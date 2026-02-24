@@ -1,3 +1,8 @@
+# Other files/folders
+.DS_Store
+data/2023_data/
+download_data/
+
 # History files
 .Rhistory
 .Rapp.history

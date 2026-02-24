@@ -1,0 +1,53 @@
+division_name,school_year,population,number_of_students,rate,type,source
+Albemarle,2016-17,13790,569,41.26178390137781,Out of school suspension,ssir
+Albemarle,2017-18,13928,513,36.83228029867892,Out of school suspension,ssir
+Albemarle,2018-19,13994,479,34.228955266542805,Out of school suspension,ssir
+Albemarle,2019-20,14404,262,18.189391835601224,Out of school suspension,ssir
+Albemarle,2020-21,13499,13,0.9630342988369508,Out of school suspension,ssir
+Charlottesville,2016-17,4471,178,39.81212256765824,Out of school suspension,ssir
+Charlottesville,2017-18,4527,157,34.68080406450188,Out of school suspension,ssir
+Charlottesville,2018-19,4559,193,42.33384514147839,Out of school suspension,ssir
+Charlottesville,2019-20,4547,172,37.82713877281724,Out of school suspension,ssir
+Charlottesville,2020-21,4261,1,0.2346866932644919,Out of school suspension,ssir
+Virginia,2016-17,1286844,72606,56.421757415817304,Out of school suspension,ssir
+Virginia,2017-18,1291359,72459,56.110655518720975,Out of school suspension,ssir
+Virginia,2018-19,1289239,72360,56.12613332361183,Out of school suspension,ssir
+Virginia,2019-20,1296887,54571,42.078454021051954,Out of school suspension,ssir
+Virginia,2020-21,1251583,5417,4.328118870262699,Out of school suspension,ssir
+Albemarle County,2016-17,13790,549,39.81145757795504,Out of school suspension,prior
+Albemarle County,2015-16,13767,474,34.430159076051424,Out of school suspension,prior
+Albemarle County,2014-15,13680,502,36.69590643274854,Out of school suspension,prior
+Albemarle County,2013-14,13420,382,28.464977645305513,Out of school suspension,prior
+Albemarle County,2012-13,13263,576,43.42908844152907,Out of school suspension,prior
+Albemarle County,2011-12,13104,912,69.5970695970696,Out of school suspension,prior
+Albemarle County,2010-11,13212,669,50.63578564940963,Out of school suspension,prior
+Albemarle County,2009-10,13035,1260,96.66283084004604,Out of school suspension,prior
+Albemarle County,2008-09,12815,1460,113.92898946547017,Out of school suspension,prior
+Albemarle County,2007-08,12793,1418,110.84186664582194,Out of school suspension,prior
+Albemarle County,2006-07,12735,1544,121.24067530427952,Out of school suspension,prior
+Albemarle County,2005-06,12766,1563,122.43459188469372,Out of school suspension,prior
+Albemarle County,2004-05,12420,1680,135.2657004830918,Out of school suspension,prior
+Albemarle County,2003-04,12547,1734,138.20036662150315,Out of school suspension,prior
+Charlottesville City,2016-17,4471,183,40.93044061731156,Out of school suspension,prior
+Charlottesville City,2015-16,4377,267,61.00068540095956,Out of school suspension,prior
+Charlottesville City,2014-15,4356,348,79.88980716253444,Out of school suspension,prior
+Charlottesville City,2013-14,4340,295,67.97235023041475,Out of school suspension,prior
+Charlottesville City,2012-13,4236,346,81.68083097261568,Out of school suspension,prior
+Charlottesville City,2011-12,4175,640,153.29341317365268,Out of school suspension,prior
+Charlottesville City,2010-11,4030,767,190.32258064516128,Out of school suspension,prior
+Charlottesville City,2009-10,4014,906,225.7100149476831,Out of school suspension,prior
+Charlottesville City,2008-09,4055,1126,277.6818742293465,Out of school suspension,prior
+Charlottesville City,2007-08,4081,961,235.48149963244305,Out of school suspension,prior
+Charlottesville City,2006-07,4226,1518,359.2049219119735,Out of school suspension,prior
+Charlottesville City,2005-06,4331,1554,358.80858924036016,Out of school suspension,prior
+Charlottesville City,2004-05,4383,1276,291.1248003650468,Out of school suspension,prior
+Charlottesville City,2003-04,4416,1072,242.75362318840575,Out of school suspension,prior
+Albemarle County,2021-2022,13749,300,21.81976871045167,Out of school suspension,SBAR
+Charlottesville City,2021-2022,4290,76,17.715617715617718,Out of school suspension,SBAR
+Virginia,2021-2022,1251970,67060,53.5635837919439,Out of school suspension,SBAR
+Albemarle County,2022-2023,13970,376,26.914817465998567,Out of school suspension,SBAR
+Charlottesville City,2022-2023,4491,275,61.2335782676464,Out of school suspension,SBAR
+Virginia,2022-2023,1263367,82102,64.98665866687986,Out of school suspension,SBAR
+Albemarle County,2023-2024,13835,403,29.12902059992772,Out of school suspension,SBAR
+Charlottesville City,2023-2024,4444,282,63.456345634563455,Out of school suspension,SBAR
+Virginia,2023-2024,1262011,78556,62.24668406218329,Out of school suspension,SBAR

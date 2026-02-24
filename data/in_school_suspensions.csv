@@ -1,0 +1,25 @@
+division_name,school_year,population,individual_student_offenders,rate,type,source
+Albemarle County,2016-17,13790,31,2.25,In-School Suspension,SSIR
+Albemarle County,2017-18,13928,52,3.73,In-School Suspension,SSIR
+Albemarle County,2018-19,13994,86,6.15,In-School Suspension,SSIR
+Albemarle County,2019-20,14404,100,6.94,In-School Suspension,SSIR
+Albemarle County,2020-21,13499,1,0.07,In-School Suspension,SSIR
+Charlottesville City,2016-17,4471,22,4.92,In-School Suspension,SSIR
+Charlottesville City,2017-18,4527,32,7.07,In-School Suspension,SSIR
+Charlottesville City,2018-19,4559,45,9.87,In-School Suspension,SSIR
+Charlottesville City,2019-20,4547,35,7.7,In-School Suspension,SSIR
+Charlottesville City,2020-21,4261,0,0,In-School Suspension,SSIR
+Virginia,2016-17,1286844,3848,2.99,In-School Suspension,SSIR
+Virginia,2017-18,1291359,5590,4.33,In-School Suspension,SSIR
+Virginia,2018-19,1289239,8305,6.44,In-School Suspension,SSIR
+Virginia,2019-20,1296887,6273,4.84,In-School Suspension,SSIR
+Virginia,2020-21,1251583,941,0.75,In-School Suspension,SSIR
+Albemarle County,2021-2022,13749,494,35.93,In-School Suspension,SBAR
+Charlottesville City,2021-2022,4290,62,14.45,In-School Suspension,SBAR
+Virginia,2021-2022,1251970,59126,47.23,In-School Suspension,SBAR
+Albemarle County,2022-2023,13970,652,46.67,In-School Suspension,SBAR
+Charlottesville City,2022-2023,4491,63,14.03,In-School Suspension,SBAR
+Virginia,2022-2023,1263367,73104,57.86,In-School Suspension,SBAR
+Albemarle County,2023-2024,13835,691,49.95,In-School Suspension,SBAR
+Charlottesville City,2023-2024,4444,119,26.78,In-School Suspension,SBAR
+Virginia,2023-2024,1262011,74392,58.95,In-School Suspension,SBAR

@@ -1,0 +1,55 @@
+cohort_year,level,division_number,division_name,type_of_graduation_rate,rate_type,graduation_rate,students_in_cohort,total_graduates
+2008,Division,2,Albemarle County,On-Time Graduation Rate,4 yr rate,87.94,1012,890
+2008,Division,104,Charlottesville City,On-Time Graduation Rate,4 yr rate,74.61,319,238
+2009,Division,2,Albemarle County,On-Time Graduation Rate,4 yr rate,89.49,1056,945
+2009,Division,104,Charlottesville City,On-Time Graduation Rate,4 yr rate,76.58,316,242
+2010,Division,2,Albemarle County,On-Time Graduation Rate,4 yr rate,91.97,1021,939
+2010,Division,104,Charlottesville City,On-Time Graduation Rate,4 yr rate,79.82,327,261
+2011,Division,2,Albemarle County,On-Time Graduation Rate,4 yr rate,93.02,1031,959
+2011,Division,104,Charlottesville City,On-Time Graduation Rate,4 yr rate,83.86,316,265
+2012,Division,2,Albemarle County,On-Time Graduation Rate,4 yr rate,92.02,1015,934
+2012,Division,104,Charlottesville City,On-Time Graduation Rate,4 yr rate,85.02,307,261
+2013,Division,2,Albemarle County,On-Time Graduation Rate,4 yr rate,93.51,1032,965
+2013,Division,104,Charlottesville City,On-Time Graduation Rate,4 yr rate,80.57,314,253
+2014,Division,2,Albemarle County,On-Time Graduation Rate,4 yr rate,94.91,1002,951
+2014,Division,104,Charlottesville City,On-Time Graduation Rate,4 yr rate,88.5,287,254
+2015,Division,2,Albemarle County,On-Time Graduation Rate,4 yr rate,94.38,996,940
+2015,Division,104,Charlottesville City,On-Time Graduation Rate,4 yr rate,84.92,305,259
+2016,Division,2,Albemarle County,On-Time Graduation Rate,4 yr rate,95.2,1042,992
+2016,Division,104,Charlottesville City,On-Time Graduation Rate,4 yr rate,89.42,274,245
+2017,Division,2,Albemarle County,On-Time Graduation Rate,4 yr rate,94.78,1034,980
+2017,Division,104,Charlottesville City,On-Time Graduation Rate,4 yr rate,89.56,316,283
+2018,Division,2,Albemarle County,On-Time Graduation Rate,4 yr rate,92.74,1130,1048
+2018,Division,104,Charlottesville City,On-Time Graduation Rate,4 yr rate,92.62,271,251
+2019,Division,2,Albemarle County,On-Time Graduation Rate,4 yr rate,94.36,1082,1021
+2019,Division,104,Charlottesville City,On-Time Graduation Rate,4 yr rate,95.73,281,269
+2020,Division,2,Albemarle County,On-Time Graduation Rate,4 yr rate,93.55,1085,1015
+2020,Division,104,Charlottesville City,On-Time Graduation Rate,4 yr rate,94.52,310,293
+2021,Division,2,Albemarle County,On-Time Graduation Rate,4 yr rate,96.4,1084,1045
+2021,Division,104,Charlottesville City,On-Time Graduation Rate,4 yr rate,96.42,279,269
+2022,Division,2,Albemarle County,On-Time Graduation Rate,4 yr rate,94.3,1087,1025
+2022,Division,104,Charlottesville City,On-Time Graduation Rate,4 yr rate,92.95,298,277
+2008,State,0,Virginia,On-Time Graduation Rate,4 yr rate,82.13,96184,78979
+2009,State,0,Virginia,On-Time Graduation Rate,4 yr rate,83.25,98097,81661
+2010,State,0,Virginia,On-Time Graduation Rate,4 yr rate,85.72,97714,83751
+2011,State,0,Virginia,On-Time Graduation Rate,4 yr rate,86.59,97958,84823
+2012,State,0,Virginia,On-Time Graduation Rate,4 yr rate,87.93,97100,85379
+2013,State,0,Virginia,On-Time Graduation Rate,4 yr rate,89.11,96238,85757
+2014,State,0,Virginia,On-Time Graduation Rate,4 yr rate,89.92,94739,85188
+2015,State,0,Virginia,On-Time Graduation Rate,4 yr rate,90.57,93089,84307
+2016,State,0,Virginia,On-Time Graduation Rate,4 yr rate,91.41,95077,86908
+2017,State,0,Virginia,On-Time Graduation Rate,4 yr rate,91.19,95235,86848
+2018,State,0,Virginia,On-Time Graduation Rate,4 yr rate,91.63,97908,89712
+2019,State,0,Virginia,On-Time Graduation Rate,4 yr rate,91.53,98367,90036
+2020,State,0,Virginia,On-Time Graduation Rate,4 yr rate,92.48,98431,91030
+2021,State,0,Virginia,On-Time Graduation Rate,4 yr rate,92.99,97127,90323
+2022,State,0,Virginia,On-Time Graduation Rate,4 yr rate,92.14,98709,90953
+2023,Division,2,Albemarle County,On-Time Graduation Rate,4 yr rate,93.98,1130,1062
+2023,Division,104,Charlottesville City,On-Time Graduation Rate,4 yr rate,92.91,296,275
+2023,State,0,Virginia,On-Time Graduation Rate,4 yr rate,92.02,98955,91057
+2024,Division,2,Albemarle County,On-Time Graduation Rate,4 yr rate,93.24,1080,1007
+2024,Division,104,Charlottesville City,On-Time Graduation Rate,4 yr rate,89.29,308,275
+2024,State,0,Virginia,On-Time Graduation Rate,4 yr rate,92.86,98629,91591
+2025,Division,2,Albemarle County,On-Time Graduation Rate,4 yr rate,93.88,1161,1090
+2025,Division,104,Charlottesville City,On-Time Graduation Rate,4 yr rate,86.9,336,292
+2025,State,0,Virginia,On-Time Graduation Rate,4 yr rate,92.7,102547,95066
