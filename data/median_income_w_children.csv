@@ -1,0 +1,34 @@
+GEOID,NAME,year,medinc_w_children
+51,Virginia,2014,76610
+51,Virginia,2015,77142
+51,Virginia,2016,78877
+51,Virginia,2017,82307
+51,Virginia,2018,85880
+51,Virginia,2019,89973
+51003,Albemarle County,2014,91013
+51003,Albemarle County,2015,95030
+51003,Albemarle County,2016,93324
+51003,Albemarle County,2017,99171
+51003,Albemarle County,2018,103664
+51003,Albemarle County,2019,108154
+51540,Charlottesville City,2014,62097
+51540,Charlottesville City,2015,62157
+51540,Charlottesville City,2016,64570
+51540,Charlottesville City,2017,68203
+51540,Charlottesville City,2018,71696
+51540,Charlottesville City,2019,76694
+51540,Charlottesville City,2020,80328
+51003,Albemarle County,2020,116948
+51003,Albemarle County,2021,121578
+51540,Charlottesville City,2021,88295
+51003,Albemarle County,2022,135016
+51540,Charlottesville City,2022,97273
+51003,Albemarle County,2023,132609
+51540,Charlottesville City,2023,106773
+51003,Albemarle County,2024,139415
+51540,Charlottesville City,2024,113004
+51,Virginia,2020,93828
+51,Virginia,2021,99499
+51,Virginia,2022,108964
+51,Virginia,2023,113159
+51,Virginia,2024,116598

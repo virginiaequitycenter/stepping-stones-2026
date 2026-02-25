@@ -46,3 +46,17 @@ Get, wrangle and save VDOE data for report. Prior report measures are merged wit
     - VDOE SBAR Build-a-Table (2021-22 to 2023-24) https://p1pe.doe.virginia.gov/apex_captcha/home.do?apexTypeId=351
   - Out-of-School Suspensions
     - Source: VDOE SBAR Build-a-Table (2021-22 to 2023-24) https://p1pe.doe.virginia.gov/apex_captcha/home.do?apexTypeId=351
+    
+#### `acs_5yr.R`
+
+Get, wrangle and save US Census ACS 5-yr survey data for report. Prior report measures are merged with data from 2023 report. Script includes:
+
+  - High School Degree Attainment
+    - Source: ACS Table S1501 https://data.census.gov/table?q=S1501&tid=ACSST1Y2021.S1501
+  - Youth Labor Force Participation and Unemployment
+    - Source: ACS Table B23001 https://data.census.gov/table?q=b23001&g=0500000US51003,51540
+  - Children in Two-Parent Households
+    - Source: ACS Table B05009 https://data.census.gov/table/ACSDT5Y2023.B05009?q=B05009
+  - Median Family income with children under 18 in household (New for 2026)
+    - KidsCount (2010-2019): https://datacenter.aecf.org/data/tables/9184-median-income-of-families-with-own-children-in-household?loc=48&loct=5#detailed/5/6813,6836/true/1983/any/18208
+    - Source (2020 and later): ACS Table B19125  https://data.census.gov/table/ACSDT5Y2024.B19125?q=B19125&g=050XX00US51003,51540
