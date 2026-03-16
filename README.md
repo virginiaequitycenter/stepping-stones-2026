@@ -15,7 +15,7 @@ The following scripts require `data/2023_data/` -- currently listed in `.gitigno
 
 Running this script requires `download_data/` -- currently listed in `.gitignore`. Instructions for retrieving VDOE data from the listed sources included in script.
 
-Get, wrangle and save VDOE data for report. Prior report measures are merged with data from 2023 report. Script includes:
+Get, wrangle and save VDOE data for report. Updated report measures are merged with data from 2023 report. Script includes:
 
   - Fall Membership
     - Source: VDOE https://p1pe.doe.virginia.gov/buildatable/fallmembership
@@ -49,7 +49,7 @@ Get, wrangle and save VDOE data for report. Prior report measures are merged wit
     
 #### `acs_5yr.R`
 
-Get, wrangle and save US Census ACS 5-yr survey data for report. Prior report measures are merged with data from 2023 report. Script includes:
+Get, wrangle and save US Census ACS 5-yr survey data for report. Updated report measures are merged with data from 2023 report. Script includes:
 
   - High School Degree Attainment
     - Source: ACS Table S1501 https://data.census.gov/table?q=S1501&tid=ACSST1Y2021.S1501
@@ -60,3 +60,18 @@ Get, wrangle and save US Census ACS 5-yr survey data for report. Prior report me
   - Median Family income with children under 18 in household (New for 2026)
     - KidsCount (2010-2019): https://datacenter.aecf.org/data/tables/9184-median-income-of-families-with-own-children-in-household?loc=48&loct=5#detailed/5/6813,6836/true/1983/any/18208
     - Source (2020 and later): ACS Table B19125  https://data.census.gov/table/ACSDT5Y2024.B19125?q=B19125&g=050XX00US51003,51540
+
+#### `econ_fam_stability_data.R`
+
+Get, wrangle and save additional sources on Economic and Family Stability data for report. Updated report measures are merged with data from 2023 report. Script includes:
+
+  - Children Living below Poverty Threshold 
+    - Source: SAIPE https://www.census.gov/programs-surveys/saipe/data/datasets.html
+  - Assessments and Investigations by Child Protective Services 
+    - Source: VDSS PowerBI dashboard (2021-2024) https://cpsaccountability.dss.virginia.gov/index-social-services.html
+  - Children in Foster Care
+    - Source: VDSS (2020-2025) https://www.dss.virginia.gov/geninfo/reports/children/fc.cgi
+  - McKinney-Vento
+    - Source: Ed Data Express https://eddataexpress.ed.gov/download/data-library?field_year_target_id=All&field_population_value=&field_data_topic_target_id=All&field_reporting_level_target_id=All&field_program_target_id=42&field_file_spec_target_id=All&field_data_group_id_target_id=All&combine=
+    - This data source was not updated since retrieving data for the 2025 Community Well-being Profiles
+    - Data from that project was copied over in stepping-stones-2026/data

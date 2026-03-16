@@ -2,6 +2,9 @@
 # Gets new data and merges with prior years
 
 # Included data updates for:
+# - Sex by Age
+#   - Source: ACS Table B01001
+#   - Used to create percents or rates for multiple metrics
 # - High School Degree Attainment
 #   - Source: ACS Table S1501 https://data.census.gov/table?q=S1501&tid=ACSST1Y2021.S1501
 # - Youth Labor Force Participation and Unemployment
@@ -28,6 +31,72 @@ year <- 2024
 vars_acs <- load_variables(year, "acs5", cache = TRUE)
 vars_subject <- load_variables(year, "acs5/subject", cache = TRUE)
 vars_profile <- load_variables(year, "acs5/profile", cache = TRUE)
+
+## ...................................................
+# Sex by Age ----
+# Source: ACS Table B01001
+# Tidycensus only support from 2005-2009 5 year ACS and on
+# Get population age groups: pop_total,	pop_18over,	pop_under18	pop_10to17	pop_10to19
+
+# Select variables
+vars_B01001 <- c("B01001_001", 
+                 "B01001_003", "B01001_027", # m/f under 5
+                 "B01001_004", "B01001_028", # m/f 5 to 9 yrs
+                 "B01001_005", "B01001_029", # m/f 10 to 14 yrs
+                 "B01001_006", "B01001_030", # m/f 15 to 17 yrs
+                 "B01001_007", "B01001_031" #m/f 18 to 19 yrs
+                 )
+
+# Get ACS data
+acs_B01001_county <- map_df(2009:2024,
+                           ~ get_acs(geography = "county",
+                                     year = .x,
+                                     state = "VA",
+                                     county = county_codes,
+                                     variables = vars_B01001,
+                                     output = "wide",
+                                     survey = "acs5",
+                                     cache = TRUE) %>%
+                             mutate(year = .x, .after = GEOID))
+
+acs_B01001_state <- map_df(2009:2024,
+                          ~ get_acs(geography = "state",
+                                    year = .x,
+                                    state = "VA",
+                                    variables = vars_B01001,
+                                    output = "wide",
+                                    survey = "acs5",
+                                    cache = TRUE) %>%
+                            mutate(year = .x, .after = GEOID))
+
+# combine tables
+age_groups <- rbind(acs_B01001_county, acs_B01001_state) %>% 
+  rename(fips = GEOID)
+
+# Sum and rename variables
+age_groups <- age_groups %>%
+  mutate(pop_total = B01001_001E,
+         pop_10to17 = B01001_005E + B01001_029E + B01001_006E + B01001_030E,
+         pop_10to19 = pop_10to17 + B01001_007E + B01001_031E,
+         pop_under18 = pop_10to17 + B01001_003E + B01001_027E + B01001_004E + B01001_028E,
+         pop_18over = pop_total - pop_under18) %>% 
+  mutate(locality = str_remove(NAME, c(" County, Virginia| city, Virginia")), .after = fips) %>% 
+  select(-c(NAME, starts_with("B01001")))
+
+# Keeping just ACS now
+# # Read in prior data
+# age_groups_prior <- read_csv("data/2023_data/pop_data_cdc.csv") %>% 
+#   mutate(locality = case_when(fips == "51003" ~ "Albemarle",
+#                               fips == "51540" ~ "Charlottesville",
+#                               fips == "51" ~ "Virginia"), .after = fips) %>% 
+#   select(fips, locality, year, pop_total = pop_tot, pop_10to17 = pop_1017, pop_10to19 = pop_1019,
+#          pop_under18 = pop_17under, pop_18over)
+# 
+# # Bind tables
+# age_groups_data <- rbind(age_groups_prior, age_groups)
+
+# Save
+write_csv(age_groups, "data/population_data_acs.csv")
 
 ## .......................................................
 # High School Degree Attainment ----
