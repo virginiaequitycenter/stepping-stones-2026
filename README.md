@@ -75,3 +75,20 @@ Get, wrangle and save additional sources on Economic and Family Stability data f
     - Source: Ed Data Express https://eddataexpress.ed.gov/download/data-library?field_year_target_id=All&field_population_value=&field_data_topic_target_id=All&field_reporting_level_target_id=All&field_program_target_id=42&field_file_spec_target_id=All&field_data_group_id_target_id=All&combine=
     - This data source was not updated since retrieving data for the 2025 Community Well-being Profiles
     - Data from that project was copied over in stepping-stones-2026/data
+    
+#### `court_vsp_data.R`
+
+Get, wrangle and save VA court and state policing data for report. Script includes:
+
+  - Children in Need of Services or Supervision
+     - Source: VA Courts PowerBi and Monthly here: https://www.vacourts.gov/courtadmin/aoc/djs/programs/cpss/csi/jdr/home
+  - Juvenile Delinquency Judgments
+     - Source: VA Courts PowerBi and Monthly here: https://www.vacourts.gov/courtadmin/aoc/djs/programs/cpss/csi/jdr/home
+  - Arrests for Violent Crimes (10-17)
+    - Source: VSP https://va.beyond2020.com/va_public/Browse/browsetables.aspx?PerspectiveLanguage=en
+  - Arrests for Crimes involving Firearms (10-17) 
+    - Source: VSP https://va.beyond2020.com/va_public/Browse/browsetables.aspx?PerspectiveLanguage=en
+
+#### `pop_estimates.R`
+
+This script gets census population estimates used to calculate rates for this report.

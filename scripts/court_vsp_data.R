@@ -6,10 +6,10 @@
 #   - Source: Moved since last report - PowerBi and Monthly here: https://www.vacourts.gov/courtadmin/aoc/djs/programs/cpss/csi/jdr/home
 # - Juvenile Delinquency Judgments
 #   - Source: Moved since last report - PowerBi and Monthly here: https://www.vacourts.gov/courtadmin/aoc/djs/programs/cpss/csi/jdr/home
-# - Arrests for Violent Crimes
-#   - Source: VSP https://vsp.virginia.gov/sections-units-bureaus/bass/criminal-justice-information-services/uniform-crime-reporting/#UCR-IBR
-# - Arrests for Crimes involving Firearms (Under 18) (interested in incident types ie persons vs property/theft from vehicle)
-#   - Source: VSP https://vsp.virginia.gov/sections-units-bureaus/bass/criminal-justice-information-services/uniform-crime-reporting/#UCR-IBR
+# - Arrests for Violent Crimes (10-17)
+#   - Source: VSP https://va.beyond2020.com/va_public/Browse/browsetables.aspx?PerspectiveLanguage=en
+# - Arrests for Crimes involving Firearms (10-17) 
+#   - Source: VSP https://va.beyond2020.com/va_public/Browse/browsetables.aspx?PerspectiveLanguage=en
 
 # Libraries ----
 library(tidyverse)
