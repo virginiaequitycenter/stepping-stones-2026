@@ -2,7 +2,7 @@
 # Gets new data and merges with prior years
 
 # Included data updates for:
-# - Sex by Age
+# - Sex by Age - replaced with pop_estimates.R
 #   - Source: ACS Table B01001
 #   - Used to create percents or rates for multiple metrics
 # - High School Degree Attainment

@@ -1,0 +1,832 @@
+---
+title: "Stepping Stones 2026"
+format:
+  html:
+    toc: true
+    theme: cosmo
+    embed-resources: true
+execute:
+  cache: false
+  echo: false
+  message: false
+  warning: false
+---
+
+```{r setup}
+#| include: false
+
+# Libraries ----
+library(tidyverse)
+library(scales)
+library(janitor)
+library(highcharter)
+
+# Color palette ----
+locality_pal <- c("#193CBC", "#589ACF", "#FAC484")
+
+```
+
+
+## Education
+
+### Kindergarteners At or Above Reading Levels
+
+### Standards of Learning
+
+#### Math: Grades 3, and 5
+```{r}
+# Set data
+df_sol <- read_csv("../data/sol_pass_rates.csv") %>% 
+  mutate(year = as.numeric(str_sub(school_year,-4,-1)),
+         division_name = case_when(str_detect(division_name, "Albemarle") ~ "Albemarle County Public Schools", 
+                                                        str_detect(division_name, "Charlottesville") ~ "Charlottesville City Schools",
+                                                        str_detect(division_name, "Virginia") ~ "Virginia Public Schools"))
+
+df <- df_sol %>% filter(subject == "Mathematics") %>% filter(test_level == "Grade 3")
+df$percent <- df$pass_rate
+df$label <- df$division_name 
+df$count_label <- prettyNum(df$pass_count, big.mark = ",")
+
+title <- "Percent of Students who Pass the 3rd Grade Math SOL Test"
+ytext <- "Percent of Students taking SOL"
+xtext <- "School Year"
+xlabels <- JS("function() { return this.value - 1 + '-' + this.value.toString().slice(-2); }")
+
+```
+
+```{r series-sol, results = 'asis'}
+df <- df %>% mutate(percent = round(percent,0))
+
+df_pre <- df %>% filter(year >= 2010 & year < 2020)
+df_post <- df %>% filter(year > 2020)
+
+series_sol_chart <- df_pre %>% 
+  hchart("line", hcaes(x = year, y = percent, group = label)) %>% 
+  hc_legend(align = "center", verticalAlign = "top") %>%
+  hc_xAxis(title = list(text = xtext), 
+           labels = list(formatter = xlabels, style = list(fontSize = '1.2em')),
+           # labels = list(allowOverlap = TRUE, step = 1, style = list(fontSize = '1.2em')),
+           allowDecimals = FALSE,
+           plotLines = list(
+                 list(
+                   label = list(text = "SOLs not conducted in 2020 </br>due to the COVID-19 Pandemic", rotation = 0),
+                   width = 1,
+                   value = 2020,
+                   zIndex = 1,
+                   dashStyle = "LongDash"
+                 )
+               )) %>%
+  hc_yAxis(min = 0, max = 100,
+           title = list(text = ytext),
+           labels = list(format = '{text}%')) %>%
+  hc_colors(locality_pal) %>%
+  hc_plotOptions(series = list(dataLabels = list(format = '{y: f}%', enabled = TRUE)),
+                 line = list(marker = list(enabled = TRUE, symbol = list("circle")))) %>%
+  hc_tooltip(formatter = JS("function(){
+  return this.series.name + '</br>School year: <b>' + this.point.school_year + '</b></br>Pass Rate: <b>' + this.y + '%</b></br>' + 'Est. Number: <b>' + this.point.count_label + '</b>'
+  }")) %>%
+  hc_title(text = title,
+           align = 'left') %>%
+  # hc_subtitle(text = '2018-2023',
+  #             align = "left",
+  #             style = list(fontSize = '1.4em')) %>%
+  # hc_caption(text = source_acs_range,
+  #            align = "right",
+  #            style = list(fontSize = '1em')) %>%
+  hc_add_theme(hc_theme_smpl()) %>% 
+  hc_add_series(data =  df_post, type = "line", mapping = hcaes(x = year, y = percent, group = label), showInLegend = FALSE)
+
+series_sol_chart
+
+```
+
+```{r}
+# Set data
+df <- df_sol %>% filter(subject == "Mathematics") %>% filter(test_level == "Grade 5")
+df$percent <- df$pass_rate
+df$label <- df$division_name 
+df$count_label <- prettyNum(df$pass_count, big.mark = ",")
+
+title <- "Percent of Students who Pass the 5th Grade Math SOL Test"
+ytext <- "Percent of Students taking SOL"
+xtext <- "School Year"
+xlabels <- JS("function() { return this.value - 1 + '-' + this.value.toString().slice(-2); }")
+
+<<series-sol>>
+
+```
+
+#### Reading: Grades 3, and 5
+```{r}
+# Set data
+df <- df_sol %>% filter(subject == "English:Reading") %>% filter(test_level == "Grade 3")
+df$percent <- df$pass_rate
+df$label <- df$division_name 
+df$count_label <- prettyNum(df$pass_count, big.mark = ",")
+
+title <- "Percent of Students who Pass the 3rd Grade Reading SOL Test"
+ytext <- "Percent of Students taking SOL"
+xtext <- "School Year"
+xlabels <- JS("function() { return this.value - 1 + '-' + this.value.toString().slice(-2); }")
+
+<<series-sol>>
+
+```
+
+```{r}
+# Set data
+df <- df_sol %>% filter(subject == "English:Reading") %>% filter(test_level == "Grade 5")
+df$percent <- df$pass_rate
+df$label <- df$division_name 
+df$count_label <- prettyNum(df$pass_count, big.mark = ",")
+
+title <- "Percent of Students who Pass the 5th Grade Reading SOL Test"
+ytext <- "Percent of Students taking SOL"
+xtext <- "School Year"
+xlabels <- JS("function() { return this.value - 1 + '-' + this.value.toString().slice(-2); }")
+
+<<series-sol>>
+
+```
+
+### Students Eligible for Special Education Services
+```{r}
+# Set data
+df <- read_csv("../data/special_ed_services.csv")  %>% 
+  mutate(year = as.numeric(str_sub(school_year,-4,-1)),
+         division_name = case_when(str_detect(division_name, "Albemarle") ~ "Albemarle County Public Schools", 
+                                                        str_detect(division_name, "Charlottesville") ~ "Charlottesville City Schools",
+                                                        str_detect(division_name, "Virginia") ~ "Virginia Public Schools"))
+
+df$percent <- df$percent_sped
+df$label <- df$division_name 
+df$count_label <- prettyNum(df$total_sped, big.mark = ",")
+
+title <- "Percent of Students Identified to Receive Special Services"
+ytext <- "Percent of Students"
+xtext <- "School Year"
+xlabels <- JS("function() { return this.value - 1 + '-' + this.value.toString().slice(-2); }")
+
+```
+
+```{r series-percent, results = 'asis'}
+
+df <- df %>% filter(year >= 2010)
+
+series_percent_chart <- df %>% 
+  mutate(percent = round(percent,0)) %>% 
+  hchart("line", hcaes(x = year, y = percent, group = label)) %>% 
+  hc_legend(align = "center", verticalAlign = "top") %>%
+  hc_xAxis(title = list(text = xtext), 
+           labels = list(formatter = xlabels, style = list(fontSize = '1.2em')),
+           allowDecimals = FALSE) %>%
+  hc_yAxis(min = 0, max = 100,
+           title = list(text = ytext),
+           labels = list(format = '{text}%')) %>%
+  hc_colors(locality_pal) %>%
+  hc_plotOptions(series = list(dataLabels = list(format = '{y: f}%', enabled = TRUE)),
+                 line = list( marker = list(enabled = TRUE) )) %>%
+  hc_tooltip(formatter = JS("function(){
+  return this.series.name + '</br><b>' + this.key + '</b></br>' + 'Percent: <b>' + this.y + '%</b></br>' + 'Est. Number: <b>' + this.point.count_label + '</b>'
+  }")) %>%
+  hc_title(text = title,
+           align = 'left') %>%
+  # hc_subtitle(text = '2018-2023',
+  #             align = "left",
+  #             style = list(fontSize = '1.4em')) %>%
+  # hc_caption(text = source_acs_range,
+  #            align = "right",
+  #            style = list(fontSize = '1em')) %>%
+  hc_add_theme(hc_theme_smpl())
+
+series_percent_chart
+
+```
+
+### English Learners
+```{r}
+# Set data
+df <- read_csv("../data/english_language_learners.csv") %>% 
+  mutate(year = as.numeric(str_sub(school_year,-4,-1)),
+         division_name = case_when(str_detect(division_name, "Albemarle") ~ "Albemarle County Public Schools", 
+                                                        str_detect(division_name, "Charlottesville") ~ "Charlottesville City Schools",
+                                                        str_detect(division_name, "Virginia") ~ "Virginia Public Schools"))
+
+df$percent <- df$pct_english_learners
+df$label <- df$division_name 
+df$count_label <- prettyNum(df$english_learners, big.mark = ",")
+
+title <- "Percent of Students Identified as English Learners"
+ytext <- "Percent of Students"
+xtext <- "School Year"
+xlabels <- JS("function() { return this.value - 1 + '-' + this.value.toString().slice(-2); }")
+
+<<series-percent>>
+```
+
+### Absenteeism
+```{r}
+# Set data
+df <- read_csv("../data/absenteeism.csv") %>% 
+  mutate(year = as.numeric(str_sub(school_year,-4,-1)),
+         div_name = case_when(str_detect(div_name, "Albemarle") ~ "Albemarle County Public Schools", 
+                                                        str_detect(div_name, "Charlottesville") ~ "Charlottesville City Schools",
+                                                        str_detect(div_name, "Virginia") ~ "Virginia Public Schools"))
+
+df$percent <- df$percent_chronically_absent
+df$label <- df$div_name 
+df$count_label <- prettyNum(df$number_of_chronically_absent_students, big.mark = ",")
+
+title <- "Percent of Students Identified Chronically Absent"
+ytext <- "Percent of Students"
+xtext <- "School Year"
+xlabels <- JS("function() { return this.value - 1 + '-' + this.value.toString().slice(-2); }")
+
+<<series-percent>>
+```
+
+### On-Time Graduation Rates
+```{r}
+# Set data
+df <- read_csv("../data/graduation_rates.csv")
+
+df$year <- df$cohort_year
+df$percent <- df$graduation_rate
+df$label <- df$division_name 
+df$count_label <- prettyNum(df$total_graduates, big.mark = ",")
+
+title <- "Percent of Student Cohort Graduating in Four Years"
+ytext <- "Percent of Student Cohort"
+xtext <- "Graduation Year"
+xlabels <- JS("function() { return this.value; }")
+
+<<series-percent>>
+```
+
+### Post-Secondary Enrollment
+```{r}
+# Set data
+df <- read_csv("../data/postsecondary_education.csv") %>% 
+  mutate(enrolled4yr = enrolled4pub + enrolled4priv,
+         percent4yr = round(enrolled4yr/cohortsize *100, 0))
+
+df$percent <- df$percentany
+df$label <- df$locality
+df$count_label <- prettyNum(df$enrolledany, big.mark = ",")
+
+title <- "Percent of Graduating Students Enrolled in a Post-Secondary Institution"
+ytext <- "Percent of Graduating Students"
+xtext <- "Graduation Year"
+xlabels <- JS("function() { return this.value; }")
+
+```
+
+```{r post-secondary, results = 'asis'}
+
+df <- df %>% filter(year >= 2010)
+
+df_any <- df %>% 
+  mutate(label = case_when(locality =="Albemarle" ~ "ACPS: Any College",
+                           locality == "Charlottesville" ~ "CCS: Any College",
+                           .default = "VA Public Schools: Any College"))
+
+df_4yr <- df %>% 
+  mutate(label = case_when(locality =="Albemarle" ~ "ACPS: 4-yr College",
+                           locality == "Charlottesville" ~ "CCS: 4-yr College",
+                           .default = "VA Public Schools: 4-yr College"))
+
+series_percent_chart <- df_any %>% 
+  mutate(percent = round(percent,0)) %>% 
+  hchart("line", hcaes(x = year, y = percent, group = label), dashStyle = "solid") %>% 
+  hc_legend(align = "center", verticalAlign = "top", symbolWidth= 40) %>%
+  hc_xAxis(title = list(text = xtext), 
+           labels = list(formatter = xlabels, style = list(fontSize = '1.2em')),
+           # labels = list(allowOverlap = TRUE, step = 1, style = list(fontSize = '1.2em')),
+           allowDecimals = FALSE) %>%
+  hc_yAxis(min = 0, max = 100,
+           title = list(text = ytext),
+           labels = list(format = '{text}%')) %>%
+  hc_colors(locality_pal) %>%
+  hc_plotOptions(series = list(dataLabels = list(format = '{y: f}%', enabled = TRUE)),
+                 line = list(marker = list(enabled = TRUE, symbol = list("circle")))) %>%
+  hc_tooltip(formatter = JS("function(){
+  return '<b>' + this.key + '</b></br>' + this.series.name + ': <b>' + this.y + '%</b></br>'
+  }")) %>%
+  hc_title(text = title,
+           align = 'left') %>%
+  # hc_subtitle(text = '2018-2023',
+  #             align = "left",
+  #             style = list(fontSize = '1.4em')) %>%
+  # hc_caption(text = source_acs_range,
+  #            align = "right",
+  #            style = list(fontSize = '1em')) %>%
+  hc_add_theme(hc_theme_smpl()) %>% 
+  hc_add_series(data =  df_4yr, type = "line", mapping = hcaes(x = year, y = percent4yr, group = label), dashStyle = "dash", marker = list(symbol = "diamond"))
+
+series_percent_chart
+
+```
+
+### High School Degree Attainment
+```{r}
+# Set data
+df <- read_csv("../data/hsdegree_attainment.csv") %>% 
+  mutate(count = round((pcthshigherE/100)*totpop25E, 0))
+
+df$percent <- df$pcthshigherE
+df$label <- df$NAME 
+df$count_label <- prettyNum(df$count, big.mark = ",")
+
+title <- "Percent of Residents Age 25 and Older with a High School Degree or Equivalent"
+ytext <- "Percent of Residents"
+xtext <- "Year"
+xlabels <- JS("function() { return this.value; }")
+
+<<series-percent>>
+```
+
+## Economic and Family Stability
+
+### Income for Famlies with Children
+```{r}
+# Set data
+df <- read_csv("../data/median_income_w_children.csv")
+
+df$number <- df$medinc_w_children
+df$label <- df$NAME 
+df$count_label <- prettyNum(df$medinc_w_children, big.mark = ",")
+
+title <- "Median Income for Families with Children under 18"
+ytext <- "Median Family Income"
+xtext <- "Year"
+
+```
+
+```{r family-income, results = 'asis'}
+
+df <- df %>% filter(year >= 2010)
+
+series_inc_chart <- df %>% 
+  arrange(year) %>% 
+  hchart("line", hcaes(x = year, y = number, group = label)) %>% 
+  hc_legend(align = "center", verticalAlign = "top") %>%
+  hc_xAxis(title = list(text = xtext), 
+           labels = list(allowOverlap = TRUE, step = 1, style = list(fontSize = '1.2em')),
+           allowDecimals = FALSE) %>%
+  hc_yAxis(title = list(text = ytext),
+           labels = list(format = '${text}')) %>%
+  hc_colors(locality_pal) %>%
+  hc_plotOptions(series = list(dataLabels = list(format = '${y: ,f}', enabled = TRUE)),
+                 line = list( marker = list(enabled = TRUE) )) %>%
+  hc_tooltip(formatter = JS("function(){
+  return '<b>' + this.key + '</b></br>' + this.series.name + ': <b>$' + this.point.count_label + '</b></br>'
+  }")) %>%
+  hc_title(text = title,
+           align = 'left') %>%
+  hc_add_theme(hc_theme_smpl())
+
+series_inc_chart
+```
+
+### Youth Labor Force Participation and Unemployment
+```{r}
+# Set data
+df <- read_csv("../data/youth_employment_status.csv")
+
+df$percent <- df$per_laborforce_16_19yr
+df$label <- df$NAME 
+df$count_label <- prettyNum(df$laborforce_16_19yr, big.mark = ",")
+
+title <- "Percent of Youth (16-19) Participating in the Labor Force"
+ytext <- "Percent of Youth (16-19)"
+xtext <- "Year"
+xlabels <- JS("function() { return this.value; }")
+
+<<series-percent>>
+```
+
+```{r}
+# Set data
+
+df$percent <- df$per_unemployed_16_19yr
+df$label <- df$NAME 
+df$count_label <- prettyNum(df$unemployed_16_19yr, big.mark = ",")
+
+title <- "Percent of Youth (16-19) in the Labor Force Experiencing Unemployment"
+ytext <- "Percent of Youth (16-19) in the Labor Force"
+xtext <- "Year"
+xlabels <- JS("function() { return this.value; }")
+
+<<series-percent>>
+```
+
+### Children Living below Poverty Threshold
+
+```{r}
+# Set data
+df <- read_csv("../data/child_poverty.csv") %>% 
+  mutate(locality = case_when(county_fips == "003" ~ "Albemarle",
+                              county_fips == "540" ~ "Charlottesville",
+                              county_fips == "000" ~ "Virginia"))
+
+df$percent <- df$pct_child_pov
+df$label <- df$locality 
+df$count_label <- prettyNum(df$num_child_pov, big.mark = ",")
+
+title <- "Percent of Children Living below the Poverty Threshold"
+ytext <- "Percent of Children"
+xtext <- "Year"
+xlabels <- JS("function() { return this.value; }")
+
+<<series-percent>>
+```
+
+### Students Identified as Economically Disadvantaged
+```{r}
+# Set data
+df <- read_csv("../data/economically_disadvantaged_students.csv") %>% 
+  mutate(year = as.numeric(str_sub(school_year,-4,-1)),
+         division_name = case_when(str_detect(division_name, "Albemarle") ~ "Albemarle County Public Schools", 
+                                                        str_detect(division_name, "Charlottesville") ~ "Charlottesville City Schools",
+                                                        str_detect(division_name, "Virginia") ~ "Virginia Public Schools"))
+
+df$percent <- df$percent_disadvantaged
+df$label <- df$division_name
+df$count_label <- prettyNum(df$economically_disadvantaged_students, big.mark = ",") 
+
+title <- "Percent of Students Identified as Economically Disadvantaged"
+ytext <- "Percent of Students"
+xtext <- "School Year"
+xlabels <- JS("function() { return this.value - 1 + '-' + this.value.toString().slice(-2); }")
+
+<<series-percent>>
+```
+
+### Children in Two-Parent Households
+```{r}
+# Set data
+df <- read_csv("../data/children_twoparent_hh.csv")
+
+df$percent <- df$per_child_twoparent_hh
+df$label <- df$NAME
+df$count_label <- prettyNum(df$total_children, big.mark = ",") 
+
+title <- "Percent of Children Living in a Two-Parent Household"
+ytext <- "Percent of Children"
+xtext <- "Year"
+xlabels <- JS("function() { return this.value; }")
+
+<<series-percent>>
+```
+
+### Assessments and Investigations by Child Protective Services
+```{r}
+# Set data
+df <- read_csv("../data/child_welfare_cases.csv")
+
+df$rate <- df$cps_rate
+df$label <- df$locality 
+df$count_label <- prettyNum(df$cases_accepted, big.mark = ",")
+
+title <- "Referrals to Child Protective Services Accepted for Assessment or Investigation by Fiscal Year"
+ytext <- "Rate per 1,000 Children"
+xtext <- "Fiscal Year (July 1st - June 30th)"
+xlabels <- JS("function() { return this.value; }")
+
+```
+
+```{r series-rate, results = 'asis'}
+
+df <- df %>% filter(year >= 2010)
+
+series_rate_chart <- df %>% 
+  mutate(rate = round(rate,1)) %>% 
+  arrange(year) %>% 
+  hchart("line", hcaes(x = year, y = rate, group = label)) %>% 
+  hc_legend(align = "center", verticalAlign = "top") %>%
+  hc_xAxis(title = list(text = xtext), 
+           labels = list(formatter = xlabels, style = list(fontSize = '1.2em')),
+           allowDecimals = FALSE) %>%
+  hc_yAxis(min = 0, max = 50,
+           title = list(text = ytext),
+           labels = list(format = '{text}')) %>%
+  hc_colors(locality_pal) %>%
+  hc_plotOptions(series = list(dataLabels = list(format = '{y: f}', enabled = TRUE)),
+                 line = list( marker = list(enabled = TRUE) )) %>%
+  hc_tooltip(formatter = JS("function(){
+  return this.series.name + '</br><b>' + this.key + '</b></br>' + 'Rate per 1,000: <b>' + this.y + '</b></br>' + 'Est. Number: <b>' + this.point.count_label + '</b>'
+  }")) %>%
+  hc_title(text = title,
+           align = 'left') %>%
+  hc_add_theme(hc_theme_smpl())
+
+series_rate_chart
+```
+
+### Children in Foster Care
+```{r}
+# Set data
+df <- read_csv("../data/foster_care.csv") %>% 
+  filter(year >= 2010 & year < 2025)
+
+df$rate <- df$fc_rate
+df$label <- df$locality 
+df$count_label <- prettyNum(df$fc_count, big.mark = ",")
+
+title <- "Rate of Children in Foster Care"
+ytext <- "Rate per 1,000 Children"
+xtext <- "Year (Measured on October 1st)"
+xlabels <- JS("function() { return this.value; }")
+
+<<series-rate>>
+
+```
+
+### Students Experiencing Homelessness
+```{r}
+# Set data
+df <- read_csv("../data/mckinney_vento_rates.csv")  %>% 
+  mutate(year = as.numeric(str_sub(school_year,-4,-1)),
+         division = case_when(str_detect(division, "Albemarle") ~ "Albemarle County Public Schools", 
+                                                        str_detect(division, "Charlottesville") ~ "Charlottesville City Schools",
+                                                        str_detect(division, "Virginia") ~ "Virginia Public Schools"))
+
+df$rate <- df$mv_rate
+df$label <- df$division 
+df$count_label <- prettyNum(df$mv_count, big.mark = ",")
+
+title <- "McKinney-Vento: Students Experiencing Homelessness Enrolled in Public Schools"
+ytext <- "Rate per 1,000 Students"
+xtext <- "School Year"
+xlabels <- JS("function() { return this.value - 1 + '-' + this.value.toString().slice(-2); }")
+
+<<series-rate>>
+
+```
+
+## Health
+
+### Sexually Transmitted Infections in Youth
+```{r}
+# Set data
+df <- read_csv("../data/youth_sti_rates.csv")
+
+df$rate <- df$annual_rate_per_1_000
+df$label <- df$location 
+df$count_label <- prettyNum(df$sti_hiv_case_count, big.mark = ",")
+
+title <- "Rate of Sexually Transmitted Infections in Youth"
+ytext <- "Rate per 1,000 Youth (10-19 yr)"
+xtext <- "Year"
+xlabels <- JS("function() { return this.value; }")
+
+<<series-rate>>
+
+```
+
+## School and Community Disciplinary Actions
+
+### Student Behavior and Administrative Response
+
+BESO: Behaviors that Endanger Self or Others (BESO). These behaviors endanger the health, safety, or welfare of either the student or others in the school community.
+```{r}
+# Set data
+df <- read_csv("../data/student_behavior_events.csv")  %>% 
+  mutate(year = as.numeric(paste0("20", str_sub(school_year,-2,-1))),
+         division_name = case_when(str_detect(division_name, "Albemarle") ~ "Albemarle County Public Schools", 
+                                                        str_detect(division_name, "Charlottesville") ~ "Charlottesville City Schools",
+                                                        str_detect(division_name, "Virginia") ~ "Virginia Public Schools"))
+
+df$rate <- df$beso_rate
+df$label <- df$division_name 
+df$count_label <- prettyNum(df$beso_count, big.mark = ",")
+
+title <- "Rate of BESO Incidents: Behaviors that Endanger Self or Others"
+ytext <- "Rate per 1,000 Students"
+xtext <- "School Year"
+xlabels <- JS("function() { return this.value - 1 + '-' + this.value.toString().slice(-2); }")
+
+<<series-rate>>
+
+```
+
+Persistently Dangerous (PD): Behaviors described in Virginia’s Unsafe School Choice Option Policy required by the federal Every Student Succeeds Act of 2015.
+```{r}
+# Set data
+df <- read_csv("../data/student_behavior_events.csv")  %>% 
+  mutate(year = as.numeric(paste0("20", str_sub(school_year,-2,-1))),
+         division_name = case_when(str_detect(division_name, "Albemarle") ~ "Albemarle County Public Schools", 
+                                                        str_detect(division_name, "Charlottesville") ~ "Charlottesville City Schools",
+                                                        str_detect(division_name, "Virginia") ~ "Virginia Public Schools"))
+
+df$rate <- df$pd_rate
+df$label <- df$division_name 
+df$count_label <- prettyNum(df$pd_count, big.mark = ",")
+
+title <- "Rate of PD Incidents: Persistently Dangerous"
+ytext <- "Rate per 1,000 Students"
+xtext <- "School Year"
+xlabels <- JS("function() { return this.value - 1 + '-' + this.value.toString().slice(-2); }")
+
+<<series-rate>>
+
+```
+
+### In-School Suspensions
+```{r}
+# Set data
+df <- read_csv("../data/in_school_suspensions.csv")   %>% 
+  mutate(year = as.numeric(paste0("20", str_sub(school_year,-2,-1))),
+         division_name = case_when(str_detect(division_name, "Albemarle") ~ "Albemarle County Public Schools", 
+                                                        str_detect(division_name, "Charlottesville") ~ "Charlottesville City Schools",
+                                                        str_detect(division_name, "Virginia") ~ "Virginia Public Schools"))
+
+df$rate <- df$rate
+df$label <- df$division_name 
+df$count_label <- prettyNum(df$individual_student_offenders, big.mark = ",")
+
+title <- "Rate of In-School Suspensions"
+ytext <- "Rate per 1,000 Students"
+xtext <- "School Year"
+xlabels <- JS("function() { return this.value - 1 + '-' + this.value.toString().slice(-2); }")
+
+```
+
+```{r in-school, results = 'asis'}
+
+df <- df %>% filter(year >= 2010)
+
+series_rate_chart <- df %>% 
+  mutate(rate = round(rate,1)) %>% 
+  arrange(year) %>% 
+  hchart("line", hcaes(x = year, y = rate, group = label)) %>% 
+  hc_legend(align = "center", verticalAlign = "top") %>%
+  hc_xAxis(title = list(text = xtext), 
+           labels = list(formatter = xlabels, style = list(fontSize = '1.2em')),
+           # labels = list(allowOverlap = TRUE, step = 1, minTickInterval = 1, allowDecimals = FALSE, style = list(fontSize = '1.2em')),
+           allowDecimals = FALSE) %>%
+  hc_yAxis(min = 0, max = 250,
+           title = list(text = ytext),
+           labels = list(format = '{text}')) %>%
+  hc_colors(locality_pal) %>%
+  hc_plotOptions(series = list(dataLabels = list(format = '{y: f}', enabled = TRUE)),
+                 line = list( marker = list(enabled = TRUE) )) %>%
+  hc_tooltip(formatter = JS("function(){
+  return this.series.name + '</br>School Year: <b>' + this.point.school_year + '</b></br>' + 'Rate per 1,000: <b>' + this.y + '</b></br>' + 'Est. Number: <b>' + this.point.count_label + '</b>'
+  }")) %>%
+  hc_title(text = title,
+           align = 'left') %>%
+  hc_add_theme(hc_theme_smpl())
+
+series_rate_chart
+```
+
+### Out-of-School Suspensions
+```{r}
+# Set data
+df <- read_csv("../data/out_of_school_suspensions.csv")  %>% 
+  mutate(year = as.numeric(paste0("20", str_sub(school_year,-2,-1))),
+         division_name = case_when(str_detect(division_name, "Albemarle") ~ "Albemarle County Public Schools", 
+                                                        str_detect(division_name, "Charlottesville") ~ "Charlottesville City Schools",
+                                                        str_detect(division_name, "Virginia") ~ "Virginia Public Schools"))
+
+df$rate <- df$rate
+df$label <- df$division_name 
+df$count_label <- prettyNum(df$number_of_students, big.mark = ",")
+
+title <- "Rate of Out-of-School Suspensions"
+ytext <- "Rate per 1,000 Students"
+xtext <- "School Year"
+xlabels <- JS("function() { return this.value - 1 + '-' + this.value.toString().slice(-2); }")
+
+```
+
+```{r out-school, results = 'asis'}
+
+df <- df %>% filter(year >= 2010)
+
+series_rate_chart <- df %>% 
+  mutate(rate = round(rate,1)) %>% 
+  arrange(year) %>% 
+  hchart("line", hcaes(x = year, y = rate, group = label)) %>% 
+  hc_legend(align = "center", verticalAlign = "top") %>%
+  hc_xAxis(title = list(text = xtext), 
+           labels = list(formatter = xlabels, style = list(fontSize = '1.2em')),
+           # labels = list(allowOverlap = TRUE, step = 1, minTickInterval = 1, allowDecimals = FALSE, style = list(fontSize = '1.2em')),
+           allowDecimals = FALSE) %>%
+  hc_yAxis(min = 0, max = 250,
+           title = list(text = ytext),
+           labels = list(format = '{text}')) %>%
+  hc_colors(locality_pal) %>%
+  hc_plotOptions(series = list(dataLabels = list(format = '{y: f}', enabled = TRUE)),
+                 line = list( marker = list(enabled = TRUE) )) %>%
+  hc_tooltip(formatter = JS("function(){
+  return this.series.name + '</br>School Year: <b>' + this.point.school_year + '</b></br>' + 'Rate per 1,000: <b>' + this.y + '</b></br>' + 'Est. Number: <b>' + this.point.count_label + '</b>'
+  }")) %>%
+  hc_title(text = title,
+           align = 'left') %>%
+  hc_add_theme(hc_theme_smpl())
+
+series_rate_chart
+```
+
+### Children in Need of Services or Supervision
+```{r}
+# Set data
+df <- read_csv("../data/jdr_services_supervision_rates.csv") %>% 
+  filter(year != 2025)
+
+df$rate <- df$rate_total
+df$label <- df$locality 
+df$count_label <- prettyNum(df$count_total, big.mark = ",")
+
+title <- "Rate of Youth in Need of Services or Supervision"
+ytext <- "Rate per 1,000 Youth (5-17)"
+xtext <- "Year"
+xlabels <- JS("function() { return this.value; }")
+
+<<series-rate>>
+
+```
+
+### Juvenile Delinquency Judgments
+```{r}
+# Set data
+df <- read_csv("../data/jdr_delinquency_rates.csv") %>% 
+  filter(year != 2025)
+
+df$rate <- df$rate_total
+df$label <- df$locality 
+df$count_label <- prettyNum(df$count_total, big.mark = ",")
+
+title <- "Rate of Juvenile Delinquency Judgments for Youth"
+ytext <- "Rate per 1,000 Youth (10-17)"
+xtext <- "Year"
+xlabels <- JS("function() { return this.value; }")
+
+```
+
+```{r, results = 'asis'}
+
+df <- df %>% filter(year >= 2010)
+
+series_rate_chart <- df %>% 
+  mutate(rate = round(rate,1)) %>% 
+  arrange(year) %>% 
+  hchart("line", hcaes(x = year, y = rate, group = label)) %>% 
+  hc_legend(align = "center", verticalAlign = "top") %>%
+  hc_xAxis(title = list(text = xtext), 
+           labels = list(formatter = xlabels, style = list(fontSize = '1.2em')),
+           # labels = list(allowOverlap = TRUE, step = 1, minTickInterval = 1, allowDecimals = FALSE, style = list(fontSize = '1.2em')),
+           allowDecimals = FALSE) %>%
+  hc_yAxis(min = 0, max = 150,
+           title = list(text = ytext),
+           labels = list(format = '{text}')) %>%
+  hc_colors(locality_pal) %>%
+  hc_plotOptions(series = list(dataLabels = list(format = '{y: f}', enabled = TRUE)),
+                 line = list( marker = list(enabled = TRUE) )) %>%
+  hc_tooltip(formatter = JS("function(){
+  return this.series.name + '</br><b>' + this.key + '</b></br>' + 'Rate per 1,000: <b>' + this.y + '</b></br>' + 'Est. Number: <b>' + this.point.count_label + '</b>'
+  }")) %>%
+  hc_title(text = title,
+           align = 'left') %>%
+  hc_add_theme(hc_theme_smpl())
+
+series_rate_chart
+```
+
+## Arrests for Violent Crimes
+```{r}
+# Set data
+df <- read_csv("../data/vsp_arrest_rates.csv")
+
+df$rate <- df$rate_arrests
+df$label <- df$jurisdiction_by_geography 
+df$count_label <- prettyNum(df$number_of_arrestees_10to17, big.mark = ",")
+
+title <- "Rate of Youth Arrests for Crimes against Persons (Ages 10-17)"
+ytext <- "Rate per 1,000 Youth (Ages 10-17)"
+xtext <- "Year"
+xlabels <- JS("function() { return this.value; }")
+
+<<series-rate>>
+
+```
+
+## Arrests for Crimes involving Firearms
+```{r}
+# Set data
+df <- read_csv("../data/vsp_firearms_rates.csv")
+
+df$rate <- df$rate_firearms
+df$label <- df$jurisdiction_by_geography 
+df$count_label <- prettyNum(df$number_of_arrestees_10to17, big.mark = ",")
+
+title <- "Rate of Youth Arrests for Crimes involving Firearms (Ages 10-17)"
+ytext <- "Rate per 1,000 Youth (Ages 10-17)"
+xtext <- "Year"
+xlabels <- JS("function() { return this.value; }")
+
+<<series-rate>>
+
+```

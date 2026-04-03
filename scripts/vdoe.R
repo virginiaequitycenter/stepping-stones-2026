@@ -154,7 +154,7 @@ write_csv(sped_data, "data/special_ed_services.csv")
 #             Select Student Characteristics : Select All for all categories
 #             Self-reporting categories: All students for all except 
 #             English Learners: Yes
-#             Include Former ELs: No (don't check)
+#             Include Former ELs: Yes [former EL is SELECTED] (recommendation per Rusty ACPS)
 #         (3) Submit and click CSV Download (save to download_data/)
 
 # Read in data
@@ -393,7 +393,7 @@ write_csv(disadvan_data, "data/economically_disadvantaged_students.csv")
 #             Select Divisions (multi-select): Albemarle County; Charlottesville City 
 #             Select SBAR Report: Events Report
 #             Select Behavior Category: BESO; PD 
-#             Selevt Behavior: All Behaviors
+#             Select Behavior: All Behaviors
 #         (3) Submit and click CSV Download (save to download_data/)
 
 # Read in data
