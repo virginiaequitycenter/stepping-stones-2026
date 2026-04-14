@@ -24,6 +24,8 @@ library(highcharter)
 # Color palette ----
 locality_pal <- c("#193CBC", "#589ACF", "#FAC484")
 
+
+myMenuItems <- c("downloadPNG", "downloadJPEG", "downloadPDF", "downloadCSV" )
 ```
 
 
@@ -51,6 +53,7 @@ title <- "Percent of Students who Pass the 3rd Grade Math SOL Test"
 ytext <- "Percent of Students taking SOL"
 xtext <- "School Year"
 xlabels <- JS("function() { return this.value - 1 + '-' + this.value.toString().slice(-2); }")
+file_name <- "sol_pass_rates_math_3"
 
 ```
 
@@ -67,6 +70,9 @@ series_sol_chart <- df_pre %>%
            labels = list(formatter = xlabels, style = list(fontSize = '1.2em')),
            # labels = list(allowOverlap = TRUE, step = 1, style = list(fontSize = '1.2em')),
            allowDecimals = FALSE,
+           # endOnTick = TRUE,
+           tickInterval = 1,
+           # tickAmount = 16,
            plotLines = list(
                  list(
                    label = list(text = "SOLs not conducted in 2020 </br>due to the COVID-19 Pandemic", rotation = 0),
@@ -94,7 +100,17 @@ series_sol_chart <- df_pre %>%
   #            align = "right",
   #            style = list(fontSize = '1em')) %>%
   hc_add_theme(hc_theme_smpl()) %>% 
-  hc_add_series(data =  df_post, type = "line", mapping = hcaes(x = year, y = percent, group = label), showInLegend = FALSE)
+  hc_add_series(data =  df_post, type = "line", mapping = hcaes(x = year, y = percent, group = label), showInLegend = FALSE) %>%
+  hc_exporting(enabled=TRUE,
+               sourceWidth = 900,
+               sourceHeight = 600,
+               filename = file_name
+               # width = 200
+               # formAttributes=list(target="_blank"),
+               # buttons=list(contextButton=list(
+               #   # text="Export", theme=list(fill="transparent"),
+               #   menuItems=myMenuItems))
+  )
 
 series_sol_chart
 
@@ -111,6 +127,7 @@ title <- "Percent of Students who Pass the 5th Grade Math SOL Test"
 ytext <- "Percent of Students taking SOL"
 xtext <- "School Year"
 xlabels <- JS("function() { return this.value - 1 + '-' + this.value.toString().slice(-2); }")
+file_name <- "sol_pass_rates_math_5"
 
 <<series-sol>>
 
@@ -128,6 +145,7 @@ title <- "Percent of Students who Pass the 3rd Grade Reading SOL Test"
 ytext <- "Percent of Students taking SOL"
 xtext <- "School Year"
 xlabels <- JS("function() { return this.value - 1 + '-' + this.value.toString().slice(-2); }")
+file_name <- "sol_pass_rates_reading_3"
 
 <<series-sol>>
 
@@ -144,6 +162,7 @@ title <- "Percent of Students who Pass the 5th Grade Reading SOL Test"
 ytext <- "Percent of Students taking SOL"
 xtext <- "School Year"
 xlabels <- JS("function() { return this.value - 1 + '-' + this.value.toString().slice(-2); }")
+file_name <- "sol_pass_rates_reading_5"
 
 <<series-sol>>
 
@@ -179,6 +198,7 @@ series_percent_chart <- df %>%
   hc_legend(align = "center", verticalAlign = "top") %>%
   hc_xAxis(title = list(text = xtext), 
            labels = list(formatter = xlabels, style = list(fontSize = '1.2em')),
+           tickInterval = 1,
            allowDecimals = FALSE) %>%
   hc_yAxis(min = 0, max = 100,
            title = list(text = ytext),
@@ -197,7 +217,11 @@ series_percent_chart <- df %>%
   # hc_caption(text = source_acs_range,
   #            align = "right",
   #            style = list(fontSize = '1em')) %>%
-  hc_add_theme(hc_theme_smpl())
+  hc_add_theme(hc_theme_smpl()) %>%
+  hc_exporting(enabled=TRUE,
+               sourceWidth = 900,
+               sourceHeight = 600
+  )
 
 series_percent_chart
 
@@ -302,6 +326,7 @@ series_percent_chart <- df_any %>%
   hc_xAxis(title = list(text = xtext), 
            labels = list(formatter = xlabels, style = list(fontSize = '1.2em')),
            # labels = list(allowOverlap = TRUE, step = 1, style = list(fontSize = '1.2em')),
+           tickInterval = 1,
            allowDecimals = FALSE) %>%
   hc_yAxis(min = 0, max = 100,
            title = list(text = ytext),
@@ -321,7 +346,11 @@ series_percent_chart <- df_any %>%
   #            align = "right",
   #            style = list(fontSize = '1em')) %>%
   hc_add_theme(hc_theme_smpl()) %>% 
-  hc_add_series(data =  df_4yr, type = "line", mapping = hcaes(x = year, y = percent4yr, group = label), dashStyle = "dash", marker = list(symbol = "diamond"))
+  hc_add_series(data =  df_4yr, type = "line", mapping = hcaes(x = year, y = percent4yr, group = label), dashStyle = "dash", marker = list(symbol = "diamond")) %>%
+  hc_exporting(enabled=TRUE,
+               sourceWidth = 900,
+               sourceHeight = 600
+  )
 
 series_percent_chart
 
@@ -372,6 +401,7 @@ series_inc_chart <- df %>%
   hc_legend(align = "center", verticalAlign = "top") %>%
   hc_xAxis(title = list(text = xtext), 
            labels = list(allowOverlap = TRUE, step = 1, style = list(fontSize = '1.2em')),
+           tickInterval = 1,
            allowDecimals = FALSE) %>%
   hc_yAxis(title = list(text = ytext),
            labels = list(format = '${text}')) %>%
@@ -383,7 +413,11 @@ series_inc_chart <- df %>%
   }")) %>%
   hc_title(text = title,
            align = 'left') %>%
-  hc_add_theme(hc_theme_smpl())
+  hc_add_theme(hc_theme_smpl()) %>%
+  hc_exporting(enabled=TRUE,
+               sourceWidth = 900,
+               sourceHeight = 600
+  )
 
 series_inc_chart
 ```
@@ -506,6 +540,7 @@ series_rate_chart <- df %>%
   hc_legend(align = "center", verticalAlign = "top") %>%
   hc_xAxis(title = list(text = xtext), 
            labels = list(formatter = xlabels, style = list(fontSize = '1.2em')),
+           tickInterval = 1,
            allowDecimals = FALSE) %>%
   hc_yAxis(min = 0, max = 50,
            title = list(text = ytext),
@@ -514,11 +549,15 @@ series_rate_chart <- df %>%
   hc_plotOptions(series = list(dataLabels = list(format = '{y: f}', enabled = TRUE)),
                  line = list( marker = list(enabled = TRUE) )) %>%
   hc_tooltip(formatter = JS("function(){
-  return this.series.name + '</br><b>' + this.key + '</b></br>' + 'Rate per 1,000: <b>' + this.y + '</b></br>' + 'Est. Number: <b>' + this.point.count_label + '</b>'
+  return this.series.name + '</br><b>' + this.key + '</b></br>' + 'Rate per 1,000: <b>' + this.y + '</b>'
   }")) %>%
   hc_title(text = title,
            align = 'left') %>%
-  hc_add_theme(hc_theme_smpl())
+  hc_add_theme(hc_theme_smpl()) %>%
+  hc_exporting(enabled=TRUE,
+               sourceWidth = 900,
+               sourceHeight = 600
+  )
 
 series_rate_chart
 ```
@@ -560,8 +599,39 @@ ytext <- "Rate per 1,000 Students"
 xtext <- "School Year"
 xlabels <- JS("function() { return this.value - 1 + '-' + this.value.toString().slice(-2); }")
 
-<<series-rate>>
+```
 
+```{r mckinney-vento, results = 'asis'}
+
+df <- df %>% filter(year >= 2010)
+
+series_rate_chart <- df %>% 
+  mutate(rate = round(rate,1)) %>% 
+  arrange(year) %>% 
+  hchart("line", hcaes(x = year, y = rate, group = label)) %>% 
+  hc_legend(align = "center", verticalAlign = "top") %>%
+  hc_xAxis(title = list(text = xtext), 
+           labels = list(formatter = xlabels, style = list(fontSize = '1.2em')),
+           tickInterval = 1,
+           allowDecimals = FALSE) %>%
+  hc_yAxis(min = 0, max = 50,
+           title = list(text = ytext),
+           labels = list(format = '{text}')) %>%
+  hc_colors(locality_pal) %>%
+  hc_plotOptions(series = list(dataLabels = list(format = '{y: f}', enabled = TRUE)),
+                 line = list( marker = list(enabled = TRUE) )) %>%
+  hc_tooltip(formatter = JS("function(){
+  return this.series.name + '</br><b>' + this.key + '</b></br>' + 'Rate per 1,000: <b>' + this.y + '</b>' + 'Est. Number: <b>' + this.point.count_label + '</b>'
+  }")) %>%
+  hc_title(text = title,
+           align = 'left') %>%
+  hc_add_theme(hc_theme_smpl()) %>%
+  hc_exporting(enabled=TRUE,
+               sourceWidth = 900,
+               sourceHeight = 600
+  )
+
+series_rate_chart
 ```
 
 ## Health
@@ -623,7 +693,7 @@ df$rate <- df$pd_rate
 df$label <- df$division_name 
 df$count_label <- prettyNum(df$pd_count, big.mark = ",")
 
-title <- "Rate of PD Incidents: Persistently Dangerous"
+title <- "Rate of PD Incidents: Persistently Dangerous Behaviors"
 ytext <- "Rate per 1,000 Students"
 xtext <- "School Year"
 xlabels <- JS("function() { return this.value - 1 + '-' + this.value.toString().slice(-2); }")
@@ -654,7 +724,7 @@ xlabels <- JS("function() { return this.value - 1 + '-' + this.value.toString().
 
 ```{r in-school, results = 'asis'}
 
-df <- df %>% filter(year >= 2010)
+df <- df %>% filter(year >= 2022)
 
 series_rate_chart <- df %>% 
   mutate(rate = round(rate,1)) %>% 
@@ -664,8 +734,9 @@ series_rate_chart <- df %>%
   hc_xAxis(title = list(text = xtext), 
            labels = list(formatter = xlabels, style = list(fontSize = '1.2em')),
            # labels = list(allowOverlap = TRUE, step = 1, minTickInterval = 1, allowDecimals = FALSE, style = list(fontSize = '1.2em')),
+           tickInterval = 1,
            allowDecimals = FALSE) %>%
-  hc_yAxis(min = 0, max = 250,
+  hc_yAxis(min = 0, max = 150,
            title = list(text = ytext),
            labels = list(format = '{text}')) %>%
   hc_colors(locality_pal) %>%
@@ -676,7 +747,11 @@ series_rate_chart <- df %>%
   }")) %>%
   hc_title(text = title,
            align = 'left') %>%
-  hc_add_theme(hc_theme_smpl())
+  hc_add_theme(hc_theme_smpl()) %>%
+  hc_exporting(enabled=TRUE,
+               sourceWidth = 900,
+               sourceHeight = 600
+  )
 
 series_rate_chart
 ```
@@ -703,7 +778,7 @@ xlabels <- JS("function() { return this.value - 1 + '-' + this.value.toString().
 
 ```{r out-school, results = 'asis'}
 
-df <- df %>% filter(year >= 2010)
+df <- df %>% filter(year >= 2022)
 
 series_rate_chart <- df %>% 
   mutate(rate = round(rate,1)) %>% 
@@ -713,8 +788,9 @@ series_rate_chart <- df %>%
   hc_xAxis(title = list(text = xtext), 
            labels = list(formatter = xlabels, style = list(fontSize = '1.2em')),
            # labels = list(allowOverlap = TRUE, step = 1, minTickInterval = 1, allowDecimals = FALSE, style = list(fontSize = '1.2em')),
+           tickInterval = 1,
            allowDecimals = FALSE) %>%
-  hc_yAxis(min = 0, max = 250,
+  hc_yAxis(min = 0, max = 150,
            title = list(text = ytext),
            labels = list(format = '{text}')) %>%
   hc_colors(locality_pal) %>%
@@ -725,7 +801,11 @@ series_rate_chart <- df %>%
   }")) %>%
   hc_title(text = title,
            align = 'left') %>%
-  hc_add_theme(hc_theme_smpl())
+  hc_add_theme(hc_theme_smpl()) %>%
+  hc_exporting(enabled=TRUE,
+               sourceWidth = 900,
+               sourceHeight = 600
+  )
 
 series_rate_chart
 ```
@@ -790,12 +870,16 @@ series_rate_chart <- df %>%
   }")) %>%
   hc_title(text = title,
            align = 'left') %>%
-  hc_add_theme(hc_theme_smpl())
+  hc_add_theme(hc_theme_smpl()) %>%
+  hc_exporting(enabled=TRUE,
+               sourceWidth = 900,
+               sourceHeight = 600
+  )
 
 series_rate_chart
 ```
 
-## Arrests for Violent Crimes
+### Arrests for Violent Crimes
 ```{r}
 # Set data
 df <- read_csv("../data/vsp_arrest_rates.csv")
@@ -813,7 +897,7 @@ xlabels <- JS("function() { return this.value; }")
 
 ```
 
-## Arrests for Crimes involving Firearms
+### Arrests for Crimes involving Firearms
 ```{r}
 # Set data
 df <- read_csv("../data/vsp_firearms_rates.csv")
