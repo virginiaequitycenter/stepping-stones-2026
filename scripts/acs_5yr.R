@@ -13,6 +13,7 @@
 #   - Source: ACS Table B05009 https://data.census.gov/table/ACSDT5Y2023.B05009?q=B05009
 # - Median Family income with children under 18 in household
 #   - Source: ACS Table B19125  https://data.census.gov/table/ACSDT5Y2024.B19125?q=B19125&g=050XX00US51003,51540
+#   - Inflation adjusted income: https://www.bls.gov/cpi/data.htm
 
 # Libraries ----
 library(tidycensus)
@@ -344,6 +345,39 @@ medinc_fam_prior <- medinc_fam_prior %>%
 
 # merge with prior 
 medinc_fam_data <- rbind(medinc_fam_prior, medinc_fam)
+
+# Adjust income for inflation
+# Consumer Price Index measure for inflation-adjusted dollar values
+# Go to: https://www.bls.gov/cpi/data.htm
+# (1) Under Databases section -> Databases, row for All Urban Consumers (Current Series) -> click "Top picks"
+# (2) Select: "U.S City Average, All Items", click retrieve data
+# (3) Click "More formatting options
+# (4) Under "Select view of the data" select: "Table Format" and check "Original data value"
+# (5) Under "Select the time frame for your data": Specify year range: From: 2014 To: 2026;
+#                                                 Select one time period: Annual Data
+# (6) Under "Output type" select: "HTML table"
+# (7) Click "Retrieve Data"
+# (8) Download xlsx to download_data folder
+
+# Citation: 
+# U.S. Bureau of Labor Statistics, "All items in U.S. city average, all urban consumers, not seasonally adjusted", Series Id CUUR0000SA0 (accessed April 15, 2026). 
+
+bls_ann <- read_excel("download_data/SeriesReport-20260415133403_610a5f.xlsx", skip = 10)
+
+# Revise to base year 2014
+# (Default is 1982-1984)
+base2014 <- as_vector(bls_ann %>% filter(Year == 2014) %>% select(Annual))
+
+bls_ann <- bls_ann %>% 
+  mutate(cpi14 = Annual/base2014*100)
+
+# merge with dollar-valued data frame
+# calculate adjusted dollar values
+#   mutate(adj_inc = inc/cpi10*100)
+
+medinc_fam_data <- medinc_fam_data %>% 
+  left_join(bls_ann %>% select(year = Year, cpi14)) %>% 
+  mutate(adj_medinc_w_children = (medinc_w_children/cpi14)*100)
 
 # Save
 write_csv(medinc_fam_data, "data/median_income_w_children.csv")

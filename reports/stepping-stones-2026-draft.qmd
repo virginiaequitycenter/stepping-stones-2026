@@ -5,6 +5,19 @@ format:
     toc: true
     theme: cosmo
     embed-resources: true
+  # docx:
+  #   toc: true
+  #   toc-title: "Table of Contents"
+  #   lof: true
+  #   number-sections: true
+  #   number-depth: 3
+  #   # fig-align: left
+  #   # fig-width: 3
+  #   # fig-height: 2
+  #   # # fig-format: png
+  #   # fig-dpi: 200
+  #   embed-resources: true
+  #   reference-doc: styles.docx
 execute:
   cache: false
   echo: false
@@ -388,38 +401,86 @@ df$count_label <- prettyNum(df$medinc_w_children, big.mark = ",")
 title <- "Median Income for Families with Children under 18"
 ytext <- "Median Family Income"
 xtext <- "Year"
+xlabels <- JS("function() { return this.value; }")
 
 ```
 
 ```{r family-income, results = 'asis'}
 
-df <- df %>% filter(year >= 2010)
 
-series_inc_chart <- df %>% 
-  arrange(year) %>% 
-  hchart("line", hcaes(x = year, y = number, group = label)) %>% 
-  hc_legend(align = "center", verticalAlign = "top") %>%
+df <- df %>% filter(year >= 2010) %>% 
+  mutate(adj_medinc_w_children = round(adj_medinc_w_children, 0))
+
+df_raw_inc <- df %>% 
+  mutate(label = case_when(NAME =="Albemarle County" ~ "Albemarle: Raw Income",
+                           NAME =="Charlottesville City" ~ "Charlottesville: Raw Income",
+                           .default = "Virginia: Raw Income"),
+         count_label = prettyNum(medinc_w_children, big.mark = ","))
+
+df_adj_inc <- df %>% 
+  mutate(label = case_when(NAME =="Albemarle County" ~ "Albemarle: Inflation-Adjusted",
+                           NAME =="Charlottesville City" ~ "Charlottesville: Inflation-Adjusted",
+                           .default = "Virginia: Inflation-Adjusted"),
+         count_label = prettyNum(adj_medinc_w_children, big.mark = ","))
+
+series_inc_chart <- df_raw_inc %>% 
+  arrange(year) %>%
+  hchart("line", hcaes(x = year, y = number, group = label), dashStyle = "solid") %>% 
+  hc_legend(align = "center", verticalAlign = "top", symbolWidth= 40) %>%
   hc_xAxis(title = list(text = xtext), 
-           labels = list(allowOverlap = TRUE, step = 1, style = list(fontSize = '1.2em')),
+           labels = list(formatter = xlabels, style = list(fontSize = '1.2em')),
            tickInterval = 1,
            allowDecimals = FALSE) %>%
   hc_yAxis(title = list(text = ytext),
            labels = list(format = '${text}')) %>%
   hc_colors(locality_pal) %>%
   hc_plotOptions(series = list(dataLabels = list(format = '${y: ,f}', enabled = TRUE)),
-                 line = list( marker = list(enabled = TRUE) )) %>%
+                 line = list(marker = list(enabled = TRUE, symbol = list("circle")))) %>%
   hc_tooltip(formatter = JS("function(){
   return '<b>' + this.key + '</b></br>' + this.series.name + ': <b>$' + this.point.count_label + '</b></br>'
   }")) %>%
   hc_title(text = title,
            align = 'left') %>%
-  hc_add_theme(hc_theme_smpl()) %>%
+  # hc_subtitle(text = '2018-2023',
+  #             align = "left",
+  #             style = list(fontSize = '1.4em')) %>%
+  # hc_caption(text = source_acs_range,
+  #            align = "right",
+  #            style = list(fontSize = '1em')) %>%
+  hc_add_theme(hc_theme_smpl()) %>% 
+  hc_add_series(data =  df_adj_inc, type = "line", mapping = hcaes(x = year, y = adj_medinc_w_children, group = label), dashStyle = "dash", marker = list(symbol = "diamond")) %>%
   hc_exporting(enabled=TRUE,
                sourceWidth = 900,
                sourceHeight = 600
   )
 
 series_inc_chart
+
+# series_inc_chart <- df %>% 
+#   arrange(year) %>% 
+#   hchart("line", hcaes(x = year, y = number, group = label)) %>% 
+#   hc_legend(align = "center", verticalAlign = "top") %>%
+#   hc_xAxis(title = list(text = xtext), 
+#            labels = list(allowOverlap = TRUE, step = 1, style = list(fontSize = '1.2em')),
+#            tickInterval = 1,
+#            allowDecimals = FALSE) %>%
+#   hc_yAxis(title = list(text = ytext),
+#            labels = list(format = '${text}')) %>%
+#   hc_colors(locality_pal) %>%
+#   hc_plotOptions(series = list(dataLabels = list(format = '${y: ,f}', enabled = TRUE)),
+#                  line = list( marker = list(enabled = TRUE) )) %>%
+#   hc_tooltip(formatter = JS("function(){
+#   return '<b>' + this.key + '</b></br>' + this.series.name + ': <b>$' + this.point.count_label + '</b></br>'
+#   }")) %>%
+#   hc_title(text = title,
+#            align = 'left') %>%
+#   hc_add_theme(hc_theme_smpl()) %>%
+#   hc_exporting(enabled=TRUE,
+#                sourceWidth = 900,
+#                sourceHeight = 600
+#   )
+# 
+# series_inc_chart
 ```
 
 ### Youth Labor Force Participation and Unemployment
@@ -682,6 +743,9 @@ xlabels <- JS("function() { return this.value - 1 + '-' + this.value.toString().
 
 Persistently Dangerous (PD): Behaviors described in Virginia’s Unsafe School Choice Option Policy required by the federal Every Student Succeeds Act of 2015.
 ```{r}
+#| label: fig-pd
+#| fig-cap: "SBAR data"
+
 # Set data
 df <- read_csv("../data/student_behavior_events.csv")  %>% 
   mutate(year = as.numeric(paste0("20", str_sub(school_year,-2,-1))),

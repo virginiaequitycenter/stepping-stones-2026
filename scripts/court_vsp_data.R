@@ -135,7 +135,7 @@ write_csv(vsp_arrest_rates, "data/vsp_arrest_rates.csv")
 # 
 # * Start with Crimes by Jurisdiction - All crime by jurisdiction
 # * Select Type of weapon/force involved (on sidebar): select firearem
-# * Click arrestee age (on table): select Under 18 (and under 10, 10-17), deselect all others
+# * Click offender age (on table): select Under 18 (and under 10, 10-17), deselect all others
 # * Click incident date (on table or sidebar): select all years
 # * Click jurisdiction by geography (on table or sidebar): unselect all but VA, Cvl, Alb (division 3)
 # * Rearrange report: jurisdiction by geography in rows; arrest date, arrest age in columns
