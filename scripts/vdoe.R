@@ -155,44 +155,71 @@ write_csv(sped_data, "data/special_ed_services.csv")
 #             Select Student Characteristics : Select All for all categories
 #             Self-reporting categories: All students for all except 
 #             English Learners: Yes
-#             Include Former ELs: Yes [former EL is SELECTED]
+#             Include Former ELs: No 
 #         (3) Submit and click CSV Download (save to download_data/)
 
 # Read in data
-ell <- read_csv("download_data/fall_membership_statistics_ell_include_former.csv") %>% 
-  clean_names() %>% 
-  mutate(division_name = ifelse(is.na(division_name), "Virginia", division_name))
-
-# Read in fall membership
-fall_mem <- fallmem %>% 
-  clean_names() %>% 
-  mutate(division_name = case_when(is.na(division_name) ~ "Virginia",
-                              .default = division_name)) %>% 
-  select(school_year, division_name, total_students)
-
-fall_mem_prior <- read_csv("data/2023_data/student_totals.csv") %>% 
-  filter(!school_year %in% c("2021-2022", "2022-2023")) %>% 
-  mutate(division = case_when(division=="Albemarle" ~ "Albemarle County",
-                              division=="Charlottesville" ~ "Charlottesville City",
-                              .default = division)) %>% 
-  rename(total_students = students,
-         division_name = division)
-
-# bind
-fall_mem <- rbind(fall_mem_prior, fall_mem)
+ell <- read_csv("download_data/fall_membership_statistics_ell.csv") %>% 
+  clean_names()
 
 # Join with fall membership
 ell <- ell %>% 
-  left_join(fall_mem)
+  left_join(fallmem)
 
 # Create percents
 ell <- ell %>% 
-  select(-c(division_number, english_learners_include_former_e_ls, ft_count, pt_count)) %>% 
-  mutate(pct_english_learners = (total_count/total_students) *100) %>% 
+  select(-c(division_number, english_learners, ft_count, pt_count)) %>% 
+  mutate(pct_english_learners = (total_count/total_students) *100,
+         division_name = ifelse(is.na(division_name), "Virginia", division_name)) %>% 
   rename(english_learners = total_count)
 
+# Read in prior data
+ell_prior <- read_csv("data/2023_data/english_language_learners.csv") %>% 
+  mutate(level = ifelse(division_name=="Virginia","State","Division"), .after = school_year) %>% 
+  rename(total_students = student_count) %>% 
+  select(-c(`...1`,division_number,locality,year))
+
+# Bind tables
+ell_data <- rbind(ell_prior, ell)
+
 # Save
-write_csv(ell, "data/english_language_learners.csv")
+write_csv(ell_data, "data/english_language_learners.csv")
+
+# # Read in data
+# ell <- read_csv("download_data/fall_membership_statistics_ell_include_former.csv") %>% 
+#   clean_names() %>% 
+#   mutate(division_name = ifelse(is.na(division_name), "Virginia", division_name))
+# 
+# # Read in fall membership
+# fall_mem <- fallmem %>% 
+#   clean_names() %>% 
+#   mutate(division_name = case_when(is.na(division_name) ~ "Virginia",
+#                               .default = division_name)) %>% 
+#   select(school_year, division_name, total_students)
+# 
+# fall_mem_prior <- read_csv("data/2023_data/student_totals.csv") %>% 
+#   filter(!school_year %in% c("2021-2022", "2022-2023")) %>% 
+#   mutate(division = case_when(division=="Albemarle" ~ "Albemarle County",
+#                               division=="Charlottesville" ~ "Charlottesville City",
+#                               .default = division)) %>% 
+#   rename(total_students = students,
+#          division_name = division)
+# 
+# # bind
+# fall_mem <- rbind(fall_mem_prior, fall_mem)
+# 
+# # Join with fall membership
+# ell <- ell %>% 
+#   left_join(fall_mem)
+# 
+# # Create percents
+# ell <- ell %>% 
+#   select(-c(division_number, english_learners_include_former_e_ls, ft_count, pt_count)) %>% 
+#   mutate(pct_english_learners = (total_count/total_students) *100) %>% 
+#   rename(english_learners = total_count)
+# 
+# # Save
+# write_csv(ell, "data/english_language_learners.csv")
 
 ## .......................................................
 # Chronic Absenteeism ----

@@ -17,9 +17,19 @@ library(tidyverse)
 ## .......................................................
 # Children in Need of Services or Supervision ----
 # Source: PowerBi and Monthly here: https://www.vacourts.gov/courtadmin/aoc/djs/programs/cpss/csi/jdr/home
-# PowerBi Selections (Civil): Child in Need of Services - CS
-#                     Truancy/Runaway - TR
+# (1) Go to: https://www.vacourts.gov/courtadmin/aoc/djs/programs/cpss/csi/jdr/home
+# (2) Under Case Dispositions, click "View Daily Report" to go to PowerBi dashboard
+# (3) Go to dashboard page "State (Years)"
+# (4) Selections in top right corner drop down options:
+#   - Years dropdown: Select each year recording data individually
+#   - Second dropdown (disposition types): De-select all, expand "Civil" category, 
+#       select "Child in Need of Services - CS" and "Truancy/Runaway - TR" (hold command for multiple selections)
+# (5) Record values in spreadsheet 
+#   - State total from "Dispositions by Calendar Year" bar chart
+#   - Locality totals from "Dispositions by Case Type" (for individual CS and TR counts) or 
+#       "Dispositions by Major Case Category" for summed total of CS and TR
 # Recorded in CSV: jdr_services_supervision_recorded.csv
+
 # Rate per 1000 5-17yr olds 
 # Age range determined by combination of under 18 for Child in Need of Services and 5-18yr olds required to be at school (Truancy)
 
@@ -51,10 +61,20 @@ write_csv(jdr_services, "data/jdr_services_supervision_rates.csv")
 ## .......................................................
 # Juvenile Delinquency Judgments ----
 # Source: PowerBi and Monthly here: https://www.vacourts.gov/courtadmin/aoc/djs/programs/cpss/csi/jdr/home
-# PowerBi Selections (Delinquency): Delinquency Felony - DF
-#                           Delinquency Misdemeanor - DM
+# (1) Go to: https://www.vacourts.gov/courtadmin/aoc/djs/programs/cpss/csi/jdr/home
+# (2) Under Case Dispositions, click "View Daily Report" to go to PowerBi dashboard
+# (3) Go to dashboard page "State (Years)"
+# (4) Selections in top right corner drop down options:
+#   - Years dropdown: Select each year recording data individually
+#   - Second dropdown (disposition types): De-select all, expand "Delinquncy" category, 
+#       select "Delinquency Felony - DF" and "Delinquency Misdemeanor - DM" (hold command for multiple selections)
+# (5) Record values in spreadsheet 
+#   - State total from "Dispositions by Calendar Year" bar chart
+#   - Locality totals from "Dispositions by Case Type" (for individual DF and DM counts) or 
+#       "Dispositions by Major Case Category" for summed total of DF and DM
 # Recorded in CSV: jdr_delinquency_recorded.csv
-# Rate per 1000 10-17yr olds - age range as close to delinquency as possible (11-17yrs)
+
+# Rate per 1000 10-17yr olds - age range as close to delinquency as possible from population totals (11-17yrs)
 
 jdr_delinquency_recorded <- read_csv("data/jdr_delinquency_recorded.csv") %>% 
   mutate(fips = as.character(fips))
@@ -126,7 +146,7 @@ vsp_arrest_rates <- vsp_arrest_rates %>%
 write_csv(vsp_arrest_rates, "data/vsp_arrest_rates.csv")
 
 ## .......................................................
-# Arrests for Crimes involving Firearms (Under 10-17)
+# Arrests for Crimes involving Firearms (Under 10-17) ----
 # Retrieving arrest and crime data from va.beyond2020.com 
 # https://va.beyond2020.com/va_public/Browse/browsetables.aspx?PerspectiveLanguage=en
 # 

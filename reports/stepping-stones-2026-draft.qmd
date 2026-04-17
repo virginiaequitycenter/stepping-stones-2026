@@ -1,5 +1,11 @@
 ---
 title: "Stepping Stones 2026"
+# date: "May 2026"
+# author: "Community-Centered Analysis at the UVA Center for Community Partnerships"
+# license: "CC BY"
+# citation:
+#   type: report
+#   url: communitypartnerships.virginia.edu
 format:
   html:
     toc: true
@@ -37,18 +43,46 @@ library(highcharter)
 # Color palette ----
 locality_pal <- c("#193CBC", "#589ACF", "#FAC484")
 
-
-myMenuItems <- c("downloadPNG", "downloadJPEG", "downloadPDF", "downloadCSV" )
 ```
-
 
 ## Education
 
-### Kindergarteners At or Above Reading Levels
+### Kindergarten Readiness
+```{r}
+# Set data
+df <- read_csv("../data/kindergarten_readiness.csv")
+
+columnchart <- df %>% 
+  hchart('column', hcaes(x = year, y = round(percent_kindergartners_ready,0), group = name)) %>% 
+  hc_legend(align = "center", verticalAlign = "top") %>%
+  hc_xAxis(title = list(text = 'Fall Assessment Year'), labels = list(style = list(fontSize = '1.2em'))) %>%
+  hc_yAxis(min = 0, max = 100,
+           title = list(text = "Percent of Kindergarten Students"),
+           labels = list(format = '{text}%')) %>%
+  hc_colors(locality_pal) %>%
+  hc_tooltip(formatter = JS("function(){
+  return this.series.name + '</br>Fall Assessment Year: <b>' + this.point.year + '</b></br>Percent: <b>' + this.y + '%</b>'
+  }")) %>%
+  hc_plotOptions(series = list(dataLabels = list(format = '{y: f}%', enabled = TRUE))) %>%
+  hc_title(text = 'Percent of Kindergartners Meeting Overall Readiness Benchmark',
+           align = 'left') %>%
+  hc_caption(text = "Data Source: Virginia Early Childhood Foundation",
+             align = "right",
+             style = list(fontSize = '1em')) %>%
+  hc_add_theme(hc_theme_smpl()) %>%
+  hc_exporting(enabled=TRUE,
+               sourceWidth = 900,
+               sourceHeight = 600
+  )
+
+columnchart
+```
+
 
 ### Standards of Learning
 
 #### Math: Grades 3, and 5
+
 ```{r}
 # Set data
 df_sol <- read_csv("../data/sol_pass_rates.csv") %>% 
@@ -109,9 +143,9 @@ series_sol_chart <- df_pre %>%
   # hc_subtitle(text = '2018-2023',
   #             align = "left",
   #             style = list(fontSize = '1.4em')) %>%
-  # hc_caption(text = source_acs_range,
-  #            align = "right",
-  #            style = list(fontSize = '1em')) %>%
+  hc_caption(text = "Data Source: Virginia Department of Education, Annual Statewide Assessment Result Build-A-Table",
+             align = "right",
+             style = list(fontSize = '1em')) %>%
   hc_add_theme(hc_theme_smpl()) %>% 
   hc_add_series(data =  df_post, type = "line", mapping = hcaes(x = year, y = percent, group = label), showInLegend = FALSE) %>%
   hc_exporting(enabled=TRUE,
@@ -147,6 +181,7 @@ file_name <- "sol_pass_rates_math_5"
 ```
 
 #### Reading: Grades 3, and 5
+
 ```{r}
 # Set data
 df <- df_sol %>% filter(subject == "English:Reading") %>% filter(test_level == "Grade 3")
@@ -182,6 +217,7 @@ file_name <- "sol_pass_rates_reading_5"
 ```
 
 ### Students Eligible for Special Education Services
+
 ```{r}
 # Set data
 df <- read_csv("../data/special_ed_services.csv")  %>% 
@@ -198,6 +234,7 @@ title <- "Percent of Students Identified to Receive Special Services"
 ytext <- "Percent of Students"
 xtext <- "School Year"
 xlabels <- JS("function() { return this.value - 1 + '-' + this.value.toString().slice(-2); }")
+source_text <- "Data Source: Virginia Department of Education, December 1 Build-A-Table"
 
 ```
 
@@ -227,9 +264,9 @@ series_percent_chart <- df %>%
   # hc_subtitle(text = '2018-2023',
   #             align = "left",
   #             style = list(fontSize = '1.4em')) %>%
-  # hc_caption(text = source_acs_range,
-  #            align = "right",
-  #            style = list(fontSize = '1em')) %>%
+  hc_caption(text = source_text,
+             align = "right",
+             style = list(fontSize = '1em')) %>%
   hc_add_theme(hc_theme_smpl()) %>%
   hc_exporting(enabled=TRUE,
                sourceWidth = 900,
@@ -240,7 +277,8 @@ series_percent_chart
 
 ```
 
-### English Learners
+### Students Eligible for English Language Instruction
+
 ```{r}
 # Set data
 df <- read_csv("../data/english_language_learners.csv") %>% 
@@ -253,15 +291,17 @@ df$percent <- df$pct_english_learners
 df$label <- df$division_name 
 df$count_label <- prettyNum(df$english_learners, big.mark = ",")
 
-title <- "Percent of Students Identified as English Learners"
+title <- "Percent of Students Eligible for English Language Instruction"
 ytext <- "Percent of Students"
 xtext <- "School Year"
 xlabels <- JS("function() { return this.value - 1 + '-' + this.value.toString().slice(-2); }")
+source_text <- "Data Source: Virginia Department of Education, Fall Membership Build-A-Table"
 
 <<series-percent>>
 ```
 
 ### Absenteeism
+
 ```{r}
 # Set data
 df <- read_csv("../data/absenteeism.csv") %>% 
@@ -278,11 +318,13 @@ title <- "Percent of Students Identified Chronically Absent"
 ytext <- "Percent of Students"
 xtext <- "School Year"
 xlabels <- JS("function() { return this.value - 1 + '-' + this.value.toString().slice(-2); }")
+source_text <- "Data Source: Virginia Department of Education, School Climate Reports"
 
 <<series-percent>>
 ```
 
 ### On-Time Graduation Rates
+
 ```{r}
 # Set data
 df <- read_csv("../data/graduation_rates.csv")
@@ -296,11 +338,13 @@ title <- "Percent of Student Cohort Graduating in Four Years"
 ytext <- "Percent of Student Cohort"
 xtext <- "Graduation Year"
 xlabels <- JS("function() { return this.value; }")
+source_text <- "Data Source: Virginia Department of Education, Cohort Graduation Build-A-Table"
 
 <<series-percent>>
 ```
 
 ### Post-Secondary Enrollment
+
 ```{r}
 # Set data
 df <- read_csv("../data/postsecondary_education.csv") %>% 
@@ -355,9 +399,9 @@ series_percent_chart <- df_any %>%
   # hc_subtitle(text = '2018-2023',
   #             align = "left",
   #             style = list(fontSize = '1.4em')) %>%
-  # hc_caption(text = source_acs_range,
-  #            align = "right",
-  #            style = list(fontSize = '1em')) %>%
+  hc_caption(text = "Data Source: Virginia Department of Education, Public Postsecondary Education Reports",
+             align = "right",
+             style = list(fontSize = '1em')) %>%
   hc_add_theme(hc_theme_smpl()) %>% 
   hc_add_series(data =  df_4yr, type = "line", mapping = hcaes(x = year, y = percent4yr, group = label), dashStyle = "dash", marker = list(symbol = "diamond")) %>%
   hc_exporting(enabled=TRUE,
@@ -370,6 +414,7 @@ series_percent_chart
 ```
 
 ### High School Degree Attainment
+
 ```{r}
 # Set data
 df <- read_csv("../data/hsdegree_attainment.csv") %>% 
@@ -383,6 +428,7 @@ title <- "Percent of Residents Age 25 and Older with a High School Degree or Equ
 ytext <- "Percent of Residents"
 xtext <- "Year"
 xlabels <- JS("function() { return this.value; }")
+source_text <- "Data Source: U.S. Census Bureau, American Community Survey 5-year estimates"
 
 <<series-percent>>
 ```
@@ -390,6 +436,7 @@ xlabels <- JS("function() { return this.value; }")
 ## Economic and Family Stability
 
 ### Income for Famlies with Children
+
 ```{r}
 # Set data
 df <- read_csv("../data/median_income_w_children.csv")
@@ -444,9 +491,9 @@ series_inc_chart <- df_raw_inc %>%
   # hc_subtitle(text = '2018-2023',
   #             align = "left",
   #             style = list(fontSize = '1.4em')) %>%
-  # hc_caption(text = source_acs_range,
-  #            align = "right",
-  #            style = list(fontSize = '1em')) %>%
+  hc_caption(text = "Data Source: U.S. Census Bureau, American Community Survey 5-year estimates; U.S. Bureau of Labor Statistics",
+             align = "right",
+             style = list(fontSize = '1em')) %>%
   hc_add_theme(hc_theme_smpl()) %>% 
   hc_add_series(data =  df_adj_inc, type = "line", mapping = hcaes(x = year, y = adj_medinc_w_children, group = label), dashStyle = "dash", marker = list(symbol = "diamond")) %>%
   hc_exporting(enabled=TRUE,
@@ -484,6 +531,7 @@ series_inc_chart
 ```
 
 ### Youth Labor Force Participation and Unemployment
+
 ```{r}
 # Set data
 df <- read_csv("../data/youth_employment_status.csv")
@@ -496,6 +544,7 @@ title <- "Percent of Youth (16-19) Participating in the Labor Force"
 ytext <- "Percent of Youth (16-19)"
 xtext <- "Year"
 xlabels <- JS("function() { return this.value; }")
+source_text <- "Data Source: U.S. Census Bureau, American Community Survey 5-year estimates"
 
 <<series-percent>>
 ```
@@ -511,6 +560,7 @@ title <- "Percent of Youth (16-19) in the Labor Force Experiencing Unemployment"
 ytext <- "Percent of Youth (16-19) in the Labor Force"
 xtext <- "Year"
 xlabels <- JS("function() { return this.value; }")
+source_text <- "Data Source: U.S. Census Bureau, American Community Survey 5-year estimates"
 
 <<series-percent>>
 ```
@@ -532,11 +582,13 @@ title <- "Percent of Children Living below the Poverty Threshold"
 ytext <- "Percent of Children"
 xtext <- "Year"
 xlabels <- JS("function() { return this.value; }")
+source_text <- "Data Source: U.S. Census Bureau, Small Area Income and Poverty Estimates"
 
 <<series-percent>>
 ```
 
 ### Students Identified as Economically Disadvantaged
+
 ```{r}
 # Set data
 df <- read_csv("../data/economically_disadvantaged_students.csv") %>% 
@@ -553,11 +605,13 @@ title <- "Percent of Students Identified as Economically Disadvantaged"
 ytext <- "Percent of Students"
 xtext <- "School Year"
 xlabels <- JS("function() { return this.value - 1 + '-' + this.value.toString().slice(-2); }")
+source_text <- "Data Source: Virginia Department of Education"
 
 <<series-percent>>
 ```
 
 ### Children in Two-Parent Households
+
 ```{r}
 # Set data
 df <- read_csv("../data/children_twoparent_hh.csv")
@@ -570,11 +624,13 @@ title <- "Percent of Children Living in a Two-Parent Household"
 ytext <- "Percent of Children"
 xtext <- "Year"
 xlabels <- JS("function() { return this.value; }")
+source_text <- "Data Source: U.S. Census Bureau, American Community Survey 5-year estimates"
 
 <<series-percent>>
 ```
 
 ### Assessments and Investigations by Child Protective Services
+
 ```{r}
 # Set data
 df <- read_csv("../data/child_welfare_cases.csv")
@@ -587,6 +643,7 @@ title <- "Referrals to Child Protective Services Accepted for Assessment or Inve
 ytext <- "Rate per 1,000 Children"
 xtext <- "Fiscal Year (July 1st - June 30th)"
 xlabels <- JS("function() { return this.value; }")
+source_text <- "Data Source: Virginia Department of Social Services"
 
 ```
 
@@ -614,6 +671,9 @@ series_rate_chart <- df %>%
   }")) %>%
   hc_title(text = title,
            align = 'left') %>%
+  hc_caption(text = source_text,
+             align = "right",
+             style = list(fontSize = '1em')) %>%
   hc_add_theme(hc_theme_smpl()) %>%
   hc_exporting(enabled=TRUE,
                sourceWidth = 900,
@@ -624,6 +684,7 @@ series_rate_chart
 ```
 
 ### Children in Foster Care
+
 ```{r}
 # Set data
 df <- read_csv("../data/foster_care.csv") %>% 
@@ -637,12 +698,14 @@ title <- "Rate of Children in Foster Care"
 ytext <- "Rate per 1,000 Children"
 xtext <- "Year (Measured on October 1st)"
 xlabels <- JS("function() { return this.value; }")
+source_text <- "Data Source: Virginia Department of Social Services"
 
 <<series-rate>>
 
 ```
 
 ### Students Experiencing Homelessness
+
 ```{r}
 # Set data
 df <- read_csv("../data/mckinney_vento_rates.csv")  %>% 
@@ -686,6 +749,9 @@ series_rate_chart <- df %>%
   }")) %>%
   hc_title(text = title,
            align = 'left') %>%
+  hc_caption(text = "Data Source: U.S. Department of Education",
+             align = "right",
+             style = list(fontSize = '1em')) %>%
   hc_add_theme(hc_theme_smpl()) %>%
   hc_exporting(enabled=TRUE,
                sourceWidth = 900,
@@ -698,6 +764,7 @@ series_rate_chart
 ## Health
 
 ### Sexually Transmitted Infections in Youth
+
 ```{r}
 # Set data
 df <- read_csv("../data/youth_sti_rates.csv")
@@ -710,6 +777,7 @@ title <- "Rate of Sexually Transmitted Infections in Youth"
 ytext <- "Rate per 1,000 Youth (10-19 yr)"
 xtext <- "Year"
 xlabels <- JS("function() { return this.value; }")
+source_text <- "Data Source: Virginia Department of Health, Division of Disease Prevention"
 
 <<series-rate>>
 
@@ -720,6 +788,7 @@ xlabels <- JS("function() { return this.value; }")
 ### Student Behavior and Administrative Response
 
 BESO: Behaviors that Endanger Self or Others (BESO). These behaviors endanger the health, safety, or welfare of either the student or others in the school community.
+
 ```{r}
 # Set data
 df <- read_csv("../data/student_behavior_events.csv")  %>% 
@@ -736,12 +805,14 @@ title <- "Rate of BESO Incidents: Behaviors that Endanger Self or Others"
 ytext <- "Rate per 1,000 Students"
 xtext <- "School Year"
 xlabels <- JS("function() { return this.value - 1 + '-' + this.value.toString().slice(-2); }")
+source_text <- "Data Source: Virginia Department of Education"
 
 <<series-rate>>
 
 ```
 
 Persistently Dangerous (PD): Behaviors described in Virginia’s Unsafe School Choice Option Policy required by the federal Every Student Succeeds Act of 2015.
+
 ```{r}
 #| label: fig-pd
 #| fig-cap: "SBAR data"
@@ -761,12 +832,15 @@ title <- "Rate of PD Incidents: Persistently Dangerous Behaviors"
 ytext <- "Rate per 1,000 Students"
 xtext <- "School Year"
 xlabels <- JS("function() { return this.value - 1 + '-' + this.value.toString().slice(-2); }")
+source_text <- "Data Source: Virginia Department of Education"
 
 <<series-rate>>
 
 ```
 
+
 ### In-School Suspensions
+
 ```{r}
 # Set data
 df <- read_csv("../data/in_school_suspensions.csv")   %>% 
@@ -811,6 +885,9 @@ series_rate_chart <- df %>%
   }")) %>%
   hc_title(text = title,
            align = 'left') %>%
+  hc_caption(text = "Data Source: Virginia Department of Education",
+             align = "right",
+             style = list(fontSize = '1em')) %>%
   hc_add_theme(hc_theme_smpl()) %>%
   hc_exporting(enabled=TRUE,
                sourceWidth = 900,
@@ -821,6 +898,7 @@ series_rate_chart
 ```
 
 ### Out-of-School Suspensions
+
 ```{r}
 # Set data
 df <- read_csv("../data/out_of_school_suspensions.csv")  %>% 
@@ -865,6 +943,9 @@ series_rate_chart <- df %>%
   }")) %>%
   hc_title(text = title,
            align = 'left') %>%
+  hc_caption(text = "Data Source: Virginia Department of Education",
+             align = "right",
+             style = list(fontSize = '1em')) %>%
   hc_add_theme(hc_theme_smpl()) %>%
   hc_exporting(enabled=TRUE,
                sourceWidth = 900,
@@ -875,6 +956,7 @@ series_rate_chart
 ```
 
 ### Children in Need of Services or Supervision
+
 ```{r}
 # Set data
 df <- read_csv("../data/jdr_services_supervision_rates.csv") %>% 
@@ -888,12 +970,14 @@ title <- "Rate of Youth in Need of Services or Supervision"
 ytext <- "Rate per 1,000 Youth (5-17)"
 xtext <- "Year"
 xlabels <- JS("function() { return this.value; }")
+source_text <- "Data Source: Virginia Judicial System, Juvenile and Domestic Relations Court"
 
 <<series-rate>>
 
 ```
 
 ### Juvenile Delinquency Judgments
+
 ```{r}
 # Set data
 df <- read_csv("../data/jdr_delinquency_rates.csv") %>% 
@@ -907,6 +991,7 @@ title <- "Rate of Juvenile Delinquency Judgments for Youth"
 ytext <- "Rate per 1,000 Youth (10-17)"
 xtext <- "Year"
 xlabels <- JS("function() { return this.value; }")
+source_text <- "Data Source: Virginia Judicial System, Juvenile and Domestic Relations Court"
 
 ```
 
@@ -934,6 +1019,9 @@ series_rate_chart <- df %>%
   }")) %>%
   hc_title(text = title,
            align = 'left') %>%
+  hc_caption(text = source_text,
+             align = "right",
+             style = list(fontSize = '1em')) %>%
   hc_add_theme(hc_theme_smpl()) %>%
   hc_exporting(enabled=TRUE,
                sourceWidth = 900,
@@ -944,6 +1032,7 @@ series_rate_chart
 ```
 
 ### Arrests for Violent Crimes
+
 ```{r}
 # Set data
 df <- read_csv("../data/vsp_arrest_rates.csv")
@@ -956,12 +1045,14 @@ title <- "Rate of Youth Arrests for Crimes against Persons (Ages 10-17)"
 ytext <- "Rate per 1,000 Youth (Ages 10-17)"
 xtext <- "Year"
 xlabels <- JS("function() { return this.value; }")
+source_text <- "Data Source: Virginia State Police"
 
 <<series-rate>>
 
 ```
 
 ### Arrests for Crimes involving Firearms
+
 ```{r}
 # Set data
 df <- read_csv("../data/vsp_firearms_rates.csv")
@@ -974,6 +1065,7 @@ title <- "Rate of Youth Arrests for Crimes involving Firearms (Ages 10-17)"
 ytext <- "Rate per 1,000 Youth (Ages 10-17)"
 xtext <- "Year"
 xlabels <- JS("function() { return this.value; }")
+source_text <- "Data Source: Virginia State Police"
 
 <<series-rate>>
 
