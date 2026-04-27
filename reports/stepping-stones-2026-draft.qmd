@@ -1,29 +1,31 @@
 ---
-title: "Stepping Stones 2026"
-# date: "May 2026"
+title: "DRAFT: Stepping Stones"
+subtitle: "A Report on Community Well-Being of Children and Families in Charlottesville and Albemarle"
+date: "May 2026"
+date-format: "MMMM YYYY"
 # author: "Community-Centered Analysis at the UVA Center for Community Partnerships"
 # license: "CC BY"
 # citation:
 #   type: report
 #   url: communitypartnerships.virginia.edu
 format:
-  html:
-    toc: true
-    theme: cosmo
-    embed-resources: true
-  # docx:
+  # html:
   #   toc: true
-  #   toc-title: "Table of Contents"
-  #   lof: true
-  #   number-sections: true
-  #   number-depth: 3
-  #   # fig-align: left
-  #   # fig-width: 3
-  #   # fig-height: 2
-  #   # # fig-format: png
-  #   # fig-dpi: 200
+  #   theme: cosmo
   #   embed-resources: true
-  #   reference-doc: styles.docx
+  docx:
+    toc: true
+    toc-title: "Table of Contents"
+    # lof: true
+    number-sections: true
+    number-depth: 3
+    # fig-align: left
+    # fig-width: 3
+    # fig-height: 2
+    # # fig-format: png
+    # fig-dpi: 200
+    embed-resources: true
+    reference-doc: styles.docx
 execute:
   cache: false
   echo: false
@@ -45,9 +47,48 @@ locality_pal <- c("#193CBC", "#589ACF", "#FAC484")
 
 ```
 
+## Introduction
+
+The Stepping Stones Report provides trend data for a selection of measures on the well-being of children and families in the City of Charlottesville and Albemarle County. Youth and family development is shaped by multiple interrelated domains. This report brings together data across these domains to characterize the experiences and environments shaping young people in our community, including: education, economic and family stability, health, and disciplinary behaviors and actions. The goal is to create a data-informed understanding of our collective trajectory that stimulates dialogue and promotes action to improve the lives of all who reside in our community.
+
+### Approach
+
+In updating this community resource, we followed key principles of data equity and ethics, including openness, reproducibility, and contextualization.
+
+**Open:** Since this report began, there has been a significant movement to make data from public agencies more open and available. We leverage open data as much as possible, gathering measures from publicly maintained sites and collections. This ensures we are measuring the same conditions, behaviors, or outcomes over time.
+
+**Reproducible:** These updates include building processes that are repeatable for future years and are well-documented for future researchers. The data collection and corresponding code are documented and made publicly available in a GitHub repository.
+
+**Contextualized:** The report is divided into sections based on the nature of the measures and their source. For each metric, we provide an overview of how the measure impacts youth and community well-being, present visualizations and highlight key trends, and note the sources and limitations of the data.
+
+An important piece of context missing from this report is representation of racial disparities in the outcomes shown here. Many of the metrics we highlight in this report disproportionately impact youth of color due to long-standing systemic racial inequality in our region and the country. Although we only display data for the populations as a whole in this report, understanding how these metrics differentially impact youth depending on their racial identity is critical to promoting racial equity in the region.
+
+### Our Youth
+
+These data represent the youth in our community–your children and their friends, the children you see at your grocery store or waiting at the bus stop, and all the children you know in your community are included here. Although these graphs show single outcomes in isolation, none of these data exist in a vacuum. The environments we prepare for youth in our community, their families, the neighborhoods where they live, and their intersecting identities all provide important context for understanding each of these individual outcomes. We encourage you to keep the children you know in mind, and consider how we can do better by them and future generations.
+
+### Contributions
+
+The 2026 Stepping Stones Report was produced through a collaboration between the City of Charlottesville and Albemarle County’s respective Departments of Human Services and the Center for Community Partnerships at UVA. The UVA Center for Community Partnership’s Community-Centered Analysis team collected, validated and visualized the data and wrote the report.
+
+The first Stepping Stones Report was published by the Charlottesville/Albemarle Commission on Children and Families (CCF) in 2000. After the CCF was dissolved in 2012, the City of Charlottesville’s Department of Human Services (DHS) began stewarding the Stepping Stones Report. In 2023, the UVA Center for Community Partnerships joined the collaboration in producing the report. We continue to build on the foundation established by the CCF Data Management Work Group and the knowledge cultivated by Charlottesville DHS, Albemarle DHS, as well as the administrators and agency experts who have provided insight for the last two decades.
+
 ## Education
 
 ### Kindergarten Readiness
+
+Children are identified as kindergarten ready if they meet benchmarks in literacy, mathematics, self-regulation, and social skills. These benchmarks are part of the Virginia [Kindergarten Readiness Program (VKRP)](https://vkrponline.org/): proactive, preventive screening measures that assist teachers, schools, and programs in providing differentiated, targeted instruction to meet each child’s needs.
+
+-   **Data considerations:** The fall overall benchmark is based on the expected skill levels of a kindergarten student at the beginning of the academic year. All kindergarten students in public schools are required to take the assessment in the fall and spring. Fall 2024 reflects the first year that the Virginia Language and Literacy Screening System (VALLS), used for the literacy benchmark, was implemented statewide. This replaced the Phonological Awareness Literacy Screening (PALS).
+
+-   **How is this measured?:** This measure represents the number of kindergarten students who are at or above kindergarten readiness benchmarks as a percent of all kindergarten students screened in the fall assessment.
+
+#### Notable Trends
+
+-   In Fall 2025, kindergarten students in Albemarle and Charlottesville were above the state overall in meeting the readiness benchmark, an increase from the prior year.
+
+-   In the most recent fall assessment, 59% of Albemarle kindergartners and 58% of Charlottesville kindergartners met the overall readiness benchmark.
+
 ```{r}
 # Set data
 df <- read_csv("../data/kindergarten_readiness.csv")
@@ -78,10 +119,25 @@ columnchart <- df %>%
 columnchart
 ```
 
-
 ### Standards of Learning
 
-#### Math: Grades 3, and 5
+The Virginia Department of Education’s Standards of Learning (SOL) outline minimum expectations of student knowledge at each grade level in a range of subjects. SOL tests are administered in all Virginia public schools starting in 3rd grade, and the resulting pass rates are used to assess student achievement, evaluate school and district performance, and determine whether schools are meeting state and federal standards. Student performance is graded on a scale of 0-600 with 400-499 representing pass proficiency and 500 and above representing advanced proficiency.
+
+The Virginia Board of Education revised both math and reading SOLs to raise standards and implemented these in the math SOL tests in 2012 and the reading SOL tests in 2013. Mirroring the trend in the state as a whole, both Charlottesville and Albemarle divisions saw a notable decline in pass rates for reading and math across 3rd and 5th grades in the years these changes were implemented.
+
+-   **Data considerations:** SOL tests are administered to students enrolled in public schools, and does not account for students who are homeschooled or attend private schools. Further, SOL tests were not administered at the end of the 2019-2020 school year due to closures during the COVID-19 pandemic. While traditionally participation on the SOL tests has been high (approximately 95%), participation dropped notably in 2020-2021 (approximately 70%) as schools reopened with COVID health precautions.
+
+-   **How is this measured?:** The pass rate is the number of students in a given grade who passed the math or reading SOL test (i.e., scoring 400 or above) for that grade level as a percent of the total number of students in that grade who took the math or reading SOL test.
+
+### Math: Grade 3 and Grade 5
+
+Math is a fundamental subject that is necessary for success in many college and career paths, and children who are proficient at math will be able to access a wide range of paths.
+
+#### Notable Trends
+
+-   Math SOL test pass rates have been improving since the steep drop in 2021 after schools reopened after the first wave of the COVID-19 pandemic.
+
+-   CCS and ACPS have experienced similar pass rates in 3rd grade math throughout 2010 to present. 5th grade pass rates in CCS, though, dropped notably below those in ACPS in the years following the 2012 revisions.
 
 ```{r}
 # Set data
@@ -180,7 +236,17 @@ file_name <- "sol_pass_rates_math_5"
 
 ```
 
-#### Reading: Grades 3, and 5
+### Reading: Grade 3 and Grade 5
+
+Reading test scores measure a students’ ability to read at grade level. Not meeting reading proficiency has lasting impacts on student academic success, degree attainment, and future earnings. [Third grade reading](https://www.aecf.org/resources/early-warning-why-reading-by-the-end-of-third-grade-matters) is particularly important as this is when children transition from learning to read to reading to learn.
+
+#### Notable Trends
+
+-   Reading SOL test pass rates have returned to pre-pandemic rate, after initially declining in 2021.
+
+-   CCS and ACPS have experienced similar pass rates in 3rd grade reading throughout 2010 to present.
+
+-   5th grade passing rates in CCS dropped notably below those in ACPS after the 2013 revisions. These apparent differences in 5th grade could be, in part, due to the changing population of students during the middle school years, as the Charlottesville region is home to multiple private middle schools.
 
 ```{r}
 # Set data
@@ -217,6 +283,18 @@ file_name <- "sol_pass_rates_reading_5"
 ```
 
 ### Students Eligible for Special Education Services
+
+Special education services are intended to ensure students with disabilities have access to a meaningful public education. The Individuals with Disability Education Act (IDEA) guarantees a free appropriate public education to all eligible children with documented disabilities. Students with a disability – hearing impairment, including deafness; speech or language impairment; visual impairment, including blindness; orthopedic impairment; autism; traumatic brain injury; developmental delay; other health impairment; intellectual disability; specific learning disability; serious emotional disturbance; or multiple disabilities – receive special education and related services outlined in an Individual Education Program (IEP) or other service plan. [See VDOE for more details](https://www.doe.virginia.gov/programs-services/special-education).
+
+-   **Data considerations:** These data are collected for the administration of special education services and represent the record of children deemed eligible for special education services. Eligibility is determined through evaluation processes to identify disabilities and determine needed services. Increasing numbers of students receiving special education services can reflect increased access to needed resources, as disability diagnoses become less stigmatized.
+
+-   **How is this measured?:** This measure is the number of students identified as eligible for special education services as a percent of all students in the school division.
+
+#### Notable Trends
+
+-   From 2011 through 2017, the percent of students receiving special education services in Albemarle County Public Schools (ACPS) was below that for Charlottesville City Schools (CCS).
+
+-   The percent in ACPS increased modestly after 2015 and has been very similar to the percent in CCS since. This modest increase mirrors the trend nationally. From 2009–10 through 2020–21, the number of students ages 3–21 who received special education services under IDEA increased from 13% of total public school enrollment to 15% of total public school enrollment ([NCES](https://nces.ed.gov/programs/coe/indicator/cgg/students-with-disabilities#fn1)).
 
 ```{r}
 # Set data
@@ -279,6 +357,18 @@ series_percent_chart
 
 ### Students Eligible for English Language Instruction
 
+An English Learner (EL) is a student who is not fully proficient in English and requires language-based accommodations to effectively learn during their K-12 education. To support the growing population of multilingual students in Virginia, the [Virginia Department of Education](https://www.doe.virginia.gov/teaching-learning-assessment/specialized-instruction/english-learner-education) provides resources for educators in providing instruction and services to English Learners (ELs).
+
+-   **Data considerations:** An English Language Screening assessment is administered to potential EL students during the enrollment process and annually to current EL students to determine eligibility for English language instructional services. The data can be used to provide a full picture of the current composition of EL students in public schools.
+
+-   **How is this measured?:** The count of identified students who speak English as a second or other language and are emergent in the speaking, reading, writing, and/or understanding of English as a percent of all students in the school division.
+
+#### Notable Trends
+
+-   The percentage of English Language Learners in both Charlottesville City Schools (CCS) and Albemarle County Public Schools (ACPS) has grown between 2009-2025, mirroring growth in the state overall.
+
+-   In recent years, increase has been larger in CCS. In the 2025-26 school year, 16% of CCS students were identified as current English Language Learners compared to 11% of ACPS students and 11% of students in Virginia.
+
 ```{r}
 # Set data
 df <- read_csv("../data/english_language_learners.csv") %>% 
@@ -301,6 +391,20 @@ source_text <- "Data Source: Virginia Department of Education, Fall Membership B
 ```
 
 ### Absenteeism
+
+Attendance has been increasingly the focus of attention among school divisions and educators. Regular attendance is a significant factor in a student’s success, as chronic absenteeism correlates to low academic achievement and is a powerful predictor of dropout rates. In the years following the initial onset of the COVID-19 pandemic, rates of chronic absenteeism in schools throughout the U.S. have skyrocketed: [national-level data](https://www.nytimes.com/interactive/2024/03/29/us/chronic-absences.html) shows that rates of chronic absenteeism in U.S. schools increased from 15% in 2019 to 26% in 2023.
+
+-   **Data considerations:** In Virginia public schools, [chronic absenteeism](https://www.doe.virginia.gov/programs-services/student-services/attendance-school-engagement) is defined as missing ten percent or more of the academic year for any reason, including excused absences, unexcused absences, and suspensions. Based on a 180-day school year, that means approximately 18 days per year or 2 to 3 days per month.
+
+-   **How is this measured?**: the percent of chronically absent students is a measure based on the number of students determined to be chronically absent divided by the number of enrolled students. For more detailed information on this calculation, see the explanation from the [School Climate Reports page](https://www.doe.virginia.gov/data-policy-funding/data-reports/data-collection/special-education).
+
+#### Notable Trends
+
+-   Across Virginia public schools, chronic absenteeism increased following the COVID-19 pandemic and still remain higher than pre-pandemic numbers.
+
+-   ACPS has followed recent trends in the state, seeing a decrease in chronic absenteeism from 18% in 2022-2023 to 12% in 2024-2025 – a 33% reduction.
+
+-   In CSS, over 1 in 5 students (21%) were identified as chronically absent in the 2024-25 school year – higher than the state average by 6%.
 
 ```{r}
 # Set data
@@ -325,6 +429,18 @@ source_text <- "Data Source: Virginia Department of Education, School Climate Re
 
 ### On-Time Graduation Rates
 
+On-time graduation is an important indicator of whether localities are preparing most students for college or career readiness, as a high school diploma is a standard requirement for many jobs and for accessing higher education. On-time graduation measures the percentage of public school students that graduated within four years of entering high school.
+
+-   **Data considerations:** This rate is derived from Virginia’s longitudinal student data system linking the records of students who entered 9th grade for the first time in a given year (beginning in 2004) with their records four years later to determine their graduation or completion status. The measure accounts for student mobility, retention, and promotion patterns and provides a complete description of completion outcomes for each cohort attending public schools. Students who earn a GED or a certificate of completion are not counted as dropouts or as graduates when calculating the on-time graduation rate.
+
+-   **How is this measured?:** On-time graduation is defined as students who earn a Virginia Board of Education-approved diploma among students who entered 9th grade for the first time together and were scheduled to graduate four years later; the percent represents students in a cohort who graduated on time over all students in that cohort, (multiplied by 100). This measure recognizes that some students with disabilities and limited English proficiency are allowed more than the standard four years to earn a diploma and counts those students as “on-time” graduates. [See VDOE for more](https://www.doe.virginia.gov/home/showpublisheddocument/19836/638042970406400000).
+
+#### Notable Trends
+
+-   On-time graduation rates have generally increased in both divisions and in the state overall since 2010, with ACPS remaining higher than the state average.
+
+-   In CCS, the rate dipped in 2013 before increasing to near ACPS between 2018-2023, at 93-94%. Recent years has seen a drop below state averages, falling to 87% in 2025.
+
 ```{r}
 # Set data
 df <- read_csv("../data/graduation_rates.csv")
@@ -344,6 +460,20 @@ source_text <- "Data Source: Virginia Department of Education, Cohort Graduation
 ```
 
 ### Post-Secondary Enrollment
+
+It is increasingly common for jobs to require post-secondary education or postsecondary training or certification, particularly among jobs that support economic security. The rate of post-secondary enrollment measures the percent of graduating high school seniors who enter a higher education institution (e.g., college, university or community college) within 16 months after graduating from high school.
+
+-   **Data considerations:** This metric tracks each graduating cohort’s enrollment in a two- or four-year college or university anywhere in the United States. It is an accurate and complete reflection of education enrollment immediately following high school, but it does not include information on students who begin college more than 16 months after graduation.
+
+-   **How is this measured?:** The VDOE uses data from the [National Student Clearinghouse](http://www.studentclearinghouse.org/) to track college attendance nationwide among students graduating from Virginia’s public schools. This metric represents the number of students in a division’s graduating cohort who enroll in any institution of higher education within 16 months of graduating as a percent of the number of students in the graduating cohort.
+
+#### Notable Trends
+
+-   The percentage of graduates enrolling in any post-secondary Institute of Higher Education (IHE) is consistently higher among Albemarle County Public School (ACPS) graduates than Charlottesville City Schools (CCS) or Virginia graduates overall.
+
+-   In ACPS, the percentage has fallen from 80% in 2015 to 72% in 2023. In CCS, the percentage has been relatively steady over the past decade, rising to 77% in 2013 with values between 64%-70% in other years.
+
+-   The percentage of graduates enrolling in a four-year institution is consistently higher in ACPS graduates than CCS or Virginia graduates. The percentage has fluctuated in both divisions from 2010 to 2023, with the most recent years showing 54% in ACPS and 43% in CCS, compared to 43% statewide.
 
 ```{r}
 # Set data
@@ -415,6 +545,18 @@ series_percent_chart
 
 ### High School Degree Attainment
 
+Earning a high school (H.S.) diploma is a minimum requirement for many jobs and to pursue higher education, thus it can have wide-ranging health, social, and economic impacts. The rate of education attainment in a community not only reflects benefits to individuals but is also related to community economic and population health.
+
+-   **Data considerations:** This metric is derived from the U.S. Census Bureau’s American Community Survey (ACS) 5-year estimates, a continuous survey given to a sample of addresses each month. The year listed for ACS measures is the last year of the 5-year period, i.e. “2024” represents the “2020-2024” 5-year period. As a survey, rather than a census, the ACS estimates have a degree of uncertainty, or sampling error, associated with them. Importantly, this metric does not capture the performance of schools in a given city but rather on the highest level of education achieved by adults who reside in that city, regardless of where they attended school.
+
+-   **How is this measured?:** The measure is the count of residents who are 25 or over who have received at least a H.S. diploma or equivalent (including GEDs) over the count of all residents aged 25 or over in the relevant city, county, or state (multiplied by 100).
+
+#### Notable Trends
+
+-   In Albemarle County, the percentage of residents with a H.S. diploma or more has been high and steady, remaining between 90-93% from 2010-2024.
+
+-   Among Charlottesville City residents there has been significant growth, with a H.S. diploma attainment rate of 85% in 2010 and a rate of 92% in 2024, essentially matching the rate in Albemarle County. From 2013 onward, the H.S. diploma attainment rate in both localities has exceeded that of the state as a whole.
+
 ```{r}
 # Set data
 df <- read_csv("../data/hsdegree_attainment.csv") %>% 
@@ -435,7 +577,17 @@ source_text <- "Data Source: U.S. Census Bureau, American Community Survey 5-yea
 
 ## Economic and Family Stability
 
-### Income for Famlies with Children
+### Income for Families with Children
+
+The income available to a family is a primary measure of economic security of children and families. Median income for families with children measures the combined income for a family with children under 18 living in the home. Low household income can mean that a family is unable to afford basic necessities. According to [United for ALICE](https://www.unitedforalice.org) the amount an average family needs to meet basic needs in 2023 was \$75,124 in Albemarle and \$68,703 in Charlottesville. Adjusting for inflation allows for the comparison of income given the increase in prices over time.
+
+-   **Data considerations:** This metric is derived from the U.S. Census Bureau’s American Community Survey (ACS) 5-year estimates, a continuous survey given to a sample of addresses each month. The year listed for ACS measures is the last year of the 5-year period, i.e. “2024” represents the “2020-2024” 5-year period. As a survey, rather than a census, the ACS estimates have a degree of uncertainty, or sampling error, associated with them.
+
+-   **How is this measured?:** Median family income represent the midpoint of all family incomes, meaning half of families with children earn more and half earn less than that amount. The median is generally considered a more representative measure of typical income compared to the average, as it's not affected by extreme outliers (very high or low incomes).The inflation-adjusted version uses the Consumer Price Index with 2014 as the base year.
+
+#### Notable Trends
+
+-   Adjusting for inflation shows that even as raw income has increased since 2014, its value has not kept up with the rising cost of living. In 2024, the median income for Albemarle families with children was near \$140k/year – the same as earning \$105k in 2014. In Charlottesville, the median income was \$113k in 2024 — \$85k in 2014 dollars.
 
 ```{r}
 # Set data
@@ -532,6 +684,18 @@ series_inc_chart
 
 ### Youth Labor Force Participation and Unemployment
 
+Labor force participation among young people and youth unemployment can shed light on both the health of the economy and the well-being of young people. High unemployment rates for youth may suggest an unavailability of jobs for youth or a mismatch between the skills that young people possess and the skills employers are seeking.
+
+-   **Data considerations:** This metric is derived from the U.S. Census Bureau’s American Community Survey (ACS) 5-year estimates, a continuous survey given to a sample of addresses each month. The year listed for ACS measures is the last year of the 5-year period, i.e. “2024” represents the “2020-2024” 5-year period. As a survey, rather than a census, the ACS estimates have a degree of uncertainty, or sampling error, associated with them. Labor force participation and unemployment do not include discouraged workers who have searched for a job in the last year but have given up.
+
+-   **How is this measured?:** The youth labor force participation rate is the number of 16-19 year olds who are employed or are seeking employment as a percentage of the number of residents aged 16-19. The youth unemployment rate is the number of 16-19 year olds who have reported that they do not have a job but are ready to work and have been seeking employment within the last 4 weeks as a percentage of the number of residents aged 16-19 in the labor force.
+
+#### Notable Trends
+
+-   Youth participation in the labor force in both Charlottesville and Albemarle is below that of the state overall. In recent years, labor force participation of Charlottesville youth has grown relative to that of young people in Albemarle. In 2024, 34% of Charlottesville youth were in the labor force compared to 28% of Albemarle youth.
+
+-   From 2016 to 2019, the youth unemployment rate in Charlottesville jumped, peaking at 23%, while the youth unemployment rate in Albemarle fell, hovering around 8%. In recent years the youth unemployment rate has declined in Charlottesville and remained relatively steady in Albemarle.
+
 ```{r}
 # Set data
 df <- read_csv("../data/youth_employment_status.csv")
@@ -567,6 +731,20 @@ source_text <- "Data Source: U.S. Census Bureau, American Community Survey 5-yea
 
 ### Children Living below Poverty Threshold
 
+When children grow up in poverty, they are more likely to have inadequate nutrition, limited access to health care services, unstable housing, lower quality of schools, and exposure to environmental toxins, all of which have short- and long-term physical and mental impacts.
+
+-   **Data considerations:** According to the Census, Small Area Income and Poverty Estimates (SAIPE) “are not direct counts from enumerations or administrative records, nor direct estimates from sample surveys. Instead, for counties and states, we model income and poverty estimates by combining survey data with population estimates and administrative records.” As such, these estimates have a degree of uncertainty associated with them.
+
+-   **How is this measured?:** This metric is measured as a percentage of families with incomes below the yearly poverty level out of all families. In 2024, the federal poverty level for a family of four was \$31,200.
+
+#### Notable Trends
+
+-   In Charlottesville in 2024, the percent of children in poverty was the lowest it has been in the last decade, at 15%, but still remained higher than in Virginia overall; the child poverty rate in Albemarle is consistently lower than that in the state, and has remained near its lowest rate in recent years, at 7% in 2024.
+
+-   Although the percent in the county is lower, due to the difference in population between the City of Charlottesville and Albemarle County, it represents a higher number of children. In 2024, the estimated count in Charlottesville was 1,103 compared to 1,576 in Albemarle.
+
+-   In 2020, Charlottesville, Albemarle, and Virginia experienced low rates of child poverty, as the stimulus payments and child tax credit expansion were in place to provide relief in the midst of the COVID-19 Pandemic. [These policies are widely credited with keeping 3.7 million children out of poverty nationwide](https://www.cbpp.org/research/federal-tax/stimulus-payments-child-tax-credit-expansion-were-critical-parts-of-successful).
+
 ```{r}
 # Set data
 df <- read_csv("../data/child_poverty.csv") %>% 
@@ -588,6 +766,20 @@ source_text <- "Data Source: U.S. Census Bureau, Small Area Income and Poverty E
 ```
 
 ### Students Identified as Economically Disadvantaged
+
+Students in low-income households face additional challenges that can hinder their learning. Students are identified as economically disadvantaged if they meet one or more of the following conditions: eligible for free or reduced meals (family income is within 130% or 185% of federal poverty threshold), are eligible for TANF, Medicaid and/or Head Start, or identified as from a migrant family, experiencing homelessness, or in foster care. This measure is an indicator of low-income families. In addition, education funding is influenced by the presence of economically disadvantaged students [via the At-Risk Add-On](https://thecommonwealthinstitute.org/research/weighing-support-for-virginias-students/).
+
+-   **Data considerations:** This metric can be used to provide a picture of the current composition of students from low-income families to the extent economic need has been revealed to and verified by the schools. Historically, eligibility for free or reduced lunch has been one of the most frequent indicators of economic disadvantage; the National School Lunch Program has been a key policy to reduce hunger for children from economically insecure families. The USDA Community Eligibility Provision (CEP) was created in 2010 to allow high-poverty schools an opportunity to apply to offer all students at a school free- or reduced-price-meals. [Charlottesville City Schools have been participating in CEP since 2018, and Albemarle County Public Schools began participating in 2022](https://www.doe.virginia.gov/programs-services/school-operations-support-services/school-nutrition/program-statistics-reports).
+
+-   **How is this measured?:** This measures the count of students identified as economically disadvantaged as a percentage of all students in the school division.
+
+#### Notable Trends
+
+-   The percent of economically disadvantaged students has been considerably higher in Charlottesville City Schools throughout this period, peaking at 63% in 2023-24 and falling to 42% in the 2025-26 school year.
+
+-   In Albemarle County Public Schools, the percentage has ranged from 24-32% over the period, lowing slightly to 27% in the 2025-26 school year.
+
+-   Although the percent in the county is lower, due to the difference in population between the City of Charlottesville and Albemarle County, it represents a higher number of children. In the 2025-26 school year, the count in Charlottesville was 1,823 compared to 3,778 in Albemarle.
 
 ```{r}
 # Set data
@@ -612,6 +804,18 @@ source_text <- "Data Source: Virginia Department of Education"
 
 ### Children in Two-Parent Households
 
+Research suggests children living in two-parent households, on average, are more advantaged than single-parent households. Married parent households are typically better off financially and family structure can influence children’s socioemotional development and [academic achievement](https://onlinelibrary.wiley.com/doi/full/10.1111/j.1741-3737.2011.00825.x). Lower rates of two-parent households can be indicators of higher rates of divorce/separation; they can be further impacted by incarceration trends as the carceral systems remove parents from the community.
+
+-   **Data considerations:** This metric is derived from the U.S. Census Bureau’s American Community Survey (ACS) 5-year estimates, a continuous survey given to a sample of addresses each month. The year listed for ACS measures is the last year of the 5-year period, i.e. “2024” represents the “2020-2024” 5-year period. As a survey, rather than a census, the ACS estimates have a degree of uncertainty, or sampling error, associated with them. In addition, this measure does not include children living in households with two adults who are not both parents of the child as children living with two parents.
+
+-   **How is this measured?:** The percent of children living with two parents is derived by totaling children ages 0-17 where child/ren are living with both parents and dividing over the total number of children under 18 years in families and subfamilies (multiplied by 100).
+
+#### Notable Trends
+
+-   Albemarle consistently has a larger share of two-parent households relative to Charlottesville. County trends show a slight decline in recent years, from 79% in 2014 to 73% in 2024.
+
+-   In Charlottesville, the percent of two-parent households fell to a low of 58% in 2014, before gradually rising back to 63% in 2024.
+
 ```{r}
 # Set data
 df <- read_csv("../data/children_twoparent_hh.csv")
@@ -630,6 +834,20 @@ source_text <- "Data Source: U.S. Census Bureau, American Community Survey 5-yea
 ```
 
 ### Assessments and Investigations by Child Protective Services
+
+Reports of potential child neglect or abuse are one indicator of child wellbeing and may signal that more or fewer children are being identified as potentially at risk or that there is greater awareness of the signs of abuse and neglect within the community. Childhood maltreatment, in addition to having an immediate and negative impact on children, has been linked to later [physical, psychological, and behavioral consequences](https://www.childwelfare.gov/pubpdfs/long_term_consequences.pdf).
+
+-   **Data considerations:** Child abuse and neglect referrals are made to Child Protective Services who make a determination of whether the referral meets the threshold and criteria for further action and, if so, whether to pursue a family assessment or an investigation. As such, this measure is not reporting the substantiated occurrence of neglect or abuse, but the valid reporting of potential neglect or abuse. These data, then, capture only cases that have been reported to CPS and screened in by social services. Reports to CPS require someone to observe or evaluate behavior as meeting a threshold of neglect or abuse. The majority of accepted referrals to CPS are made for “physical neglect,” an occurrence open to considerable interpretation as [research has demonstrated the deep overlap between the conditions of poverty and of child neglect](https://www.childwelfare.gov/pubPDFs/bulletins-povertyneglect.pdf).
+
+-   **How is this measured?:** This metric captures the number of referrals to Child Protective Services accepted for assessment or investigation in Virginia, regardless of outcome, over the number of children aged 0-17 in the area and multiplied by 1,000.
+
+#### Notable Trends
+
+-   The rate of child neglect and abuse assessments and investigations has fluctuated in both Charlottesville and Albemarle but is consistently higher in Charlottesville. Poverty has been consistently linked to judgments of neglect used in child welfare, and the rate of poverty is considerably lower in Albemarle than in Charlottesville.
+
+-   In Charlottesville, the rate has generally declined from 47 per 1,000 children in 2017 to 25 per 1,000 in 2024.
+
+-   The rate in Albemarle has seen a rise in this period, from a low of 12 per 1,000 in 2011 up to 20 per 1,000 in 2024.
 
 ```{r}
 # Set data
@@ -685,6 +903,16 @@ series_rate_chart
 
 ### Children in Foster Care
 
+Children in foster care are among our most vulnerable children. The rate of family separation is both an indicator of child welfare and of the unmet need or underinvestment in policies and resources to support families in the community. Neglect, often a proxy for the effects of poverty, is [one of the most common reasons for a child’s removal from the home nationally](https://www.childrensdefense.org/state-of-americas-children/soac-2021-child-welfare/), including “failure to provide adequate nutrition, supervision, health care, clothing, or housing.”
+
+-   **Data considerations:** While this data counts all children in foster care at a point in time, a child’s presence in foster care occurs only after multiple decisions made by people in a position of authority. These data, then, reflect a series of actions, evaluations, and decisions, many of which are subject to interpretation. Research has long shown that minoritized populations, especially Black children, are overrepresented in foster care, and legal and social researchers have [repeatedly](https://www.hachettebookgroup.com/titles/dorothy-roberts/shattered-bonds/9780465070596/)[documented](https://cssp.org/wp-content/uploads/2018/11/CSSP-Entangled-Roots.pdf) the ways child welfare systems are [entangled](https://www.childrensrights.org/wp-content/uploads/2023/04/CR-Racism-at-the-Front-End-of-Child-Welfare-2023-Fact-Sheet.pdf) with [race](https://www.hachettebookgroup.com/titles/dorothy-roberts/torn-apart/9781541675445/).
+
+-   **How is this measured?:** This metric reports the number of children in foster care on October 1 of each year divided by the number of children aged 0-17 in the area and multiplied by 1,000.
+
+#### Notable Trends
+
+-   The rate of children in foster care has been consistently higher in Charlottesville than in Albemarle. The rate in Albemarle has remained relatively steady, at around 4-5 children per 1,000, during this period. The rate in Charlottesville has fallen substantially over time, from rates above 20 children per 1,000 in 2010 to 10 or fewer children per 1,000 in 2023 and 2024.
+
 ```{r}
 # Set data
 df <- read_csv("../data/foster_care.csv") %>% 
@@ -705,6 +933,18 @@ source_text <- "Data Source: Virginia Department of Social Services"
 ```
 
 ### Students Experiencing Homelessness
+
+Children need safe and stable housing to thrive. The absence of secure housing worsens child educational, health, and developmental outcomes. The federal government, through the McKinney-Vento Act, provides protections and resources to support equal access to free, appropriate education for children experiencing homelessness. To administer the program, state and local education agencies capture information on “children and youth who lack a fixed, regular, and adequate nighttime residence, including those who are sharing the housing of others due to loss of housing, economic hardship, or a similar reason; staying in motels, trailer parks, or camp grounds due to the lack of an adequate alternative; staying in shelters or transitional housing; or sleeping in cars, parks, abandoned buildings, substandard housing, or similar settings.”
+
+-   **Data considerations:** The data on student homelessness uses a more comprehensive definition of homelessness than that used by the Department of Housing and Urban Development, including children living doubled-up. But it only counts children experiencing homelessness among children in kindergarten through grade 12 and preschoolers enrolled in a preschool program that receives a homeless education grant from the Education Department. Children from birth to age 5, not subject to compulsory education requirements, are not fully captured in these data.
+
+-   **How is this measured?:** Schools identify children experiencing homelessness through multiple means, including enrollment processes where families self-identify and staff trained to notice the warning signs of student homelessness and make referrals to a school’s homelessness liaison.
+
+#### Notable Trends
+
+-   The rate of students experiencing homelessness in CCS and ACPS has generally been higher than the state average, except for the 2020-21 school year. The data for 2020 and 2021 may have been impacted by the COVID-19 pandemic. The remote and hybrid learning at the onset of the pandemic reduced the ability for educational staff to recognize housing instability among their students.
+
+-   In CCS the rate of students experiencing homelessness has jumped to 28 per 1,000 students, higher than pre-pandemic levels.
 
 ```{r}
 # Set data
@@ -763,7 +1003,29 @@ series_rate_chart
 
 ## Health
 
+\*Waiting for data from VDH
+
+### Prenatal Care\*
+
+### Low Birth-Weight Infants\*
+
+### Infant Deaths\*
+
+### Teen Pregnancies and Births to Teens\*
+
 ### Sexually Transmitted Infections in Youth
+
+Nationally, the rate of sexually transmitted infections has been on the rise. [Adolescents are uniquely at risk for STIs](https://www.guttmacher.org/gpr/2020/04/reducing-sti-cases-young-people-deserve-better-sexual-health-information-and-services) as they are less likely than adults to access and utilize sexual health services and public policies regularly limit young people’s access to sexual health information.
+
+-   **Data considerations:** These data are derived from health registration data. Registration data represent an authoritative list of diagnoses known to the Virginia Department of Health. Registration data is closer to census data in that it attempts to capture all relevant events to accurately reflect the population. Error may be introduced if relevant events are not captured.
+
+-   **How is this measured?:** This measure is the combined incidence of syphilis, gonorrhea, chlamydia, and HIV per 1,000 residents aged 10-19. This incidence rate only counts cases first reported; for HIV, the incidence rate will count a new case in the first year it is diagnosed, but not in the following years, even though a patient still has the condition and is receiving treatment.
+
+#### Notable Trends
+
+-   The incidence rates of STIs among youth in Charlottesville have been consistently higher than the rate in Albemarle, though in recent years the rate in Charlottesville has fallen steeply and become aligned with the rate in the state overall. In 2024, the rate per 1,000 youths ages 10-19 was 11.
+
+-   The incidence rate in Albemarle has grown slightly, at 6 per 1,000 young people in 2024.
 
 ```{r}
 # Set data
@@ -787,7 +1049,19 @@ source_text <- "Data Source: Virginia Department of Health, Division of Disease 
 
 ### Student Behavior and Administrative Response
 
-BESO: Behaviors that Endanger Self or Others (BESO). These behaviors endanger the health, safety, or welfare of either the student or others in the school community.
+These data capture the recorded student behaviors that endanger student safety and health as well as behaviors that require engagement with law enforcement and offer insight into the safety of school environments. For each metric, it is the rate of incidents per 1,000 students; this is not equivalent to the number of students reported for an offense as an individual student could be reported multiple times.
+
+-   **Data considerations:** These data are derived from school administrative data from the Virginia Department of Education (VDOE). They capture only incidents observed and reported by school authorities. That is, these records do not occur by default but require someone to observe or evaluate an action or behavior and make a judgment about whether the behavior should be referred to the administrative systems. Details on all behavior categories and other policies can be read on the [VDOE’s Student Behavior and Administrative Response Collection page](https://www.doe.virginia.gov/data-policy-funding/data-reports/data-collection/student-behavior-and-administrative-response-collection). The SBAR data reporting system replaced the previous Safe Schools Information Resource (SSIR) beginning the the 2021-2022 school year.
+
+-   **How are these measured?:** For each measure, the number of relevant events from the SBAR Annual Report are summed and the total is divided by the number of students in the school division (and multiplied by 1,000).
+
+    -   BESO: Behaviors that Endanger Self or Others (BESO). These behaviors endanger the health, safety, or welfare of either the student or others in the school community. For ACPS and CCS, the most commonly documented BESO events were related to fighting and assault, threatening violence, and drug possession.
+
+    -   Persistently Dangerous (PD): Behaviors described in Virginia’s Unsafe School Choice Option Policy required by the federal Every Student Succeeds Act of 2015. These behaviors require reports to law enforcement. For ACPS and CCS, the number of PD events resulted in a very low rate of 0.2 or less per 1,000 students. These included possession of drugs with intent to sell and possession of handgun.
+
+#### Notable Trends
+
+-   Due to the new implementation of Student Behavior and Administrative Response Collection (SBAR), there are likely inconsistencies between schools in Virginia in the adaptation of this new data reporting system.
 
 ```{r}
 # Set data
@@ -811,11 +1085,9 @@ source_text <- "Data Source: Virginia Department of Education"
 
 ```
 
-Persistently Dangerous (PD): Behaviors described in Virginia’s Unsafe School Choice Option Policy required by the federal Every Student Succeeds Act of 2015.
-
 ```{r}
-#| label: fig-pd
-#| fig-cap: "SBAR data"
+# <!-- #| label: fig-pd -->
+# <!-- #| fig-cap: "SBAR data" -->
 
 # Set data
 df <- read_csv("../data/student_behavior_events.csv")  %>% 
@@ -838,8 +1110,17 @@ source_text <- "Data Source: Virginia Department of Education"
 
 ```
 
-
 ### In-School Suspensions
+
+In-School suspensions (ISS) are a disciplinary exclusionary setting within the school building used for temporary removal of a student from their regularly scheduled classes. In-School suspensions can be a time for learning, catching up on missed work, problem-solving, getting academic support/tutoring, or meeting with counselors. However, any type of suspension, both in-school and out-of-school, that excludes students from their regular classes, have negative outcomes for students including distrust of the school environment, chronic absenteeism, lower academic achievement, and risk of dropping out.
+
+-   **Data considerations:** For Virginia public schools, an in-school suspension can be a half-day or longer. This metric presents a rate per 1,000 students based on the number of students who received an ISS. Some students may have received multiple in-school suspensions. Details on the behavior categories that can lead to an in-school suspension and other policies can be read on the [VDOE’s Student Behavior and Administrative Response Collection page](https://www.doe.virginia.gov/data-policy-funding/data-reports/data-collection/student-behavior-and-administrative-response-collection). The SBAR data reporting system replaced the previous Safe Schools Information Resource (SSIR) beginning the the 2021-2022 school year.
+
+-   **How is this measured?:** The rate of students suspended is the count of students given an in-school suspension divided by the total students enrolled in a school division, multiplied by 1,000.
+
+#### Notable Trends
+
+-   Due to the new implementation of Student Behavior and Administrative Response Collection (SBAR), there are likely inconsistencies between schools in Virginia in the adaptation of this new data reporting system. In the 2023-24 school year, around 27 of every 1,000 students were reported by CCS as receiving an ISS, compared to 50 per 1,000 students reported by ACPS.
 
 ```{r}
 # Set data
@@ -899,6 +1180,16 @@ series_rate_chart
 
 ### Out-of-School Suspensions
 
+Out-of-School suspensions (OSS) are an exclusionary disciplinary tool that temporarily removes students from their schools for a violation of school policies or rules. Being suspended from school is associated with multiple poor outcomes including lower academic achievement, being at risk for dropping out, and involvement in the criminal justice system.
+
+-   **Data considerations:** For Virginia public schools, an OSS can range from 1-10 days for a short-term suspension to 11 or more days for a long-term suspension. Depending on the length of the suspension and aggravating circumstances, out-of-school suspensions are assigned by school-based administrators, division-level administrators such as Superintendents, or by the School Board. In ACPS and CCS, the majority of out-of-school suspensions are determined at the school admin level. This metric presents a rate per 1,000 students based on the number of students who received an OSS. Some students may have received multiple out-of-school suspensions. Details on the behavior categories that can lead to an out-of-school suspension and other policies can be read on the [VDOE’s Student Behavior and Administrative Response Collection page](https://www.doe.virginia.gov/data-policy-funding/data-reports/data-collection/student-behavior-and-administrative-response-collection). The SBAR data reporting system replaced the previous Safe Schools Information Resource (SSIR) beginning the the 2021-2022 school year.
+
+-   **How is this measured?:** The rate of students suspended is the count of students given an out-of-school suspension divided by the total students enrolled in a school division, multiplied by 1,000.
+
+#### Notable Trends
+
+-   Due to the new implementation of Student Behavior and Administrative Response Collection (SBAR), there are likely inconsistencies between schools in Virginia in the adaptation of this new data reporting system. In the 2023-24 school year, around 64 of every 1,000 students were reported by CCS as receiving an OSS, compared to 29 per 1,000 students by ACPS.
+
 ```{r}
 # Set data
 df <- read_csv("../data/out_of_school_suspensions.csv")  %>% 
@@ -957,6 +1248,16 @@ series_rate_chart
 
 ### Children in Need of Services or Supervision
 
+This measure tracks the number of judgments of a child in need of supervision, a young person who is truant or has run away from home, and the number of judgments of a child in need of services, a young person whose behavior, conduct, or condition presents or results in a serious threat to himself or another person. A CHINS petition can be filed by parents, police, and school authorities and is adjudicated in Juvenile Court. According to Virginia Code[§ 16.1-278.4](https://law.lis.virginia.gov/vacode/title16.1/chapter11/section16.1-278.4/) and[§ 16.1-278.5](https://law.lis.virginia.gov/vacode/title16.1/chapter11/section16.1-278.5/), a child who has been found in need of services or supervision may be subject to probation, transfer of custody, or rehabilitative treatment.
+
+-   **How is this measured?:** This metric counts the number of dispositions of children in need of services and truancy issued in a court jurisdiction divided by the number of residents aged 5-17 in the locality (multiplied by 1,000).
+
+#### Notable Trends
+
+-   The past rate has been higher in Charlottesville than in Albemarle, peaking at 15 per 1,000 youth in 2016, and falling to around 2 per 1,000 youth in 2023 and 2024.
+
+-   The rate in Albemarle saw a high around 5 in 2014 and has fallen to between 1 and 3 per 1,000 youth in 2024.
+
 ```{r}
 # Set data
 df <- read_csv("../data/jdr_services_supervision_rates.csv") %>% 
@@ -977,6 +1278,16 @@ source_text <- "Data Source: Virginia Judicial System, Juvenile and Domestic Rel
 ```
 
 ### Juvenile Delinquency Judgments
+
+This measure tracks the number of judgments of delinquency in the Juvenile and Domestic Relations court. A delinquent judgment may be passed when someone under age 18 commits an act which would be a crime if committed by an adult (including felonies and misdemeanors) and a ruling of delinquency entails escalated involvement with the justice system. According to[Virginia Code § 16.1-278.8](https://law.lis.virginia.gov/vacode/title16.1/chapter11/section16.1-278.8/), juveniles found to be delinquent may be subject to multiple types of sanctions or services: commitment to juvenile justice, probation, substance abuse treatment, fines and restitution, loss of driver’s license, public service project, and others.
+
+-   **Data considerations:** These data do not include “status offenses”, behaviors that are not crimes but are prohibited because of a youth’s status as a minor.
+
+-   **How is this measured?:** This metric counts the number of juvenile delinquency felony and misdemeanor dispositions issued in a court jurisdiction divided by the number of residents aged 10-17 in the locality, multiplied by 1,000. The majority of delinquency judgments are misdemeanors, both statewide and in local jurisdictions.
+
+#### Notable Trends
+
+-   The rate of juvenile delinquency judgments has decreased steadily in both Charlottesville and Albemarle. In 2010, the rate in Charlottesville was 132 per 1,000 youth, but fell to 40 in 2024. In 2010, the rate in Albemarle was 51 per 1,000 youth, but fell to 18 in 2024.
 
 ```{r}
 # Set data
@@ -1033,6 +1344,18 @@ series_rate_chart
 
 ### Arrests for Violent Crimes
 
+Youth involvement in violent crimes reflects the exposure of young people to serious harm. Contact with the justice system is linked to future challenges in education, employment, and health for young people. This measure tracks the rate of arrests of youth under 18 for crimes against persons.
+
+-   **Data considerations:** Arrest data capture only instances observed by or reported to police and instances which policing authorities evaluate as being subject to arrest. They arise from policing practices as well as behavior. Thus, it is important not to equate this metric with the occurrence of crime among youth.
+
+-   **How is this measured?:** The arrest rate is the sum of arrests among juveniles for crimes against persons including murder, negligent manslaughter, kidnapping, sex offenses, aggravated assault, simple assault, and intimidation among juveniles, divided by the number of residents aged 10-17 (multiplied by 1,000).
+
+#### Notable Trends
+
+-   Arrest rates in both Albemarle and Charlottesville have seen a mostly downward trend since 2010. In Charlottesville the arrest rate was 7 per 1,000 youth in 2010 and has gone down to 1 per 1,000 youth in 2023.
+
+-   The rate of arrests in both the county and city have remained below statewide trends over the past decade.
+
 ```{r}
 # Set data
 df <- read_csv("../data/vsp_arrest_rates.csv")
@@ -1051,7 +1374,19 @@ source_text <- "Data Source: Virginia State Police"
 
 ```
 
-### Arrests for Crimes involving Firearms
+### Arrests for Crimes Involving Firearms
+
+Gun violence is a leading cause of death and injury among youth in the U.S. Arrests of youth for crimes involving firearms can signal the severity of youth-involved violence as well as youth exposure to environments where guns are present. This measure presents the rate of arrests of youth aged 10 to 17 for any crime – from illegal possession to robbery to serious violent crime – involving a firearm. See [The State of Gun Violence in Charlottesville & Albemarle](https://communitypartnerships.github.io/local-gun-violence/data-overview.html) for additional data on firearm violence in the community.
+
+-   **Data considerations:** Arrest data capture only instances observed by or reported to police and instances which policing authorities evaluate as being subject to arrest. They arise from policing practices as well as behavior. Thus, it is important not to equate this metric with the occurrence of crime among youth.
+
+-   **How is this measured?:** The arrest rate is the sum of arrests among juveniles for crimes involving firearms, divided by the number of residents aged 10-17 (multiplied by 1,000). Crimes include crimes against society like weapons law violations, crimes against property like theft and robbery, and crimes against persons like assault or manslaughter.
+
+#### Notable Trends
+
+-   Arrest rates for crimes involving firearms have fluctuated in Charlottesville, with modest peaks in 2016 through 2017 and again in 2022 and 2024. Arrest rates in Albemarle have remained consistently low throughout the period shown.
+
+-   Arrest rates for crimes involving firearms in Albemarle remained below statewide trends since 2010. In Charlottesville, the arrest rates are consistently higher, in some years notably so, than comparable rates across the state.
 
 ```{r}
 # Set data
@@ -1070,3 +1405,33 @@ source_text <- "Data Source: Virginia State Police"
 <<series-rate>>
 
 ```
+
+## Contributors
+
+This report is a collaboration of many contributors, including:
+
+-   The UVA Center for Community Partnerships, Community-Centered Analysis: Beth Mitchell (Senior Research Specialist), Michele Claibourn (Director of Community-Centered Analysis)
+-   The City of Charlottesville’s Department of Human Services: Misty Graves (Director)
+-   Albemarle County’s Department of Human Services: Kaki Dimock, Mary Stebbins
+
+### About the Center for Community Partnerships
+
+Established in 2019, the mission of the UVA Center for Community Partnerships is to build mutually beneficial partnerships in university communities by advancing a transformative approach to the fundamental research mission, which will, in turn, reform institutional values, pedagogy, and operations. We envision universities that serve local communities by bringing rich research resources to bear and equipping students to lead in building a more just society.
+
+Community-Centered Analysis centers on community-driven partnerships to provide advocates, as well as civic and private sector leaders, with data and metrics, contextualized analysis, interactive maps and data visualizations, and narrative storytelling as a resource in pursuit of a more just region.
+
+### Project Repository
+
+The work supporting this Stepping Stones Report, including our data collection documentation and the corresponding data, is publicly available on GitHub at https://github.com/virginiaequitycenter/stepping-stones-2026.
+
+### Citation
+
+UVA Center for Community Partnerships. Stepping Stones: A Report on Community Well-Being of Children and Families in Charlottesville and Albemarle. Published May 2026.
+
+This work is licensed under a [Creative Commons Attribution 4.0 International License](https://creativecommons.org/licenses/by/4.0/).
+
+## Appendix 
+
+### Data Sources by Figure
+
+\*To be included in final draft
