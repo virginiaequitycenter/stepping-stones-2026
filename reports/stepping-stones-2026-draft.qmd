@@ -9,23 +9,23 @@ date-format: "MMMM YYYY"
 #   type: report
 #   url: communitypartnerships.virginia.edu
 format:
-  # html:
-  #   toc: true
-  #   theme: cosmo
-  #   embed-resources: true
-  docx:
+  html:
     toc: true
-    toc-title: "Table of Contents"
-    # lof: true
-    number-sections: true
-    number-depth: 3
-    # fig-align: left
-    # fig-width: 3
-    # fig-height: 2
-    # # fig-format: png
-    # fig-dpi: 200
+    theme: cosmo
     embed-resources: true
-    reference-doc: styles.docx
+  # docx:
+  #   toc: true
+  #   toc-title: "Table of Contents"
+  #   # lof: true
+  #   number-sections: true
+  #   number-depth: 3
+  #   # fig-align: left
+  #   # fig-width: 3
+  #   # fig-height: 2
+  #   # # fig-format: png
+  #   # fig-dpi: 200
+  #   embed-resources: true
+  #   reference-doc: styles.docx
 execute:
   cache: false
   echo: false
@@ -50,6 +50,12 @@ locality_pal <- c("#193CBC", "#589ACF", "#FAC484")
 ## Introduction
 
 The Stepping Stones Report provides trend data for a selection of measures on the well-being of children and families in the City of Charlottesville and Albemarle County. Youth and family development is shaped by multiple interrelated domains. This report brings together data across these domains to characterize the experiences and environments shaping young people in our community, including: education, economic and family stability, health, and disciplinary behaviors and actions. The goal is to create a data-informed understanding of our collective trajectory that stimulates dialogue and promotes action to improve the lives of all who reside in our community.
+
+### Report & Summary PDF 
+
+This interactive online version of the Stepping Stones Report is also available as a PDF: [Stepping Stones Report PDF (coming soon)]()
+
+See also: [Report Summary Handout (coming soon)]()
 
 ### Approach
 
@@ -1410,9 +1416,18 @@ source_text <- "Data Source: Virginia State Police"
 
 This report is a collaboration of many contributors, including:
 
--   The UVA Center for Community Partnerships, Community-Centered Analysis: Beth Mitchell (Senior Research Specialist), Michele Claibourn (Director of Community-Centered Analysis)
--   The City of Charlottesville’s Department of Human Services: Misty Graves (Director)
--   Albemarle County’s Department of Human Services: Kaki Dimock, Mary Stebbins
+-   Elizabeth Mitchell, Senior Research Specialist, Center for Community Partnerships, University of Virginia
+-   Michele Claibourn, Director of Community-Centered Analysis, Center for Community Partnerships, University of Virginia and Assistant Professor, Batten School of Leadership and Public Policy, University of Virginia
+-   Misty Graves, Director, City of Charlottesville Department of Human Services
+-   Kaki Dimock, Chief Human Services Officer, Albemarle County
+-   Mary Stebbins, Director, Albemarle County Department of Social Services
+
+<!-- ### About the Charlottesville Department of Human Services (DHS) -->
+
+<!-- The City of Charlottesville's [Department of Human Services (DHS)](https://charlottesville.org/224/Human-Services) was created in 2010 to serve as a human services policy advisor to the City Manager in order to implement the social policy initiatives of the Charlottesville City Council. The vision of the Charlottesville City DHS is to serve as the community’s premier provider in meeting the therapeutic needs of youth and families, supporting the community’s efforts to improve equity, and -->
+<!-- address poverty and its impacts. -->
+
+<!-- The Charlottesville City DHS manages the Youth Council, Youth Opportunity Project initiative, Juvenile Justice Advisory Committee, and other related community grants and initiatives. They provide services and programs that improve and support the resilience, health, and well-being of youth, families, and community organizations. -->
 
 ### About the Center for Community Partnerships
 
@@ -1430,7 +1445,7 @@ UVA Center for Community Partnerships. Stepping Stones: A Report on Community We
 
 This work is licensed under a [Creative Commons Attribution 4.0 International License](https://creativecommons.org/licenses/by/4.0/).
 
-## Appendix 
+## Appendix
 
 ### Data Sources by Figure
 

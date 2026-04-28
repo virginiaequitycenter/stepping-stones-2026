@@ -124,6 +124,9 @@ vsp_arrests <- read_csv("download_data/vabeyond/Number of Group A Arrestees by A
   clean_names() %>% 
   rename_with(~ str_sub(.x,2,5), starts_with("x"))
   
+# Set NA values as zero
+vsp_arrests[is.na(vsp_arrests)] <- 0
+
 # Reshape
 vsp_arrest_rates <- vsp_arrests %>% 
   pivot_longer(cols = c(`2009`:`2024`), names_to = "year", values_to = "number_of_arrestees_10to17") %>% 
