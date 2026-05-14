@@ -80,7 +80,9 @@ age_groups <- age_groups %>%
          pop_10to17 = B01001_005E + B01001_029E + B01001_006E + B01001_030E,
          pop_10to19 = pop_10to17 + B01001_007E + B01001_031E,
          pop_under18 = pop_10to17 + B01001_003E + B01001_027E + B01001_004E + B01001_028E,
-         pop_18over = pop_total - pop_under18) %>% 
+         pop_18over = pop_total - pop_under18,
+         pop_15to17_fem = B01001_030E,
+         pop_18_19_fem = B01001_031E) %>% 
   mutate(locality = str_remove(NAME, c(" County, Virginia| city, Virginia")), .after = fips) %>% 
   select(-c(NAME, starts_with("B01001")))
 
