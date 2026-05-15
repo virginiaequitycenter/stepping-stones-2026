@@ -9,23 +9,23 @@ date-format: "MMMM YYYY"
 #   type: report
 #   url: communitypartnerships.virginia.edu
 format:
-  html:
-    toc: true
-    theme: cosmo
-    embed-resources: true
-  # docx:
+  # html:
   #   toc: true
-  #   toc-title: "Table of Contents"
-  #   lof: true
-  #   number-sections: true
-  #   number-depth: 3
-  #   # fig-align: left
-  #   # fig-width: 3
-  #   # fig-height: 2
-  #   # # fig-format: png
-  #   # fig-dpi: 200
+  #   theme: cosmo
   #   embed-resources: true
-  #   reference-doc: styles.docx
+  docx:
+    toc: true
+    toc-title: "Table of Contents"
+    # lof: true
+    # number-sections: true
+    number-depth: 3
+    # fig-align: left
+    # fig-width: 3
+    # fig-height: 2
+    # # fig-format: png
+    # fig-dpi: 200
+    embed-resources: true
+    reference-doc: styles.docx
 execute:
   cache: false
   echo: false
@@ -75,7 +75,7 @@ These data represent the youth in our community–your children and their friend
 
 ### Contributions
 
-The 2026 Stepping Stones Report was produced through a collaboration between the City of Charlottesville and Albemarle County’s respective Departments of Human Services and the Center for Community Partnerships at UVA. The UVA Center for Community Partnership’s Community-Centered Analysis team collected, validated and visualized the data and wrote the report.
+The 2026 Stepping Stones Report was produced through a collaboration between the Center for Community Partnerships at UVA and the City of Charlottesville and Albemarle County’s respective Departments of Human Services.
 
 The first Stepping Stones Report was published by the Charlottesville/Albemarle Commission on Children and Families (CCF) in 2000. After the CCF was dissolved in 2012, the City of Charlottesville’s Department of Human Services (DHS) began stewarding the Stepping Stones Report. In 2023, the UVA Center for Community Partnerships joined the collaboration in producing the report. We continue to build on the foundation established by the CCF Data Management Work Group and the knowledge cultivated by Charlottesville DHS, Albemarle DHS, as well as the administrators and agency experts who have provided insight for the last two decades.
 
@@ -1670,10 +1670,9 @@ This report is a collaboration of many contributors, including:
 
 <!-- ### About the Charlottesville Department of Human Services (DHS) -->
 
-<!-- The City of Charlottesville's [Department of Human Services (DHS)](https://charlottesville.org/224/Human-Services) was created in 2010 to serve as a human services policy advisor to the City Manager in order to implement the social policy initiatives of the Charlottesville City Council. The vision of the Charlottesville City DHS is to serve as the community’s premier provider in meeting the therapeutic needs of youth and families, supporting the community’s efforts to improve equity, and -->
-<!-- address poverty and its impacts. -->
+<!-- The City of Charlottesville's [Department of Human Services (DHS)](https://charlottesville.org/224/Human-Services) was created in 2010 to serve as a human services policy advisor to the City Manager in order to implement the social policy initiatives of the Charlottesville City Council. The vision of the Charlottesville City DHS is to serve as the community’s premier provider in meeting the therapeutic needs of youth and families, supporting the community’s efforts to improve equity, and address poverty and its impacts. -->
 
-<!-- Charlottesville DHS provides a variety of services and programs that improve and support the resilience, health, and well-being of youth, families, residents and community organizations. They support initiatives that make a positive impact on youth development, juvenile justice involvement, foster care, financial stability, housing stability, re-entry and community wellbeing. -->
+<!-- Charlottesville DHS provides a variety of services and programs that improve and support the resilience, health, and well-being of youth, families, residents and community organizations. They support initiatives that make a positive impact on youth development, juvenile justice involvement, foster care, financial stability, housing stability, re-entry and community well-being. -->
 
 ### About the Center for Community Partnerships
 
@@ -1695,4 +1694,20 @@ This work is licensed under a [Creative Commons Attribution 4.0 International Li
 
 ### Data Sources by Figure
 
-\*To be included in final draft
+```{r}
+#| html-table-processing: none
+
+library(gt)
+
+df_sources <- read_csv("../data/appendix_data_sources.csv")
+
+df_sources %>% 
+  gt() %>% 
+  cols_width(`Figure` ~ "50%",
+             `Source` ~ "50%") %>% 
+  tab_style(
+    style = cell_text(v_align = "top"),
+    locations = cells_body()
+    )
+```
+
