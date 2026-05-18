@@ -1,5 +1,5 @@
 ---
-title: "DRAFT: Stepping Stones Report"
+title: "Stepping Stones Report"
 subtitle: "Community Wellbeing of Children and Families in Charlottesville and Albemarle"
 date: "May 2026"
 date-format: "MMMM YYYY"
@@ -9,23 +9,23 @@ date-format: "MMMM YYYY"
 #   type: report
 #   url: communitypartnerships.virginia.edu
 format:
-  # html:
-  #   toc: true
-  #   theme: cosmo
-  #   embed-resources: true
-  docx:
+  html:
     toc: true
-    toc-title: "Table of Contents"
-    # lof: true
-    # number-sections: true
-    number-depth: 3
-    # fig-align: left
-    # fig-width: 3
-    # fig-height: 2
-    # # fig-format: png
-    # fig-dpi: 200
+    theme: cosmo
     embed-resources: true
-    reference-doc: styles.docx
+  # docx:
+  #   toc: true
+  #   toc-title: "Table of Contents"
+  #   # lof: true
+  #   # number-sections: true
+  #   number-depth: 3
+  #   # fig-align: left
+  #   # fig-width: 3
+  #   # fig-height: 2
+  #   # # fig-format: png
+  #   # fig-dpi: 200
+  #   embed-resources: true
+  #   reference-doc: styles.docx
 execute:
   cache: false
   echo: false
@@ -53,7 +53,7 @@ The Stepping Stones Report provides trend data for a selection of measures on th
 
 ### Summary & Report PDF 
 
-[Stepping Stones 2026 Executive Summary (coming soon)]()
+[Stepping Stones 2026 Executive Summary](/stepping-stones-2026-exec-summary.pdf){.external target="_blank"}
 
 This interactive online version of the Stepping Stones Report is also available as a PDF: [Stepping Stones 2026 Report PDF (coming soon)]()
 
