@@ -1,6 +1,6 @@
 ---
 title: "Stepping Stones Report"
-subtitle: "Community Wellbeing of Children and Families in Charlottesville and Albemarle"
+subtitle: "Community Well-Being of Children and Families in Charlottesville and Albemarle"
 date: "May 2026"
 date-format: "MMMM YYYY"
 format:
@@ -36,7 +36,7 @@ locality_pal <- c("#193CBC", "#589ACF", "#FAC484")
 ```
 
 ::: {.content-hidden when-format="html"}
-## Excecutive Summary
+## Executive Summary {.unlisted .unnumbered}
 
 The Stepping Stones Report provides trend data for over 30 measures on the well-being of children and families in the City of Charlottesville and Albemarle County. Youth and family development is shaped by multiple interrelated domains. This report brings together data across these domains to describe the experiences and environments shaping young people in our community. The goal is to create a data-informed understanding of our collective trajectory, encourage dialogue, and promote action to improve the lives of all who reside in our community.
 
@@ -842,7 +842,7 @@ Labor force participation among young people and youth unemployment can shed lig
 ::: {.content-visible when-format="html"}
 ```{r}
 #| label: fig-youth-employ
-#| fig-cap: "Percent of youth (16-19) participating in the labor force, 2010-2024,  for Albemarle County, Charlottesville City, and Virginia."
+#| fig-cap: "Percent of youth (16-19) participating in the labor force, 2010-2024, for Albemarle County, Charlottesville City, and Virginia."
 
 # Set data
 df <- read_csv("../data/youth_employment_status.csv")
@@ -1372,6 +1372,7 @@ xlabels <- JS("function() { return this.value; }")
 source_text <- "Data Source: Virginia Department of Health, Division of Disease Prevention"
 
 ```
+
 ```{r}
 #| label: fig-infant-mortality
 #| fig-cap: "Rate per 1,000 births of infants who died before their 1st birthday, 2010-2023, for Albemarle County, Charlottesville City, and Virginia."
@@ -1803,7 +1804,7 @@ knitr::include_graphics("figure_images/fig-30-rate-of-youth-in-need-of.png")
 
 ### Juvenile Delinquency Judgments
 
-This measure tracks the number of judgments of delinquency in the Juvenile and Domestic Relations court. A delinquent judgment may be passed when someone under age 18 commits an act which would be a crime if committed by an adult (including felonies and misdemeanors) and a ruling of delinquency entails escalated involvement with the justice system. According to[Virginia Code § 16.1-278.8](https://law.lis.virginia.gov/vacode/title16.1/chapter11/section16.1-278.8/), juveniles found to be delinquent may be subject to multiple types of sanctions or services: commitment to juvenile justice, probation, substance abuse treatment, fines and restitution, loss of driver’s license, public service project, and others.
+This measure tracks the number of judgments of delinquency in the Juvenile and Domestic Relations court. A delinquent judgment may be passed when someone under age 18 commits an act which would be a crime if committed by an adult (including felonies and misdemeanors) and a ruling of delinquency entails escalated involvement with the justice system. According to [Virginia Code § 16.1-278.8](https://law.lis.virginia.gov/vacode/title16.1/chapter11/section16.1-278.8/), juveniles found to be delinquent may be subject to multiple types of sanctions or services: commitment to juvenile justice, probation, substance abuse treatment, fines and restitution, loss of driver’s license, public service project, and others.
 
 -   **Data considerations:** These data do not include “status offenses”, behaviors that are not crimes but are prohibited because of a youth’s status as a minor.
 
@@ -1978,17 +1979,21 @@ This report is a collaboration of many contributors, including:
 -   Kaki Dimock, Chief Human Services Officer, Albemarle County
 -   Mary Stebbins, Director, Albemarle County Department of Social Services
 
-<!-- ### About the Charlottesville Department of Human Services (DHS) -->
-
-<!-- The City of Charlottesville's [Department of Human Services (DHS)](https://charlottesville.org/224/Human-Services) was created in 2010 to serve as a human services policy advisor to the City Manager in order to implement the social policy initiatives of the Charlottesville City Council. The vision of the Charlottesville City DHS is to serve as the community’s premier provider in meeting the therapeutic needs of youth and families, supporting the community’s efforts to improve equity, and address poverty and its impacts. -->
-
-<!-- Charlottesville DHS provides a variety of services and programs that improve and support the resilience, health, and well-being of youth, families, residents and community organizations. They support initiatives that make a positive impact on youth development, juvenile justice involvement, foster care, financial stability, housing stability, re-entry and community well-being. -->
-
 ### About the Center for Community Partnerships
 
 Established in 2019, the mission of the UVA Center for Community Partnerships is to build mutually beneficial partnerships in university communities by advancing a transformative approach to the fundamental research mission, which will, in turn, reform institutional values, pedagogy, and operations. We envision universities that serve local communities by bringing rich research resources to bear and equipping students to lead in building a more just society.
 
 Community-Centered Analysis centers on community-driven partnerships to provide advocates, as well as civic and private sector leaders, with data and metrics, contextualized analysis, interactive maps and data visualizations, and narrative storytelling as a resource in pursuit of a more just region.
+
+### About the Charlottesville Department of Human Services (DHS)
+
+The City of Charlottesville's [Department of Human Services (DHS)](https://charlottesville.org/224/Human-Services) was created in 2010 to serve as a human services policy advisor to the City Manager in order to implement the social policy initiatives of the Charlottesville City Council. The vision of the Charlottesville City DHS is to serve as the community’s premier provider in meeting the therapeutic needs of youth and families, supporting the community’s efforts to improve equity, and address poverty and its impacts.
+
+Charlottesville DHS provides a variety of services and programs that improve and support the resilience, health, and well-being of youth, families, residents and community organizations. They support initiatives that make a positive impact on youth development, juvenile justice involvement, foster care, financial stability, housing stability, re-entry and community well-being.
+
+### About Albemarle County Human Services Programs
+ 
+[Albemarle County Human Services](https://www.albemarle.org/government/human-services) Programs include the Department of Social Services, the Office of Housing, which includes an affordable policy division and a housing voucher division, the Human Services Response Team (HART), and programs aimed at improving community access and engagement in county services. These services are unified by an interest in improving Albemarle County’s well-being and resilience.
 
 ### Project Repository
 
