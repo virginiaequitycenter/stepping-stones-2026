@@ -1,0 +1,344 @@
+cohort_year,level,division_number,division_name,type_of_graduation_rate,rate_type,group,graduation_rate,students_in_cohort,total_graduates,completion_rate,dropout_rate
+2010,Division,2,Albemarle County,On-Time Graduation Rate,4 yr rate,American Indian or Alaska Native,NA,NA,NA,NA,NA
+2010,Division,2,Albemarle County,On-Time Graduation Rate,4 yr rate,Asian,95.65,46,44,97.83,2.17
+2010,Division,2,Albemarle County,On-Time Graduation Rate,4 yr rate,"Black, not of Hispanic origin",87.02,131,114,88.55,7.63
+2010,Division,2,Albemarle County,On-Time Graduation Rate,4 yr rate,Hispanic,72.73,44,32,75,25
+2010,Division,2,Albemarle County,On-Time Graduation Rate,4 yr rate,Native Hawaiian  or Pacific Islander,NA,NA,NA,NA,NA
+2010,Division,2,Albemarle County,On-Time Graduation Rate,4 yr rate,"White, not of Hispanic origin",93.54,789,738,94.68,3.8
+2010,Division,104,Charlottesville City,On-Time Graduation Rate,4 yr rate,Asian,76.47,17,13,88.24,11.76
+2010,Division,104,Charlottesville City,On-Time Graduation Rate,4 yr rate,"Black, not of Hispanic origin",73.57,140,103,85.71,7.14
+2010,Division,104,Charlottesville City,On-Time Graduation Rate,4 yr rate,Hispanic,NA,NA,NA,NA,NA
+2010,Division,104,Charlottesville City,On-Time Graduation Rate,4 yr rate,Native Hawaiian  or Pacific Islander,NA,NA,NA,NA,NA
+2010,Division,104,Charlottesville City,On-Time Graduation Rate,4 yr rate,"White, not of Hispanic origin",87.66,154,135,91.56,6.49
+2010,State,0,Virginia,On-Time Graduation Rate,4 yr rate,American Indian or Alaska Native,82.13,319,262,86.83,10.03
+2010,State,0,Virginia,On-Time Graduation Rate,4 yr rate,Asian,94.19,5182,4881,95.62,3.45
+2010,State,0,Virginia,On-Time Graduation Rate,4 yr rate,"Black, not of Hispanic origin",79.34,26131,20731,83.06,11.69
+2010,State,0,Virginia,On-Time Graduation Rate,4 yr rate,Hispanic,76.91,7206,5542,80.07,17.37
+2010,State,0,Virginia,On-Time Graduation Rate,4 yr rate,Native Hawaiian  or Pacific Islander,90.22,92,83,93.48,5.43
+2010,State,0,Virginia,On-Time Graduation Rate,4 yr rate,"White, not of Hispanic origin",88.99,57282,50968,93.05,5.18
+2011,Division,2,Albemarle County,On-Time Graduation Rate,4 yr rate,American Indian or Alaska Native,NA,NA,NA,NA,NA
+2011,Division,2,Albemarle County,On-Time Graduation Rate,4 yr rate,Asian,97.22,36,35,100,0
+2011,Division,2,Albemarle County,On-Time Graduation Rate,4 yr rate,"Black, not of Hispanic origin",87.39,119,104,89.92,7.56
+2011,Division,2,Albemarle County,On-Time Graduation Rate,4 yr rate,Hispanic,92.31,65,60,92.31,6.15
+2011,Division,2,Albemarle County,On-Time Graduation Rate,4 yr rate,Native Hawaiian  or Pacific Islander,NA,NA,NA,NA,NA
+2011,Division,2,Albemarle County,On-Time Graduation Rate,4 yr rate,"Non-Hispanic, two or more races",94.12,34,32,94.12,0
+2011,Division,2,Albemarle County,On-Time Graduation Rate,4 yr rate,"White, not of Hispanic origin",93.77,771,723,94.68,2.98
+2011,Division,104,Charlottesville City,On-Time Graduation Rate,4 yr rate,Asian,85.71,14,12,85.71,7.14
+2011,Division,104,Charlottesville City,On-Time Graduation Rate,4 yr rate,"Black, not of Hispanic origin",79.25,159,126,85.53,7.55
+2011,Division,104,Charlottesville City,On-Time Graduation Rate,4 yr rate,Hispanic,NA,NA,NA,NA,NA
+2011,Division,104,Charlottesville City,On-Time Graduation Rate,4 yr rate,"Non-Hispanic, two or more races",NA,NA,NA,NA,NA
+2011,Division,104,Charlottesville City,On-Time Graduation Rate,4 yr rate,"White, not of Hispanic origin",91.54,130,119,96.92,0.77
+2011,State,0,Virginia,On-Time Graduation Rate,4 yr rate,American Indian or Alaska Native,83.01,359,298,87.47,7.24
+2011,State,0,Virginia,On-Time Graduation Rate,4 yr rate,Asian,94.57,5287,4999,95.56,3.37
+2011,State,0,Virginia,On-Time Graduation Rate,4 yr rate,"Black, not of Hispanic origin",80.42,25514,20518,84.17,10.81
+2011,State,0,Virginia,On-Time Graduation Rate,4 yr rate,Hispanic,78.52,8858,6955,80.98,15.5
+2011,State,0,Virginia,On-Time Graduation Rate,4 yr rate,Native Hawaiian  or Pacific Islander,87.5,128,112,89.06,6.25
+2011,State,0,Virginia,On-Time Graduation Rate,4 yr rate,"Non-Hispanic, two or more races",94.02,2827,2658,95.22,1.95
+2011,State,0,Virginia,On-Time Graduation Rate,4 yr rate,"White, not of Hispanic origin",89.79,54848,49245,93.39,4.7
+2012,Division,2,Albemarle County,On-Time Graduation Rate,4 yr rate,American Indian or Alaska Native,NA,NA,NA,NA,NA
+2012,Division,2,Albemarle County,On-Time Graduation Rate,4 yr rate,Asian,90.91,33,30,90.91,6.06
+2012,Division,2,Albemarle County,On-Time Graduation Rate,4 yr rate,"Black, not of Hispanic origin",84.3,121,102,90.08,9.09
+2012,Division,2,Albemarle County,On-Time Graduation Rate,4 yr rate,Hispanic,85.94,64,55,85.94,10.94
+2012,Division,2,Albemarle County,On-Time Graduation Rate,4 yr rate,Native Hawaiian  or Pacific Islander,NA,NA,NA,NA,NA
+2012,Division,2,Albemarle County,On-Time Graduation Rate,4 yr rate,"Non-Hispanic, two or more races",97.37,38,37,97.37,0
+2012,Division,2,Albemarle County,On-Time Graduation Rate,4 yr rate,"White, not of Hispanic origin",93.64,755,707,94.97,3.44
+2012,Division,104,Charlottesville City,On-Time Graduation Rate,4 yr rate,Asian,92.86,14,13,92.86,0
+2012,Division,104,Charlottesville City,On-Time Graduation Rate,4 yr rate,"Black, not of Hispanic origin",82.96,135,112,85.93,8.15
+2012,Division,104,Charlottesville City,On-Time Graduation Rate,4 yr rate,Hispanic,50,10,5,60,20
+2012,Division,104,Charlottesville City,On-Time Graduation Rate,4 yr rate,"Non-Hispanic, two or more races",NA,NA,NA,NA,NA
+2012,Division,104,Charlottesville City,On-Time Graduation Rate,4 yr rate,"White, not of Hispanic origin",89.73,146,131,93.84,3.42
+2012,State,0,Virginia,On-Time Graduation Rate,4 yr rate,American Indian or Alaska Native,82.54,315,260,89.21,8.57
+2012,State,0,Virginia,On-Time Graduation Rate,4 yr rate,Asian,94.62,5296,5011,95.71,2.95
+2012,State,0,Virginia,On-Time Graduation Rate,4 yr rate,"Black, not of Hispanic origin",82.72,24819,20529,86.24,9.66
+2012,State,0,Virginia,On-Time Graduation Rate,4 yr rate,Hispanic,80.2,9456,7584,82.72,14.22
+2012,State,0,Virginia,On-Time Graduation Rate,4 yr rate,Native Hawaiian  or Pacific Islander,90.76,119,108,93.28,5.04
+2012,State,0,Virginia,On-Time Graduation Rate,4 yr rate,"Non-Hispanic, two or more races",92.22,3200,2951,94.28,3.03
+2012,State,0,Virginia,On-Time Graduation Rate,4 yr rate,"White, not of Hispanic origin",90.88,53850,48935,94.01,4.38
+2013,Division,2,Albemarle County,On-Time Graduation Rate,4 yr rate,American Indian or Alaska Native,NA,NA,NA,NA,NA
+2013,Division,2,Albemarle County,On-Time Graduation Rate,4 yr rate,Asian,97.56,41,40,100,0
+2013,Division,2,Albemarle County,On-Time Graduation Rate,4 yr rate,"Black, not of Hispanic origin",92.79,111,103,93.69,6.31
+2013,Division,2,Albemarle County,On-Time Graduation Rate,4 yr rate,Hispanic,88.89,81,72,91.36,7.41
+2013,Division,2,Albemarle County,On-Time Graduation Rate,4 yr rate,Native Hawaiian  or Pacific Islander,NA,NA,NA,NA,NA
+2013,Division,2,Albemarle County,On-Time Graduation Rate,4 yr rate,"Non-Hispanic, two or more races",88.89,45,40,93.33,4.44
+2013,Division,2,Albemarle County,On-Time Graduation Rate,4 yr rate,"White, not of Hispanic origin",94.27,750,707,96.67,2.53
+2013,Division,104,Charlottesville City,On-Time Graduation Rate,4 yr rate,American Indian or Alaska Native,NA,NA,NA,NA,NA
+2013,Division,104,Charlottesville City,On-Time Graduation Rate,4 yr rate,Asian,78.26,23,18,100,0
+2013,Division,104,Charlottesville City,On-Time Graduation Rate,4 yr rate,"Black, not of Hispanic origin",73.04,115,84,77.39,13.91
+2013,Division,104,Charlottesville City,On-Time Graduation Rate,4 yr rate,Hispanic,57.89,19,11,57.89,42.11
+2013,Division,104,Charlottesville City,On-Time Graduation Rate,4 yr rate,"Non-Hispanic, two or more races",NA,NA,NA,NA,NA
+2013,Division,104,Charlottesville City,On-Time Graduation Rate,4 yr rate,"White, not of Hispanic origin",89.33,150,134,90.67,4.67
+2013,State,0,Virginia,On-Time Graduation Rate,4 yr rate,American Indian or Alaska Native,83.48,333,278,89.49,8.71
+2013,State,0,Virginia,On-Time Graduation Rate,4 yr rate,Asian,94.87,5458,5178,95.8,3.22
+2013,State,0,Virginia,On-Time Graduation Rate,4 yr rate,"Black, not of Hispanic origin",84.16,23423,19712,87.31,8.59
+2013,State,0,Virginia,On-Time Graduation Rate,4 yr rate,Hispanic,82.68,9904,8189,85.05,12.24
+2013,State,0,Virginia,On-Time Graduation Rate,4 yr rate,Native Hawaiian  or Pacific Islander,90.83,120,109,91.67,3.33
+2013,State,0,Virginia,On-Time Graduation Rate,4 yr rate,"Non-Hispanic, two or more races",92.05,3621,3333,93.87,3.87
+2013,State,0,Virginia,On-Time Graduation Rate,4 yr rate,"White, not of Hispanic origin",91.74,53367,48958,94.58,3.94
+2014,Division,2,Albemarle County,On-Time Graduation Rate,4 yr rate,American Indian or Alaska Native,NA,NA,NA,NA,NA
+2014,Division,2,Albemarle County,On-Time Graduation Rate,4 yr rate,Asian,100,40,40,100,0
+2014,Division,2,Albemarle County,On-Time Graduation Rate,4 yr rate,"Black, not of Hispanic origin",88.24,119,105,92.44,4.2
+2014,Division,2,Albemarle County,On-Time Graduation Rate,4 yr rate,Hispanic,82.05,78,64,89.74,10.26
+2014,Division,2,Albemarle County,On-Time Graduation Rate,4 yr rate,"Non-Hispanic, two or more races",94.44,36,34,97.22,0
+2014,Division,2,Albemarle County,On-Time Graduation Rate,4 yr rate,"White, not of Hispanic origin",97.1,725,704,98.07,1.24
+2014,Division,104,Charlottesville City,On-Time Graduation Rate,4 yr rate,Asian,89.47,19,17,100,0
+2014,Division,104,Charlottesville City,On-Time Graduation Rate,4 yr rate,"Black, not of Hispanic origin",85.04,127,108,87.4,7.09
+2014,Division,104,Charlottesville City,On-Time Graduation Rate,4 yr rate,Hispanic,75,12,9,75,25
+2014,Division,104,Charlottesville City,On-Time Graduation Rate,4 yr rate,"Non-Hispanic, two or more races",NA,NA,NA,NA,NA
+2014,Division,104,Charlottesville City,On-Time Graduation Rate,4 yr rate,"White, not of Hispanic origin",92.91,127,118,96.06,3.15
+2014,State,0,Virginia,On-Time Graduation Rate,4 yr rate,American Indian or Alaska Native,88.41,302,267,91.72,6.95
+2014,State,0,Virginia,On-Time Graduation Rate,4 yr rate,Asian,94.83,5838,5536,95.99,2.96
+2014,State,0,Virginia,On-Time Graduation Rate,4 yr rate,"Black, not of Hispanic origin",85.42,22451,19176,88.26,7.57
+2014,State,0,Virginia,On-Time Graduation Rate,4 yr rate,Hispanic,82.98,9995,8294,85.26,12.21
+2014,State,0,Virginia,On-Time Graduation Rate,4 yr rate,Native Hawaiian  or Pacific Islander,90.7,129,117,95.35,3.1
+2014,State,0,Virginia,On-Time Graduation Rate,4 yr rate,"Non-Hispanic, two or more races",91.44,3634,3322,93.67,3.69
+2014,State,0,Virginia,On-Time Graduation Rate,4 yr rate,"White, not of Hispanic origin",92.53,52390,48476,94.83,3.6
+2015,Division,2,Albemarle County,On-Time Graduation Rate,4 yr rate,Asian,100,46,46,100,0
+2015,Division,2,Albemarle County,On-Time Graduation Rate,4 yr rate,"Black, not of Hispanic origin",88.57,105,93,91.43,1.9
+2015,Division,2,Albemarle County,On-Time Graduation Rate,4 yr rate,Hispanic,90.79,76,69,92.11,5.26
+2015,Division,2,Albemarle County,On-Time Graduation Rate,4 yr rate,"Non-Hispanic, two or more races",92.16,51,47,94.12,3.92
+2015,Division,2,Albemarle County,On-Time Graduation Rate,4 yr rate,"White, not of Hispanic origin",95.4,718,685,96.94,2.09
+2015,Division,104,Charlottesville City,On-Time Graduation Rate,4 yr rate,Asian,66.67,21,14,76.19,23.81
+2015,Division,104,Charlottesville City,On-Time Graduation Rate,4 yr rate,"Black, not of Hispanic origin",79.81,104,83,79.81,12.5
+2015,Division,104,Charlottesville City,On-Time Graduation Rate,4 yr rate,Hispanic,80.95,21,17,85.71,14.29
+2015,Division,104,Charlottesville City,On-Time Graduation Rate,4 yr rate,"Non-Hispanic, two or more races",64.29,14,9,71.43,14.29
+2015,Division,104,Charlottesville City,On-Time Graduation Rate,4 yr rate,"White, not of Hispanic origin",93.79,145,136,94.48,4.14
+2015,State,0,Virginia,On-Time Graduation Rate,4 yr rate,American Indian or Alaska Native,87.88,297,261,89.9,7.74
+2015,State,0,Virginia,On-Time Graduation Rate,4 yr rate,Asian,95.62,5747,5495,96.4,2.71
+2015,State,0,Virginia,On-Time Graduation Rate,4 yr rate,"Black, not of Hispanic origin",86.32,21708,18739,88.23,6.63
+2015,State,0,Virginia,On-Time Graduation Rate,4 yr rate,Hispanic,84.09,10448,8786,85.83,11.69
+2015,State,0,Virginia,On-Time Graduation Rate,4 yr rate,Native Hawaiian  or Pacific Islander,94.4,125,118,95.2,1.6
+2015,State,0,Virginia,On-Time Graduation Rate,4 yr rate,"Non-Hispanic, two or more races",92.51,3793,3509,93.83,4.06
+2015,State,0,Virginia,On-Time Graduation Rate,4 yr rate,"White, not of Hispanic origin",93,50971,47399,94.73,3.65
+2016,Division,2,Albemarle County,On-Time Graduation Rate,4 yr rate,American Indian or Alaska Native,NA,NA,NA,NA,NA
+2016,Division,2,Albemarle County,On-Time Graduation Rate,4 yr rate,Asian,97.56,41,40,97.56,2.44
+2016,Division,2,Albemarle County,On-Time Graduation Rate,4 yr rate,"Black, not of Hispanic origin",94.07,118,111,94.07,1.69
+2016,Division,2,Albemarle County,On-Time Graduation Rate,4 yr rate,Hispanic,86.9,84,73,89.29,9.52
+2016,Division,2,Albemarle County,On-Time Graduation Rate,4 yr rate,Native Hawaiian  or Pacific Islander,NA,NA,NA,NA,NA
+2016,Division,2,Albemarle County,On-Time Graduation Rate,4 yr rate,"Non-Hispanic, two or more races",90.91,44,40,90.91,6.82
+2016,Division,2,Albemarle County,On-Time Graduation Rate,4 yr rate,"White, not of Hispanic origin",96.67,750,725,97.33,1.6
+2016,Division,104,Charlottesville City,On-Time Graduation Rate,4 yr rate,American Indian or Alaska Native,NA,NA,NA,NA,NA
+2016,Division,104,Charlottesville City,On-Time Graduation Rate,4 yr rate,Asian,71.43,21,15,71.43,28.57
+2016,Division,104,Charlottesville City,On-Time Graduation Rate,4 yr rate,"Black, not of Hispanic origin",87.76,98,86,88.78,8.16
+2016,Division,104,Charlottesville City,On-Time Graduation Rate,4 yr rate,Hispanic,75,16,12,75,12.5
+2016,Division,104,Charlottesville City,On-Time Graduation Rate,4 yr rate,"Non-Hispanic, two or more races",91.67,12,11,91.67,8.33
+2016,Division,104,Charlottesville City,On-Time Graduation Rate,4 yr rate,"White, not of Hispanic origin",96.03,126,121,96.83,2.38
+2016,State,0,Virginia,On-Time Graduation Rate,4 yr rate,American Indian or Alaska Native,86.03,272,234,87.87,10.29
+2016,State,0,Virginia,On-Time Graduation Rate,4 yr rate,Asian,96.52,5948,5741,97.07,2.17
+2016,State,0,Virginia,On-Time Graduation Rate,4 yr rate,"Black, not of Hispanic origin",88.42,22479,19875,89.78,6.28
+2016,State,0,Virginia,On-Time Graduation Rate,4 yr rate,Hispanic,82.83,11254,9322,83.94,13.65
+2016,State,0,Virginia,On-Time Graduation Rate,4 yr rate,Native Hawaiian  or Pacific Islander,89.6,125,112,90.4,7.2
+2016,State,0,Virginia,On-Time Graduation Rate,4 yr rate,"Non-Hispanic, two or more races",92.8,3947,3663,93.92,4.03
+2016,State,0,Virginia,On-Time Graduation Rate,4 yr rate,"White, not of Hispanic origin",93.95,51052,47961,95.17,3.38
+2017,Division,2,Albemarle County,On-Time Graduation Rate,4 yr rate,American Indian or Alaska Native,NA,NA,NA,NA,NA
+2017,Division,2,Albemarle County,On-Time Graduation Rate,4 yr rate,Asian,100,46,46,100,0
+2017,Division,2,Albemarle County,On-Time Graduation Rate,4 yr rate,"Black, not of Hispanic origin",94.35,124,117,96.77,1.61
+2017,Division,2,Albemarle County,On-Time Graduation Rate,4 yr rate,Hispanic,90.59,85,77,91.76,7.06
+2017,Division,2,Albemarle County,On-Time Graduation Rate,4 yr rate,Native Hawaiian  or Pacific Islander,NA,NA,NA,NA,NA
+2017,Division,2,Albemarle County,On-Time Graduation Rate,4 yr rate,"Non-Hispanic, two or more races",89.66,58,52,91.38,5.17
+2017,Division,2,Albemarle County,On-Time Graduation Rate,4 yr rate,"White, not of Hispanic origin",95.52,714,682,96.36,2.38
+2017,Division,104,Charlottesville City,On-Time Graduation Rate,4 yr rate,American Indian or Alaska Native,NA,NA,NA,NA,NA
+2017,Division,104,Charlottesville City,On-Time Graduation Rate,4 yr rate,Asian,84,25,21,84,12
+2017,Division,104,Charlottesville City,On-Time Graduation Rate,4 yr rate,"Black, not of Hispanic origin",84.76,105,89,86.67,9.52
+2017,Division,104,Charlottesville City,On-Time Graduation Rate,4 yr rate,Hispanic,81.82,33,27,84.85,15.15
+2017,Division,104,Charlottesville City,On-Time Graduation Rate,4 yr rate,"Non-Hispanic, two or more races",83.33,12,10,91.67,0
+2017,Division,104,Charlottesville City,On-Time Graduation Rate,4 yr rate,"White, not of Hispanic origin",96.4,139,134,97.84,0.72
+2017,State,0,Virginia,On-Time Graduation Rate,4 yr rate,American Indian or Alaska Native,88.18,296,261,89.53,9.12
+2017,State,0,Virginia,On-Time Graduation Rate,4 yr rate,Asian,96.9,5964,5779,97.25,1.93
+2017,State,0,Virginia,On-Time Graduation Rate,4 yr rate,"Black, not of Hispanic origin",88.42,22133,19570,89.71,6.75
+2017,State,0,Virginia,On-Time Graduation Rate,4 yr rate,Hispanic,81.32,12251,9962,82.23,15.86
+2017,State,0,Virginia,On-Time Graduation Rate,4 yr rate,Native Hawaiian  or Pacific Islander,94.85,136,129,94.85,2.94
+2017,State,0,Virginia,On-Time Graduation Rate,4 yr rate,"Non-Hispanic, two or more races",92.63,4233,3921,93.74,4.11
+2017,State,0,Virginia,On-Time Graduation Rate,4 yr rate,"White, not of Hispanic origin",94.03,50222,47226,95.29,3.39
+2018,Division,2,Albemarle County,On-Time Graduation Rate,4 yr rate,American Indian or Alaska Native,NA,NA,NA,NA,NA
+2018,Division,2,Albemarle County,On-Time Graduation Rate,4 yr rate,Asian,94.44,54,51,94.44,1.85
+2018,Division,2,Albemarle County,On-Time Graduation Rate,4 yr rate,"Black, not of Hispanic origin",89.52,124,111,89.52,8.87
+2018,Division,2,Albemarle County,On-Time Graduation Rate,4 yr rate,Hispanic,76.03,121,92,77.69,17.36
+2018,Division,2,Albemarle County,On-Time Graduation Rate,4 yr rate,"Non-Hispanic, two or more races",89.83,59,53,91.53,6.78
+2018,Division,2,Albemarle County,On-Time Graduation Rate,4 yr rate,"White, not of Hispanic origin",96.08,766,736,96.48,2.48
+2018,Division,104,Charlottesville City,On-Time Graduation Rate,4 yr rate,Asian,100,20,20,100,0
+2018,Division,104,Charlottesville City,On-Time Graduation Rate,4 yr rate,"Black, not of Hispanic origin",88.3,94,83,91.49,6.38
+2018,Division,104,Charlottesville City,On-Time Graduation Rate,4 yr rate,Hispanic,89.66,29,26,89.66,10.34
+2018,Division,104,Charlottesville City,On-Time Graduation Rate,4 yr rate,"Non-Hispanic, two or more races",NA,NA,NA,NA,NA
+2018,Division,104,Charlottesville City,On-Time Graduation Rate,4 yr rate,"White, not of Hispanic origin",95.9,122,117,96.72,3.28
+2018,State,0,Virginia,On-Time Graduation Rate,4 yr rate,American Indian or Alaska Native,88.22,314,277,89.17,8.6
+2018,State,0,Virginia,On-Time Graduation Rate,4 yr rate,Asian,97.73,6436,6290,98.12,1.41
+2018,State,0,Virginia,On-Time Graduation Rate,4 yr rate,"Black, not of Hispanic origin",89.59,22495,20154,90.86,6.05
+2018,State,0,Virginia,On-Time Graduation Rate,4 yr rate,Hispanic,80.92,13573,10983,82.02,15.91
+2018,State,0,Virginia,On-Time Graduation Rate,4 yr rate,Native Hawaiian  or Pacific Islander,94.08,152,143,96.05,1.32
+2018,State,0,Virginia,On-Time Graduation Rate,4 yr rate,"Non-Hispanic, two or more races",93.38,4382,4092,94.73,3.65
+2018,State,0,Virginia,On-Time Graduation Rate,4 yr rate,"White, not of Hispanic origin",94.5,50556,47773,95.8,3.12
+2019,Division,2,Albemarle County,On-Time Graduation Rate,4 yr rate,Asian,100,51,51,100,0
+2019,Division,2,Albemarle County,On-Time Graduation Rate,4 yr rate,"Black, not of Hispanic origin",90.52,116,105,90.52,6.9
+2019,Division,2,Albemarle County,On-Time Graduation Rate,4 yr rate,Hispanic,80.33,122,98,80.33,18.03
+2019,Division,2,Albemarle County,On-Time Graduation Rate,4 yr rate,Native Hawaiian  or Pacific Islander,NA,NA,NA,NA,NA
+2019,Division,2,Albemarle County,On-Time Graduation Rate,4 yr rate,"Non-Hispanic, two or more races",97.87,47,46,97.87,2.13
+2019,Division,2,Albemarle County,On-Time Graduation Rate,4 yr rate,"White, not of Hispanic origin",96.64,744,719,97.45,1.75
+2019,Division,104,Charlottesville City,On-Time Graduation Rate,4 yr rate,Asian,94.12,17,16,94.12,0
+2019,Division,104,Charlottesville City,On-Time Graduation Rate,4 yr rate,"Black, not of Hispanic origin",95.92,98,94,95.92,1.02
+2019,Division,104,Charlottesville City,On-Time Graduation Rate,4 yr rate,Hispanic,90.91,33,30,90.91,6.06
+2019,Division,104,Charlottesville City,On-Time Graduation Rate,4 yr rate,Native Hawaiian  or Pacific Islander,NA,NA,NA,NA,NA
+2019,Division,104,Charlottesville City,On-Time Graduation Rate,4 yr rate,"Non-Hispanic, two or more races",92.86,14,13,92.86,7.14
+2019,Division,104,Charlottesville City,On-Time Graduation Rate,4 yr rate,"White, not of Hispanic origin",97.46,118,115,99.15,0.85
+2019,State,0,Virginia,On-Time Graduation Rate,4 yr rate,American Indian or Alaska Native,88.67,256,227,89.84,6.64
+2019,State,0,Virginia,On-Time Graduation Rate,4 yr rate,Asian,97.43,6736,6563,97.68,1.66
+2019,State,0,Virginia,On-Time Graduation Rate,4 yr rate,"Black, not of Hispanic origin",89.72,21955,19699,91.05,6.14
+2019,State,0,Virginia,On-Time Graduation Rate,4 yr rate,Hispanic,80.08,14746,11808,81.59,16.42
+2019,State,0,Virginia,On-Time Graduation Rate,4 yr rate,Native Hawaiian  or Pacific Islander,94.2,138,130,96.38,2.17
+2019,State,0,Virginia,On-Time Graduation Rate,4 yr rate,"Non-Hispanic, two or more races",94.05,4523,4254,95.38,2.94
+2019,State,0,Virginia,On-Time Graduation Rate,4 yr rate,"White, not of Hispanic origin",94.69,50013,47355,96.04,2.84
+2020,Division,2,Albemarle County,On-Time Graduation Rate,4 yr rate,Asian,88.46,52,46,90.38,9.62
+2020,Division,2,Albemarle County,On-Time Graduation Rate,4 yr rate,"Black, not of Hispanic origin",97.25,109,106,97.25,0.92
+2020,Division,2,Albemarle County,On-Time Graduation Rate,4 yr rate,Hispanic,77.69,130,101,78.46,20
+2020,Division,2,Albemarle County,On-Time Graduation Rate,4 yr rate,"Non-Hispanic, two or more races",95.08,61,58,96.72,3.28
+2020,Division,2,Albemarle County,On-Time Graduation Rate,4 yr rate,"White, not of Hispanic origin",96.04,733,704,96.73,1.91
+2020,Division,104,Charlottesville City,On-Time Graduation Rate,4 yr rate,Asian,78.57,14,11,78.57,7.14
+2020,Division,104,Charlottesville City,On-Time Graduation Rate,4 yr rate,"Black, not of Hispanic origin",96.7,91,88,96.7,2.2
+2020,Division,104,Charlottesville City,On-Time Graduation Rate,4 yr rate,Hispanic,77.14,35,27,77.14,11.43
+2020,Division,104,Charlottesville City,On-Time Graduation Rate,4 yr rate,"Non-Hispanic, two or more races",91.3,23,21,91.3,4.35
+2020,Division,104,Charlottesville City,On-Time Graduation Rate,4 yr rate,"White, not of Hispanic origin",99.32,147,146,99.32,0
+2020,State,0,Virginia,On-Time Graduation Rate,4 yr rate,American Indian or Alaska Native,92.37,262,242,93.89,4.58
+2020,State,0,Virginia,On-Time Graduation Rate,4 yr rate,Asian,98.12,7114,6980,98.33,1.22
+2020,State,0,Virginia,On-Time Graduation Rate,4 yr rate,"Black, not of Hispanic origin",91.38,21556,19697,92.36,4.98
+2020,State,0,Virginia,On-Time Graduation Rate,4 yr rate,Hispanic,81.96,16057,13161,82.77,15.81
+2020,State,0,Virginia,On-Time Graduation Rate,4 yr rate,Native Hawaiian  or Pacific Islander,96.58,146,141,97.26,1.37
+2020,State,0,Virginia,On-Time Graduation Rate,4 yr rate,"Non-Hispanic, two or more races",94.3,4775,4503,95.79,2.89
+2020,State,0,Virginia,On-Time Graduation Rate,4 yr rate,"White, not of Hispanic origin",95.43,48521,46306,96.63,2.44
+2021,Division,2,Albemarle County,On-Time Graduation Rate,4 yr rate,Asian,100,68,68,100,0
+2021,Division,2,Albemarle County,On-Time Graduation Rate,4 yr rate,"Black, not of Hispanic origin",95.9,122,117,95.9,3.28
+2021,Division,2,Albemarle County,On-Time Graduation Rate,4 yr rate,Hispanic,88.64,132,117,88.64,10.61
+2021,Division,2,Albemarle County,On-Time Graduation Rate,4 yr rate,"Non-Hispanic, two or more races",94.83,58,55,96.55,1.72
+2021,Division,2,Albemarle County,On-Time Graduation Rate,4 yr rate,"White, not of Hispanic origin",97.73,704,688,97.73,1.85
+2021,Division,104,Charlottesville City,On-Time Graduation Rate,4 yr rate,Asian,100,26,26,100,0
+2021,Division,104,Charlottesville City,On-Time Graduation Rate,4 yr rate,"Black, not of Hispanic origin",93.83,81,76,93.83,3.7
+2021,Division,104,Charlottesville City,On-Time Graduation Rate,4 yr rate,Hispanic,90.24,41,37,90.24,7.32
+2021,Division,104,Charlottesville City,On-Time Graduation Rate,4 yr rate,"Non-Hispanic, two or more races",100,14,14,100,0
+2021,Division,104,Charlottesville City,On-Time Graduation Rate,4 yr rate,"White, not of Hispanic origin",99.15,117,116,99.15,0
+2021,State,0,Virginia,On-Time Graduation Rate,4 yr rate,American Indian or Alaska Native,93.07,231,215,93.51,5.19
+2021,State,0,Virginia,On-Time Graduation Rate,4 yr rate,Asian,98.46,7268,7156,98.68,0.89
+2021,State,0,Virginia,On-Time Graduation Rate,4 yr rate,"Black, not of Hispanic origin",90.92,21215,19289,91.66,4.79
+2021,State,0,Virginia,On-Time Graduation Rate,4 yr rate,Hispanic,85.17,15133,12889,85.89,12.19
+2021,State,0,Virginia,On-Time Graduation Rate,4 yr rate,Native Hawaiian  or Pacific Islander,96.47,170,164,97.65,1.76
+2021,State,0,Virginia,On-Time Graduation Rate,4 yr rate,"Non-Hispanic, two or more races",95.1,4964,4721,96.01,2.3
+2021,State,0,Virginia,On-Time Graduation Rate,4 yr rate,"White, not of Hispanic origin",95.32,48190,45933,96.19,2.27
+2022,Division,2,Albemarle County,On-Time Graduation Rate,4 yr rate,American Indian or Alaska Native,NA,NA,NA,NA,NA
+2022,Division,2,Albemarle County,On-Time Graduation Rate,4 yr rate,Asian,100,48,48,100,0
+2022,Division,2,Albemarle County,On-Time Graduation Rate,4 yr rate,"Black, not of Hispanic origin",90.27,113,102,90.27,7.08
+2022,Division,2,Albemarle County,On-Time Graduation Rate,4 yr rate,Hispanic,83.78,148,124,83.78,14.19
+2022,Division,2,Albemarle County,On-Time Graduation Rate,4 yr rate,"Non-Hispanic, two or more races",95.38,65,62,95.38,1.54
+2022,Division,2,Albemarle County,On-Time Graduation Rate,4 yr rate,"White, not of Hispanic origin",96.62,711,687,96.91,1.69
+2022,Division,104,Charlottesville City,On-Time Graduation Rate,4 yr rate,Asian,100,16,16,100,0
+2022,Division,104,Charlottesville City,On-Time Graduation Rate,4 yr rate,"Black, not of Hispanic origin",90.28,72,65,90.28,6.94
+2022,Division,104,Charlottesville City,On-Time Graduation Rate,4 yr rate,Hispanic,76.92,39,30,76.92,15.38
+2022,Division,104,Charlottesville City,On-Time Graduation Rate,4 yr rate,"Non-Hispanic, two or more races",96.67,30,29,96.67,0
+2022,Division,104,Charlottesville City,On-Time Graduation Rate,4 yr rate,"White, not of Hispanic origin",97.16,141,137,97.16,0.71
+2022,State,0,Virginia,On-Time Graduation Rate,4 yr rate,American Indian or Alaska Native,86.34,205,177,86.83,9.76
+2022,State,0,Virginia,On-Time Graduation Rate,4 yr rate,Asian,98.2,7614,7477,98.44,1.12
+2022,State,0,Virginia,On-Time Graduation Rate,4 yr rate,"Black, not of Hispanic origin",90.31,21128,19081,91.22,5.46
+2022,State,0,Virginia,On-Time Graduation Rate,4 yr rate,Hispanic,83.18,16407,13648,84.24,13.85
+2022,State,0,Virginia,On-Time Graduation Rate,4 yr rate,Native Hawaiian  or Pacific Islander,96,150,144,96,3.33
+2022,State,0,Virginia,On-Time Graduation Rate,4 yr rate,"Non-Hispanic, two or more races",93.68,5301,4966,94.74,3.68
+2022,State,0,Virginia,On-Time Graduation Rate,4 yr rate,"White, not of Hispanic origin",94.94,47918,45495,95.92,2.84
+2023,Division,2,Albemarle County,On-Time Graduation Rate,4 yr rate,American Indian or Alaska Native,NA,NA,NA,NA,NA
+2023,Division,2,Albemarle County,On-Time Graduation Rate,4 yr rate,Asian,98.46,65,64,98.46,0
+2023,Division,2,Albemarle County,On-Time Graduation Rate,4 yr rate,"Black, not of Hispanic origin",92.31,130,120,93.08,4.62
+2023,Division,2,Albemarle County,On-Time Graduation Rate,4 yr rate,Hispanic,84.21,152,128,84.21,15.79
+2023,Division,2,Albemarle County,On-Time Graduation Rate,4 yr rate,"Non-Hispanic, two or more races",97.18,71,69,98.59,1.41
+2023,Division,2,Albemarle County,On-Time Graduation Rate,4 yr rate,"White, not of Hispanic origin",95.63,709,678,96.61,2.26
+2023,Division,104,Charlottesville City,On-Time Graduation Rate,4 yr rate,American Indian or Alaska Native,NA,NA,NA,NA,NA
+2023,Division,104,Charlottesville City,On-Time Graduation Rate,4 yr rate,Asian,100,15,15,100,0
+2023,Division,104,Charlottesville City,On-Time Graduation Rate,4 yr rate,"Black, not of Hispanic origin",91.4,93,85,91.4,4.3
+2023,Division,104,Charlottesville City,On-Time Graduation Rate,4 yr rate,Hispanic,85.71,35,30,85.71,11.43
+2023,Division,104,Charlottesville City,On-Time Graduation Rate,4 yr rate,"Non-Hispanic, two or more races",84,25,21,88,12
+2023,Division,104,Charlottesville City,On-Time Graduation Rate,4 yr rate,"White, not of Hispanic origin",96.85,127,123,97.64,1.57
+2023,State,0,Virginia,On-Time Graduation Rate,4 yr rate,American Indian or Alaska Native,92.94,255,237,93.73,3.14
+2023,State,0,Virginia,On-Time Graduation Rate,4 yr rate,Asian,98.33,7551,7425,98.56,1.17
+2023,State,0,Virginia,On-Time Graduation Rate,4 yr rate,"Black, not of Hispanic origin",90.71,21049,19094,91.69,5.18
+2023,State,0,Virginia,On-Time Graduation Rate,4 yr rate,Hispanic,82.56,17973,14838,83.87,14.29
+2023,State,0,Virginia,On-Time Graduation Rate,4 yr rate,Native Hawaiian  or Pacific Islander,96.36,165,159,96.97,1.82
+2023,State,0,Virginia,On-Time Graduation Rate,4 yr rate,"Non-Hispanic, two or more races",93.39,5504,5140,94.62,3.85
+2023,State,0,Virginia,On-Time Graduation Rate,4 yr rate,"White, not of Hispanic origin",95.06,46458,44164,96.1,2.84
+2024,Division,2,Albemarle County,On-Time Graduation Rate,4 yr rate,Asian,93.22,59,55,93.22,3.39
+2024,Division,2,Albemarle County,On-Time Graduation Rate,4 yr rate,"Black, not of Hispanic origin",93.5,123,115,93.5,5.69
+2024,Division,2,Albemarle County,On-Time Graduation Rate,4 yr rate,Hispanic,84.92,179,152,84.92,13.97
+2024,Division,2,Albemarle County,On-Time Graduation Rate,4 yr rate,Native Hawaiian  or Pacific Islander,NA,NA,NA,NA,NA
+2024,Division,2,Albemarle County,On-Time Graduation Rate,4 yr rate,"Non-Hispanic, two or more races",91.67,48,44,93.75,2.08
+2024,Division,2,Albemarle County,On-Time Graduation Rate,4 yr rate,"White, not of Hispanic origin",95.52,670,640,96.57,2.54
+2024,Division,104,Charlottesville City,On-Time Graduation Rate,4 yr rate,Asian,90,10,9,90,0
+2024,Division,104,Charlottesville City,On-Time Graduation Rate,4 yr rate,"Black, not of Hispanic origin",84,75,63,84,4
+2024,Division,104,Charlottesville City,On-Time Graduation Rate,4 yr rate,Hispanic,79.63,54,43,85.19,7.41
+2024,Division,104,Charlottesville City,On-Time Graduation Rate,4 yr rate,"Non-Hispanic, two or more races",87.88,33,29,90.91,3.03
+2024,Division,104,Charlottesville City,On-Time Graduation Rate,4 yr rate,"White, not of Hispanic origin",96.32,136,131,97.06,1.47
+2024,State,0,Virginia,On-Time Graduation Rate,4 yr rate,American Indian or Alaska Native,93.12,247,230,94.74,4.05
+2024,State,0,Virginia,On-Time Graduation Rate,4 yr rate,Asian,98.46,7684,7566,98.75,0.87
+2024,State,0,Virginia,On-Time Graduation Rate,4 yr rate,"Black, not of Hispanic origin",90.43,21339,19296,91.64,5.22
+2024,State,0,Virginia,On-Time Graduation Rate,4 yr rate,Hispanic,87.05,18112,15766,88.31,10.24
+2024,State,0,Virginia,On-Time Graduation Rate,4 yr rate,Native Hawaiian  or Pacific Islander,95.83,168,161,97.62,1.19
+2024,State,0,Virginia,On-Time Graduation Rate,4 yr rate,"Non-Hispanic, two or more races",94.07,5703,5365,95.23,2.96
+2024,State,0,Virginia,On-Time Graduation Rate,4 yr rate,"White, not of Hispanic origin",95.22,45376,43207,96.28,2.66
+2025,Division,2,Albemarle County,On-Time Graduation Rate,4 yr rate,American Indian or Alaska Native,NA,NA,NA,NA,NA
+2025,Division,2,Albemarle County,On-Time Graduation Rate,4 yr rate,Asian,100,73,73,100,0
+2025,Division,2,Albemarle County,On-Time Graduation Rate,4 yr rate,"Black, not of Hispanic origin",94.49,127,120,96.06,3.94
+2025,Division,2,Albemarle County,On-Time Graduation Rate,4 yr rate,Hispanic,82.61,207,171,83.09,16.91
+2025,Division,2,Albemarle County,On-Time Graduation Rate,4 yr rate,Native Hawaiian  or Pacific Islander,NA,NA,NA,NA,NA
+2025,Division,2,Albemarle County,On-Time Graduation Rate,4 yr rate,"Non-Hispanic, two or more races",95.38,65,62,95.38,3.08
+2025,Division,2,Albemarle County,On-Time Graduation Rate,4 yr rate,"White, not of Hispanic origin",96.36,687,662,96.94,2.47
+2025,Division,104,Charlottesville City,On-Time Graduation Rate,4 yr rate,Asian,85,20,17,85,10
+2025,Division,104,Charlottesville City,On-Time Graduation Rate,4 yr rate,"Black, not of Hispanic origin",88.89,90,80,90,8.89
+2025,Division,104,Charlottesville City,On-Time Graduation Rate,4 yr rate,Hispanic,66.04,53,35,67.92,24.53
+2025,Division,104,Charlottesville City,On-Time Graduation Rate,4 yr rate,"Non-Hispanic, two or more races",86.21,29,25,86.21,6.9
+2025,Division,104,Charlottesville City,On-Time Graduation Rate,4 yr rate,"White, not of Hispanic origin",93.75,144,135,95.14,3.47
+2025,State,0,Virginia,On-Time Graduation Rate,4 yr rate,American Indian or Alaska Native,90.22,276,249,90.94,7.25
+2025,State,0,Virginia,On-Time Graduation Rate,4 yr rate,Asian,97.82,8012,7837,98.1,1.45
+2025,State,0,Virginia,On-Time Graduation Rate,4 yr rate,"Black, not of Hispanic origin",91.7,21811,20000,92.7,4.88
+2025,State,0,Virginia,On-Time Graduation Rate,4 yr rate,Hispanic,85,20983,17835,86.19,12.48
+2025,State,0,Virginia,On-Time Graduation Rate,4 yr rate,Native Hawaiian  or Pacific Islander,93.04,158,147,93.67,4.43
+2025,State,0,Virginia,On-Time Graduation Rate,4 yr rate,"Non-Hispanic, two or more races",94.82,6008,5697,96.22,2.85
+2025,State,0,Virginia,On-Time Graduation Rate,4 yr rate,"White, not of Hispanic origin",95.59,45299,43301,96.62,2.65
+2010,Division,2,Albemarle County,On-Time Graduation Rate,4 yr rate,Economically Disadvantaged,85.53,152,130,88.16,8.55
+2010,Division,104,Charlottesville City,On-Time Graduation Rate,4 yr rate,Economically Disadvantaged,72.93,133,97,83.46,10.53
+2010,State,0,Virginia,On-Time Graduation Rate,4 yr rate,Economically Disadvantaged,78.26,26311,20588,83.83,11.46
+2011,Division,2,Albemarle County,On-Time Graduation Rate,4 yr rate,Economically Disadvantaged,86.06,208,179,88.46,6.25
+2011,Division,104,Charlottesville City,On-Time Graduation Rate,4 yr rate,Economically Disadvantaged,89.06,128,114,91.41,2.34
+2011,State,0,Virginia,On-Time Graduation Rate,4 yr rate,Economically Disadvantaged,79.98,28926,23133,84.85,10.31
+2012,Division,2,Albemarle County,On-Time Graduation Rate,4 yr rate,Economically Disadvantaged,87.35,166,145,89.16,8.43
+2012,Division,104,Charlottesville City,On-Time Graduation Rate,4 yr rate,Economically Disadvantaged,82.76,145,120,87.59,4.83
+2012,State,0,Virginia,On-Time Graduation Rate,4 yr rate,Economically Disadvantaged,81.74,30172,24664,86.06,9.96
+2013,Division,2,Albemarle County,On-Time Graduation Rate,4 yr rate,Economically Disadvantaged,88.38,198,175,92.42,6.57
+2013,Division,104,Charlottesville City,On-Time Graduation Rate,4 yr rate,Economically Disadvantaged,77.54,138,107,83.33,10.87
+2013,State,0,Virginia,On-Time Graduation Rate,4 yr rate,Economically Disadvantaged,83.12,30183,25087,87.12,9.09
+2014,Division,2,Albemarle County,On-Time Graduation Rate,4 yr rate,Economically Disadvantaged,88.06,201,177,92.54,4.98
+2014,Division,104,Charlottesville City,On-Time Graduation Rate,4 yr rate,Economically Disadvantaged,85.5,131,112,87.02,8.4
+2014,State,0,Virginia,On-Time Graduation Rate,4 yr rate,Economically Disadvantaged,84.37,30102,25395,87.95,8.04
+2015,Division,2,Albemarle County,On-Time Graduation Rate,4 yr rate,Economically Disadvantaged,87.02,208,181,90.38,4.81
+2015,Division,104,Charlottesville City,On-Time Graduation Rate,4 yr rate,Economically Disadvantaged,75.33,150,113,77.33,16
+2015,State,0,Virginia,On-Time Graduation Rate,4 yr rate,Economically Disadvantaged,85.11,29181,24834,87.75,7.73
+2016,Division,2,Albemarle County,On-Time Graduation Rate,4 yr rate,Economically Disadvantaged,88.72,195,173,89.74,6.67
+2016,Division,104,Charlottesville City,On-Time Graduation Rate,4 yr rate,Economically Disadvantaged,82.07,145,119,83.45,12.41
+2016,State,0,Virginia,On-Time Graduation Rate,4 yr rate,Economically Disadvantaged,87.62,29646,25976,89.08,7.15
+2017,Division,2,Albemarle County,On-Time Graduation Rate,4 yr rate,Economically Disadvantaged,88.02,242,213,91.32,6.2
+2017,Division,104,Charlottesville City,On-Time Graduation Rate,4 yr rate,Economically Disadvantaged,80.89,157,127,84.08,11.46
+2017,State,0,Virginia,On-Time Graduation Rate,4 yr rate,Economically Disadvantaged,86.56,31155,26967,88.24,8.41
+2018,Division,2,Albemarle County,On-Time Graduation Rate,4 yr rate,Economically Disadvantaged,84.25,273,230,85.35,10.62
+2018,Division,104,Charlottesville City,On-Time Graduation Rate,4 yr rate,Economically Disadvantaged,85.48,124,106,88.71,9.68
+2018,State,0,Virginia,On-Time Graduation Rate,4 yr rate,Economically Disadvantaged,87.67,33889,29711,89.28,7.76
+2019,Division,2,Albemarle County,On-Time Graduation Rate,4 yr rate,Economically Disadvantaged,88.46,260,230,89.23,8.46
+2019,Division,104,Charlottesville City,On-Time Graduation Rate,4 yr rate,Economically Disadvantaged,94.17,120,113,94.17,3.33
+2019,State,0,Virginia,On-Time Graduation Rate,4 yr rate,Economically Disadvantaged,87.22,34969,30501,89.06,8.13
+2020,Division,2,Albemarle County,On-Time Graduation Rate,4 yr rate,Economically Disadvantaged,88.69,283,251,89.75,6.71
+2020,Division,104,Charlottesville City,On-Time Graduation Rate,4 yr rate,Economically Disadvantaged,92.59,135,125,92.59,3.7
+2020,State,0,Virginia,On-Time Graduation Rate,4 yr rate,Economically Disadvantaged,89.17,36532,32576,90.65,6.82
+2021,Division,2,Albemarle County,On-Time Graduation Rate,4 yr rate,Economically Disadvantaged,91.59,309,283,91.91,6.8
+2021,Division,104,Charlottesville City,On-Time Graduation Rate,4 yr rate,Economically Disadvantaged,96.45,141,136,96.45,1.42
+2021,State,0,Virginia,On-Time Graduation Rate,4 yr rate,Economically Disadvantaged,89.28,36224,32340,90.41,5.98
+2022,Division,2,Albemarle County,On-Time Graduation Rate,4 yr rate,Economically Disadvantaged,89.27,261,233,89.27,6.9
+2022,Division,104,Charlottesville City,On-Time Graduation Rate,4 yr rate,Economically Disadvantaged,89.63,135,121,89.63,5.93
+2022,State,0,Virginia,On-Time Graduation Rate,4 yr rate,Economically Disadvantaged,87.74,37322,32748,89.13,7.66
+2023,Division,2,Albemarle County,On-Time Graduation Rate,4 yr rate,Economically Disadvantaged,89.97,299,269,90.97,8.03
+2023,Division,104,Charlottesville City,On-Time Graduation Rate,4 yr rate,Economically Disadvantaged,88.89,135,120,89.63,6.67
+2023,State,0,Virginia,On-Time Graduation Rate,4 yr rate,Economically Disadvantaged,87.84,38024,33402,89.37,7.64
+2024,Division,2,Albemarle County,On-Time Graduation Rate,4 yr rate,Economically Disadvantaged,88.92,325,289,89.54,8.31
+2024,Division,104,Charlottesville City,On-Time Graduation Rate,4 yr rate,Economically Disadvantaged,84.08,157,132,86.62,3.82
+2024,State,0,Virginia,On-Time Graduation Rate,4 yr rate,Economically Disadvantaged,89.63,39067,35015,91.16,6.01
+2025,Division,2,Albemarle County,On-Time Graduation Rate,4 yr rate,Economically Disadvantaged,88.45,329,291,89.97,9.42
+2025,Division,104,Charlottesville City,On-Time Graduation Rate,4 yr rate,Economically Disadvantaged,86.08,158,136,87.34,7.59
+2025,State,0,Virginia,On-Time Graduation Rate,4 yr rate,Economically Disadvantaged,89.58,39115,35039,91.15,6.68

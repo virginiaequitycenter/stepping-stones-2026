@@ -1,0 +1,181 @@
+year,locality,fips,group,count,percent,total_children_in_care
+2021,Albemarle,51003,All Children In Care,108,100,108
+2021,Albemarle,51003,Male,52,48.15,108
+2021,Albemarle,51003,Female,56,51.85,108
+2021,Albemarle,51003,Gender Unknown,0,0,108
+2021,Albemarle,51003,Black,42,38.89,108
+2021,Albemarle,51003,White,59,54.63,108
+2021,Albemarle,51003,Am Indian Alaskan Native,1,0.93,108
+2021,Albemarle,51003,Asian,0,0,108
+2021,Albemarle,51003,Hawaiian Pacific Islander,0,0,108
+2021,Albemarle,51003,Multi-Race,5,4.63,108
+2021,Albemarle,51003,Race Unknown,0,0,108
+2021,Albemarle,51003,Hispanic,20,18.52,108
+2021,Charlottesville,51540,All Children In Care,76,100,76
+2021,Charlottesville,51540,Male,39,51.32,76
+2021,Charlottesville,51540,Female,37,48.68,76
+2021,Charlottesville,51540,Gender Unknown,0,0,76
+2021,Charlottesville,51540,Black,44,57.89,76
+2021,Charlottesville,51540,White,16,21.05,76
+2021,Charlottesville,51540,Am Indian Alaskan Native,0,0,76
+2021,Charlottesville,51540,Asian,4,5.26,76
+2021,Charlottesville,51540,Hawaiian Pacific Islander,0,0,76
+2021,Charlottesville,51540,Multi-Race,11,14.47,76
+2021,Charlottesville,51540,Race Unknown,0,0,76
+2021,Charlottesville,51540,Hispanic,10,13.16,76
+2021,Virginia,51,All Children In Care,5288,100,5288
+2021,Virginia,51,Male,2711,51.27,5288
+2021,Virginia,51,Female,2577,48.73,5288
+2021,Virginia,51,Gender Unknown,0,0,5288
+2021,Virginia,51,Black,1495,28.27,5288
+2021,Virginia,51,White,3116,58.93,5288
+2021,Virginia,51,Am Indian Alaskan Native,11,0.21,5288
+2021,Virginia,51,Asian,49,0.93,5288
+2021,Virginia,51,Hawaiian Pacific Islander,6,0.11,5288
+2021,Virginia,51,Multi-Race,505,9.55,5288
+2021,Virginia,51,Race Unknown,0,0,5288
+2021,Virginia,51,Hispanic,590,11.16,5288
+2022,Albemarle,51003,All Children In Care,101,100,101
+2022,Albemarle,51003,Male,49,48.51,101
+2022,Albemarle,51003,Female,52,51.49,101
+2022,Albemarle,51003,Gender Unknown,0,0,101
+2022,Albemarle,51003,Black,30,29.7,101
+2022,Albemarle,51003,White,63,62.38,101
+2022,Albemarle,51003,Am Indian Alaskan Native,0,0,101
+2022,Albemarle,51003,Asian,0,0,101
+2022,Albemarle,51003,Hawaiian Pacific Islander,0,0,101
+2022,Albemarle,51003,Multi-Race,7,6.93,101
+2022,Albemarle,51003,Race Unknown,0,0,101
+2022,Albemarle,51003,Hispanic,21,20.79,101
+2022,Charlottesville,51540,All Children In Care,57,100,57
+2022,Charlottesville,51540,Male,27,47.37,57
+2022,Charlottesville,51540,Female,30,52.63,57
+2022,Charlottesville,51540,Gender Unknown,0,0,57
+2022,Charlottesville,51540,Black,26,45.61,57
+2022,Charlottesville,51540,White,20,35.09,57
+2022,Charlottesville,51540,Am Indian Alaskan Native,0,0,57
+2022,Charlottesville,51540,Asian,3,5.26,57
+2022,Charlottesville,51540,Hawaiian Pacific Islander,0,0,57
+2022,Charlottesville,51540,Multi-Race,8,14.04,57
+2022,Charlottesville,51540,Race Unknown,0,0,57
+2022,Charlottesville,51540,Hispanic,8,14.04,57
+2022,Virginia,51,All Children In Care,5076,100,5076
+2022,Virginia,51,Male,2631,51.83,5076
+2022,Virginia,51,Female,2445,48.17,5076
+2022,Virginia,51,Gender Unknown,0,0,5076
+2022,Virginia,51,Black,1405,27.68,5076
+2022,Virginia,51,White,2998,59.06,5076
+2022,Virginia,51,Am Indian Alaskan Native,6,0.12,5076
+2022,Virginia,51,Asian,53,1.04,5076
+2022,Virginia,51,Hawaiian Pacific Islander,11,0.22,5076
+2022,Virginia,51,Multi-Race,496,9.77,5076
+2022,Virginia,51,Race Unknown,0,0,5076
+2022,Virginia,51,Hispanic,545,10.74,5076
+2023,Albemarle,51003,All Children In Care,96,100,96
+2023,Albemarle,51003,Male,43,44.79,96
+2023,Albemarle,51003,Female,53,55.21,96
+2023,Albemarle,51003,Gender Unknown,0,0,96
+2023,Albemarle,51003,Black,26,27.08,96
+2023,Albemarle,51003,White,54,56.25,96
+2023,Albemarle,51003,Am Indian Alaskan Native,0,0,96
+2023,Albemarle,51003,Asian,0,0,96
+2023,Albemarle,51003,Hawaiian Pacific Islander,0,0,96
+2023,Albemarle,51003,Multi-Race,14,14.58,96
+2023,Albemarle,51003,Race Unknown,0,0,96
+2023,Albemarle,51003,Hispanic,21,21.88,96
+2023,Charlottesville,51540,All Children In Care,49,100,49
+2023,Charlottesville,51540,Male,24,48.98,49
+2023,Charlottesville,51540,Female,25,51.02,49
+2023,Charlottesville,51540,Gender Unknown,0,0,49
+2023,Charlottesville,51540,Black,22,44.9,49
+2023,Charlottesville,51540,White,19,38.78,49
+2023,Charlottesville,51540,Am Indian Alaskan Native,0,0,49
+2023,Charlottesville,51540,Asian,2,4.08,49
+2023,Charlottesville,51540,Hawaiian Pacific Islander,0,0,49
+2023,Charlottesville,51540,Multi-Race,6,12.24,49
+2023,Charlottesville,51540,Race Unknown,0,0,49
+2023,Charlottesville,51540,Hispanic,8,16.33,49
+2023,Virginia,51,All Children In Care,5013,100,5013
+2023,Virginia,51,Male,2553,50.93,5013
+2023,Virginia,51,Female,2460,49.07,5013
+2023,Virginia,51,Gender Unknown,0,0,5013
+2023,Virginia,51,Black,1417,28.27,5013
+2023,Virginia,51,White,2928,58.41,5013
+2023,Virginia,51,Am Indian Alaskan Native,1,0.02,5013
+2023,Virginia,51,Asian,49,0.98,5013
+2023,Virginia,51,Hawaiian Pacific Islander,10,0.2,5013
+2023,Virginia,51,Multi-Race,529,10.55,5013
+2023,Virginia,51,Race Unknown,0,0,5013
+2023,Virginia,51,Hispanic,595,11.87,5013
+2024,Albemarle,51003,All Children In Care,88,100,88
+2024,Albemarle,51003,Male,43,48.86,88
+2024,Albemarle,51003,Female,45,51.14,88
+2024,Albemarle,51003,Gender Unknown,0,0,88
+2024,Albemarle,51003,Black,18,20.45,88
+2024,Albemarle,51003,White,59,67.05,88
+2024,Albemarle,51003,Am Indian Alaskan Native,0,0,88
+2024,Albemarle,51003,Asian,0,0,88
+2024,Albemarle,51003,Hawaiian Pacific Islander,0,0,88
+2024,Albemarle,51003,Multi-Race,9,10.23,88
+2024,Albemarle,51003,Race Unknown,0,0,88
+2024,Albemarle,51003,Hispanic,21,23.86,88
+2024,Charlottesville,51540,All Children In Care,78,100,78
+2024,Charlottesville,51540,Male,32,41.03,78
+2024,Charlottesville,51540,Female,46,58.97,78
+2024,Charlottesville,51540,Gender Unknown,0,0,78
+2024,Charlottesville,51540,Black,37,47.44,78
+2024,Charlottesville,51540,White,18,23.08,78
+2024,Charlottesville,51540,Am Indian Alaskan Native,0,0,78
+2024,Charlottesville,51540,Asian,2,2.56,78
+2024,Charlottesville,51540,Hawaiian Pacific Islander,0,0,78
+2024,Charlottesville,51540,Multi-Race,21,26.92,78
+2024,Charlottesville,51540,Race Unknown,0,0,78
+2024,Charlottesville,51540,Hispanic,9,11.54,78
+2024,Virginia,51,All Children In Care,5362,100,5362
+2024,Virginia,51,Male,2703,50.41,5362
+2024,Virginia,51,Female,2659,49.59,5362
+2024,Virginia,51,Gender Unknown,0,0,5362
+2024,Virginia,51,Black,1554,28.98,5362
+2024,Virginia,51,White,3081,57.46,5362
+2024,Virginia,51,Am Indian Alaskan Native,6,0.11,5362
+2024,Virginia,51,Asian,51,0.95,5362
+2024,Virginia,51,Hawaiian Pacific Islander,8,0.15,5362
+2024,Virginia,51,Multi-Race,562,10.48,5362
+2024,Virginia,51,Race Unknown,0,0,5362
+2024,Virginia,51,Hispanic,634,11.82,5362
+2025,Albemarle,51003,All Children In Care,96,100,96
+2025,Albemarle,51003,Male,42,43.75,96
+2025,Albemarle,51003,Female,54,56.25,96
+2025,Albemarle,51003,Gender Unknown,0,0,96
+2025,Albemarle,51003,Black,26,27.08,96
+2025,Albemarle,51003,White,60,62.5,96
+2025,Albemarle,51003,Am Indian Alaskan Native,0,0,96
+2025,Albemarle,51003,Asian,0,0,96
+2025,Albemarle,51003,Hawaiian Pacific Islander,0,0,96
+2025,Albemarle,51003,Multi-Race,9,9.38,96
+2025,Albemarle,51003,Race Unknown,1,1.04,96
+2025,Albemarle,51003,Hispanic,15,15.62,96
+2025,Charlottesville,51540,All Children In Care,108,100,108
+2025,Charlottesville,51540,Male,48,44.44,108
+2025,Charlottesville,51540,Female,60,55.56,108
+2025,Charlottesville,51540,Gender Unknown,0,0,108
+2025,Charlottesville,51540,Black,58,53.7,108
+2025,Charlottesville,51540,White,28,25.93,108
+2025,Charlottesville,51540,Am Indian Alaskan Native,0,0,108
+2025,Charlottesville,51540,Asian,1,0.93,108
+2025,Charlottesville,51540,Hawaiian Pacific Islander,0,0,108
+2025,Charlottesville,51540,Multi-Race,21,19.44,108
+2025,Charlottesville,51540,Race Unknown,0,0,108
+2025,Charlottesville,51540,Hispanic,11,10.19,108
+2025,Virginia,51,All Children In Care,5715,100,5715
+2025,Virginia,51,Male,2818,49.31,5715
+2025,Virginia,51,Female,2897,50.69,5715
+2025,Virginia,51,Gender Unknown,0,0,5715
+2025,Virginia,51,Black,1764,30.87,5715
+2025,Virginia,51,White,3204,56.06,5715
+2025,Virginia,51,Am Indian Alaskan Native,3,0.05,5715
+2025,Virginia,51,Asian,54,0.94,5715
+2025,Virginia,51,Hawaiian Pacific Islander,10,0.17,5715
+2025,Virginia,51,Multi-Race,581,10.17,5715
+2025,Virginia,51,Race Unknown,99,1.73,5715
+2025,Virginia,51,Hispanic,682,11.93,5715

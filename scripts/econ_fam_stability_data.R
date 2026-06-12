@@ -8,6 +8,9 @@
 #   - Source: VDSS PowerBI dashboard (2021-2024) https://cpsaccountability.dss.virginia.gov/index-social-services.html
 # - Children in Foster Care
 #   - Source: VDSS (2020-2025) https://www.dss.virginia.gov/geninfo/reports/children/fc.cgi
+#   - For future reference, website updated: 
+        # Source: 2024-2025: https://www.dss.virginia.gov/research-and-planning/reports-data/fc-data-reports/
+        # Source: 2021-2023: https://www.dss.virginia.gov/archives/research-and-planning-archives/
 # - McKinney-Vento
 #   - Source: Ed Data Express https://eddataexpress.ed.gov/download/data-library?field_year_target_id=All&field_population_value=&field_data_topic_target_id=All&field_reporting_level_target_id=All&field_program_target_id=42&field_file_spec_target_id=All&field_data_group_id_target_id=All&combine=
 #   - This data source was not updated since retrieving data for the 2025 Community Well-being Profiles
@@ -125,6 +128,9 @@ write_csv(child_welfare_data, "data/child_welfare_cases.csv")
 ## .......................................................
 # Children in Foster Care ----
 # Source: VDSS (2020-2025) https://www.dss.virginia.gov/geninfo/reports/children/fc.cgi
+# For future reference, website updated: 
+# Source: 2024-2025: https://www.dss.virginia.gov/research-and-planning/reports-data/fc-data-reports/
+# Source: 2021-2023: https://www.dss.virginia.gov/archives/research-and-planning-archives/
 
 # Create vector of urls 
 ## choose september report for each year (manually copy-paste)

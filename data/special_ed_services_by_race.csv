@@ -1,0 +1,290 @@
+school_year,level,division_name,race,sped_race_count,sped_total_count,total_byrace,total_students,sped_percent_byrace,sped_percent_byallsped
+2010-2011,Division,Albemarle County,American Indian or Alaska Native,10,1508,42,13221,23.81,0.66
+2010-2011,Division,Albemarle County,Asian,27,1508,558,13221,4.84,1.79
+2010-2011,Division,Albemarle County,"Black, not of Hispanic origin",283,1508,1549,13221,18.27,18.77
+2010-2011,Division,Albemarle County,Hispanic,108,1508,1154,13221,9.36,7.16
+2010-2011,Division,Albemarle County,Native Hawaiian  or Pacific Islander,NA,1508,13,13221,NA,NA
+2010-2011,Division,Albemarle County,"Non-Hispanic, two or more races",68,1508,630,13221,10.79,4.51
+2010-2011,Division,Albemarle County,"White, not of Hispanic origin",1010,1508,9275,13221,10.89,66.98
+2010-2011,Division,Charlottesville City,American Indian or Alaska Native,NA,596,4,4030,NA,NA
+2010-2011,Division,Charlottesville City,Asian,11,596,186,4030,5.91,1.85
+2010-2011,Division,Charlottesville City,"Black, not of Hispanic origin",368,596,1696,4030,21.7,61.74
+2010-2011,Division,Charlottesville City,Hispanic,37,596,300,4030,12.33,6.21
+2010-2011,Division,Charlottesville City,"Non-Hispanic, two or more races",19,596,151,4030,12.58,3.19
+2010-2011,Division,Charlottesville City,"White, not of Hispanic origin",160,596,1691,4030,9.46,26.85
+2010-2011,State,Virginia,American Indian or Alaska Native,657,163506,4254,1252266,15.44,0.4
+2010-2011,State,Virginia,Asian,5015,163506,73236,1252266,6.85,3.07
+2010-2011,State,Virginia,"Black, not of Hispanic origin",47770,163506,301192,1252266,15.86,29.22
+2010-2011,State,Virginia,Hispanic,18286,163506,142655,1252266,12.82,11.18
+2010-2011,State,Virginia,Native Hawaiian  or Pacific Islander,193,163506,1713,1252266,11.27,0.12
+2010-2011,State,Virginia,"Non-Hispanic, two or more races",5665,163506,51190,1252266,11.07,3.46
+2010-2011,State,Virginia,"White, not of Hispanic origin",85920,163506,678026,1252266,12.67,52.55
+2011-2012,Division,Albemarle County,American Indian or Alaska Native,NA,1449,43,13113,NA,NA
+2011-2012,Division,Albemarle County,Asian,34,1449,594,13113,5.72,2.35
+2011-2012,Division,Albemarle County,"Black, not of Hispanic origin",275,1449,1499,13113,18.35,18.98
+2011-2012,Division,Albemarle County,Hispanic,119,1449,1182,13113,10.07,8.21
+2011-2012,Division,Albemarle County,Native Hawaiian  or Pacific Islander,NA,1449,9,13113,NA,NA
+2011-2012,Division,Albemarle County,"Non-Hispanic, two or more races",82,1449,654,13113,12.54,5.66
+2011-2012,Division,Albemarle County,"White, not of Hispanic origin",931,1449,9132,13113,10.19,64.25
+2011-2012,Division,Charlottesville City,American Indian or Alaska Native,NA,608,9,4175,NA,NA
+2011-2012,Division,Charlottesville City,Asian,11,608,239,4175,4.6,1.81
+2011-2012,Division,Charlottesville City,"Black, not of Hispanic origin",366,608,1667,4175,21.96,60.2
+2011-2012,Division,Charlottesville City,Hispanic,40,608,324,4175,12.35,6.58
+2011-2012,Division,Charlottesville City,Native Hawaiian  or Pacific Islander,NA,608,1,4175,NA,NA
+2011-2012,Division,Charlottesville City,"Non-Hispanic, two or more races",27,608,190,4175,14.21,4.44
+2011-2012,Division,Charlottesville City,"White, not of Hispanic origin",162,608,1745,4175,9.28,26.64
+2011-2012,State,Virginia,American Indian or Alaska Native,566,162651,4138,1258896,13.68,0.35
+2011-2012,State,Virginia,Asian,5103,162651,75860,1258896,6.73,3.14
+2011-2012,State,Virginia,"Black, not of Hispanic origin",46946,162651,298749,1258896,15.71,28.86
+2011-2012,State,Virginia,Hispanic,19409,162651,149464,1258896,12.99,11.93
+2011-2012,State,Virginia,Native Hawaiian  or Pacific Islander,177,162651,1763,1258896,10.04,0.11
+2011-2012,State,Virginia,"Non-Hispanic, two or more races",6251,162651,54602,1258896,11.45,3.84
+2011-2012,State,Virginia,"White, not of Hispanic origin",84199,162651,674320,1258896,12.49,51.77
+2012-2013,Division,Albemarle County,American Indian or Alaska Native,NA,1438,33,13277,NA,NA
+2012-2013,Division,Albemarle County,Asian,34,1438,602,13277,5.65,2.36
+2012-2013,Division,Albemarle County,"Black, not of Hispanic origin",271,1438,1460,13277,18.56,18.85
+2012-2013,Division,Albemarle County,Hispanic,125,1438,1245,13277,10.04,8.69
+2012-2013,Division,Albemarle County,Native Hawaiian  or Pacific Islander,NA,1438,5,13277,NA,NA
+2012-2013,Division,Albemarle County,"Non-Hispanic, two or more races",76,1438,680,13277,11.18,5.29
+2012-2013,Division,Albemarle County,"White, not of Hispanic origin",925,1438,9252,13277,10,64.33
+2012-2013,Division,Charlottesville City,American Indian or Alaska Native,NA,616,9,4236,NA,NA
+2012-2013,Division,Charlottesville City,Asian,19,616,275,4236,6.91,3.08
+2012-2013,Division,Charlottesville City,"Black, not of Hispanic origin",356,616,1622,4236,21.95,57.79
+2012-2013,Division,Charlottesville City,Hispanic,42,616,370,4236,11.35,6.82
+2012-2013,Division,Charlottesville City,"Non-Hispanic, two or more races",33,616,208,4236,15.87,5.36
+2012-2013,Division,Charlottesville City,"White, not of Hispanic origin",165,616,1751,4236,9.42,26.79
+2012-2013,State,Virginia,American Indian or Alaska Native,546,162614,4045,1265277,13.5,0.34
+2012-2013,State,Virginia,Asian,5238,162614,77997,1265277,6.72,3.22
+2012-2013,State,Virginia,"Black, not of Hispanic origin",46658,162614,296704,1265277,15.73,28.69
+2012-2013,State,Virginia,Hispanic,20441,162614,157744,1265277,12.96,12.57
+2012-2013,State,Virginia,Native Hawaiian  or Pacific Islander,180,162614,1830,1265277,9.84,0.11
+2012-2013,State,Virginia,"Non-Hispanic, two or more races",6552,162614,57382,1265277,11.42,4.03
+2012-2013,State,Virginia,"White, not of Hispanic origin",82999,162614,669575,1265277,12.4,51.04
+2013-2014,Division,Albemarle County,American Indian or Alaska Native,NA,1460,39,13432,NA,NA
+2013-2014,Division,Albemarle County,Asian,37,1460,643,13432,5.75,2.53
+2013-2014,Division,Albemarle County,"Black, not of Hispanic origin",289,1460,1538,13432,18.79,19.79
+2013-2014,Division,Albemarle County,Hispanic,150,1460,1357,13432,11.05,10.27
+2013-2014,Division,Albemarle County,Native Hawaiian  or Pacific Islander,NA,1460,7,13432,NA,NA
+2013-2014,Division,Albemarle County,"Non-Hispanic, two or more races",80,1460,700,13432,11.43,5.48
+2013-2014,Division,Albemarle County,"White, not of Hispanic origin",897,1460,9148,13432,9.81,61.44
+2013-2014,Division,Charlottesville City,American Indian or Alaska Native,NA,608,10,4340,NA,NA
+2013-2014,Division,Charlottesville City,Asian,19,608,291,4340,6.53,3.12
+2013-2014,Division,Charlottesville City,"Black, not of Hispanic origin",348,608,1617,4340,21.52,57.24
+2013-2014,Division,Charlottesville City,Hispanic,47,608,420,4340,11.19,7.73
+2013-2014,Division,Charlottesville City,"Non-Hispanic, two or more races",38,608,233,4340,16.31,6.25
+2013-2014,Division,Charlottesville City,"White, not of Hispanic origin",154,608,1768,4340,8.71,25.33
+2013-2014,State,Virginia,American Indian or Alaska Native,542,162184,4049,1273532,13.39,0.33
+2013-2014,State,Virginia,Asian,5401,162184,80703,1273532,6.69,3.33
+2013-2014,State,Virginia,"Black, not of Hispanic origin",45729,162184,295954,1273532,15.45,28.2
+2013-2014,State,Virginia,Hispanic,21557,162184,166299,1273532,12.96,13.29
+2013-2014,State,Virginia,Native Hawaiian  or Pacific Islander,171,162184,1821,1273532,9.39,0.11
+2013-2014,State,Virginia,"Non-Hispanic, two or more races",7068,162184,60078,1273532,11.76,4.36
+2013-2014,State,Virginia,"White, not of Hispanic origin",81716,162184,664628,1273532,12.29,50.38
+2014-2015,Division,Albemarle County,American Indian or Alaska Native,NA,1490,30,13689,NA,NA
+2014-2015,Division,Albemarle County,Asian,32,1490,669,13689,4.78,2.15
+2014-2015,Division,Albemarle County,"Black, not of Hispanic origin",282,1490,1505,13689,18.74,18.93
+2014-2015,Division,Albemarle County,Hispanic,166,1490,1458,13689,11.39,11.14
+2014-2015,Division,Albemarle County,Native Hawaiian  or Pacific Islander,NA,1490,9,13689,NA,NA
+2014-2015,Division,Albemarle County,"Non-Hispanic, two or more races",80,1490,751,13689,10.65,5.37
+2014-2015,Division,Albemarle County,"White, not of Hispanic origin",922,1490,9267,13689,9.95,61.88
+2014-2015,Division,Charlottesville City,American Indian or Alaska Native,NA,595,9,4356,NA,NA
+2014-2015,Division,Charlottesville City,Asian,15,595,283,4356,5.3,2.52
+2014-2015,Division,Charlottesville City,"Black, not of Hispanic origin",340,595,1630,4356,20.86,57.14
+2014-2015,Division,Charlottesville City,Hispanic,50,595,455,4356,10.99,8.4
+2014-2015,Division,Charlottesville City,"Non-Hispanic, two or more races",39,595,265,4356,14.72,6.55
+2014-2015,Division,Charlottesville City,"White, not of Hispanic origin",149,595,1713,4356,8.7,25.04
+2014-2015,State,Virginia,American Indian or Alaska Native,505,163267,3933,1280370,12.84,0.31
+2014-2015,State,Virginia,Asian,5660,163267,82785,1280370,6.84,3.47
+2014-2015,State,Virginia,"Black, not of Hispanic origin",45408,163267,294639,1280370,15.41,27.81
+2014-2015,State,Virginia,Hispanic,22506,163267,177306,1280370,12.69,13.78
+2014-2015,State,Virginia,Native Hawaiian  or Pacific Islander,193,163267,1922,1280370,10.04,0.12
+2014-2015,State,Virginia,"Non-Hispanic, two or more races",7530,163267,63046,1280370,11.94,4.61
+2014-2015,State,Virginia,"White, not of Hispanic origin",81465,163267,656739,1280370,12.4,49.9
+2015-2016,Division,Albemarle County,American Indian or Alaska Native,11,1572,29,13772,37.93,0.7
+2015-2016,Division,Albemarle County,Asian,42,1572,649,13772,6.47,2.67
+2015-2016,Division,Albemarle County,"Black, not of Hispanic origin",320,1572,1560,13772,20.51,20.36
+2015-2016,Division,Albemarle County,Hispanic,191,1572,1612,13772,11.85,12.15
+2015-2016,Division,Albemarle County,Native Hawaiian  or Pacific Islander,NA,1572,11,13772,NA,NA
+2015-2016,Division,Albemarle County,"Non-Hispanic, two or more races",73,1572,765,13772,9.54,4.64
+2015-2016,Division,Albemarle County,"White, not of Hispanic origin",934,1572,9146,13772,10.21,59.41
+2015-2016,Division,Charlottesville City,American Indian or Alaska Native,NA,585,9,4382,NA,NA
+2015-2016,Division,Charlottesville City,Asian,14,585,283,4382,4.95,2.39
+2015-2016,Division,Charlottesville City,"Black, not of Hispanic origin",322,585,1588,4382,20.28,55.04
+2015-2016,Division,Charlottesville City,Hispanic,57,585,475,4382,12,9.74
+2015-2016,Division,Charlottesville City,"Non-Hispanic, two or more races",50,585,283,4382,17.67,8.55
+2015-2016,Division,Charlottesville City,"White, not of Hispanic origin",140,585,1743,4382,8.03,23.93
+2015-2016,State,Virginia,American Indian or Alaska Native,497,165776,3702,1284114,13.43,0.3
+2015-2016,State,Virginia,Asian,5899,165776,85329,1284114,6.91,3.56
+2015-2016,State,Virginia,"Black, not of Hispanic origin",45578,165776,293973,1284114,15.5,27.49
+2015-2016,State,Virginia,Hispanic,23503,165776,184801,1284114,12.72,14.18
+2015-2016,State,Virginia,Native Hawaiian  or Pacific Islander,206,165776,1983,1284114,10.39,0.12
+2015-2016,State,Virginia,"Non-Hispanic, two or more races",8025,165776,65748,1284114,12.21,4.84
+2015-2016,State,Virginia,"White, not of Hispanic origin",82068,165776,648578,1284114,12.65,49.51
+2016-2017,Division,Albemarle County,American Indian or Alaska Native,NA,1675,28,13818,NA,NA
+2016-2017,Division,Albemarle County,Asian,53,1675,690,13818,7.68,3.16
+2016-2017,Division,Albemarle County,"Black, not of Hispanic origin",337,1675,1554,13818,21.69,20.12
+2016-2017,Division,Albemarle County,Hispanic,224,1675,1725,13818,12.99,13.37
+2016-2017,Division,Albemarle County,Native Hawaiian  or Pacific Islander,NA,1675,15,13818,NA,NA
+2016-2017,Division,Albemarle County,"Non-Hispanic, two or more races",84,1675,786,13818,10.69,5.01
+2016-2017,Division,Albemarle County,"White, not of Hispanic origin",968,1675,9020,13818,10.73,57.79
+2016-2017,Division,Charlottesville City,American Indian or Alaska Native,NA,583,8,4478,NA,NA
+2016-2017,Division,Charlottesville City,Asian,15,583,286,4478,5.24,2.57
+2016-2017,Division,Charlottesville City,"Black, not of Hispanic origin",322,583,1600,4478,20.12,55.23
+2016-2017,Division,Charlottesville City,Hispanic,62,583,545,4478,11.38,10.63
+2016-2017,Division,Charlottesville City,"Non-Hispanic, two or more races",36,583,272,4478,13.24,6.17
+2016-2017,Division,Charlottesville City,"White, not of Hispanic origin",147,583,1766,4478,8.32,25.21
+2016-2017,State,Virginia,American Indian or Alaska Native,503,168941,3586,1288033,14.03,0.3
+2016-2017,State,Virginia,Asian,6120,168941,87654,1288033,6.98,3.62
+2016-2017,State,Virginia,"Black, not of Hispanic origin",45744,168941,291008,1288033,15.72,27.08
+2016-2017,State,Virginia,Hispanic,24746,168941,194647,1288033,12.71,14.65
+2016-2017,State,Virginia,Native Hawaiian  or Pacific Islander,207,168941,1974,1288033,10.49,0.12
+2016-2017,State,Virginia,"Non-Hispanic, two or more races",8579,168941,68836,1288033,12.46,5.08
+2016-2017,State,Virginia,"White, not of Hispanic origin",83042,168941,640328,1288033,12.97,49.15
+2017-2018,Division,Albemarle County,American Indian or Alaska Native,NA,1772,18,13937,NA,NA
+2017-2018,Division,Albemarle County,Asian,51,1772,715,13937,7.13,2.88
+2017-2018,Division,Albemarle County,"Black, not of Hispanic origin",339,1772,1461,13937,23.2,19.13
+2017-2018,Division,Albemarle County,Hispanic,261,1772,1787,13937,14.61,14.73
+2017-2018,Division,Albemarle County,Native Hawaiian  or Pacific Islander,NA,1772,13,13937,NA,NA
+2017-2018,Division,Albemarle County,"Non-Hispanic, two or more races",90,1772,835,13937,10.78,5.08
+2017-2018,Division,Albemarle County,"White, not of Hispanic origin",1026,1772,9108,13937,11.26,57.9
+2017-2018,Division,Charlottesville City,American Indian or Alaska Native,NA,596,5,4529,NA,NA
+2017-2018,Division,Charlottesville City,Asian,17,596,299,4529,5.69,2.85
+2017-2018,Division,Charlottesville City,"Black, not of Hispanic origin",321,596,1564,4529,20.52,53.86
+2017-2018,Division,Charlottesville City,Hispanic,60,596,542,4529,11.07,10.07
+2017-2018,Division,Charlottesville City,"Non-Hispanic, two or more races",40,596,293,4529,13.65,6.71
+2017-2018,Division,Charlottesville City,"White, not of Hispanic origin",157,596,1825,4529,8.6,26.34
+2017-2018,State,Virginia,American Indian or Alaska Native,501,173397,3488,1292706,14.36,0.29
+2017-2018,State,Virginia,Asian,6412,173397,90371,1292706,7.1,3.7
+2017-2018,State,Virginia,"Black, not of Hispanic origin",46184,173397,289012,1292706,15.98,26.63
+2017-2018,State,Virginia,Hispanic,26344,173397,203364,1292706,12.95,15.19
+2017-2018,State,Virginia,Native Hawaiian  or Pacific Islander,225,173397,2047,1292706,10.99,0.13
+2017-2018,State,Virginia,"Non-Hispanic, two or more races",9212,173397,71613,1292706,12.86,5.31
+2017-2018,State,Virginia,"White, not of Hispanic origin",84519,173397,632811,1292706,13.36,48.74
+2018-2019,Division,Albemarle County,American Indian or Alaska Native,NA,1865,14,14013,NA,NA
+2018-2019,Division,Albemarle County,Asian,60,1865,740,14013,8.11,3.22
+2018-2019,Division,Albemarle County,"Black, not of Hispanic origin",352,1865,1507,14013,23.36,18.87
+2018-2019,Division,Albemarle County,Hispanic,275,1865,1844,14013,14.91,14.75
+2018-2019,Division,Albemarle County,Native Hawaiian  or Pacific Islander,NA,1865,17,14013,NA,NA
+2018-2019,Division,Albemarle County,"Non-Hispanic, two or more races",100,1865,852,14013,11.74,5.36
+2018-2019,Division,Albemarle County,"White, not of Hispanic origin",1073,1865,9039,14013,11.87,57.53
+2018-2019,Division,Charlottesville City,Asian,23,615,298,4561,7.72,3.74
+2018-2019,Division,Charlottesville City,"Black, not of Hispanic origin",302,615,1474,4561,20.49,49.11
+2018-2019,Division,Charlottesville City,Hispanic,64,615,544,4561,11.76,10.41
+2018-2019,Division,Charlottesville City,"Non-Hispanic, two or more races",48,615,352,4561,13.64,7.8
+2018-2019,Division,Charlottesville City,"White, not of Hispanic origin",178,615,1889,4561,9.42,28.94
+2018-2019,State,Virginia,American Indian or Alaska Native,516,176585,3409,1290513,15.14,0.29
+2018-2019,State,Virginia,Asian,6617,176585,92111,1290513,7.18,3.75
+2018-2019,State,Virginia,"Black, not of Hispanic origin",46444,176585,285910,1290513,16.24,26.3
+2018-2019,State,Virginia,Hispanic,27775,176585,208705,1290513,13.31,15.73
+2018-2019,State,Virginia,Native Hawaiian  or Pacific Islander,253,176585,2136,1290513,11.84,0.14
+2018-2019,State,Virginia,"Non-Hispanic, two or more races",9683,176585,73582,1290513,13.16,5.48
+2018-2019,State,Virginia,"White, not of Hispanic origin",85297,176585,624660,1290513,13.65,48.3
+2019-2020,Division,Albemarle County,American Indian or Alaska Native,NA,1961,17,14435,NA,NA
+2019-2020,Division,Albemarle County,Asian,68,1961,739,14435,9.2,3.47
+2019-2020,Division,Albemarle County,"Black, not of Hispanic origin",374,1961,1586,14435,23.58,19.07
+2019-2020,Division,Albemarle County,Hispanic,275,1961,2010,14435,13.68,14.02
+2019-2020,Division,Albemarle County,"Non-Hispanic, two or more races",118,1961,914,14435,12.91,6.02
+2019-2020,Division,Albemarle County,"White, not of Hispanic origin",1122,1961,9153,14435,12.26,57.22
+2019-2020,Division,Charlottesville City,Asian,23,643,280,4544,8.21,3.58
+2019-2020,Division,Charlottesville City,"Black, not of Hispanic origin",308,643,1398,4544,22.03,47.9
+2019-2020,Division,Charlottesville City,Hispanic,76,643,571,4544,13.31,11.82
+2019-2020,Division,Charlottesville City,"Non-Hispanic, two or more races",54,643,399,4544,13.53,8.4
+2019-2020,Division,Charlottesville City,"White, not of Hispanic origin",182,643,1894,4544,9.61,28.3
+2019-2020,State,Virginia,American Indian or Alaska Native,568,180541,3378,1298083,16.81,0.31
+2019-2020,State,Virginia,Asian,6839,180541,93573,1298083,7.31,3.79
+2019-2020,State,Virginia,"Black, not of Hispanic origin",46815,180541,283426,1298083,16.52,25.93
+2019-2020,State,Virginia,Hispanic,28802,180541,220968,1298083,13.03,15.95
+2019-2020,State,Virginia,Native Hawaiian  or Pacific Islander,254,180541,2159,1298083,11.76,0.14
+2019-2020,State,Virginia,"Non-Hispanic, two or more races",10280,180541,77269,1298083,13.3,5.69
+2019-2020,State,Virginia,"White, not of Hispanic origin",86983,180541,617310,1298083,14.09,48.18
+2020-2021,Division,Albemarle County,American Indian or Alaska Native,NA,1792,16,13532,NA,NA
+2020-2021,Division,Albemarle County,Asian,65,1792,763,13532,8.52,3.63
+2020-2021,Division,Albemarle County,"Black, not of Hispanic origin",333,1792,1525,13532,21.84,18.58
+2020-2021,Division,Albemarle County,Hispanic,265,1792,2015,13532,13.15,14.79
+2020-2021,Division,Albemarle County,"Non-Hispanic, two or more races",114,1792,885,13532,12.88,6.36
+2020-2021,Division,Albemarle County,"White, not of Hispanic origin",1011,1792,8314,13532,12.16,56.42
+2020-2021,Division,Charlottesville City,Asian,30,615,253,4258,11.86,4.88
+2020-2021,Division,Charlottesville City,"Black, not of Hispanic origin",278,615,1360,4258,20.44,45.2
+2020-2021,Division,Charlottesville City,Hispanic,70,615,560,4258,12.5,11.38
+2020-2021,Division,Charlottesville City,"Non-Hispanic, two or more races",59,615,391,4258,15.09,9.59
+2020-2021,Division,Charlottesville City,"White, not of Hispanic origin",178,615,1691,4258,10.53,28.94
+2020-2021,State,Virginia,American Indian or Alaska Native,525,174638,3284,1252752,15.99,0.3
+2020-2021,State,Virginia,Asian,6655,174638,93240,1252752,7.14,3.81
+2020-2021,State,Virginia,"Black, not of Hispanic origin",45123,174638,276930,1252752,16.29,25.84
+2020-2021,State,Virginia,Hispanic,29378,174638,218752,1252752,13.43,16.82
+2020-2021,State,Virginia,Native Hawaiian  or Pacific Islander,241,174638,2004,1252752,12.03,0.14
+2020-2021,State,Virginia,"Non-Hispanic, two or more races",10356,174638,77924,1252752,13.29,5.93
+2020-2021,State,Virginia,"White, not of Hispanic origin",82360,174638,580618,1252752,14.18,47.16
+2021-2022,Division,Albemarle County,American Indian or Alaska Native,NA,1835,19,13749,NA,NA
+2021-2022,Division,Albemarle County,Asian,69,1835,752,13749,9.18,3.76
+2021-2022,Division,Albemarle County,"Black, not of Hispanic origin",338,1835,1605,13749,21.06,18.42
+2021-2022,Division,Albemarle County,Hispanic,282,1835,2095,13749,13.46,15.37
+2021-2022,Division,Albemarle County,Native Hawaiian  or Pacific Islander,NA,1835,14,13749,NA,NA
+2021-2022,Division,Albemarle County,"Non-Hispanic, two or more races",131,1835,946,13749,13.85,7.14
+2021-2022,Division,Albemarle County,"White, not of Hispanic origin",1010,1835,8318,13749,12.14,55.04
+2021-2022,Division,Charlottesville City,Asian,28,621,238,4290,11.76,4.51
+2021-2022,Division,Charlottesville City,"Black, not of Hispanic origin",274,621,1274,4290,21.51,44.12
+2021-2022,Division,Charlottesville City,Hispanic,72,621,553,4290,13.02,11.59
+2021-2022,Division,Charlottesville City,"Non-Hispanic, two or more races",60,621,457,4290,13.13,9.66
+2021-2022,Division,Charlottesville City,"White, not of Hispanic origin",187,621,1766,4290,10.59,30.11
+2021-2022,State,Virginia,American Indian or Alaska Native,539,173910,3220,1251970,16.74,0.31
+2021-2022,State,Virginia,Asian,6720,173910,92826,1251970,7.24,3.86
+2021-2022,State,Virginia,"Black, not of Hispanic origin",43704,173910,273166,1251970,16,25.13
+2021-2022,State,Virginia,Hispanic,30083,173910,226208,1251970,13.3,17.3
+2021-2022,State,Virginia,Native Hawaiian  or Pacific Islander,246,173910,2027,1251970,12.14,0.14
+2021-2022,State,Virginia,"Non-Hispanic, two or more races",10797,173910,80904,1251970,13.35,6.21
+2021-2022,State,Virginia,"White, not of Hispanic origin",81821,173910,573619,1251970,14.26,47.05
+2022-2023,Division,Albemarle County,American Indian or Alaska Native,NA,1845,12,13970,NA,NA
+2022-2023,Division,Albemarle County,Asian,63,1845,808,13970,7.8,3.41
+2022-2023,Division,Albemarle County,"Black, not of Hispanic origin",334,1845,1667,13970,20.04,18.1
+2022-2023,Division,Albemarle County,Hispanic,287,1845,2213,13970,12.97,15.56
+2022-2023,Division,Albemarle County,"Non-Hispanic, two or more races",140,1845,1003,13970,13.96,7.59
+2022-2023,Division,Albemarle County,"White, not of Hispanic origin",1017,1845,8257,13970,12.32,55.12
+2022-2023,Division,Charlottesville City,Asian,20,600,238,4491,8.4,3.33
+2022-2023,Division,Charlottesville City,"Black, not of Hispanic origin",287,600,1256,4491,22.85,47.83
+2022-2023,Division,Charlottesville City,Hispanic,68,600,587,4491,11.58,11.33
+2022-2023,Division,Charlottesville City,"Non-Hispanic, two or more races",61,600,611,4491,9.98,10.17
+2022-2023,Division,Charlottesville City,"White, not of Hispanic origin",164,600,1795,4491,9.14,27.33
+2022-2023,State,Virginia,American Indian or Alaska Native,496,178891,3293,1263367,15.06,0.28
+2022-2023,State,Virginia,Asian,7002,178891,94963,1263367,7.37,3.91
+2022-2023,State,Virginia,"Black, not of Hispanic origin",44686,178891,273503,1263367,16.34,24.98
+2022-2023,State,Virginia,Hispanic,31893,178891,236793,1263367,13.47,17.83
+2022-2023,State,Virginia,Native Hawaiian  or Pacific Islander,233,178891,1983,1263367,11.75,0.13
+2022-2023,State,Virginia,"Non-Hispanic, two or more races",11569,178891,84347,1263367,13.72,6.47
+2022-2023,State,Virginia,"White, not of Hispanic origin",83012,178891,568485,1263367,14.6,46.4
+2023-2024,Division,Albemarle County,American Indian or Alaska Native,NA,1926,17,13835,NA,NA
+2023-2024,Division,Albemarle County,Asian,78,1926,865,13835,9.02,4.05
+2023-2024,Division,Albemarle County,"Black, not of Hispanic origin",361,1926,1619,13835,22.3,18.74
+2023-2024,Division,Albemarle County,Hispanic,324,1926,2321,13835,13.96,16.82
+2023-2024,Division,Albemarle County,"Non-Hispanic, two or more races",146,1926,985,13835,14.82,7.58
+2023-2024,Division,Albemarle County,"White, not of Hispanic origin",1015,1926,8021,13835,12.65,52.7
+2023-2024,Division,Charlottesville City,Asian,17,567,273,4444,6.23,3
+2023-2024,Division,Charlottesville City,"Black, not of Hispanic origin",269,567,1165,4444,23.09,47.44
+2023-2024,Division,Charlottesville City,Hispanic,55,567,606,4444,9.08,9.7
+2023-2024,Division,Charlottesville City,"Non-Hispanic, two or more races",63,567,612,4444,10.29,11.11
+2023-2024,Division,Charlottesville City,"White, not of Hispanic origin",163,567,1785,4444,9.13,28.75
+2023-2024,State,Virginia,American Indian or Alaska Native,530,185651,3291,1262011,16.1,0.29
+2023-2024,State,Virginia,Asian,7397,185651,96403,1262011,7.67,3.98
+2023-2024,State,Virginia,"Black, not of Hispanic origin",46155,185651,270980,1262011,17.03,24.86
+2023-2024,State,Virginia,Hispanic,34379,185651,244903,1262011,14.04,18.52
+2023-2024,State,Virginia,Native Hawaiian  or Pacific Islander,240,185651,1966,1262011,12.21,0.13
+2023-2024,State,Virginia,"Non-Hispanic, two or more races",12531,185651,86677,1262011,14.46,6.75
+2023-2024,State,Virginia,"White, not of Hispanic origin",84419,185651,557791,1262011,15.13,45.47
+2024-2025,Division,Albemarle County,American Indian or Alaska Native,NA,2023,17,14173,NA,NA
+2024-2025,Division,Albemarle County,Asian,83,2023,934,14173,8.89,4.1
+2024-2025,Division,Albemarle County,"Black, not of Hispanic origin",376,2023,1668,14173,22.54,18.59
+2024-2025,Division,Albemarle County,Hispanic,356,2023,2476,14173,14.38,17.6
+2024-2025,Division,Albemarle County,"Non-Hispanic, two or more races",152,2023,1020,14173,14.9,7.51
+2024-2025,Division,Albemarle County,"White, not of Hispanic origin",1054,2023,8052,14173,13.09,52.1
+2024-2025,Division,Charlottesville City,Asian,14,565,347,4443,4.03,2.48
+2024-2025,Division,Charlottesville City,"Black, not of Hispanic origin",277,565,1129,4443,24.53,49.03
+2024-2025,Division,Charlottesville City,Hispanic,53,565,614,4443,8.63,9.38
+2024-2025,Division,Charlottesville City,"Non-Hispanic, two or more races",61,565,600,4443,10.17,10.8
+2024-2025,Division,Charlottesville City,"White, not of Hispanic origin",160,565,1751,4443,9.14,28.32
+2024-2025,State,Virginia,American Indian or Alaska Native,559,190120,3305,1261387,16.91,0.29
+2024-2025,State,Virginia,Asian,7712,190120,98182,1261387,7.85,4.06
+2024-2025,State,Virginia,"Black, not of Hispanic origin",47665,190120,268633,1261387,17.74,25.07
+2024-2025,State,Virginia,Hispanic,36407,190120,253856,1261387,14.34,19.15
+2024-2025,State,Virginia,Native Hawaiian  or Pacific Islander,226,190120,1943,1261387,11.63,0.12
+2024-2025,State,Virginia,"Non-Hispanic, two or more races",13267,190120,88627,1261387,14.97,6.98
+2024-2025,State,Virginia,"White, not of Hispanic origin",84284,190120,546841,1261387,15.41,44.33

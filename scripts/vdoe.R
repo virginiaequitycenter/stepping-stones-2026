@@ -425,7 +425,7 @@ write_csv(disadvan_data, "data/economically_disadvantaged_students.csv")
 # Get data for Albemarle County Public Schools; Charlottesville City Public Schools and Virginia overall
 # Go to:  (1) Download Data (https://p1pe.doe.virginia.gov/apex_captcha/home.do?apexTypeId=351) 
 #         (2) Make the following selections:
-#             Select School Years (multi-select): 2021-2022; 2022-2023; 2023-2024
+#             Select School Years (multi-select): 2021-2022; 2022-2023; 2023-2024; 2024-2025
 #             Select Report Level (multi-select): Division; State
 #             Select Divisions (multi-select): Albemarle County; Charlottesville City 
 #             Select SBAR Report: Events Report
@@ -434,7 +434,7 @@ write_csv(disadvan_data, "data/economically_disadvantaged_students.csv")
 #         (3) Submit and click CSV Download (save to download_data/)
 
 # Read in data
-sbar_events <- read_csv("download_data/sbar_statistics.csv") %>% 
+sbar_events <- read_csv("download_data/sbar_statistics_2021_2024.csv") %>% 
   clean_names()
 
 # pivot to create columns by behavior code
@@ -514,7 +514,7 @@ iss_ssir <- rbind(iss_ssir_div, iss_ssir_state) %>%
 # Get data for Albemarle County Public Schools; Charlottesville City Public Schools and Virginia overall
 # Go to:  (1) Download Data (https://p1pe.doe.virginia.gov/apex_captcha/home.do?apexTypeId=351) 
 #         (2) Make the following selections:
-#             Select School Years (multi-select): 2021-2022; 2022-2023; 2023-2024
+#             Select School Years (multi-select): 2021-2022; 2022-2023; 2023-2024; 2024-2025
 #             Select Report Level (multi-select): Division; State
 #             Select Divisions (multi-select): Albemarle County; Charlottesville City 
 #             Select SBAR Report: Sanction Report
@@ -522,7 +522,7 @@ iss_ssir <- rbind(iss_ssir_div, iss_ssir_state) %>%
 #         (3) Submit and click CSV Download (save to download_data/)
 
 # Read in data
-iss_sbar_raw <- read_csv("download_data/sbar_statistics_iss.csv") %>% 
+iss_sbar_raw <- read_csv("download_data/sbar_statistics_iss_2021_2024.csv") %>% 
   clean_names()
 
 # Join with fall membership
@@ -541,14 +541,14 @@ iss_sbar <- iss_sbar %>%
          source = "SBAR")
 
 # Combine ISS sources
-iss <- rbind(iss_ssir, iss_sbar)
+# iss <- rbind(iss_ssir, iss_sbar)
 
 # Create rate
-iss <- iss %>% 
+iss_sbar <- iss_sbar %>% 
   mutate(rate = round((individual_student_offenders/population)*1000, 2), .after = individual_student_offenders)
 
 # Save 
-write_csv(iss, "data/in_school_suspensions.csv")
+write_csv(iss_sbar, "data/in_school_suspensions_sbar.csv")
 
 ## .......................................................
 # Out-of-School Suspensions ----
@@ -556,7 +556,7 @@ write_csv(iss, "data/in_school_suspensions.csv")
 # Get data for Albemarle County Public Schools; Charlottesville City Public Schools and Virginia overall
 # Go to:  (1) Download Data (https://p1pe.doe.virginia.gov/apex_captcha/home.do?apexTypeId=351) 
 #         (2) Make the following selections:
-#             Select School Years (multi-select): 2021-2022; 2022-2023; 2023-2024
+#             Select School Years (multi-select): 2021-2022; 2022-2023; 2023-2024; 2024-2025
 #             Select Report Level (multi-select): Division; State
 #             Select Divisions (multi-select): Albemarle County; Charlottesville City 
 #             Select SBAR Report: Sanction Report
@@ -564,7 +564,7 @@ write_csv(iss, "data/in_school_suspensions.csv")
 #         (3) Submit and click CSV Download (save to download_data/)
 
 # Read in data
-oss_sbar_raw <- read_csv("download_data/sbar_statistics_oss.csv") %>% 
+oss_sbar_raw <- read_csv("download_data/sbar_statistics_oss_2021_2024.csv") %>% 
   clean_names()
 
 
@@ -586,6 +586,8 @@ oss_sbar <- oss_sbar %>%
 # Create rate
 oss_sbar <- oss_sbar %>% 
   mutate(rate = (number_of_students/population)*1000, .after = number_of_students)
+
+write_csv(oss_sbar, "data/out_of_school_suspensions_sbar.csv")
 
 # Read in previous OSS data
 oss_prior <- read_csv("data/2023_data/school_suspensions.csv") %>% 
