@@ -5,7 +5,6 @@
   # Source: ACS Tables B17001A-I
 # Students Identified as Economically Disadvantaged by Race/Ethnicity
   # Source: VDOE https://p1pe.doe.virginia.gov/buildatable/fallmembership
-# Children Qualifying for Free Reduced Meals by Race/Ethnicity
 # Students Eligible for Special Education Services by Race/Ethnicity
   # Source: https://p1pe.doe.virginia.gov/buildatable/dec1
 # Out-of-School Suspensions by Race/Ethnicity
@@ -448,6 +447,28 @@ leaflet() %>%
             })
 
 ## .......................................................
+# Low Birth-Weight Infants by Race/Ethnicity ----
+lbw_raw <- read_excel("download_data/VDH_LBW_IMR_June_2026.xlsx", sheet = 2, skip = 1)
+
+lbw <- lbw_raw %>% 
+  clean_names()
+  # mutate(across(low_birth_weight_births:percentage_with_low_birth_weight, ~ as.numeric(.x)))
+
+# Save
+write_csv(lbw, "data/low_birthweight_race_ethn.csv")
+
+## .......................................................
+# Infant Deaths by Race/Ethnicity ----
+imr_raw <- read_excel("download_data/VDH_LBW_IMR_June_2026.xlsx", sheet = 3, skip = 1)
+
+imr <- imr_raw %>% 
+  clean_names()
+  # mutate(across(infant_deaths:infant_mortality_rate, ~ as.numeric(.x)))
+
+# Save
+write_csv(imr, "data/infant_mortality_race_ethn.csv")
+
+## .......................................................
 # Children in Foster Care by Race/Ethnicity ----
 # Source: 2024-2025: https://www.dss.virginia.gov/research-and-planning/reports-data/fc-data-reports/
 # Source: 2021-2023: https://www.dss.virginia.gov/archives/research-and-planning-archives/
@@ -473,21 +494,52 @@ fc_all <- fc_all %>%
          FIPS = case_when(
            FIPS == 3 ~ "51003",
            FIPS == 540 ~ "51540",
+           FIPS == 0 ~ "51",
            is.na(FIPS) ~ "51"
          )) %>% 
-  select(-starts_with("Percent"))
-
-# pivot and recreate percents
-fc <- fc_all %>% 
-  mutate(`All Children in Care` = `Total Children in Care`, .after = `Total Children in Care`) %>% 
-  pivot_longer(`All Children in Care`:Hispanic, names_to = "group", values_to = "count") %>% 
+  select(-starts_with("Percent")) %>% 
+  select(-c("MALE", "FEMALE", "Gender Unknown", "Am Indian Alaskan Native", "Hawaiian Pacific Islander", "Race Unknown")) %>% 
   clean_names() %>% 
-  mutate(percent = round(count/total_children_in_care * 100, 2),
-         group = str_to_title(group)) %>% 
-  select(year, locality, fips, group, count, percent, total_children_in_care)
+  rename(GEOID = fips) %>% 
+  mutate(fc_under18 = total_children_in_care, .after = total_children_in_care) %>% 
+  rename_with(~ paste0("fc_under18_", .x), .cols = black:hispanic)
+
+# Bring in population data
+pop_under18 <- read_csv("data/pop_race_ethn_acs.csv") %>% 
+  mutate(GEOID = as.character(GEOID)) %>% 
+  select(GEOID, locality, year, starts_with("pop_under18")) %>% 
+  select(-c("pop_under18_aian", "pop_under18_nhpi", "pop_under18_white_nonhisp", "pop_under18_other"))
+
+age_groups <- read_csv("data/population_data_acs.csv") %>% 
+  mutate(GEOID = as.character(fips)) %>% 
+  select(GEOID, locality, year, pop_under18)
+
+# Join population data
+fc <- fc_all %>% 
+  left_join(age_groups, by = join_by(GEOID == GEOID, year == year, locality == locality)) %>% 
+  left_join(pop_under18, by = join_by(GEOID == GEOID, year == year, locality == locality))
+
+# Pivot
+fc_rates <- fc %>% 
+  rename(fc_under18_multiracial = fc_under18_multi_race,
+         pop_under18_multiracial = pop_under18_multi,
+         pop_under18_hispanic = pop_under18_hisp) %>% 
+  pivot_longer(c(starts_with("fc_"), starts_with("pop")), names_to = c("name","group"), names_pattern = "(.*?)_(.*)") %>%      
+  pivot_wider(id_cols = c(GEOID, locality, region, year, group, total_children_in_care), names_from = name, values_from = value, names_repair = "check_unique") %>% 
+  rename(fc_count_group = fc,
+         population_count_group = pop) %>% 
+  mutate(group = case_when(group == "under18" ~ "all",
+                           startsWith(group, "under18_") ~ str_remove(group, "under18_")))
+
+# Create poverty rates
+fc_rates <- fc_rates %>%
+  mutate(fc_per_bygroup = round(fc_count_group/population_count_group * 100, 2),
+         fc_per_byallfc = round(fc_count_group/total_children_in_care * 100, 2),
+         fc_rate_bygroup = round(fc_count_group/population_count_group * 1000, 2),
+         fc_rate_byallfc = round(fc_count_group/total_children_in_care * 1000, 2))
 
 # Save
-write_csv(fc, "data/foster_care_race_ethn.csv")
+write_csv(fc_rates, "data/foster_care_race_ethn.csv")
 
 ## .......................................................
 # Child Abuse/Neglect Investigations/Assessments by Race/Ethnicity ----

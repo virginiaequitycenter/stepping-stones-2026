@@ -1,0 +1,1092 @@
+---
+title: "Stepping Stones 2026 Supplement Report"
+subtitle: "Disaggregated Measures of Well-Being of Children and Families in in Charlottesville and Albemarle"
+date: "May 2026"
+date-format: "MMMM YYYY"
+# author: "Community-Centered Analysis at the UVA Center for Community Partnerships"
+# license: "CC BY"
+# citation:
+#   type: report
+#   url: communitypartnerships.virginia.edu
+format:
+  html:
+    toc: true
+    theme: cosmo
+    embed-resources: true
+  # docx:
+  #   toc: true
+  #   toc-title: "Table of Contents"
+  #   # lof: true
+  #   # number-sections: true
+  #   number-depth: 3
+  #   # fig-align: left
+  #   # fig-width: 3
+  #   # fig-height: 2
+  #   # # fig-format: png
+  #   # fig-dpi: 200
+  #   embed-resources: true
+  #   reference-doc: styles.docx
+execute:
+  cache: false
+  echo: false
+  message: false
+  warning: false
+---
+```{css}
+.panel-tabset .nav-pills {
+    display: flex !important;
+}
+
+.nav.nav-tabs {
+    display: flex !important;
+    flex-flow: column nowrap;
+    flex: 0 0 25%;
+    max-height: 500px;
+  overflow: scroll;
+
+}
+
+.panel-tabset .nav-pills .nav-tabs .nav-item {
+    width: max-content;
+    height: 50px;
+    display: contents;
+}
+```
+
+```{r setup}
+#| include: false
+
+# Libraries ----
+library(tidyverse)
+library(scales)
+library(janitor)
+library(highcharter)
+library(leaflet)
+library(tigris)
+library(sf)
+library(rcartocolor)
+
+# Color palette ----
+locality_pal <- c("#193CBC", "#589ACF", "#FAC484")
+two_pal <- c("#d95204", "#193CBC")
+
+pal_red <- colorBin(c('#f5ded4', '#f6cbb7', '#f5b79b', '#f2a47f', '#ee9063', '#e87c48', '#e1682b', '#d95204'), domain = c(0,100), bins = c(0, 20, 40, 60, 80, 100), reverse = FALSE, na.color = "#e0e0e0")
+pal_red_rev <- colorBin(c('#f5ded4', '#f6cbb7', '#f5b79b', '#f2a47f', '#ee9063', '#e87c48', '#e1682b', '#d95204'), domain = c(0,100), bins = c(0, 20, 40, 60, 80, 100), reverse = TRUE, na.color = "#e0e0e0")
+pal_blue <- colorBin(c('#ddd9ec', '#c7c1e6', '#b1a9df', '#9b92d9', '#837bd2', '#6965cb', '#4a50c3', '#193cbc'), domain = c(0,100), bins = c(0, 20, 40, 60, 80, 100), reverse = FALSE, na.color = "#e0e0e0")
+pal_blue_rev <- colorBin(c('#ddd9ec', '#c7c1e6', '#b1a9df', '#9b92d9', '#837bd2', '#6965cb', '#4a50c3', '#193cbc'), domain = c(0,100), bins = c(0, 20, 40, 60, 80, 100), reverse = TRUE, na.color = "#e0e0e0")
+pal_purple <- carto_pal(6, "Purp")
+map_pal <- colorBin(pal_purple, domain = c(0,100), bins = c(0, 0.1, 20, 40, 60, 80, 100), reverse = FALSE, na.color = "#e0e0e0")
+map_pal_rev <- colorBin(pal_purple, domain = c(0,100),bins = c(0, 0.1, 20, 40, 60, 80, 100), reverse = TRUE, na.color = "#e0e0e0")
+
+# Geometries ----
+county_geo <- counties(state = "VA") %>% 
+  subset(COUNTYFP %in% c("003", "540")) %>% 
+  st_transform(crs = 4326)
+tracts_geo <- tracts(state = "VA", county = c("003", "540"))
+tracts_geo <- tracts_geo %>% st_transform(tracts_geo, crs = 4326) 
+
+```
+
+## Education
+
+### Students Eligible for Special Education Services
+```{r include=FALSE}
+# Init Step to make sure that the dependencies are loaded
+highchart()
+```
+
+```{r, results='asis'}
+df <- read_csv("../data/special_ed_services_by_race.csv") %>% 
+  select(school_year, division_name, race, sped_race_count, sped_total_count, total_students, sped_percent_byrace)
+
+df_all <- read_csv("../data/special_ed_services.csv") %>% 
+  mutate(race = "All Students", .after = "division_name") %>% 
+  rename("sped_race_count" = "total_sped",
+         "sped_percent_byrace" = "percent_sped") %>% 
+  mutate(sped_total_count = sped_race_count, .after = "sped_race_count") %>% 
+  select(school_year, division_name, race, sped_race_count, sped_total_count, total_students, sped_percent_byrace)
+
+df <- rbind(df, df_all)
+
+df <- df %>%
+  filter(! race %in% c("American Indian or Alaska Native", "Native Hawaiian  or Pacific Islander")) %>% 
+  mutate(year = as.numeric(str_sub(school_year,1,4)),
+         division_name = case_when(str_detect(division_name, "Albemarle") ~ "Albemarle County Public Schools", 
+                                                        str_detect(division_name, "Charlottesville") ~ "Charlottesville City Schools",
+                                                        str_detect(division_name, "Virginia") ~ "Virginia Public Schools"),
+         label = case_when(race == "Black, not of Hispanic origin" ~ "Black",
+                           race == "Non-Hispanic, two or more races" ~ "Multiracial",
+                           race == "White, not of Hispanic origin" ~ "White",
+                           .default = race)) %>% 
+  filter(year >= 2014)
+
+df$percent <- round(df$sped_percent_byrace,0)
+df$label <- df$label 
+df$count_label <- prettyNum(df$sped_race_count, big.mark = ",")
+
+title <- "Percent of Students Identified to Receive Special Education Services"
+ytext <- "Percent of Students"
+xtext <- "School Year"
+xlabels <- JS("function() { return this.value + '-' + (this.value + 1).toString().slice(-2); }")
+source_text <- "Data Source: Virginia Department of Education"
+
+nms <- unique(df$division_name)
+len <- length(unique(df$division_name))
+
+mychart <- function(i) {
+  df_groups <- df %>% filter(label != "All Students")
+  df_all <- df %>% filter(label == "All Students")
+  
+  df_groups %>%
+    filter(df_groups$division_name == nms[[i]]) %>%
+    hchart("line", hcaes(y = percent, x = year, group = label)) %>%
+    hc_legend(align = "center", verticalAlign = "top") %>%
+    hc_xAxis(title = list(text = xtext),
+             labels = list(formatter = xlabels, style = list(fontSize = '1.2em')),
+             tickInterval = 1,
+             allowDecimals = FALSE) %>%
+    hc_yAxis(min = 0, max = 100,
+             title = list(text = ytext),
+             labels = list(format = '{text}%')) %>%
+  # hc_colors(two_pal) %>%
+  hc_plotOptions(series = list(dataLabels = list(format = '{y: f}%', enabled = TRUE)),
+                 line = list( marker = list(enabled = TRUE, symbol = list("circle")) )) %>%
+  hc_tooltip(formatter = JS("function(){
+  return this.series.name + '</br><b>' + this.key + '</b></br>' + 'Percent: <b>' + this.y + '%</b></br>' + 'Est. Number: <b>' + this.point.count_label + '</b></br>Total Eligible: ' + this.point.sped_total_count
+  }")) %>%
+  hc_title(text = paste0(title, " in ", nms[[i]], " by Race and Ethnicity"),
+           align = 'left') %>%
+  hc_caption(text = source_text,
+             align = "right",
+             style = list(fontSize = '1em')) %>%
+  hc_add_theme(hc_theme_smpl()) %>%
+  hc_add_series(data =  df_all %>% filter(df_all$division_name == nms[[i]]), type = "line", mapping = hcaes(x = year, y = percent, group = label), dashStyle = "dash", marker = list(symbol = "diamond")) %>%
+  hc_exporting(enabled=TRUE,
+               sourceWidth = 900,
+               sourceHeight = 600)
+}
+
+for (i in 1:len) {
+  cat("####", nms[i], "\n \n")
+  print(htmltools::tagList(mychart(i)))
+}
+
+```
+
+### Out-of-School Suspensions
+
+### High School Graduation Rate
+```{r include=FALSE}
+# Init Step to make sure that the dependencies are loaded
+highchart()
+```
+
+```{r, results='asis'}
+df <- read_csv("../data/graduation_rates_race_econ_disadvan.csv") %>% 
+  select(cohort_year, division_name, group, graduation_rate, students_in_cohort)
+
+df_all <- read_csv("../data/graduation_rates.csv") %>% 
+  mutate(group = "All Students", .after = "division_name") %>% 
+  select(cohort_year, division_name, group, graduation_rate, students_in_cohort)
+
+df <- rbind(df, df_all)
+
+df <- df %>% 
+  filter(! group %in% c("American Indian or Alaska Native", "Native Hawaiian  or Pacific Islander")) %>% 
+  mutate(division_name = case_when(str_detect(division_name, "Albemarle") ~ "Albemarle County Public Schools", 
+                                                        str_detect(division_name, "Charlottesville") ~ "Charlottesville City Schools",
+                                                        str_detect(division_name, "Virginia") ~ "Virginia Public Schools"),
+         label = case_when(group == "Black, not of Hispanic origin" ~ "Black",
+                           group == "Non-Hispanic, two or more races" ~ "Multiracial",
+                           group == "White, not of Hispanic origin" ~ "White",
+                           .default = group)) %>% 
+  filter(cohort_year >= 2014)
+
+df$percent <- round(df$graduation_rate,0)
+df$label <- df$label 
+df$count_label <- prettyNum(df$students_in_cohort, big.mark = ",")
+
+title <- "Percent of Student Cohort Graduating in Four Years"
+ytext <- "Percent of Student Cohort"
+xtext <- "Graduation Year"
+xlabels <- JS("function() { return this.value; }")
+source_text <- "Data Source: Virginia Department of Education"
+
+nms <- unique(df$division_name)
+len <- length(unique(df$division_name))
+
+mychart <- function(i) {
+  df <- df %>% filter(group != "Economically Disadvantaged")
+  df_groups <- df %>% filter(group != "All Students")
+  df_all <- df %>% filter(group == "All Students")
+  
+  df_groups %>%
+    filter(df_groups$division_name == nms[[i]]) %>%
+    hchart("line", hcaes(y = percent, x = cohort_year, group = label)) %>%
+    hc_legend(align = "center", verticalAlign = "top") %>%
+    hc_xAxis(title = list(text = xtext),
+             labels = list(formatter = xlabels, style = list(fontSize = '1.2em')),
+             tickInterval = 1,
+             allowDecimals = FALSE) %>%
+    hc_yAxis(min = 0, max = 100,
+             title = list(text = ytext),
+             labels = list(format = '{text}%')) %>%
+  # hc_colors(two_pal) %>%
+  hc_plotOptions(series = list(dataLabels = list(format = '{y: f}%', enabled = TRUE)),
+                 line = list( marker = list(enabled = TRUE, symbol = list("circle")) )) %>%
+  hc_tooltip(formatter = JS("function(){
+  return this.series.name + '</br><b>' + this.key + '</b></br>' + 'Percent: <b>' + this.y + '%</b></br>' + 'Est. Number: <b>' + this.point.count_label 
+  }")) %>%
+  hc_title(text = paste0(title, " in ", nms[[i]], " by Race and Ethnicity"),
+           align = 'left') %>%
+  hc_caption(text = source_text,
+             align = "right",
+             style = list(fontSize = '1em')) %>%
+  hc_add_theme(hc_theme_smpl()) %>%
+  hc_add_series(data =  df_all %>% filter(df_all$division_name == nms[[i]]), type = "line", mapping = hcaes(x = cohort_year, y = percent, group = label), dashStyle = "dash", marker = list(symbol = "diamond")) %>%
+  hc_exporting(enabled=TRUE,
+               sourceWidth = 900,
+               sourceHeight = 600)
+}
+
+chart_disadvan <- function(i) {
+  df <- df %>% filter(group %in% c("Economically Disadvantaged", "All Students"))
+  df_groups <- df %>% filter(group != "All Students")
+  df_all <- df %>% filter(group == "All Students")
+  
+  df_groups %>%
+    filter(df_groups$division_name == nms[[i]]) %>%
+    hchart("line", hcaes(y = percent, x = cohort_year, group = label)) %>%
+    hc_legend(align = "center", verticalAlign = "top") %>%
+    hc_xAxis(title = list(text = xtext),
+             labels = list(formatter = xlabels, style = list(fontSize = '1.2em')),
+             tickInterval = 1,
+             allowDecimals = FALSE) %>%
+    hc_yAxis(min = 0, max = 100,
+             title = list(text = ytext),
+             labels = list(format = '{text}%')) %>%
+  # hc_colors(two_pal) %>%
+  hc_plotOptions(series = list(dataLabels = list(format = '{y: f}%', enabled = TRUE)),
+                 line = list( marker = list(enabled = TRUE, symbol = list("circle")) )) %>%
+  hc_tooltip(formatter = JS("function(){
+  return this.series.name + '</br><b>' + this.key + '</b></br>' + 'Percent: <b>' + this.y + '%</b></br>' + 'Est. Number: <b>' + this.point.count_label 
+  }")) %>%
+  hc_title(text = paste0(title, " in ", nms[[i]], " by Economically Disadvantaged"),
+           align = 'left') %>%
+  hc_caption(text = source_text,
+             align = "right",
+             style = list(fontSize = '1em')) %>%
+  hc_add_theme(hc_theme_smpl()) %>%
+  hc_add_series(data =  df_all %>% filter(df_all$division_name == nms[[i]]), type = "line", mapping = hcaes(x = cohort_year, y = percent, group = label), dashStyle = "dash", marker = list(symbol = "diamond")) %>%
+  hc_exporting(enabled=TRUE,
+               sourceWidth = 900,
+               sourceHeight = 600)
+}
+
+for (i in 1:len) {
+  cat("####", nms[i], "\n \n")
+  print(htmltools::tagList(mychart(i)))
+  print(htmltools::tagList(chart_disadvan(i)))
+}
+
+```
+
+### Post-Secondary Enrollment
+```{r, results='asis'}
+df <- read_csv("../data/postsecond_education_race_econ_disadvan.csv") %>% 
+  filter(! group %in% c("American Indian", "Native Hawaiian", "Female", "Male", "Limited English Proficient Students", "Students with Disabilities")) %>% 
+  mutate(division_name = case_when(str_detect(locality, "Albemarle") ~ "Albemarle County Public Schools", 
+                                                        str_detect(locality, "Charlottesville") ~ "Charlottesville City Schools",
+                                                        str_detect(locality, "Virginia") ~ "Virginia Public Schools"),
+         label = case_when(group == "2 or More" ~ "Multiracial",
+                           .default = group)) %>% 
+  filter(year >= 2014)
+
+df$percent <- round(df$percentany,0)
+df$label <- df$label 
+df$count_label <- prettyNum(df$enrolledany, big.mark = ",")
+
+title <- "Percent of Graduating Students Enrolled in a Post-Secondary Institution"
+ytext <- "Percent of Graduating Students"
+xtext <- "Graduation Year"
+xlabels <- JS("function() { return this.value; }")
+source_text <- "Data Source: Virginia Department of Education"
+
+nms <- unique(df$division_name)
+len <- length(unique(df$division_name))
+
+mychart <- function(i) {
+  df <- df %>% filter(group != "Economically Disadvantaged")
+  df_groups <- df %>% filter(group != "All Students")
+  df_all <- df %>% filter(group == "All Students")
+  
+  df_groups %>%
+    filter(df_groups$division_name == nms[[i]]) %>%
+    hchart("line", hcaes(y = percent, x = year, group = label)) %>%
+    hc_legend(align = "center", verticalAlign = "top") %>%
+    hc_xAxis(title = list(text = xtext),
+             labels = list(formatter = xlabels, style = list(fontSize = '1.2em')),
+             tickInterval = 1,
+             allowDecimals = FALSE) %>%
+    hc_yAxis(min = 0, max = 100,
+             title = list(text = ytext),
+             labels = list(format = '{text}%')) %>%
+  # hc_colors(two_pal) %>%
+  hc_plotOptions(series = list(dataLabels = list(format = '{y: f}%', enabled = TRUE)),
+                 line = list( marker = list(enabled = TRUE, symbol = list("circle")) )) %>%
+  hc_tooltip(formatter = JS("function(){
+  return this.series.name + '</br><b>' + this.key + '</b></br>' + 'Percent: <b>' + this.y + '%</b></br>' + 'Est. Number: <b>' + this.point.count_label 
+  }")) %>%
+  hc_title(text = paste0(title, " in ", nms[[i]], " by Race and Ethnicity"),
+           align = 'left') %>%
+  hc_caption(text = source_text,
+             align = "right",
+             style = list(fontSize = '1em')) %>%
+  hc_add_theme(hc_theme_smpl()) %>%
+  hc_add_series(data =  df_all %>% filter(df_all$division_name == nms[[i]]), type = "line", mapping = hcaes(x = year, y = percent, group = label), dashStyle = "dash", marker = list(symbol = "diamond")) %>%
+  hc_exporting(enabled=TRUE,
+               sourceWidth = 900,
+               sourceHeight = 600)
+}
+
+chart_disadvan <- function(i) {
+  df <- df %>% filter(group %in% c("Economically Disadvantaged","All Students"))
+  df_groups <- df %>% filter(group != "All Students")
+  df_all <- df %>% filter(group == "All Students")
+  
+  df_groups %>%
+    filter(df_groups$division_name == nms[[i]]) %>%
+    hchart("line", hcaes(y = percent, x = year, group = label)) %>%
+    hc_legend(align = "center", verticalAlign = "top") %>%
+    hc_xAxis(title = list(text = xtext),
+             labels = list(formatter = xlabels, style = list(fontSize = '1.2em')),
+             tickInterval = 1,
+             allowDecimals = FALSE) %>%
+    hc_yAxis(min = 0, max = 100,
+             title = list(text = ytext),
+             labels = list(format = '{text}%')) %>%
+  # hc_colors(two_pal) %>%
+  hc_plotOptions(series = list(dataLabels = list(format = '{y: f}%', enabled = TRUE)),
+                 line = list( marker = list(enabled = TRUE, symbol = list("circle")) )) %>%
+  hc_tooltip(formatter = JS("function(){
+  return this.series.name + '</br><b>' + this.key + '</b></br>' + 'Percent: <b>' + this.y + '%</b></br>' + 'Est. Number: <b>' + this.point.count_label 
+  }")) %>%
+  hc_title(text = paste0(title, " in ", nms[[i]], " by Economically Disadvantaged"),
+           align = 'left') %>%
+  hc_caption(text = source_text,
+             align = "right",
+             style = list(fontSize = '1em')) %>%
+  hc_add_theme(hc_theme_smpl()) %>%
+  hc_add_series(data =  df_all %>% filter(df_all$division_name == nms[[i]]), type = "line", mapping = hcaes(x = year, y = percent, group = label), dashStyle = "dash", marker = list(symbol = "diamond")) %>%
+  hc_exporting(enabled=TRUE,
+               sourceWidth = 900,
+               sourceHeight = 600)
+}
+
+for (i in 1:len) {
+  cat("####", nms[i], "\n \n")
+  print(htmltools::tagList(mychart(i)))
+  print(htmltools::tagList(chart_disadvan(i)))
+}
+
+```
+## Economic and Family Stability
+
+### Children Living below Poverty Threshold
+```{r include=FALSE}
+# Init Step to make sure that the dependencies are loaded
+highchart()
+```
+
+```{r, results='asis'}
+
+df <- read_csv("../data/child_poverty_by_race.csv") %>% 
+  filter(year >= 2014) %>% 
+  filter(! group %in% c("under18_white"))
+
+df$percent <- round(df$pov_rate_bygroup,0)
+df$label <- df$group 
+df$count_label <- prettyNum(df$pov_num_group, big.mark = ",")
+
+title <- "Percent of Children Living below the Poverty Threshold"
+ytext <- "Percent of Children"
+xtext <- "Year"
+xlabels <- JS("function() { return this.value; }")
+source_text <- "Data Source: U.S. Census Bureau, American Community Survey 5-year estimates"
+
+nms <- unique(df$locality)
+len <- length(unique(df$locality))
+
+mychart <- function(i) {
+   
+  df_groups <- df %>% filter(group != "under18")
+  df_all <- df %>% filter(group == "under18")
+  
+  df_groups %>%
+    filter(df_groups$locality == nms[[i]]) %>%
+    hchart("line", hcaes(y = percent, x = year, group = label)) %>%
+    hc_legend(align = "center", verticalAlign = "top") %>%
+    hc_xAxis(title = list(text = xtext),
+             labels = list(formatter = xlabels, style = list(fontSize = '1.2em')),
+             tickInterval = 1,
+             allowDecimals = FALSE) %>%
+    hc_yAxis(min = 0, max = 100,
+             title = list(text = ytext),
+             labels = list(format = '{text}%')) %>%
+  # hc_colors(two_pal) %>%
+  hc_plotOptions(series = list(dataLabels = list(format = '{y: f}%', enabled = TRUE)),
+                 line = list( marker = list(enabled = TRUE, symbol = list("circle")) )) %>%
+  hc_tooltip(formatter = JS("function(){
+  return this.series.name + '</br><b>' + this.key + '</b></br>' + 'Percent: <b>' + this.y + '%</b></br>' + 'Est. Number: <b>' + this.point.count_label + '</b></br>Total Est.: ' + this.point.population_num_group
+  }")) %>%
+  hc_title(text = paste0(title, " in ", nms[[i]], " by Race and Ethnicity"),
+           align = 'left') %>%
+  hc_caption(text = source_text,
+             align = "right",
+             style = list(fontSize = '1em')) %>%
+  hc_add_theme(hc_theme_smpl()) %>%
+  hc_add_series(data =  df_all %>% filter(df_all$locality == nms[[i]]), type = "line", mapping = hcaes(x = year, y = percent, group = label), dashStyle = "dash", marker = list(symbol = "diamond")) %>%
+  hc_exporting(enabled=TRUE,
+               sourceWidth = 900,
+               sourceHeight = 600)
+  
+ 
+}
+
+for (i in 1:len) {
+  cat("####", nms[i], "\n \n")
+  print(htmltools::tagList(mychart(i)))
+}
+
+```
+
+### Students Identified as Economically Disadvantaged
+
+```{r include=FALSE}
+# Init Step to make sure that the dependencies are loaded
+highchart()
+```
+
+```{r, results='asis'}
+df <- read_csv("../data/econ_disadvan_students_by_race.csv") %>% 
+  select(school_year, division_name, race, disadvan_race_count, disadvan_total_count, total_students, disadvan_percent_byrace)
+
+df_all <- read_csv("../data/economically_disadvantaged_students.csv") %>% 
+  mutate(race = "All Students", .after = "division_name") %>% 
+  rename("disadvan_race_count" = "economically_disadvantaged_students",
+         "disadvan_percent_byrace" = "percent_disadvantaged") %>% 
+  mutate(disadvan_total_count = disadvan_race_count, .after = "disadvan_race_count") %>% 
+  select(school_year, division_name, race, disadvan_race_count, disadvan_total_count, total_students, disadvan_percent_byrace)
+
+df <- rbind(df, df_all)
+
+df <- df %>%
+  filter(! race %in% c("American Indian or Alaska Native", "Native Hawaiian  or Pacific Islander")) %>% 
+  mutate(year = as.numeric(str_sub(school_year,1,4)),
+         division_name = case_when(str_detect(division_name, "Albemarle") ~ "Albemarle County Public Schools", 
+                                                        str_detect(division_name, "Charlottesville") ~ "Charlottesville City Schools",
+                                                        str_detect(division_name, "Virginia") ~ "Virginia Public Schools"),
+         label = case_when(race == "Black, not of Hispanic origin" ~ "Black",
+                           race == "Non-Hispanic, two or more races" ~ "Multiracial",
+                           race == "White, not of Hispanic origin" ~ "White",
+                           .default = race)) %>% 
+  filter(year >= 2014)
+
+df$percent <- round(df$disadvan_percent_byrace,0)
+df$label <- df$label 
+df$count_label <- prettyNum(df$disadvan_race_count, big.mark = ",")
+
+title <- "Percent of Students Identified as Economically Disadvantaged"
+ytext <- "Percent of Students"
+xtext <- "School Year"
+xlabels <- JS("function() { return this.value + '-' + (this.value + 1).toString().slice(-2); }")
+source_text <- "Data Source: Virginia Department of Education"
+
+nms <- unique(df$division_name)
+len <- length(unique(df$division_name))
+
+mychart <- function(i) {
+  df_groups <- df %>% filter(label != "All Students")
+  df_all <- df %>% filter(label == "All Students")
+  
+  df_groups %>%
+    filter(df_groups$division_name == nms[[i]]) %>%
+    hchart("line", hcaes(y = percent, x = year, group = label)) %>%
+    hc_legend(align = "center", verticalAlign = "top") %>%
+    hc_xAxis(title = list(text = xtext),
+             labels = list(formatter = xlabels, style = list(fontSize = '1.2em')),
+             tickInterval = 1,
+             allowDecimals = FALSE) %>%
+    hc_yAxis(min = 0, max = 100,
+             title = list(text = ytext),
+             labels = list(format = '{text}%')) %>%
+  # hc_colors(two_pal) %>%
+  hc_plotOptions(series = list(dataLabels = list(format = '{y: f}%', enabled = TRUE)),
+                 line = list( marker = list(enabled = TRUE, symbol = list("circle")) )) %>%
+  hc_tooltip(formatter = JS("function(){
+  return this.series.name + '</br><b>' + this.key + '</b></br>' + 'Percent: <b>' + this.y + '%</b></br>' + 'Est. Number: <b>' + this.point.count_label + '</b></br>Total Disadvantaged: ' + this.point.disadvan_total_count
+  }")) %>%
+  hc_title(text = paste0(title, " in ", nms[[i]], " by Race and Ethnicity"),
+           align = 'left') %>%
+  hc_caption(text = source_text,
+             align = "right",
+             style = list(fontSize = '1em')) %>%
+  hc_add_theme(hc_theme_smpl()) %>%
+  hc_add_series(data =  df_all %>% filter(df_all$division_name == nms[[i]]), type = "line", mapping = hcaes(x = year, y = percent, group = label), dashStyle = "dash", marker = list(symbol = "diamond")) %>%
+  hc_exporting(enabled=TRUE,
+               sourceWidth = 900,
+               sourceHeight = 600)
+  
+ 
+}
+
+for (i in 1:len) {
+  cat("####", nms[i], "\n \n")
+  print(htmltools::tagList(mychart(i)))
+}
+
+```
+
+### Youth Labor Force Participation and Unemployment
+```{r}
+df <- read_csv("../data/youth_employment_status_by_tract.csv") %>% 
+  filter(year >= 2020) %>% 
+  rename(laborforce_count = laborforce_16_19yr,
+         unemployed_count = unemployed_16_19yr,
+         laborforce_percent = per_laborforce_16_19yr,
+         unemployed_percent = per_unemployed_16_19yr) %>% 
+  pivot_longer(laborforce_count:unemployed_percent, names_to = c("variable", ".value"), 
+               names_sep="_") %>% 
+  mutate(variable = ifelse(variable == "laborforce", "Youth (16-19) Participating in the Labor Force", "Youth (16-19) in the Labor Force Experiencing Unemployment"))
+  
+```
+
+#### Charlottesville Census Tracts
+```{r}
+# Set data
+df_cville <- df %>% 
+  filter(year >= 2020) %>% 
+  filter(locality == "Charlottesville")
+
+df_cville$percent <- round(df_cville$percent,0)
+df_cville$label <- df_cville$tractnames 
+df_cville$count_label <- prettyNum(df_cville$count, big.mark = ",")
+
+title <- "Percent of Youth (16-19) Participating in the Labor Force by Census Tract"
+ytext <- "Percent of Youth (16-19)"
+xtext <- "Year"
+xlabels <- JS("function() { return this.value; }")
+source_text <- "Data Source: U.S. Census Bureau, American Community Survey 5-year estimates"
+
+```
+
+:::{.column-body layout-ncol=2}
+```{r}
+youth_employ_map <- df_cville %>% 
+  mutate(GEOID = as.character(GEOID)) %>% 
+  filter(year == 2024) %>% 
+  left_join(tracts_geo, by = join_by(GEOID == GEOID)) %>%
+  st_as_sf()
+
+map_laborforce <- youth_employ_map %>% filter(variable == "Youth (16-19) Participating in the Labor Force")
+
+leaflet() %>% 
+  addProviderTiles("CartoDB.Positron") %>% 
+  addPolygons(data = map_laborforce,
+              fillColor = ~pal_red(map_laborforce$percent),
+              weight = 1,
+              opacity = 1,
+              color = "white", 
+              fillOpacity = 0.7,
+              popup = paste0("Place: ", map_laborforce$tractnames, "<br>",
+                             "Census Tract: ", map_laborforce$NAME.x, "<br>",
+                             "Percent: ", map_laborforce$percent, "%")) %>%
+  addLegend("topright", pal = pal_red_rev, values = map_laborforce$percent, 
+            title = "Youth in the<br/>Labor Force<br/>(2024)", opacity = 0.7,
+            # labFormat = labelFormat(transform = function(x) sort(x, decreasing = TRUE), suffix = "%"),
+            labFormat = function(type, breaks) {
+              return(c("80 - 100%", "60 - 80%", "40 - 60%", "20 - 40%", "0 - 20%"))
+            }
+            )
+```
+```{r}
+map_unemploy <- youth_employ_map %>% filter(variable == "Youth (16-19) in the Labor Force Experiencing Unemployment")
+leaflet() %>% 
+  addProviderTiles("CartoDB.Positron") %>% 
+  addPolygons(data = map_unemploy,
+              fillColor = ~pal_blue(map_unemploy$percent),
+              weight = 1,
+              opacity = 1,
+              color = "white", 
+              fillOpacity = 0.7,
+              popup = paste0("Place: ", map_unemploy$tractnames, "<br>",
+                             "Census Tract: ", map_unemploy$NAME.x, "<br>",
+                             "Percent: ", map_unemploy$percent, "%")) %>%
+  addLegend("topright", pal = pal_blue_rev, values = map_unemploy$percent, 
+            title = "Unemployed Youth<br/>in the Labor Force<br/>(2024)", opacity = 0.7,
+            # labFormat = labelFormat(transform = function(x) sort(x, decreasing = FALSE), suffix = "%"),
+            labFormat = function(type, breaks) {
+              return(c("80 - 100%", "60 - 80%", "40 - 60%", "20 - 40%", "0 - 20%"))
+            }
+            )
+```
+:::
+
+#### Charlottesville Census Tracts: Youth in the Labor Force and Unemployment 2020-2024
+```{r include=FALSE}
+# Init Step to make sure that the dependencies are loaded
+highchart()
+```
+
+::: {.panel-tabset .nav-pills style="display: flex;"}
+```{r, results='asis'}
+
+nms <- unique(df_cville$tractnames)
+len <- length(unique(df_cville$tractnames))
+
+mychart <- function(i) {
+   
+  df_cville_laborforce <- df_cville %>% filter(variable == "Youth (16-19) Participating in the Labor Force")
+  df_cville_unemployed <- df_cville %>% filter(variable == "Youth (16-19) in the Labor Force Experiencing Unemployment")
+  
+ df_cville_laborforce %>%
+    filter(df_cville_laborforce$tractnames == nms[[i]]) %>%
+    hchart("line", hcaes(y = percent, x = year, group = variable)) %>% 
+    hc_legend(align = "center", verticalAlign = "top") %>%
+    hc_xAxis(title = list(text = "Year"),
+             labels = list(formatter = xlabels, style = list(fontSize = '1.2em')),
+             tickInterval = 1,
+             allowDecimals = FALSE) %>%
+    hc_yAxis(min = 0, max = 100,
+             title = list(text = "Percent"),
+             labels = list(format = '{text}%')) %>%
+  hc_colors(two_pal) %>%
+  hc_plotOptions(series = list(dataLabels = list(format = '{y: f}%', enabled = TRUE)),
+                 line = list( marker = list(enabled = TRUE) )) %>%
+  hc_tooltip(formatter = JS("function(){
+  return this.series.name + '</br><b>' + this.key + '</b></br>' + 'Percent: <b>' + this.y + '%</b></br>' + 'Est. Number: <b>' + this.point.count_label + '</b></br>Total Est. 16-19 yr olds: ' + this.point.total_16_19yr
+  }")) %>%
+  hc_title(text = nms[[i]],
+           align = 'left') %>%
+  hc_add_theme(hc_theme_smpl()) %>% 
+  hc_add_series(data =  df_cville_unemployed %>% filter(df_cville_unemployed$tractnames == nms[[i]]), type = "line", mapping = hcaes(x = year, y = percent, group = variable)) %>%
+  hc_exporting(enabled=TRUE,
+               sourceWidth = 900,
+               sourceHeight = 600)
+}
+
+for (i in 1:len) {
+  cat("####", nms[i], "\n \n")
+  print(htmltools::tagList(mychart(i)))
+}
+
+```
+:::
+
+#### Albemarle County Census Tracts
+```{r}
+# Set data
+df_alb <- df %>% 
+  filter(year >= 2020) %>% 
+  filter(locality == "Albemarle")
+
+df_alb$percent <- round(df_alb$percent,0)
+df_alb$label <- df_alb$tractnames 
+df_alb$count_label <- prettyNum(df_alb$count, big.mark = ",")
+
+title <- "Percent of Youth (16-19) Participating in the Labor Force by Census Tract"
+ytext <- "Percent of Youth (16-19)"
+xtext <- "Year"
+xlabels <- JS("function() { return this.value; }")
+source_text <- "Data Source: U.S. Census Bureau, American Community Survey 5-year estimates"
+
+```
+
+:::{.column-body layout-ncol=2}
+```{r}
+youth_employ_map <- df_alb %>% 
+  mutate(GEOID = as.character(GEOID)) %>% 
+  filter(year == 2024) %>% 
+  left_join(tracts_geo, by = join_by(GEOID == GEOID)) %>%
+  st_as_sf()
+
+map_laborforce <- youth_employ_map %>% filter(variable == "Youth (16-19) Participating in the Labor Force")
+
+leaflet() %>% 
+  addProviderTiles("CartoDB.Positron") %>% 
+  addPolygons(data = map_laborforce,
+              fillColor = ~pal_red(map_laborforce$percent),
+              weight = 1,
+              opacity = 1,
+              color = "white", 
+              fillOpacity = 0.7,
+              popup = paste0("Place: ", map_laborforce$tractnames, "<br>",
+                             "Census Tract: ", map_laborforce$NAME.x, "<br>",
+                             "Percent: ", map_laborforce$percent, "%")) %>%
+  addLegend("topright", pal = pal_red_rev, values = map_laborforce$percent, 
+            title = "Youth in the<br/>Labor Force<br/>(2024)", opacity = 0.7,
+            # labFormat = labelFormat(transform = function(x) sort(x, decreasing = TRUE), suffix = "%"),
+            labFormat = function(type, breaks) {
+              return(c("80 - 100%", "60 - 80%", "40 - 60%", "20 - 40%", "0 - 20%"))
+            })
+```
+
+```{r}
+map_unemploy <- youth_employ_map %>% filter(variable == "Youth (16-19) in the Labor Force Experiencing Unemployment")
+leaflet() %>% 
+  addProviderTiles("CartoDB.Positron") %>% 
+  addPolygons(data = map_unemploy,
+              fillColor = ~pal_blue(map_unemploy$percent),
+              weight = 1,
+              opacity = 1,
+              color = "white", 
+              fillOpacity = 0.7,
+              popup = paste0("Place: ", map_unemploy$tractnames, "<br>",
+                             "Census Tract: ", map_unemploy$NAME.x, "<br>",
+                             "Percent: ", map_unemploy$percent, "%")) %>%
+  addLegend("topright", pal = pal_blue_rev, values = map_unemploy$percent, 
+            title = "Unemployed Youth<br/>in the Labor Force<br/>(2024)", opacity = 0.7,
+            # labFormat = labelFormat(transform = function(x) sort(x, decreasing = TRUE), suffix = "%"),
+            labFormat = function(type, breaks) {
+              return(c("80 - 100%", "60 - 80%", "40 - 60%", "20 - 40%", "0 - 20%"))
+            }
+            )
+```
+:::
+
+#### Albemarle Census Tracts: Youth in the Labor Force and Unemployment 2020-2024
+```{r include=FALSE}
+# Init Step to make sure that the dependencies are loaded
+highchart()
+```
+
+::: {.panel-tabset .nav-pills style="display: flex;"}
+```{r, results='asis'}
+
+nms <- unique(df_alb$tractnames)
+len <- length(unique(df_alb$tractnames))
+
+mychart <- function(i) {
+   
+  df_alb_laborforce <- df_alb %>% filter(variable == "Youth (16-19) Participating in the Labor Force")
+  df_alb_unemployed <- df_alb %>% filter(variable == "Youth (16-19) in the Labor Force Experiencing Unemployment")
+  
+ df_alb_laborforce %>%
+    filter(df_alb_laborforce$tractnames == nms[[i]]) %>%
+    hchart("line", hcaes(y = percent, x = year, group = variable)) %>% 
+    hc_legend(align = "center", verticalAlign = "top") %>%
+    hc_xAxis(title = list(text = "Year"),
+             labels = list(formatter = xlabels, style = list(fontSize = '1.2em')),
+             tickInterval = 1,
+             allowDecimals = FALSE) %>%
+    hc_yAxis(min = 0, max = 100,
+             title = list(text = "Percent"),
+             labels = list(format = '{text}%')) %>%
+  hc_colors(two_pal) %>%
+  hc_plotOptions(series = list(dataLabels = list(format = '{y: f}%', enabled = TRUE)),
+                 line = list( marker = list(enabled = TRUE) )) %>%
+  hc_tooltip(formatter = JS("function(){
+  return this.series.name + '</br><b>' + this.key + '</b></br>' + 'Percent: <b>' + this.y + '%</b></br>' + 'Est. Number: <b>' + this.point.count_label + '</b>'
+  }")) %>%
+  hc_title(text = nms[[i]],
+           align = 'left') %>%
+  hc_add_theme(hc_theme_smpl()) %>% 
+  hc_add_series(data =  df_alb_unemployed %>% filter(df_alb_unemployed$tractnames == nms[[i]]), type = "line", mapping = hcaes(x = year, y = percent, group = variable)) %>%
+  hc_exporting(enabled=TRUE,
+               sourceWidth = 900,
+               sourceHeight = 600)
+}
+
+for (i in 1:len) {
+  cat("####", nms[i], "\n \n")
+  print(htmltools::tagList(mychart(i)))
+}
+
+```
+:::
+
+### Assessments and Investigations by Child Protective Services
+```{r, results='asis'}
+df <- read_csv("../data/welfare_cases_race_ethn.csv") %>% 
+  filter(! group %in% c("aian", "nhpi")) %>% 
+  mutate(group = str_to_title(group)) %>% 
+  filter(sfy_year >= 2016)
+  
+df$percent <- round(df$cps_rate_bygroup,1)
+df$label <- df$group 
+# df$count_label <- prettyNum(df$low_birth_weight_births, big.mark = ",")
+
+title <- "Referrals to Child Protective Services Accepted for Assessment or Investigation"
+ytext <- "Rate per 1,000 Children"
+xtext <- "Fiscal Year (July 1st - June 30th)"
+xlabels <- JS("function() { return this.value; }")
+source_text <- "Data Source: Virginia Department of Social Services"
+
+nms <- unique(df$local_agency)
+len <- length(unique(df$local_agency))
+
+mychart <- function(i) {
+  df_groups <- df %>% filter(group != "All")
+  df_all <- df %>% filter(group == "All")
+  
+  df_groups %>%
+    filter(df_groups$local_agency == nms[[i]]) %>%
+    hchart("line", hcaes(y = percent, x = sfy_year, group = label)) %>%
+    hc_legend(align = "center", verticalAlign = "top") %>%
+    hc_xAxis(title = list(text = xtext),
+             labels = list(formatter = xlabels, style = list(fontSize = '1.2em')),
+             tickInterval = 1,
+             allowDecimals = FALSE) %>%
+    hc_yAxis(min = 0, max = 220,
+             title = list(text = ytext),
+             labels = list(format = '{text}')) %>%
+  # hc_colors(two_pal) %>%
+  hc_plotOptions(series = list(dataLabels = list(format = '{y: f}', enabled = TRUE)),
+                 line = list( marker = list(enabled = TRUE, symbol = list("circle")) )) %>%
+  hc_tooltip(formatter = JS("function(){
+  return this.series.name + '</br><b>' + this.key + '</b></br>' + 'Rate per 1,000: <b>' + this.y + '</b></br>'
+  }")) %>%
+  hc_title(text = paste0(title, " in ", nms[[i]], " by Race and Ethnicity"),
+           align = 'left') %>%
+  hc_caption(text = source_text,
+             align = "right",
+             style = list(fontSize = '1em')) %>%
+  hc_add_theme(hc_theme_smpl()) %>%
+  hc_add_series(data =  df_all %>% filter(df_all$local_agency == nms[[i]]), type = "line", mapping = hcaes(x = sfy_year, y = percent, group = label), dashStyle = "dash", marker = list(symbol = "diamond")) %>%
+  hc_exporting(enabled=TRUE,
+               sourceWidth = 900,
+               sourceHeight = 600)
+}
+
+for (i in 1:len) {
+  cat("####", nms[i], "\n \n")
+  print(htmltools::tagList(mychart(i)))
+}
+
+```
+
+### Children in Foster Care
+```{r, results='asis'}
+df <- read_csv("../data/foster_care_race_ethn.csv") %>% 
+  mutate(group = str_to_title(group)) %>% 
+  filter(year >= 2016)
+  
+df$percent <- round(df$fc_rate_bygroup,1)
+df$label <- df$group 
+# df$count_label <- prettyNum(df$low_birth_weight_births, big.mark = ",")
+
+title <- "Rate of Children in Foster Care"
+ytext <- "Rate per 1,000 Children"
+xtext <- "Year (Measured on October 1st)"
+xlabels <- JS("function() { return this.value; }")
+source_text <- "Data Source: Virginia Department of Social Services"
+
+nms <- unique(df$locality)
+len <- length(unique(df$locality))
+
+mychart <- function(i) {
+  df_groups <- df %>% filter(group != "All")
+  df_all <- df %>% filter(group == "All")
+  
+  df_groups %>%
+    filter(df_groups$locality == nms[[i]]) %>%
+    hchart("line", hcaes(y = percent, x = year, group = label)) %>%
+    hc_legend(align = "center", verticalAlign = "top") %>%
+    hc_xAxis(title = list(text = xtext),
+             labels = list(formatter = xlabels, style = list(fontSize = '1.2em')),
+             tickInterval = 1,
+             allowDecimals = FALSE) %>%
+    hc_yAxis(min = 0, max = 75,
+             title = list(text = ytext),
+             labels = list(format = '{text}')) %>%
+  # hc_colors(two_pal) %>%
+  hc_plotOptions(series = list(dataLabels = list(format = '{y: f}', enabled = TRUE)),
+                 line = list( marker = list(enabled = TRUE, symbol = list("circle")) )) %>%
+  hc_tooltip(formatter = JS("function(){
+  return this.series.name + '</br><b>' + this.key + '</b></br>' + 'Rate per 1,000: <b>' + this.y + '</b></br>'
+  }")) %>%
+  hc_title(text = paste0(title, " in ", nms[[i]], " by Race and Ethnicity"),
+           align = 'left') %>%
+  hc_caption(text = source_text,
+             align = "right",
+             style = list(fontSize = '1em')) %>%
+  hc_add_theme(hc_theme_smpl()) %>%
+  hc_add_series(data =  df_all %>% filter(df_all$locality == nms[[i]]), type = "line", mapping = hcaes(x = year, y = percent, group = label), dashStyle = "dash", marker = list(symbol = "diamond")) %>%
+  hc_exporting(enabled=TRUE,
+               sourceWidth = 900,
+               sourceHeight = 600)
+}
+
+for (i in 1:len) {
+  cat("####", nms[i], "\n \n")
+  print(htmltools::tagList(mychart(i)))
+}
+
+```
+## Health
+
+### Low Birth-Weight Infants
+```{r, results='asis'}
+
+df <- read_csv("../data/low_birthweight_race_ethn.csv") %>% 
+  filter(! maternal_race_and_ethnicity %in% c("American Indian or Alaskan Native", "Another Race, Non-Hispanic", "Asian or Pacific Islander", "Unknown Race and Ethnicity")) %>% 
+  mutate(group = case_when(maternal_race_and_ethnicity == "Black or African American" ~ "Black",
+                           maternal_race_and_ethnicity == "Hispanic or Latinx (All Races)" ~ "Hispanic",
+                           .default = maternal_race_and_ethnicity)) %>% 
+  filter(year >= 2014) %>% 
+  mutate(across(low_birth_weight_births:percentage_with_low_birth_weight, ~ as.numeric(.x))) %>% 
+  mutate(location = case_when(str_detect(geography, "Albemarle") ~ "Albemarle",
+                              str_detect(geography, "Charlottesville") ~ "Charlottesville",
+                              str_detect(geography, "Virginia") ~ "Virginia"),
+         count = ifelse(is.na(low_birth_weight_births), 1, low_birth_weight_births),
+         percent = round(count/total_live_births *100, 0)) %>% 
+  select(year, location, group, percent)
+
+df_all <- read_csv("../data/low_birthweight.csv") %>% 
+  mutate(group = "All Births") %>%
+  rename("year" = "time_frame",
+         "percent" = "percent_low_birthweight") %>% 
+  select(year, location, group, percent)
+
+df <- rbind(df, df_all)
+
+df <- df %>% 
+  filter(year >= 2014)
+  
+df$percent <- round(df$percent,0)
+df$label <- df$group 
+# df$count_label <- prettyNum(df$low_birth_weight_births, big.mark = ",")
+
+title <- "Percent Low Birth-Weight Babies"
+ytext <- "Percent of Births"
+xtext <- "Year"
+xlabels <- JS("function() { return this.value; }")
+source_text <- "Data Source: Virginia Department of Health, Maternal & Child Health Epidemiology Unit"
+
+nms <- unique(df$location)
+len <- length(unique(df$location))
+
+mychart <- function(i) {
+  df_groups <- df %>% filter(group != "All Births")
+  df_all <- df %>% filter(group == "All Births")
+  
+  df_groups %>%
+    filter(df_groups$location == nms[[i]]) %>%
+    hchart("line", hcaes(y = percent, x = year, group = label)) %>%
+    hc_legend(align = "center", verticalAlign = "top") %>%
+    hc_xAxis(title = list(text = xtext),
+             labels = list(formatter = xlabels, style = list(fontSize = '1.2em')),
+             tickInterval = 1,
+             allowDecimals = FALSE) %>%
+    hc_yAxis(min = 0, max = 100,
+             title = list(text = ytext),
+             labels = list(format = '{text}%')) %>%
+  # hc_colors(two_pal) %>%
+  hc_plotOptions(series = list(dataLabels = list(format = '{y: f}%', enabled = TRUE)),
+                 line = list( marker = list(enabled = TRUE, symbol = list("circle")) )) %>%
+  hc_tooltip(formatter = JS("function(){
+  return this.series.name + '</br><b>' + this.key + '</b></br>' + 'Percent: <b>' + this.y + '%</b></br>'
+  }")) %>%
+  hc_title(text = paste0(title, " in ", nms[[i]], " by Race and Ethnicity"),
+           align = 'left') %>%
+  hc_caption(text = source_text,
+             align = "right",
+             style = list(fontSize = '1em')) %>%
+  hc_add_theme(hc_theme_smpl()) %>%
+  hc_add_series(data =  df_all %>% filter(df_all$location == nms[[i]]), type = "line", mapping = hcaes(x = year, y = percent, group = label), dashStyle = "dash", marker = list(symbol = "diamond")) %>%
+  hc_exporting(enabled=TRUE,
+               sourceWidth = 900,
+               sourceHeight = 600)
+}
+
+for (i in 1:len) {
+  cat("####", nms[i], "\n \n")
+  print(htmltools::tagList(mychart(i)))
+}
+
+```
+
+### Infant Mortality
+```{r, results='asis'}
+df <- read_csv("../data/infant_mortality_race_ethn.csv") %>% 
+  filter(! maternal_race_and_ethnicity %in% c("American Indian or Alaskan Native", "Another Race, Non-Hispanic", "Asian or Pacific Islander", "Unknown Race and Ethnicity")) %>% 
+  mutate(group = case_when(maternal_race_and_ethnicity == "Black or African American" ~ "Black",
+                           maternal_race_and_ethnicity == "Hispanic or Latinx (All Races)" ~ "Hispanic",
+                           .default = maternal_race_and_ethnicity)) %>% 
+  mutate(across(infant_deaths:infant_mortality_rate, ~ as.numeric(.x))) %>% 
+  mutate(location = case_when(str_detect(geography, "Albemarle") ~ "Albemarle",
+                              str_detect(geography, "Charlottesville") ~ "Charlottesville",
+                              str_detect(geography, "Virginia") ~ "Virginia"),
+         count = ifelse(is.na(infant_deaths), 1, infant_deaths),
+         rate = round(count/total_live_births *1000, 0)) %>% 
+  select(year, location, group, rate)
+
+df <- df %>% 
+  arrange(location, year) %>% 
+  group_by(location, group) %>% 
+  mutate(rate_infant_mortality_3yravg = zoo::rollmean(rate, k = 3, fill = NA, align = "center")) %>% 
+  ungroup()
+
+df_all <- read_csv("../data/infant_mortality.csv") %>% 
+  mutate(group = "All Births") %>%
+  rename("year" = "time_frame",
+         "rate" = "rate_infant_mortality") %>% 
+  select(year, location, group, rate, rate_infant_mortality_3yravg)
+
+df <- rbind(df, df_all)
+
+df <- df %>% 
+  filter(year >= 2016)
+  
+df$percent <- round(df$rate_infant_mortality_3yravg,1)
+df$label <- df$group 
+# df$count_label <- prettyNum(df$low_birth_weight_births, big.mark = ",")
+
+title <- "Infant Mortality Rate"
+ytext <- "Rate per 1,000 births"
+xtext <- "Year (3 Year Rolling Average)"
+xlabels <- JS("function() { return this.value; }")
+source_text <- "Data Source: Virginia Department of Health, Maternal & Child Health Epidemiology Unit"
+
+nms <- unique(df$location)
+len <- length(unique(df$location))
+
+mychart <- function(i) {
+  df_groups <- df %>% filter(group != "All Births")
+  df_all <- df %>% filter(group == "All Births")
+  
+  df_groups %>%
+    filter(df_groups$location == nms[[i]]) %>%
+    hchart("line", hcaes(y = percent, x = year, group = label)) %>%
+    hc_legend(align = "center", verticalAlign = "top") %>%
+    hc_xAxis(title = list(text = xtext),
+             labels = list(formatter = xlabels, style = list(fontSize = '1.2em')),
+             tickInterval = 1,
+             allowDecimals = FALSE) %>%
+    hc_yAxis(min = 0, max = 50,
+             title = list(text = ytext),
+             labels = list(format = '{text}')) %>%
+  # hc_colors(two_pal) %>%
+  hc_plotOptions(series = list(dataLabels = list(format = '{y: f}', enabled = TRUE)),
+                 line = list( marker = list(enabled = TRUE, symbol = list("circle")) )) %>%
+  hc_tooltip(formatter = JS("function(){
+  return this.series.name + '</br><b>' + this.key + '</b></br>' + 'Rate per 1,000 Births: <b>' + this.y + '</b></br>'
+  }")) %>%
+  hc_title(text = paste0(title, " in ", nms[[i]], " by Race and Ethnicity"),
+           align = 'left') %>%
+  hc_caption(text = source_text,
+             align = "right",
+             style = list(fontSize = '1em')) %>%
+  hc_add_theme(hc_theme_smpl()) %>%
+  hc_add_series(data =  df_all %>% filter(df_all$location == nms[[i]]), type = "line", mapping = hcaes(x = year, y = percent, group = label), dashStyle = "dash", marker = list(symbol = "diamond")) %>%
+  hc_exporting(enabled=TRUE,
+               sourceWidth = 900,
+               sourceHeight = 600)
+}
+
+for (i in 1:len) {
+  cat("####", nms[i], "\n \n")
+  print(htmltools::tagList(mychart(i)))
+}
+
+```
