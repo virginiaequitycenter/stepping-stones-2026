@@ -68,7 +68,7 @@ library(rcartocolor)
 
 # Color palettes ----
 locality_pal <- c("#193CBC", "#589ACF", "#FAC484")
-two_pal <- c("#d95204", "#193CBC")
+two_pal <- c("#c0392b", "#193CBC")
 six_pal <- c("#c0392b", "#3498db", "#2ecc71", "#f1c40f", "#8e44ad", "#434348")
 
 # six_pal <- c("#0cc0aa","#58a2ee","#a942be","#E0004E","#ffa600","#2d5192"
@@ -80,9 +80,11 @@ six_pal <- c("#c0392b", "#3498db", "#2ecc71", "#f1c40f", "#8e44ad", "#434348")
 # 
 # "#1ABC9C", "#16A085", "#2ECC71", "#27AE60", "#3498DB", "#2980B9", "#9B59B6", "#8E44AD", "#34495E", "#2C3E50",
 # "#F1C40F", "#F39C12", "#E67E22", "#D35400", "#E74C3C", "#C0392B", "#ECF0F1", "#BDC3C7", "#95A5A6", "#7F8C8D"
+# "#fce6ea","#f9cdd4","#f4b4bb","#ed9ba0","#e58385","#db6b68","#cf524a","#c0392b"
+# '#f5ded4', '#f6cbb7', '#f5b79b', '#f2a47f', '#ee9063', '#e87c48', '#e1682b', '#d95204'
 
-pal_red <- colorBin(c('#f5ded4', '#f6cbb7', '#f5b79b', '#f2a47f', '#ee9063', '#e87c48', '#e1682b', '#d95204'), domain = c(0,100), bins = c(0, 20, 40, 60, 80, 100), reverse = FALSE, na.color = "#e0e0e0")
-pal_red_rev <- colorBin(c('#f5ded4', '#f6cbb7', '#f5b79b', '#f2a47f', '#ee9063', '#e87c48', '#e1682b', '#d95204'), domain = c(0,100), bins = c(0, 20, 40, 60, 80, 100), reverse = TRUE, na.color = "#e0e0e0")
+pal_red <- colorBin(c("#F7E6E5","#EFCECA","#E7B5B0","#E09C95","#D8837B","#D06B60","#C85246","#C0392B"), domain = c(0,100), bins = c(0, 20, 40, 60, 80, 100), reverse = FALSE, na.color = "#e0e0e0")
+pal_red_rev <- colorBin(c("#F7E6E5","#EFCECA","#E7B5B0","#E09C95","#D8837B","#D06B60","#C85246","#C0392B"), domain = c(0,100), bins = c(0, 20, 40, 60, 80, 100), reverse = TRUE, na.color = "#e0e0e0")
 pal_blue <- colorBin(c('#ddd9ec', '#c7c1e6', '#b1a9df', '#9b92d9', '#837bd2', '#6965cb', '#4a50c3', '#193cbc'), domain = c(0,100), bins = c(0, 20, 40, 60, 80, 100), reverse = FALSE, na.color = "#e0e0e0")
 pal_blue_rev <- colorBin(c('#ddd9ec', '#c7c1e6', '#b1a9df', '#9b92d9', '#837bd2', '#6965cb', '#4a50c3', '#193cbc'), domain = c(0,100), bins = c(0, 20, 40, 60, 80, 100), reverse = TRUE, na.color = "#e0e0e0")
 pal_purple <- carto_pal(6, "Purp")
@@ -274,7 +276,7 @@ chart_disadvan <- function(i) {
     hc_yAxis(min = 0, max = 100,
              title = list(text = ytext),
              labels = list(format = '{text}%')) %>%
-  hc_colors(c("#8085e9","#434348")) %>%
+  hc_colors(c("#193CBC","#434348")) %>%
   hc_plotOptions(series = list(dataLabels = list(format = '{y: f}%', enabled = TRUE)),
                  line = list( marker = list(enabled = TRUE, symbol = list("circle")) )) %>%
   hc_tooltip(formatter = JS("function(){
@@ -375,7 +377,7 @@ chart_disadvan <- function(i) {
     hc_yAxis(min = 0, max = 100,
              title = list(text = ytext),
              labels = list(format = '{text}%')) %>%
-  hc_colors(c("#8085e9","#434348")) %>%
+  hc_colors(c("#193CBC","#434348")) %>%
   hc_plotOptions(series = list(dataLabels = list(format = '{y: f}%', enabled = TRUE)),
                  line = list( marker = list(enabled = TRUE, symbol = list("circle")) )) %>%
   hc_tooltip(formatter = JS("function(){
@@ -821,7 +823,8 @@ for (i in 1:len) {
 df <- read_csv("../data/welfare_cases_race_ethn.csv") %>% 
   filter(! group %in% c("aian", "nhpi")) %>% 
   mutate(group = str_to_title(group)) %>% 
-  filter(sfy_year >= 2016)
+  filter(sfy_year >= 2016) %>% 
+  filter(sfy_year <= 2024)
   
 df$percent <- round(df$cps_rate_bygroup,1)
 df$label <- df$group 
@@ -880,7 +883,8 @@ for (i in 1:len) {
 ```{r, results='asis'}
 df <- read_csv("../data/foster_care_race_ethn.csv") %>% 
   mutate(group = str_to_title(group)) %>% 
-  filter(year >= 2016)
+  filter(year >= 2016) %>% 
+  filter(year <= 2024)
   
 df$percent <- round(df$fc_rate_bygroup,1)
 df$label <- df$group 
@@ -1049,7 +1053,8 @@ df_all <- read_csv("../data/infant_mortality.csv") %>%
 df <- rbind(df, df_all)
 
 df <- df %>% 
-  filter(year >= 2016)
+  filter(year >= 2016) %>% 
+  filter(year <= 2023)
   
 df$percent <- round(df$rate_infant_mortality_3yravg,1)
 df$label <- df$group 
