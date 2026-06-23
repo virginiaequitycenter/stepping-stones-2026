@@ -66,9 +66,20 @@ library(tigris)
 library(sf)
 library(rcartocolor)
 
-# Color palette ----
+# Color palettes ----
 locality_pal <- c("#193CBC", "#589ACF", "#FAC484")
 two_pal <- c("#d95204", "#193CBC")
+six_pal <- c("#c0392b", "#3498db", "#2ecc71", "#f1c40f", "#8e44ad", "#434348")
+
+# six_pal <- c("#0cc0aa","#58a2ee","#a942be","#E0004E","#ffa600","#2d5192"
+# )
+# "#2980b9"
+# 
+# "#90ed7d", "#2b908f", "#7cb5ec", "#8085e9", "#f7a35c", "#434348", "#f15c80", "#e4d354", "#f45b5b", "#91e8e1"
+# 
+# 
+# "#1ABC9C", "#16A085", "#2ECC71", "#27AE60", "#3498DB", "#2980B9", "#9B59B6", "#8E44AD", "#34495E", "#2C3E50",
+# "#F1C40F", "#F39C12", "#E67E22", "#D35400", "#E74C3C", "#C0392B", "#ECF0F1", "#BDC3C7", "#95A5A6", "#7F8C8D"
 
 pal_red <- colorBin(c('#f5ded4', '#f6cbb7', '#f5b79b', '#f2a47f', '#ee9063', '#e87c48', '#e1682b', '#d95204'), domain = c(0,100), bins = c(0, 20, 40, 60, 80, 100), reverse = FALSE, na.color = "#e0e0e0")
 pal_red_rev <- colorBin(c('#f5ded4', '#f6cbb7', '#f5b79b', '#f2a47f', '#ee9063', '#e87c48', '#e1682b', '#d95204'), domain = c(0,100), bins = c(0, 20, 40, 60, 80, 100), reverse = TRUE, na.color = "#e0e0e0")
@@ -148,7 +159,7 @@ mychart <- function(i) {
     hc_yAxis(min = 0, max = 100,
              title = list(text = ytext),
              labels = list(format = '{text}%')) %>%
-  # hc_colors(two_pal) %>%
+  hc_colors(six_pal) %>%
   hc_plotOptions(series = list(dataLabels = list(format = '{y: f}%', enabled = TRUE)),
                  line = list( marker = list(enabled = TRUE, symbol = list("circle")) )) %>%
   hc_tooltip(formatter = JS("function(){
@@ -172,8 +183,6 @@ for (i in 1:len) {
 }
 
 ```
-
-### Out-of-School Suspensions
 
 ### High School Graduation Rate
 ```{r include=FALSE}
@@ -231,7 +240,7 @@ mychart <- function(i) {
     hc_yAxis(min = 0, max = 100,
              title = list(text = ytext),
              labels = list(format = '{text}%')) %>%
-  # hc_colors(two_pal) %>%
+  hc_colors(six_pal) %>%
   hc_plotOptions(series = list(dataLabels = list(format = '{y: f}%', enabled = TRUE)),
                  line = list( marker = list(enabled = TRUE, symbol = list("circle")) )) %>%
   hc_tooltip(formatter = JS("function(){
@@ -265,7 +274,7 @@ chart_disadvan <- function(i) {
     hc_yAxis(min = 0, max = 100,
              title = list(text = ytext),
              labels = list(format = '{text}%')) %>%
-  # hc_colors(two_pal) %>%
+  hc_colors(c("#8085e9","#434348")) %>%
   hc_plotOptions(series = list(dataLabels = list(format = '{y: f}%', enabled = TRUE)),
                  line = list( marker = list(enabled = TRUE, symbol = list("circle")) )) %>%
   hc_tooltip(formatter = JS("function(){
@@ -300,7 +309,8 @@ df <- read_csv("../data/postsecond_education_race_econ_disadvan.csv") %>%
                                                         str_detect(locality, "Virginia") ~ "Virginia Public Schools"),
          label = case_when(group == "2 or More" ~ "Multiracial",
                            .default = group)) %>% 
-  filter(year >= 2014)
+  filter(year >= 2014) %>% 
+  arrange(locality)
 
 df$percent <- round(df$percentany,0)
 df$label <- df$label 
@@ -331,7 +341,7 @@ mychart <- function(i) {
     hc_yAxis(min = 0, max = 100,
              title = list(text = ytext),
              labels = list(format = '{text}%')) %>%
-  # hc_colors(two_pal) %>%
+  hc_colors(six_pal) %>%
   hc_plotOptions(series = list(dataLabels = list(format = '{y: f}%', enabled = TRUE)),
                  line = list( marker = list(enabled = TRUE, symbol = list("circle")) )) %>%
   hc_tooltip(formatter = JS("function(){
@@ -350,7 +360,7 @@ mychart <- function(i) {
 }
 
 chart_disadvan <- function(i) {
-  df <- df %>% filter(group %in% c("Economically Disadvantaged","All Students"))
+  df <- df %>% filter(group %in% c("Economically Disadvantaged","All Students")) %>% arrange(division_name)
   df_groups <- df %>% filter(group != "All Students")
   df_all <- df %>% filter(group == "All Students")
   
@@ -365,7 +375,7 @@ chart_disadvan <- function(i) {
     hc_yAxis(min = 0, max = 100,
              title = list(text = ytext),
              labels = list(format = '{text}%')) %>%
-  # hc_colors(two_pal) %>%
+  hc_colors(c("#8085e9","#434348")) %>%
   hc_plotOptions(series = list(dataLabels = list(format = '{y: f}%', enabled = TRUE)),
                  line = list( marker = list(enabled = TRUE, symbol = list("circle")) )) %>%
   hc_tooltip(formatter = JS("function(){
@@ -402,7 +412,8 @@ highchart()
 
 df <- read_csv("../data/child_poverty_by_race.csv") %>% 
   filter(year >= 2014) %>% 
-  filter(! group %in% c("under18_white"))
+  filter(! group %in% c("under18_white")) %>% 
+  arrange(locality)
 
 df$percent <- round(df$pov_rate_bygroup,0)
 df$label <- df$group 
@@ -433,7 +444,7 @@ mychart <- function(i) {
     hc_yAxis(min = 0, max = 100,
              title = list(text = ytext),
              labels = list(format = '{text}%')) %>%
-  # hc_colors(two_pal) %>%
+  hc_colors(six_pal) %>%
   hc_plotOptions(series = list(dataLabels = list(format = '{y: f}%', enabled = TRUE)),
                  line = list( marker = list(enabled = TRUE, symbol = list("circle")) )) %>%
   hc_tooltip(formatter = JS("function(){
@@ -520,7 +531,7 @@ mychart <- function(i) {
     hc_yAxis(min = 0, max = 100,
              title = list(text = ytext),
              labels = list(format = '{text}%')) %>%
-  # hc_colors(two_pal) %>%
+  hc_colors(six_pal) %>%
   hc_plotOptions(series = list(dataLabels = list(format = '{y: f}%', enabled = TRUE)),
                  line = list( marker = list(enabled = TRUE, symbol = list("circle")) )) %>%
   hc_tooltip(formatter = JS("function(){
@@ -840,7 +851,7 @@ mychart <- function(i) {
     hc_yAxis(min = 0, max = 220,
              title = list(text = ytext),
              labels = list(format = '{text}')) %>%
-  # hc_colors(two_pal) %>%
+  hc_colors(c("#c0392b", "#3498db", "#2ecc71", "#8e44ad", "#434348")) %>%
   hc_plotOptions(series = list(dataLabels = list(format = '{y: f}', enabled = TRUE)),
                  line = list( marker = list(enabled = TRUE, symbol = list("circle")) )) %>%
   hc_tooltip(formatter = JS("function(){
@@ -899,7 +910,8 @@ mychart <- function(i) {
     hc_yAxis(min = 0, max = 75,
              title = list(text = ytext),
              labels = list(format = '{text}')) %>%
-  # hc_colors(two_pal) %>%
+    # hc_colors(c("#d7191c", "#fdae61", "#abdda4", "#2b83ba", "#dd74f1", "#000")) %>% 
+  hc_colors(six_pal) %>%
   hc_plotOptions(series = list(dataLabels = list(format = '{y: f}', enabled = TRUE)),
                  line = list( marker = list(enabled = TRUE, symbol = list("circle")) )) %>%
   hc_tooltip(formatter = JS("function(){
@@ -951,7 +963,8 @@ df_all <- read_csv("../data/low_birthweight.csv") %>%
 df <- rbind(df, df_all)
 
 df <- df %>% 
-  filter(year >= 2014)
+  filter(year >= 2014) %>% 
+  arrange(location)
   
 df$percent <- round(df$percent,0)
 df$label <- df$group 
@@ -981,7 +994,7 @@ mychart <- function(i) {
     hc_yAxis(min = 0, max = 100,
              title = list(text = ytext),
              labels = list(format = '{text}%')) %>%
-  # hc_colors(two_pal) %>%
+  hc_colors(c("#3498db", "#2ecc71", "#8e44ad", "#434348")) %>%
   hc_plotOptions(series = list(dataLabels = list(format = '{y: f}%', enabled = TRUE)),
                  line = list( marker = list(enabled = TRUE, symbol = list("circle")) )) %>%
   hc_tooltip(formatter = JS("function(){
@@ -1066,7 +1079,7 @@ mychart <- function(i) {
     hc_yAxis(min = 0, max = 50,
              title = list(text = ytext),
              labels = list(format = '{text}')) %>%
-  # hc_colors(two_pal) %>%
+  hc_colors(c("#3498db", "#2ecc71", "#8e44ad", "#434348")) %>%
   hc_plotOptions(series = list(dataLabels = list(format = '{y: f}', enabled = TRUE)),
                  line = list( marker = list(enabled = TRUE, symbol = list("circle")) )) %>%
   hc_tooltip(formatter = JS("function(){
