@@ -2,6 +2,7 @@
 .DS_Store
 data/2023_data/
 download_data/
+data/tempdata
 
 # History files
 .Rhistory

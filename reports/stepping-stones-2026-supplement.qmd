@@ -1,7 +1,7 @@
 ---
 title: "Stepping Stones 2026 Supplement Report"
 subtitle: "Disaggregated Measures of Well-Being of Children and Families in in Charlottesville and Albemarle"
-date: "May 2026"
+date: "July 2026"
 date-format: "MMMM YYYY"
 # author: "Community-Centered Analysis at the UVA Center for Community Partnerships"
 # license: "CC BY"
@@ -9,23 +9,23 @@ date-format: "MMMM YYYY"
 #   type: report
 #   url: communitypartnerships.virginia.edu
 format:
-  html:
-    toc: true
-    theme: cosmo
-    embed-resources: true
-  # docx:
+  # html:
   #   toc: true
-  #   toc-title: "Table of Contents"
-  #   # lof: true
-  #   # number-sections: true
-  #   number-depth: 3
-  #   # fig-align: left
-  #   # fig-width: 3
-  #   # fig-height: 2
-  #   # # fig-format: png
-  #   # fig-dpi: 200
+  #   theme: cosmo
   #   embed-resources: true
-  #   reference-doc: styles.docx
+  docx:
+    toc: true
+    toc-title: "Table of Contents"
+    # lof: true
+    # number-sections: true
+    number-depth: 3
+    # fig-align: left
+    # fig-width: 3
+    # fig-height: 2
+    # # fig-format: png
+    # fig-dpi: 200
+    embed-resources: true
+    reference-doc: styles.docx
 execute:
   cache: false
   echo: false
@@ -103,12 +103,17 @@ tracts_geo <- tracts_geo %>% st_transform(tracts_geo, crs = 4326)
 ## Education
 
 ### Students Eligible for Special Education Services
+
+::: {.content-visible when-format="html"}
 ```{r include=FALSE}
 # Init Step to make sure that the dependencies are loaded
 highchart()
 ```
 
 ```{r, results='asis'}
+#| label: fig-sped
+#| fig-cap: "Percent of students identified to receive special education services by race and ethnicity for the 2014-15 through 2024-25 school years at ACPS, CCS and Virginia public schools."
+
 df <- read_csv("../data/special_ed_services_by_race.csv") %>% 
   select(school_year, division_name, race, sped_race_count, sped_total_count, total_students, sped_percent_byrace)
 
@@ -185,14 +190,46 @@ for (i in 1:len) {
 }
 
 ```
+:::
+
+::: {.content-hidden when-format="html"}
+#### Albemarle County Public Schools
+```{r}
+#| label: fig-alb-sped-img
+#| fig-cap: "Percent of students identified to receive special education services by race and ethnicity for the 2014-15 through 2024-25 school years at ACPS."
+
+knitr::include_graphics("supplement_figures/fig-1-percent-of-students-iden.png")
+```
+
+#### Charlottesville City Schools
+```{r}
+#| label: fig-cville-sped-img
+#| fig-cap: "Percent of students identified to receive special education services by race and ethnicity for the 2014-15 through 2024-25 school years at CCS."
+
+knitr::include_graphics("supplement_figures/fig-2-percent-of-students-iden.png")
+```
+
+#### Virginia Public Schools
+```{r}
+#| label: fig-va-sped-img
+#| fig-cap: "Percent of students identified to receive special education services by race and ethnicity for the 2014-15 through 2024-25 school years at Virginia public schools."
+
+knitr::include_graphics("supplement_figures/fig-3-percent-of-students-iden.png")
+```
+:::
 
 ### High School Graduation Rate
+
+::: {.content-visible when-format="html"}
 ```{r include=FALSE}
 # Init Step to make sure that the dependencies are loaded
 highchart()
 ```
 
 ```{r, results='asis'}
+#| label: fig-grad-rates
+#| fig-cap: "Percent of student cohort graduating in four years by race and ethnicity, and economically disadvantaged students for 2014-2025 at ACPS, CCS and Virginia public schools."
+
 df <- read_csv("../data/graduation_rates_race_econ_disadvan.csv") %>% 
   select(cohort_year, division_name, group, graduation_rate, students_in_cohort)
 
@@ -301,8 +338,40 @@ for (i in 1:len) {
 }
 
 ```
+:::
+
+::: {.content-hidden when-format="html"}
+#### Albemarle County Public Schools
+```{r}
+#| label: fig-alb-grad-rates-img
+#| fig-cap: "Percent of student cohort graduating in four years by race and ethnicity, and economically disadvantaged students for 2014-2025 at ACPS."
+
+knitr::include_graphics("supplement_figures/fig-4-percent-of-student-cohor.png")
+knitr::include_graphics("supplement_figures/fig-5-percent-of-student-cohor.png")
+```
+
+#### Charlottesville City Schools
+```{r}
+#| label: fig-cville-grad-rates-img
+#| fig-cap: "Percent of student cohort graduating in four years by race and ethnicity, and economically disadvantaged students for 2014-2025 at CCS."
+
+knitr::include_graphics("supplement_figures/fig-6-percent-of-student-cohor.png")
+knitr::include_graphics("supplement_figures/fig-7-percent-of-student-cohor.png")
+```
+
+#### Virginia Public Schools
+```{r}
+#| label: fig-va-grad-rates-img
+#| fig-cap: "Percent of student cohort graduating in four years by race and ethnicity, and economically disadvantaged students for 2014-2025 at Virginia public schools."
+
+knitr::include_graphics("supplement_figures/fig-8-percent-of-student-cohor.png")
+knitr::include_graphics("supplement_figures/fig-9-percent-of-student-cohor.png")
+```
+:::
 
 ### Post-Secondary Enrollment
+
+::: {.content-visible when-format="html"}
 ```{r, results='asis'}
 df <- read_csv("../data/postsecond_education_race_econ_disadvan.csv") %>% 
   filter(! group %in% c("American Indian", "Native Hawaiian", "Female", "Male", "Limited English Proficient Students", "Students with Disabilities")) %>% 
@@ -402,23 +471,669 @@ for (i in 1:len) {
 }
 
 ```
+:::
+
+::: {.content-hidden when-format="html"}
+#### Albemarle County Public Schools
+```{r}
+#| label: fig-alb-postsecondary-img
+#| fig-cap: "Percent of graduating students enrolled in a post-secondary institution by race and ethnicity, and economically disadvantaged students for 2014-2023 at ACPS."
+
+knitr::include_graphics("supplement_figures/fig-10-percent-of-graduating-st.png")
+knitr::include_graphics("supplement_figures/fig-11-percent-of-graduating-st.png")
+```
+
+#### Charlottesville City Schools
+```{r}
+#| label: fig-cville-postsecondary-img
+#| fig-cap: "Percent of graduating students enrolled in a post-secondary institution by race and ethnicity, and economically disadvantaged students for 2014-2023 at CCS."
+
+knitr::include_graphics("supplement_figures/fig-12-percent-of-graduating-st.png")
+knitr::include_graphics("supplement_figures/fig-13-percent-of-graduating-st.png")
+```
+
+#### Virginia Public Schools
+```{r}
+#| label: fig-va-postsecondary-img
+#| fig-cap: "Percent of graduating students enrolled in a post-secondary institution by race and ethnicity, and economically disadvantaged students for 2014-2023 at Virginia public schools."
+
+knitr::include_graphics("supplement_figures/fig-14-percent-of-graduating-st.png")
+knitr::include_graphics("supplement_figures/fig-15-percent-of-graduating-st.png")
+```
+:::
+
 ## Economic and Family Stability
 
-### Children Living below Poverty Threshold
+### Youth Labor Force Participation and Unemployment
+```{r}
+library(ggspatial)
+library(ggthemes)
+library(patchwork)
+
+df <- read_csv("../data/youth_employment_status_by_tract.csv") %>% 
+  filter(year >= 2020) %>% 
+  rename(laborforce_count = laborforce_16_19yr,
+         unemployed_count = unemployed_16_19yr,
+         laborforce_percent = per_laborforce_16_19yr,
+         unemployed_percent = per_unemployed_16_19yr) %>% 
+  pivot_longer(laborforce_count:unemployed_percent, names_to = c("variable", ".value"), 
+               names_sep="_") %>% 
+  mutate(variable = ifelse(variable == "laborforce", "Youth (16-19) Participating in the Labor Force", "Youth (16-19) in the Labor Force Experiencing Unemployment"))
+  
+```
+
+#### Albemarle County Census Tracts
+```{r}
+# Set data
+df_alb <- df %>% 
+  filter(year >= 2020) %>% 
+  filter(locality == "Albemarle")
+
+df_alb$percent <- round(df_alb$percent,0)
+df_alb$label <- df_alb$tractnames 
+df_alb$count_label <- prettyNum(df_alb$count, big.mark = ",")
+
+title <- "Percent of Youth (16-19) Participating in the Labor Force by Census Tract"
+ytext <- "Percent of Youth (16-19)"
+xtext <- "Year"
+xlabels <- JS("function() { return this.value; }")
+source_text <- "Data Source: U.S. Census Bureau, American Community Survey 5-year estimates"
+
+```
+
+:::{.content-visible when-format="html" .column-body layout-ncol=2}
+```{r}
+youth_employ_map <- df_alb %>% 
+  mutate(GEOID = as.character(GEOID)) %>% 
+  filter(year == 2024) %>% 
+  left_join(tracts_geo, by = join_by(GEOID == GEOID)) %>%
+  st_as_sf()
+
+map_laborforce <- youth_employ_map %>% filter(variable == "Youth (16-19) Participating in the Labor Force")
+
+leaflet() %>% 
+  addProviderTiles("CartoDB.Positron") %>% 
+  addPolygons(data = map_laborforce,
+              fillColor = ~pal_red(map_laborforce$percent),
+              weight = 1,
+              opacity = 1,
+              color = "white", 
+              fillOpacity = 0.7,
+              popup = paste0("Place: ", map_laborforce$tractnames, "<br>",
+                             "Census Tract: ", map_laborforce$NAME.x, "<br>",
+                             "Percent: ", map_laborforce$percent, "%")) %>%
+  addLegend("topright", pal = pal_red_rev, values = map_laborforce$percent, 
+            title = "Youth in the<br/>Labor Force<br/>(2024)", opacity = 0.7,
+            # labFormat = labelFormat(transform = function(x) sort(x, decreasing = TRUE), suffix = "%"),
+            labFormat = function(type, breaks) {
+              return(c("80 - 100%", "60 - 80%", "40 - 60%", "20 - 40%", "0 - 20%"))
+            })
+```
+
+```{r}
+map_unemploy <- youth_employ_map %>% filter(variable == "Youth (16-19) in the Labor Force Experiencing Unemployment")
+leaflet() %>% 
+  addProviderTiles("CartoDB.Positron") %>% 
+  addPolygons(data = map_unemploy,
+              fillColor = ~pal_blue(map_unemploy$percent),
+              weight = 1,
+              opacity = 1,
+              color = "white", 
+              fillOpacity = 0.7,
+              popup = paste0("Place: ", map_unemploy$tractnames, "<br>",
+                             "Census Tract: ", map_unemploy$NAME.x, "<br>",
+                             "Percent: ", map_unemploy$percent, "%")) %>%
+  addLegend("topright", pal = pal_blue_rev, values = map_unemploy$percent, 
+            title = "Unemployed Youth<br/>in the Labor Force<br/>(2024)", opacity = 0.7,
+            # labFormat = labelFormat(transform = function(x) sort(x, decreasing = TRUE), suffix = "%"),
+            labFormat = function(type, breaks) {
+              return(c("80 - 100%", "60 - 80%", "40 - 60%", "20 - 40%", "0 - 20%"))
+            }
+            )
+```
+:::
+
+::: {.content-hidden when-format="html"}
+```{r, fig.width=12, fig.height=10.25}
+#| label: fig-youth-employ-alb
+#| fig-cap: "Percent of youth (16-19) participating in the labor force by census tract, 2024, for Albemarle County."
+
+# Geospatial visualization ----
+pal_labor <- carto_pal(7, "RedOr")
+
+alb_labor_map <- map_laborforce %>%
+  mutate(text = paste0(round(percent,0), "%")) %>%
+  ggplot() +
+  annotation_map_tile(zoomin = 1, progress = "none", cachedir = "../data/tempdata/") +
+  geom_sf(aes(fill = round(percent,0)), color = "white") +
+  geom_sf_text(aes(label = text), size = 3.25, color = "black") +
+  scale_fill_stepsn(colors = pal_labor,
+                    labels = scales::label_percent(scale = 1),
+                    n.breaks = 6,
+                    guide = guide_colourbar(title = "Percent Youth in Labor Force",
+                                            title.position = "top",
+                                            direction = "horizontal",
+                                            title.hjust = 0.5,
+                                            # nbin = 6,
+                                            theme = theme(legend.key.height  = unit(0.5, "lines"),
+                                                          legend.key.width = unit(12, "lines"),
+                                                          text = element_text(size = 11)) 
+                                            )
+                    )+
+  theme_map()+
+  theme(legend.position.inside=c(1, 1.04),
+        legend.justification="right",
+        plot.title = element_text(size = 14),
+        plot.subtitle = element_text(size = 14))
+
+
+# Gap chart ----
+alb_labor <- map_laborforce %>%
+  group_by(percent) %>%
+  summarise(tractnames = paste(tractnames, collapse = "; ")) %>%
+  na.exclude()
+
+names <- alb_labor$tractnames
+labor <- alb_labor$percent
+
+alb_labor_gap <-  ggplot(alb_labor, aes(x = 0, y = percent, label = names)) +
+    geom_line(color = "grey", size = 1)+
+    geom_point(aes(color=as.factor(percent)), size=5)+
+    geom_text(label = str_wrap(names, width = 60), hjust = 0, nudge_x = 0.005,
+              nudge_y = case_when(alb_labor$percent %in% c(3,4) ~ 0.2,
+                                  alb_labor$percent %in% c(0,1,2) ~ -0.1,
+                             .default = 0.01),
+              # nudge_y = .05,
+              size = 3.5,
+              # angle=55,
+              lineheight = 0.7) +
+   scale_color_carto_d(name = "Percent Youth in the Labor Force: ",
+                           type = "diverging", palette = "RedOr", direction = 1) +
+    scale_x_continuous(limits = c(0,.1),
+                       expand = c(0.03, 0))+
+    scale_y_continuous(breaks = labor,
+                       labels = paste0(labor,"%")
+                       ) +
+  theme_minimal()+
+    theme(axis.line.x = element_blank(),
+          axis.ticks.x = element_blank(),
+          axis.text.x = element_blank(),
+          axis.title.x = element_blank(),
+          axis.title.y = element_blank(),
+          panel.grid.minor = element_blank(),
+          panel.grid.major = element_blank(),
+          axis.text.y = element_text(size = 11),
+          axis.ticks = element_line(linewidth = .5),
+          axis.ticks.length.y = unit(.25, "cm"),
+          plot.title.position= "plot",
+          plot.caption.position = "plot",
+          plot.caption = element_text(hjust = 0),
+          legend.position="none")
+
+  (alb_labor_map + patchwork::free(alb_labor_gap)) +
+  plot_layout(widths = c(1.75, 1)) +
+  plot_annotation(title = title,
+                  subtitle = "Albemarle County",
+                  caption = source_text,
+                  theme = theme(plot.title = element_text(size = 18),
+                                plot.subtitle = element_text(size = 16),
+                                plot.caption = element_text(size = 14)))
+```
+
+```{r, fig.width=12, fig.height=10.25}
+#| label: fig-youth-unemploy-alb
+#| fig-cap: "Percent of youth (16-19) in the labor force experiencing unemployment by census tract, 2024, for Albemarle County."
+# Geospatial visualization ----
+pal_unemploy <- carto_pal(7, "Teal")
+
+alb_unemploy_map <- map_unemploy %>%
+  mutate(text = paste0(round(percent,0), "%")) %>%
+  ggplot() +
+  annotation_map_tile(zoomin = 1, progress = "none", cachedir = "../data/tempdata/") +
+  geom_sf(aes(fill = round(percent,0)), color = "white") +
+  geom_sf_text(aes(label = text), size = 3.25, color = "black") +
+  scale_fill_stepsn(colors = pal_unemploy,
+                    labels = scales::label_percent(scale = 1),
+                    n.breaks = 6,
+                    guide = guide_colourbar(title = "Percent Youth Unemployed",
+                                            title.position = "top",
+                                            direction = "horizontal",
+                                            title.hjust = 0.5,
+                                            # nbin = 6,
+                                            theme = theme(legend.key.height  = unit(0.5, "lines"),
+                                                          legend.key.width = unit(12, "lines"),
+                                                          text = element_text(size = 11)) 
+                                            )
+                    )+
+  theme_map()+
+  theme(legend.position.inside=c(1, 1.04),
+        legend.justification="right",
+        plot.title = element_text(size = 14),
+        plot.subtitle = element_text(size = 14))
+
+
+# Gap chart ----
+alb_unemploy <- map_unemploy %>%
+  group_by(percent) %>%
+  summarise(tractnames = paste(tractnames, collapse = "; ")) %>%
+  na.exclude()
+
+names <- alb_unemploy$tractnames
+unemploy <- alb_unemploy$percent
+
+alb_unemploy_gap <-  ggplot(alb_unemploy, aes(x = 0, y = percent, label = names)) +
+    geom_line(color = "grey", size = 1)+
+    geom_point(aes(color=as.factor(percent)), size=5)+
+    geom_text(label = str_wrap(names, width = 60), hjust = 0, nudge_x = 0.005,
+              nudge_y = case_when(alb_unemploy$percent %in% c(5,8) ~ 0.4,
+                                  alb_unemploy$percent %in% c(0) ~ -0.5,
+                             .default = 0.01),
+              # nudge_y = .05,
+              size = 3.5,
+              # angle=55,
+              lineheight = 0.7) +
+   scale_color_carto_d(name = "Percent Youth Unemployed: ",
+                           type = "diverging", palette = "Teal", direction = 1) +
+    scale_x_continuous(limits = c(0,.1),
+                       expand = c(0.03, 0))+
+    scale_y_continuous(breaks = unemploy,
+                       labels = paste0(unemploy,"%")
+                       ) +
+  theme_minimal()+
+    theme(axis.line.x = element_blank(),
+          axis.ticks.x = element_blank(),
+          axis.text.x = element_blank(),
+          axis.title.x = element_blank(),
+          axis.title.y = element_blank(),
+          panel.grid.minor = element_blank(),
+          panel.grid.major = element_blank(),
+          axis.text.y = element_text(size = 11),
+          axis.ticks = element_line(linewidth = .5),
+          axis.ticks.length.y = unit(.25, "cm"),
+          plot.title.position= "plot",
+          plot.caption.position = "plot",
+          plot.caption = element_text(hjust = 0),
+          legend.position="none")
+
+  (alb_unemploy_map + patchwork::free(alb_unemploy_gap)) +
+  plot_layout(widths = c(1.75, 1)) +
+  plot_annotation(title = "Percent of Youth (16-19) Experiencing Unemployment by Census Tract",
+                  subtitle = "Albemarle County",
+                  caption = source_text,
+                  theme = theme(plot.title = element_text(size = 18),
+                                plot.subtitle = element_text(size = 16),
+                                plot.caption = element_text(size = 14)))
+```
+:::
+
+::: {.content-visible when-format="html"}
+#### Albemarle Census Tracts: Youth in the Labor Force and Unemployment 2020-2024
 ```{r include=FALSE}
 # Init Step to make sure that the dependencies are loaded
 highchart()
 ```
 
+::: {.panel-tabset .nav-pills style="display: flex;"}
+```{r, results='asis'}
+
+nms <- unique(df_alb$tractnames)
+len <- length(unique(df_alb$tractnames))
+
+mychart <- function(i) {
+   
+  df_alb_laborforce <- df_alb %>% filter(variable == "Youth (16-19) Participating in the Labor Force")
+  df_alb_unemployed <- df_alb %>% filter(variable == "Youth (16-19) in the Labor Force Experiencing Unemployment")
+  
+ df_alb_laborforce %>%
+    filter(df_alb_laborforce$tractnames == nms[[i]]) %>%
+    hchart("line", hcaes(y = percent, x = year, group = variable)) %>% 
+    hc_legend(align = "center", verticalAlign = "top") %>%
+    hc_xAxis(title = list(text = "Year"),
+             labels = list(formatter = xlabels, style = list(fontSize = '1.2em')),
+             tickInterval = 1,
+             allowDecimals = FALSE) %>%
+    hc_yAxis(min = 0, max = 100,
+             title = list(text = "Percent"),
+             labels = list(format = '{text}%')) %>%
+  hc_colors(two_pal) %>%
+  hc_plotOptions(series = list(dataLabels = list(format = '{y: f}%', enabled = TRUE)),
+                 line = list( marker = list(enabled = TRUE) )) %>%
+  hc_tooltip(formatter = JS("function(){
+  return this.series.name + '</br><b>' + this.key + '</b></br>' + 'Percent: <b>' + this.y + '%</b></br>' + 'Est. Number: <b>' + this.point.count_label + '</b>'
+  }")) %>%
+  hc_title(text = nms[[i]],
+           align = 'left') %>%
+  hc_add_theme(hc_theme_smpl()) %>% 
+  hc_add_series(data =  df_alb_unemployed %>% filter(df_alb_unemployed$tractnames == nms[[i]]), type = "line", mapping = hcaes(x = year, y = percent, group = variable)) %>%
+  hc_exporting(enabled=TRUE,
+               sourceWidth = 900,
+               sourceHeight = 600)
+}
+
+for (i in 1:len) {
+  cat("####", nms[i], "\n \n")
+  print(htmltools::tagList(mychart(i)))
+}
+
+```
+:::
+
+:::
+
+
+#### Charlottesville Census Tracts
+```{r}
+# Set data
+df_cville <- df %>% 
+  filter(year >= 2020) %>% 
+  filter(locality == "Charlottesville")
+
+df_cville$percent <- round(df_cville$percent,0)
+df_cville$label <- df_cville$tractnames 
+df_cville$count_label <- prettyNum(df_cville$count, big.mark = ",")
+
+title <- "Percent of Youth (16-19) Participating in the Labor Force by Census Tract"
+ytext <- "Percent of Youth (16-19)"
+xtext <- "Year"
+xlabels <- JS("function() { return this.value; }")
+source_text <- "Data Source: U.S. Census Bureau, American Community Survey 5-year estimates"
+
+```
+
+:::{.content-visible when-format="html" .column-body layout-ncol=2}
+```{r}
+youth_employ_map <- df_cville %>% 
+  mutate(GEOID = as.character(GEOID)) %>% 
+  filter(year == 2024) %>% 
+  left_join(tracts_geo, by = join_by(GEOID == GEOID)) %>%
+  st_as_sf()
+
+map_laborforce <- youth_employ_map %>% filter(variable == "Youth (16-19) Participating in the Labor Force")
+
+leaflet() %>% 
+  addProviderTiles("CartoDB.Positron") %>% 
+  addPolygons(data = map_laborforce,
+              fillColor = ~pal_red(map_laborforce$percent),
+              weight = 1,
+              opacity = 1,
+              color = "white", 
+              fillOpacity = 0.7,
+              popup = paste0("Place: ", map_laborforce$tractnames, "<br>",
+                             "Census Tract: ", map_laborforce$NAME.x, "<br>",
+                             "Percent: ", map_laborforce$percent, "%")) %>%
+  addLegend("topright", pal = pal_red_rev, values = map_laborforce$percent, 
+            title = "Youth in the<br/>Labor Force<br/>(2024)", opacity = 0.7,
+            # labFormat = labelFormat(transform = function(x) sort(x, decreasing = TRUE), suffix = "%"),
+            labFormat = function(type, breaks) {
+              return(c("80 - 100%", "60 - 80%", "40 - 60%", "20 - 40%", "0 - 20%"))
+            }
+            )
+```
+```{r}
+map_unemploy <- youth_employ_map %>% filter(variable == "Youth (16-19) in the Labor Force Experiencing Unemployment")
+leaflet() %>% 
+  addProviderTiles("CartoDB.Positron") %>% 
+  addPolygons(data = map_unemploy,
+              fillColor = ~pal_blue(map_unemploy$percent),
+              weight = 1,
+              opacity = 1,
+              color = "white", 
+              fillOpacity = 0.7,
+              popup = paste0("Place: ", map_unemploy$tractnames, "<br>",
+                             "Census Tract: ", map_unemploy$NAME.x, "<br>",
+                             "Percent: ", map_unemploy$percent, "%")) %>%
+  addLegend("topright", pal = pal_blue_rev, values = map_unemploy$percent, 
+            title = "Unemployed Youth<br/>in the Labor Force<br/>(2024)", opacity = 0.7,
+            # labFormat = labelFormat(transform = function(x) sort(x, decreasing = FALSE), suffix = "%"),
+            labFormat = function(type, breaks) {
+              return(c("80 - 100%", "60 - 80%", "40 - 60%", "20 - 40%", "0 - 20%"))
+            }
+            )
+```
+:::
+
+::: {.content-hidden when-format="html"}
+```{r, fig.width=9, fig.height=7}
+#| label: fig-youth-employ-cville
+#| fig-cap: "Percent of youth (16-19) participating in the labor force by census tract, 2024, for Charlottesville City."
+# Geospatial visualization ----
+pal_labor <- carto_pal(7, "RedOr")
+
+cville_labor_map <- map_laborforce %>%
+  mutate(text = paste0(round(percent,0), "%")) %>%
+  ggplot() +
+  annotation_map_tile(zoomin = 1, progress = "none", cachedir = "../data/tempdata/") +
+  geom_sf(aes(fill = round(percent,0)), color = "white") +
+  geom_sf_text(aes(label = text), size = 3.25, color = "black") +
+  scale_fill_stepsn(colors = pal_labor,
+                    labels = scales::label_percent(scale = 1),
+                    n.breaks = 6,
+                    guide = guide_colourbar(title = "Percent Youth in Labor Force",
+                                            title.position = "top",
+                                            direction = "horizontal",
+                                            title.hjust = 0.5,
+                                            # nbin = 6,
+                                            theme = theme(legend.key.height  = unit(0.5, "lines"),
+                                                          legend.key.width = unit(12, "lines"),
+                                                          text = element_text(size = 11)) 
+                                            )
+                    )+
+  theme_map()+
+  theme(legend.position.inside=c(1, 1.06),
+        legend.justification="right",
+        plot.title = element_text(size = 14),
+        plot.subtitle = element_text(size = 14))
+
+
+# Gap chart ----
+cville_labor <- map_laborforce %>%
+  group_by(percent) %>%
+  summarise(tractnames = paste(tractnames, collapse = "; ")) %>%
+  na.exclude()
+
+names <- cville_labor$tractnames
+labor <- cville_labor$percent
+
+cville_labor_gap <-  ggplot(cville_labor, aes(x = 0, y = percent, label = names)) +
+    geom_line(color = "grey", size = 1)+
+    geom_point(aes(color=as.factor(percent)), size=5)+
+    geom_text(label = str_wrap(names, width = 60), hjust = 0, nudge_x = 0.005,
+              nudge_y = case_when(cville_labor$percent %in% c(3,4) ~ 0.2,
+                                  cville_labor$percent %in% c(0,1,2) ~ -0.1,
+                             .default = 0.01),
+              # nudge_y = .05,
+              size = 3.5,
+              # angle=55,
+              lineheight = 0.7) +
+   scale_color_carto_d(name = "Percent Youth in the Labor Force: ",
+                           type = "diverging", palette = "RedOr", direction = 1) +
+    scale_x_continuous(limits = c(0,.1),
+                       expand = c(0.03, 0))+
+    scale_y_continuous(breaks = labor,
+                       labels = paste0(labor,"%")
+                       ) +
+  theme_minimal()+
+   theme(axis.line.x = element_blank(),
+          axis.ticks.x = element_blank(),
+          axis.text.x = element_blank(),
+          axis.title.x = element_blank(),
+          axis.title.y = element_blank(),
+          panel.grid.minor = element_blank(),
+          panel.grid.major = element_blank(),
+          axis.text.y = element_text(size = 11),
+          axis.ticks = element_line(linewidth = .5),
+          axis.ticks.length.y = unit(.25, "cm"),
+          plot.title.position= "plot",
+          plot.caption.position = "plot",
+          plot.caption = element_text(hjust = 0),
+          legend.position="none")
+
+  (cville_labor_map + cville_labor_gap) +
+  plot_layout(widths = c(2, 1)) +
+  plot_annotation(title = title,
+                  subtitle = "Charlottesville City",
+                  caption = source_text,
+                  theme = theme(plot.title = element_text(size = 18),
+                                plot.subtitle = element_text(size = 16),
+                                plot.caption = element_text(size = 14)))
+```
+
+```{r, fig.width=9, fig.height=7}
+#| label: fig-youth-unemploy-cville
+#| fig-cap: "Percent of youth (16-19) in the labor force experiencing unemployment by census tract, 2024, for Charlottesville City."
+# Geospatial visualization ----
+pal_unemploy <- carto_pal(7, "Teal")
+
+cville_unemploy_map <- map_unemploy %>%
+  mutate(text = paste0(round(percent,0), "%")) %>%
+  ggplot() +
+  annotation_map_tile(zoomin = 1, progress = "none", cachedir = "../data/tempdata/") +
+  geom_sf(aes(fill = round(percent,0)), color = "white") +
+  geom_sf_text(aes(label = text), size = 3.25, color = "black") +
+  scale_fill_stepsn(colors = pal_unemploy,
+                    labels = scales::label_percent(scale = 1),
+                    n.breaks = 6,
+                    guide = guide_colourbar(title = "Percent Youth Unemployed",
+                                            title.position = "top",
+                                            direction = "horizontal",
+                                            title.hjust = 0.5,
+                                            # nbin = 6,
+                                            theme = theme(legend.key.height  = unit(0.5, "lines"),
+                                                          legend.key.width = unit(12, "lines"),
+                                                          text = element_text(size = 11)) 
+                                            )
+                    )+
+  theme_map()+
+  theme(legend.position.inside=c(1, 1.06),
+        legend.justification="right",
+        plot.title = element_text(size = 14),
+        plot.subtitle = element_text(size = 14))
+
+
+# Gap chart ----
+cville_unemploy <- map_unemploy %>%
+  group_by(percent) %>%
+  summarise(tractnames = paste(tractnames, collapse = "; ")) %>%
+  na.exclude()
+
+names <- cville_unemploy$tractnames
+unemploy <- cville_unemploy$percent
+
+cville_unemploy_gap <-  ggplot(cville_unemploy, aes(x = 0, y = percent, label = names)) +
+    geom_line(color = "grey", size = 1)+
+    geom_point(aes(color=as.factor(percent)), size=5)+
+    geom_text(label = str_wrap(names, width = 60), hjust = 0, nudge_x = 0.005,
+              nudge_y = 0.01,
+              # nudge_y = .05,
+              size = 3.5,
+              # angle=55,
+              lineheight = 0.7) +
+   scale_color_carto_d(name = "Percent Youth Unemployed: ",
+                           type = "diverging", palette = "Teal", direction = 1) +
+    scale_x_continuous(limits = c(0,.1),
+                       expand = c(0.03, 0))+
+    scale_y_continuous(breaks = unemploy,
+                       labels = paste0(unemploy,"%")
+                       ) +
+  theme_minimal()+
+  theme(axis.line.x = element_blank(),
+          axis.ticks.x = element_blank(),
+          axis.text.x = element_blank(),
+          axis.title.x = element_blank(),
+          axis.title.y = element_blank(),
+          panel.grid.minor = element_blank(),
+          panel.grid.major = element_blank(),
+          axis.text.y = element_text(size = 11),
+          axis.ticks = element_line(linewidth = .5),
+          axis.ticks.length.y = unit(.25, "cm"),
+          plot.title.position= "plot",
+          plot.caption.position = "plot",
+          plot.caption = element_text(hjust = 0),
+          legend.position="none")
+
+  (cville_unemploy_map + cville_unemploy_gap) +
+  plot_layout(widths = c(2, 1)) +
+  plot_annotation(title = "Percent of Youth (16-19) Experiencing Unemployment by Census Tract",
+                  subtitle = "Charlottesville City",
+                  caption = source_text,
+                  theme = theme(plot.title = element_text(size = 18),
+                                plot.subtitle = element_text(size = 16),
+                                plot.caption = element_text(size = 14)))
+```
+:::
+
+::: {.content-visible when-format="html"}
+#### Charlottesville Census Tracts: Youth in the Labor Force and Unemployment 2020-2024
+```{r include=FALSE}
+# Init Step to make sure that the dependencies are loaded
+highchart()
+```
+
+::: {.panel-tabset .nav-pills style="display: flex;"}
+```{r, results='asis'}
+
+nms <- unique(df_cville$tractnames)
+len <- length(unique(df_cville$tractnames))
+
+mychart <- function(i) {
+   
+  df_cville_laborforce <- df_cville %>% filter(variable == "Youth (16-19) Participating in the Labor Force")
+  df_cville_unemployed <- df_cville %>% filter(variable == "Youth (16-19) in the Labor Force Experiencing Unemployment")
+  
+ df_cville_laborforce %>%
+    filter(df_cville_laborforce$tractnames == nms[[i]]) %>%
+    hchart("line", hcaes(y = percent, x = year, group = variable)) %>% 
+    hc_legend(align = "center", verticalAlign = "top") %>%
+    hc_xAxis(title = list(text = "Year"),
+             labels = list(formatter = xlabels, style = list(fontSize = '1.2em')),
+             tickInterval = 1,
+             allowDecimals = FALSE) %>%
+    hc_yAxis(min = 0, max = 100,
+             title = list(text = "Percent"),
+             labels = list(format = '{text}%')) %>%
+  hc_colors(two_pal) %>%
+  hc_plotOptions(series = list(dataLabels = list(format = '{y: f}%', enabled = TRUE)),
+                 line = list( marker = list(enabled = TRUE) )) %>%
+  hc_tooltip(formatter = JS("function(){
+  return this.series.name + '</br><b>' + this.key + '</b></br>' + 'Percent: <b>' + this.y + '%</b></br>' + 'Est. Number: <b>' + this.point.count_label + '</b></br>Total Est. 16-19 yr olds: ' + this.point.total_16_19yr
+  }")) %>%
+  hc_title(text = nms[[i]],
+           align = 'left') %>%
+  hc_add_theme(hc_theme_smpl()) %>% 
+  hc_add_series(data =  df_cville_unemployed %>% filter(df_cville_unemployed$tractnames == nms[[i]]), type = "line", mapping = hcaes(x = year, y = percent, group = variable)) %>%
+  hc_exporting(enabled=TRUE,
+               sourceWidth = 900,
+               sourceHeight = 600)
+}
+
+for (i in 1:len) {
+  cat("####", nms[i], "\n \n")
+  print(htmltools::tagList(mychart(i)))
+}
+
+```
+:::
+
+:::
+
+### Children Living below Poverty Threshold
+
+::: {.content-visible when-format="html"}
 ```{r, results='asis'}
 
 df <- read_csv("../data/child_poverty_by_race.csv") %>% 
   filter(year >= 2014) %>% 
   filter(! group %in% c("under18_white")) %>% 
-  arrange(locality)
+  arrange(locality) %>% 
+  mutate(label = case_when(group == "under18_asian" ~ "Asian",
+                           group == "under18_black" ~ "Black",
+                           group == "under18_multi" ~ "Multiracial",
+                           group == "under18_white_nonhisp" ~ "White",
+                           group == "under18_hisp" ~ "Hispanic",
+                           group == "under18" ~ "All Children"))
 
 df$percent <- round(df$pov_rate_bygroup,0)
-df$label <- df$group 
+df$label <- df$label 
 df$count_label <- prettyNum(df$pov_num_group, big.mark = ",")
 
 title <- "Percent of Children Living below the Poverty Threshold"
@@ -432,8 +1147,8 @@ len <- length(unique(df$locality))
 
 mychart <- function(i) {
    
-  df_groups <- df %>% filter(group != "under18")
-  df_all <- df %>% filter(group == "under18")
+  df_groups <- df %>% filter(label != "All Children")
+  df_all <- df %>% filter(label == "All Children")
   
   df_groups %>%
     filter(df_groups$locality == nms[[i]]) %>%
@@ -472,14 +1187,37 @@ for (i in 1:len) {
 }
 
 ```
+:::
+
+::: {.content-hidden when-format="html"}
+#### Albemarle County
+```{r}
+#| label: fig-alb-child-pov-img
+#| fig-cap: "Percent of children living below the poverty threshold by race and ethnicity, 2014-2024, for Albemarle County."
+
+knitr::include_graphics("supplement_figures/fig-16-percent-of-children-livi.png")
+```
+
+#### Charlottesville City
+```{r}
+#| label: fig-cville-child-pov-img
+#| fig-cap: "Percent of children living below the poverty threshold by race and ethnicity, 2014-2024, for Charlottesville City."
+
+knitr::include_graphics("supplement_figures/fig-17-percent-of-children-livi.png")
+```
+
+#### Virginia
+```{r}
+#| label: fig-va-child-pov-img
+#| fig-cap: "Percent of children living below the poverty threshold by race and ethnicity, 2014-2024, for Virginia."
+
+knitr::include_graphics("supplement_figures/fig-18-percent-of-children-livi.png")
+```
+:::
 
 ### Students Identified as Economically Disadvantaged
 
-```{r include=FALSE}
-# Init Step to make sure that the dependencies are loaded
-highchart()
-```
-
+::: {.content-visible when-format="html"}
 ```{r, results='asis'}
 df <- read_csv("../data/econ_disadvan_students_by_race.csv") %>% 
   select(school_year, division_name, race, disadvan_race_count, disadvan_total_count, total_students, disadvan_percent_byrace)
@@ -559,266 +1297,37 @@ for (i in 1:len) {
 }
 
 ```
-
-### Youth Labor Force Participation and Unemployment
-```{r}
-df <- read_csv("../data/youth_employment_status_by_tract.csv") %>% 
-  filter(year >= 2020) %>% 
-  rename(laborforce_count = laborforce_16_19yr,
-         unemployed_count = unemployed_16_19yr,
-         laborforce_percent = per_laborforce_16_19yr,
-         unemployed_percent = per_unemployed_16_19yr) %>% 
-  pivot_longer(laborforce_count:unemployed_percent, names_to = c("variable", ".value"), 
-               names_sep="_") %>% 
-  mutate(variable = ifelse(variable == "laborforce", "Youth (16-19) Participating in the Labor Force", "Youth (16-19) in the Labor Force Experiencing Unemployment"))
-  
-```
-
-#### Charlottesville Census Tracts
-```{r}
-# Set data
-df_cville <- df %>% 
-  filter(year >= 2020) %>% 
-  filter(locality == "Charlottesville")
-
-df_cville$percent <- round(df_cville$percent,0)
-df_cville$label <- df_cville$tractnames 
-df_cville$count_label <- prettyNum(df_cville$count, big.mark = ",")
-
-title <- "Percent of Youth (16-19) Participating in the Labor Force by Census Tract"
-ytext <- "Percent of Youth (16-19)"
-xtext <- "Year"
-xlabels <- JS("function() { return this.value; }")
-source_text <- "Data Source: U.S. Census Bureau, American Community Survey 5-year estimates"
-
-```
-
-:::{.column-body layout-ncol=2}
-```{r}
-youth_employ_map <- df_cville %>% 
-  mutate(GEOID = as.character(GEOID)) %>% 
-  filter(year == 2024) %>% 
-  left_join(tracts_geo, by = join_by(GEOID == GEOID)) %>%
-  st_as_sf()
-
-map_laborforce <- youth_employ_map %>% filter(variable == "Youth (16-19) Participating in the Labor Force")
-
-leaflet() %>% 
-  addProviderTiles("CartoDB.Positron") %>% 
-  addPolygons(data = map_laborforce,
-              fillColor = ~pal_red(map_laborforce$percent),
-              weight = 1,
-              opacity = 1,
-              color = "white", 
-              fillOpacity = 0.7,
-              popup = paste0("Place: ", map_laborforce$tractnames, "<br>",
-                             "Census Tract: ", map_laborforce$NAME.x, "<br>",
-                             "Percent: ", map_laborforce$percent, "%")) %>%
-  addLegend("topright", pal = pal_red_rev, values = map_laborforce$percent, 
-            title = "Youth in the<br/>Labor Force<br/>(2024)", opacity = 0.7,
-            # labFormat = labelFormat(transform = function(x) sort(x, decreasing = TRUE), suffix = "%"),
-            labFormat = function(type, breaks) {
-              return(c("80 - 100%", "60 - 80%", "40 - 60%", "20 - 40%", "0 - 20%"))
-            }
-            )
-```
-```{r}
-map_unemploy <- youth_employ_map %>% filter(variable == "Youth (16-19) in the Labor Force Experiencing Unemployment")
-leaflet() %>% 
-  addProviderTiles("CartoDB.Positron") %>% 
-  addPolygons(data = map_unemploy,
-              fillColor = ~pal_blue(map_unemploy$percent),
-              weight = 1,
-              opacity = 1,
-              color = "white", 
-              fillOpacity = 0.7,
-              popup = paste0("Place: ", map_unemploy$tractnames, "<br>",
-                             "Census Tract: ", map_unemploy$NAME.x, "<br>",
-                             "Percent: ", map_unemploy$percent, "%")) %>%
-  addLegend("topright", pal = pal_blue_rev, values = map_unemploy$percent, 
-            title = "Unemployed Youth<br/>in the Labor Force<br/>(2024)", opacity = 0.7,
-            # labFormat = labelFormat(transform = function(x) sort(x, decreasing = FALSE), suffix = "%"),
-            labFormat = function(type, breaks) {
-              return(c("80 - 100%", "60 - 80%", "40 - 60%", "20 - 40%", "0 - 20%"))
-            }
-            )
-```
 :::
 
-#### Charlottesville Census Tracts: Youth in the Labor Force and Unemployment 2020-2024
-```{r include=FALSE}
-# Init Step to make sure that the dependencies are loaded
-highchart()
-```
-
-::: {.panel-tabset .nav-pills style="display: flex;"}
-```{r, results='asis'}
-
-nms <- unique(df_cville$tractnames)
-len <- length(unique(df_cville$tractnames))
-
-mychart <- function(i) {
-   
-  df_cville_laborforce <- df_cville %>% filter(variable == "Youth (16-19) Participating in the Labor Force")
-  df_cville_unemployed <- df_cville %>% filter(variable == "Youth (16-19) in the Labor Force Experiencing Unemployment")
-  
- df_cville_laborforce %>%
-    filter(df_cville_laborforce$tractnames == nms[[i]]) %>%
-    hchart("line", hcaes(y = percent, x = year, group = variable)) %>% 
-    hc_legend(align = "center", verticalAlign = "top") %>%
-    hc_xAxis(title = list(text = "Year"),
-             labels = list(formatter = xlabels, style = list(fontSize = '1.2em')),
-             tickInterval = 1,
-             allowDecimals = FALSE) %>%
-    hc_yAxis(min = 0, max = 100,
-             title = list(text = "Percent"),
-             labels = list(format = '{text}%')) %>%
-  hc_colors(two_pal) %>%
-  hc_plotOptions(series = list(dataLabels = list(format = '{y: f}%', enabled = TRUE)),
-                 line = list( marker = list(enabled = TRUE) )) %>%
-  hc_tooltip(formatter = JS("function(){
-  return this.series.name + '</br><b>' + this.key + '</b></br>' + 'Percent: <b>' + this.y + '%</b></br>' + 'Est. Number: <b>' + this.point.count_label + '</b></br>Total Est. 16-19 yr olds: ' + this.point.total_16_19yr
-  }")) %>%
-  hc_title(text = nms[[i]],
-           align = 'left') %>%
-  hc_add_theme(hc_theme_smpl()) %>% 
-  hc_add_series(data =  df_cville_unemployed %>% filter(df_cville_unemployed$tractnames == nms[[i]]), type = "line", mapping = hcaes(x = year, y = percent, group = variable)) %>%
-  hc_exporting(enabled=TRUE,
-               sourceWidth = 900,
-               sourceHeight = 600)
-}
-
-for (i in 1:len) {
-  cat("####", nms[i], "\n \n")
-  print(htmltools::tagList(mychart(i)))
-}
-
-```
-:::
-
-#### Albemarle County Census Tracts
+::: {.content-hidden when-format="html"}
+#### Albemarle County Public Schools
 ```{r}
-# Set data
-df_alb <- df %>% 
-  filter(year >= 2020) %>% 
-  filter(locality == "Albemarle")
+#| label: fig-alb-econ-disadv-img
+#| fig-cap: "Percent of students identified as economically disadvantaged by race and ethnicity for the 20014-15 through 2025-26 school years in ACPS."
 
-df_alb$percent <- round(df_alb$percent,0)
-df_alb$label <- df_alb$tractnames 
-df_alb$count_label <- prettyNum(df_alb$count, big.mark = ",")
-
-title <- "Percent of Youth (16-19) Participating in the Labor Force by Census Tract"
-ytext <- "Percent of Youth (16-19)"
-xtext <- "Year"
-xlabels <- JS("function() { return this.value; }")
-source_text <- "Data Source: U.S. Census Bureau, American Community Survey 5-year estimates"
-
+knitr::include_graphics("supplement_figures/fig-19-percent-of-students-iden.png")
 ```
 
-:::{.column-body layout-ncol=2}
+#### Charlottesville City Schools
 ```{r}
-youth_employ_map <- df_alb %>% 
-  mutate(GEOID = as.character(GEOID)) %>% 
-  filter(year == 2024) %>% 
-  left_join(tracts_geo, by = join_by(GEOID == GEOID)) %>%
-  st_as_sf()
+#| label: fig-cville-econ-disadv-img
+#| fig-cap: "Percent of students identified as economically disadvantaged by race and ethnicity for the 20014-15 through 2025-26 school years in CCS."
 
-map_laborforce <- youth_employ_map %>% filter(variable == "Youth (16-19) Participating in the Labor Force")
-
-leaflet() %>% 
-  addProviderTiles("CartoDB.Positron") %>% 
-  addPolygons(data = map_laborforce,
-              fillColor = ~pal_red(map_laborforce$percent),
-              weight = 1,
-              opacity = 1,
-              color = "white", 
-              fillOpacity = 0.7,
-              popup = paste0("Place: ", map_laborforce$tractnames, "<br>",
-                             "Census Tract: ", map_laborforce$NAME.x, "<br>",
-                             "Percent: ", map_laborforce$percent, "%")) %>%
-  addLegend("topright", pal = pal_red_rev, values = map_laborforce$percent, 
-            title = "Youth in the<br/>Labor Force<br/>(2024)", opacity = 0.7,
-            # labFormat = labelFormat(transform = function(x) sort(x, decreasing = TRUE), suffix = "%"),
-            labFormat = function(type, breaks) {
-              return(c("80 - 100%", "60 - 80%", "40 - 60%", "20 - 40%", "0 - 20%"))
-            })
+knitr::include_graphics("supplement_figures/fig-20-percent-of-students-iden.png")
 ```
 
+#### Virginia Public Schools
 ```{r}
-map_unemploy <- youth_employ_map %>% filter(variable == "Youth (16-19) in the Labor Force Experiencing Unemployment")
-leaflet() %>% 
-  addProviderTiles("CartoDB.Positron") %>% 
-  addPolygons(data = map_unemploy,
-              fillColor = ~pal_blue(map_unemploy$percent),
-              weight = 1,
-              opacity = 1,
-              color = "white", 
-              fillOpacity = 0.7,
-              popup = paste0("Place: ", map_unemploy$tractnames, "<br>",
-                             "Census Tract: ", map_unemploy$NAME.x, "<br>",
-                             "Percent: ", map_unemploy$percent, "%")) %>%
-  addLegend("topright", pal = pal_blue_rev, values = map_unemploy$percent, 
-            title = "Unemployed Youth<br/>in the Labor Force<br/>(2024)", opacity = 0.7,
-            # labFormat = labelFormat(transform = function(x) sort(x, decreasing = TRUE), suffix = "%"),
-            labFormat = function(type, breaks) {
-              return(c("80 - 100%", "60 - 80%", "40 - 60%", "20 - 40%", "0 - 20%"))
-            }
-            )
-```
-:::
+#| label: fig-va-econ-disadv-img
+#| fig-cap: "Percent of students identified as economically disadvantaged by race and ethnicity for the 20014-15 through 2025-26 school years in Virginia public schools."
 
-#### Albemarle Census Tracts: Youth in the Labor Force and Unemployment 2020-2024
-```{r include=FALSE}
-# Init Step to make sure that the dependencies are loaded
-highchart()
-```
-
-::: {.panel-tabset .nav-pills style="display: flex;"}
-```{r, results='asis'}
-
-nms <- unique(df_alb$tractnames)
-len <- length(unique(df_alb$tractnames))
-
-mychart <- function(i) {
-   
-  df_alb_laborforce <- df_alb %>% filter(variable == "Youth (16-19) Participating in the Labor Force")
-  df_alb_unemployed <- df_alb %>% filter(variable == "Youth (16-19) in the Labor Force Experiencing Unemployment")
-  
- df_alb_laborforce %>%
-    filter(df_alb_laborforce$tractnames == nms[[i]]) %>%
-    hchart("line", hcaes(y = percent, x = year, group = variable)) %>% 
-    hc_legend(align = "center", verticalAlign = "top") %>%
-    hc_xAxis(title = list(text = "Year"),
-             labels = list(formatter = xlabels, style = list(fontSize = '1.2em')),
-             tickInterval = 1,
-             allowDecimals = FALSE) %>%
-    hc_yAxis(min = 0, max = 100,
-             title = list(text = "Percent"),
-             labels = list(format = '{text}%')) %>%
-  hc_colors(two_pal) %>%
-  hc_plotOptions(series = list(dataLabels = list(format = '{y: f}%', enabled = TRUE)),
-                 line = list( marker = list(enabled = TRUE) )) %>%
-  hc_tooltip(formatter = JS("function(){
-  return this.series.name + '</br><b>' + this.key + '</b></br>' + 'Percent: <b>' + this.y + '%</b></br>' + 'Est. Number: <b>' + this.point.count_label + '</b>'
-  }")) %>%
-  hc_title(text = nms[[i]],
-           align = 'left') %>%
-  hc_add_theme(hc_theme_smpl()) %>% 
-  hc_add_series(data =  df_alb_unemployed %>% filter(df_alb_unemployed$tractnames == nms[[i]]), type = "line", mapping = hcaes(x = year, y = percent, group = variable)) %>%
-  hc_exporting(enabled=TRUE,
-               sourceWidth = 900,
-               sourceHeight = 600)
-}
-
-for (i in 1:len) {
-  cat("####", nms[i], "\n \n")
-  print(htmltools::tagList(mychart(i)))
-}
-
+knitr::include_graphics("supplement_figures/fig-21-percent-of-students-iden.png")
 ```
 :::
 
 ### Assessments and Investigations by Child Protective Services
+
+::: {.content-visible when-format="html"}
 ```{r, results='asis'}
 df <- read_csv("../data/welfare_cases_race_ethn.csv") %>% 
   filter(! group %in% c("aian", "nhpi")) %>% 
@@ -878,8 +1387,37 @@ for (i in 1:len) {
 }
 
 ```
+:::
+
+::: {.content-hidden when-format="html"}
+#### Albemarle County
+```{r}
+#| label: fig-alb-cps-img
+#| fig-cap: "Referrals to child protective services accepted for assessment or investigation by race and ethnicity, rate per 1,000 children, for fiscal years 2016-2024 for Albemarle County."
+
+knitr::include_graphics("supplement_figures/fig-22-referrals-to-child-prote.png")
+```
+
+#### Charlottesville City
+```{r}
+#| label: fig-cville-cps-img
+#| fig-cap: "Referrals to child protective services accepted for assessment or investigation by race and ethnicity, rate per 1,000 children, for fiscal years 2016-2024 for Charlottesville City."
+
+knitr::include_graphics("supplement_figures/fig-23-referrals-to-child-prote.png")
+```
+
+#### Virginia
+```{r}
+#| label: fig-va-cps-img
+#| fig-cap: "Referrals to child protective services accepted for assessment or investigation by race and ethnicity, rate per 1,000 children, for fiscal years 2016-2024 for Virginia."
+
+knitr::include_graphics("supplement_figures/fig-24-referrals-to-child-prote.png")
+```
+:::
 
 ### Children in Foster Care
+
+::: {.content-visible when-format="html"}
 ```{r, results='asis'}
 df <- read_csv("../data/foster_care_race_ethn.csv") %>% 
   mutate(group = str_to_title(group)) %>% 
@@ -939,9 +1477,39 @@ for (i in 1:len) {
 }
 
 ```
+:::
+
+::: {.content-hidden when-format="html"}
+#### Albemarle County
+```{r}
+#| label: fig-alb-foster-care-img
+#| fig-cap: "Children in foster care by race and ethnicity, rate per 1,000 children in Albemarle County for 2016-2024, measured in October of each year."
+
+knitr::include_graphics("supplement_figures/fig-25-rate-of-children-in-fost.png")
+```
+
+#### Charlottesville City
+```{r}
+#| label: fig-cville-foster-care-img
+#| fig-cap: "Children in foster care by race and ethnicity, rate per 1,000 children in Charlottesville City for 2016-2024, measured in October of each year."
+
+knitr::include_graphics("supplement_figures/fig-26-rate-of-children-in-fost.png")
+```
+
+#### Virginia
+```{r}
+#| label: fig-va-foster-care-img
+#| fig-cap: "Children in foster care by race and ethnicity, rate per 1,000 children in Virginia for 2016-2024, measured in October of each year."
+
+knitr::include_graphics("supplement_figures/fig-27-rate-of-children-in-fost.png")
+```
+:::
+
 ## Health
 
 ### Low Birth-Weight Infants
+
+::: {.content-visible when-format="html"}
 ```{r, results='asis'}
 
 df <- read_csv("../data/low_birthweight_race_ethn.csv") %>% 
@@ -1022,8 +1590,37 @@ for (i in 1:len) {
 }
 
 ```
+:::
+
+::: {.content-hidden when-format="html"}
+#### Albemarle County
+```{r}
+#| label: fig-alb-low-birthweight-img
+#| fig-cap: "Percent of babies born weighing under 2,500 grams (5.5 lbs) by race and ethnicity, 2014-2024, for Albemarle County."
+
+knitr::include_graphics("supplement_figures/fig-28-percent-low-birth-weight.png")
+```
+
+#### Charlottesville City
+```{r}
+#| label: fig-cville-low-birthweight-img
+#| fig-cap: "Percent of babies born weighing under 2,500 grams (5.5 lbs) by race and ethnicity, 2014-2024, for Charlottesville City."
+
+knitr::include_graphics("supplement_figures/fig-29-percent-low-birth-weight.png")
+```
+
+#### Virginia
+```{r}
+#| label: fig-va-low-birthweight-img
+#| fig-cap: "Percent of babies born weighing under 2,500 grams (5.5 lbs) by race and ethnicity, 2014-2024, for Virginia."
+
+knitr::include_graphics("supplement_figures/fig-30-percent-low-birth-weight.png")
+```
+:::
 
 ### Infant Mortality
+
+::: {.content-visible when-format="html"}
 ```{r, results='asis'}
 df <- read_csv("../data/infant_mortality_race_ethn.csv") %>% 
   filter(! maternal_race_and_ethnicity %in% c("American Indian or Alaskan Native", "Another Race, Non-Hispanic", "Asian or Pacific Islander", "Unknown Race and Ethnicity")) %>% 
@@ -1108,3 +1705,30 @@ for (i in 1:len) {
 }
 
 ```
+:::
+
+::: {.content-hidden when-format="html"}
+#### Albemarle County
+```{r}
+#| label: fig-alb-infant-mortality-img
+#| fig-cap: "Rate per 1,000 births of infants who died before their 1st birthday by race and ethnicity, 2016-2023, for Albemarle."
+
+knitr::include_graphics("supplement_figures/fig-31-infant-mortality-rate-in.png")
+```
+
+#### Charlottesville City
+```{r}
+#| label: fig-cville-infant-mortality-img
+#| fig-cap: "Rate per 1,000 births of infants who died before their 1st birthday by race and ethnicity, 2016-2023, for Charlottesville City."
+
+knitr::include_graphics("supplement_figures/fig-32-infant-mortality-rate-in.png")
+```
+
+#### Virginia
+```{r}
+#| label: fig-va-infant-mortality-img
+#| fig-cap: "Rate per 1,000 births of infants who died before their 1st birthday by race and ethnicity, 2016-2023, for Virginia."
+
+knitr::include_graphics("supplement_figures/fig-33-infant-mortality-rate-in.png")
+```
+:::
