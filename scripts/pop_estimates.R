@@ -238,3 +238,33 @@ popunder18 <- popunder18 %>%
 # Save ----
 write_csv(popunder18, file = "data/pop_race_ethn_acs.csv")
 
+# Add percents
+
+# Bring in population data
+pop_under18 <- read_csv("data/pop_race_ethn_acs.csv") %>% 
+  mutate(GEOID = as.character(GEOID)) %>% 
+  select(GEOID, locality, year, starts_with("pop_under18"))
+
+age_groups <- read_csv("data/population_data_acs.csv") %>% 
+  mutate(GEOID = as.character(fips)) %>% 
+  select(GEOID, locality, year, pop_under18)
+
+# Join
+pop_under18 <- pop_under18 |> 
+  left_join(age_groups)
+
+# Create percents
+pop_per_under18 <- pop_under18 |> 
+  mutate(per_under18_white = round((pop_under18_white/pop_under18) *100, 2),
+         per_under18_black = round((pop_under18_black/pop_under18) *100, 2),
+         per_under18_asian = round(pop_under18_asian/pop_under18 *100, 2),
+         per_under18_multi = round(pop_under18_multi/pop_under18 *100, 2),
+         per_under18_white_nonhisp = round(pop_under18_white_nonhisp/pop_under18 *100, 2),
+         per_under18_hisp = round(pop_under18_hisp/pop_under18 *100, 2),
+         per_under18_aian = round((pop_under18_aian/pop_under18) *100, 2),
+         per_under18_nhpi = round((pop_under18_nhpi/pop_under18) *100, 2),
+         per_under18_other = round(pop_under18_other/pop_under18 *100, 2))
+
+# save csv
+write_csv(pop_per_under18, file = "data/percent_race_ethn_acs.csv")
+

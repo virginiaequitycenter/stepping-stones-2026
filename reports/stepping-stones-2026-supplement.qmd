@@ -9,29 +9,30 @@ date-format: "MMMM YYYY"
 #   type: report
 #   url: communitypartnerships.virginia.edu
 format:
-  # html:
-  #   toc: true
-  #   theme: cosmo
-  #   embed-resources: true
-  docx:
+  html:
     toc: true
-    toc-title: "Table of Contents"
-    # lof: true
-    # number-sections: true
-    number-depth: 3
-    # fig-align: left
-    # fig-width: 3
-    # fig-height: 2
-    # # fig-format: png
-    # fig-dpi: 200
+    theme: cosmo
     embed-resources: true
-    reference-doc: styles.docx
+  # docx:
+  #   toc: true
+  #   toc-title: "Table of Contents"
+  #   # lof: true
+  #   # number-sections: true
+  #   number-depth: 3
+  #   # fig-align: left
+  #   # fig-width: 3
+  #   # fig-height: 2
+  #   # # fig-format: png
+  #   # fig-dpi: 200
+  #   embed-resources: true
+  #   reference-doc: styles.docx
 execute:
   cache: false
   echo: false
   message: false
   warning: false
 ---
+
 ```{css}
 .panel-tabset .nav-pills {
     display: flex !important;
@@ -65,6 +66,7 @@ library(leaflet)
 library(tigris)
 library(sf)
 library(rcartocolor)
+library(gt)
 
 # Color palettes ----
 locality_pal <- c("#193CBC", "#589ACF", "#FAC484")
@@ -100,9 +102,95 @@ tracts_geo <- tracts_geo %>% st_transform(tracts_geo, crs = 4326)
 
 ```
 
+::: {.content-hidden when-format="html"}
+## Executive Summary {.unlisted .unnumbered}
+:::
+
+## Introduction
+
+The Stepping Stones 2026 Report provides trend data for a selection of outcomes on the well-being of children and families in the City of Charlottesville and Albemarle County. *This report is a supplement to the Stepping Stones 2026 Report to present disaggregated data for a subset of measures related to Education, Economic and Family Stability, and Health.*
+
+Disaggregated data is data that is broken down and analyzed by race, ethnicity, or other defined subgroups. Racially and other disaggregated data is valuable for equity assessments and promoting equitable policy making. Equity assessments provide understanding on whether current policies and institutions are impacting or serving subgroups differently; equitable policy making ensures that new policies will produce more equal outcomes across different populations.
+
+The disaggregated data in this report is intended to center equity. Aggregated data – summary statistics for the population as a whole – can mask vastly different experiences and outcomes among distinct populations. As shown below, many of the measures of youth and community wellbeing vary by race, ethnicity, socioeconomic status, or geography. Some categories of people are disproportionately harmed or benefited. Working towards health and well-being for the youth in our region must mean *all* youth.
+
+Our approach to this supplemental report follows the principles from the primary report: we seek to make the work open, reproducible, and contextualized. We use publicly available data and data requested from state-level agencies, our work is documented so that it can be reproduced by others, and we provide context alongside the data, including an overview of how each measure matters for youth wellbeing.
+
+::: {.content-visible when-format="html"}
+### Summary & Report PDF
+
+[Stepping Stones 2026 Supplement Executive Summary](/stepping-stones-2026-supplement-exec-summary.pdf){.external target="_blank"}
+
+This interactive online version of the Stepping Stones Report is also available as a PDF: [Stepping Stones 2026 Supplement Report PDF]()
+:::
+
+## Considerations
+
+Understanding the full context of these data is especially important when considering racial disparities. Youth of color are disproportionately impacted by many of the included outcomes relative to white youth due to the long history of racial inequality in policies, investments and opportunities. We hope that highlighting the disparate outcomes of youth in our region raises questions about what leaders, educators, and stakeholders can do to ensure all youth, regardless of their racial or ethnic identity, have equal opportunity to thrive in our community.
+
+The table below provides the racial and ethnic composition of Charlottesville and Albemarle youth (residents under 18 years old). It is important to note the proportion of a subgroup in the overall population when considering the outcomes in this report. If 40% of youth in a certain racial group experience a particular outcome, knowing whether that racial group constitutes 2% or 80% of the overall population matters for understanding the number of youth impacted.
+
+```{r, results='asis'}
+#| label: tbl-population
+#| tbl-cap: "Youth population in Albemarle / Charlottesville / VA, disaggregated by racial and ethnic subgroups: White (67% / 55% / 52%), White, Non-Hispanic (65% / 52% / 50%), Black (9% / 18% / 19%), Multiracial(13% / 18% / 16%), Hispanic (12% / 12% / 16%), Asian (5% / 5% / 6%), Other Racial Identities (5% / 4% / 6%), American Indian or Alaskan Native (0.5% / 0% / 0.4%), and Native Hawaiian or Other Pacific Islander (0% / 0% / 0.1%)."
+#| tbl-cap-location: bottom
+#| html-table-processing: none
+
+pop_percents <- read_csv("../data/percent_race_ethn_acs.csv") |> 
+  filter(year == 2024) |> 
+  select(locality, pop_under18, starts_with("per")) 
+
+colnames(pop_percents) <- c("locality", "Total Population Under 18", "Percent White","Percent Black","Percent Asian","Percent Multiracial", "Percent White, Non-Hispanic", "Percent Hispanic","Percent American Indian or Alaskan Native","Percent Native Hawaiian or Other Pacific Islander", "Percent Other Racial Identities")
+
+pop_percents <- pop_percents|>
+  pivot_longer(`Total Population Under 18`:`Percent Other Racial Identities`) 
+
+# Sort
+pop_percents <- pop_percents[order(-pop_percents$value), ]
+
+pop_percents <- pop_percents |> 
+  mutate(value = case_when(value < 1 ~ round(value,1),
+                           .default = round(value,0)),
+         value = case_when(str_detect(name, "Percent") ~ paste0(as.character(value), "%"),
+                           name == "Total Population Under 18" ~ prettyNum(value, big.mark = ",")),
+         name = str_remove(name, "Percent")) |> 
+  pivot_wider(names_from = "locality", values_from = "value") |> 
+  relocate(Virginia, .after = last_col())
+
+pop_percents %>%
+  gt(rowname_col = "name") %>%
+  tab_style(
+    style = cell_text(align = "center", v_align = "middle"),
+    locations = list(cells_column_labels(), cells_body())
+  ) %>%
+  tab_header(
+    title = md("**Youth Population by Race and Ethnicity in Albemarle County, City of Charlottesville and Virginia in 2024**")
+  ) %>%
+  tab_source_note(
+    source_note = md("Data Source: U.S. Census Bureau, American Community Survey 5-year estimates")
+  )
+
+```
+
+There are additional challenges that arise in racially disaggregated data. First, different data sources use different racial categories and language to describe them. The federal government currently mandates five categories for race and two for ethnicity: American Indian or Alaskan Native, Asian, Black, Native Hawaiian or Other Pacific Islander, and White for race, and Hispanic or Latino and not Hispanic or Latino for ethnicity. None of the data sources for the included measures in this report go beyond these categories, and some include only a portion of them. Additionally, some agencies that collect this data make a distinction between race and ethnicity, while others do not. Thus, a person who is Black and Hispanic might be recorded as belonging to the Black racial category and the Hispanic ethnic group in one dataset, while another dataset will only record them as Hispanic. Finally, it is not always clear who assigned an individual to a racial category (e.g., do individuals self identify, are they identified by their parents, or are they identified by agents within the relevant institution?). In this report, our goal is to be transparent about each data source and their choices around racial and ethnic categories.
+
+Multiple concerns have been raised about the use of racially disaggregated data, primarily around privacy or surveillance and around the potential for misinterpretation. Breaking down data by race and ethnicity within local jurisdictions, and especially for small populations, may unintentionally reveal individuals. Marginalized populations who have been historically surveilled by governments may feel especially distrustful of racially disaggregated data and vulnerable to identification. In addition, research shows there is a tendency to interpret disparities as the fault of individual and group traits in ways that reinforce stereotypes, rather than recognizing how disparities are products of structural inequities. While racial categories are socially constructed – that is, they reflect a social definition of race as recognized in the United States and not a biological or anthropological definition – showing differences by race can contribute to the stigmatization of groups who have been subject to historical and ongoing structural oppression.
+
+We adopt a set of strategies to make the disaggregated data useful while attempting to minimize these potential harms. We show disaggregated measures only for subgroups that make up at least five percent of our youth population to minimize the chance that individuals could be identified within small communities. Because of the composition of Charlottesville and Albemarle, this means we only show measures for White, Black, Hispanic, Asian, and Multiracial subgroups. Additionally, a brief narrative is provided for each measure to ensure the data points can be interpreted alongside relevant context. Race and ethnicity are only one of the ways the data are disaggregated in this report; some of the included measures are shown by geography (census tracts) and for students identified as economically disadvantaged (for school districts).
+
 ## Education
 
 ### Students Eligible for Special Education Services
+
+Special education services are intended to ensure students with disabilities have access to a meaningful public education. Nationally, Black and Native American students are more likely to be referred for special education services than are White and Asian students (e.g., [Why are So Many Students of Color in Special Education?](https://eric.ed.gov/?id=ED622195)), while rates for Hispanic students tend to be comparable to those in the overall population.
+
+These differences were once thought to be explained by the expectations educators have for students of color as a result of racial bias. However, [recent research](https://www.brookings.edu/articles/race-poverty-and-interpreting-overrepresentation-in-special-education/) has shown that differences observed between racial groups tend to disappear once other important student characteristics are taken into account, like socioeconomic status. That is, the fact that more Black and Native American students are referred to special education services has more to do with the close tie between historical and current economic inequality and race than it does with race alone. However, examining the percent of students in each racial group who receive special education services can help guide decisions about allocating educational resources, especially as inequitable referral rates can serve to segregate children, affording fewer opportunities to children of color.
+
+The following figures show the percent of students eligible to receive special education services by race and ethnicity. Students eligible for special education include those with disabilities like hearing impairment, including deafness; speech or language impairment; visual impairment, including blindness; orthopedic impairment; autism; traumatic brain injury; developmental delay; other health impairment; intellectual disability; specific learning disability; serious emotional disturbance; or multiple disabilities. [See VDOE for more details](https://www.doe.virginia.gov/programs-services/special-education).
+
+#### Notable Trends
+
+- In both ACPS and CCS, the gap between Black students eligible for special education and other groups is significant. In 2024, over 20% of Black students (over 1 in 5) in both school districts were eligible to receive special education services. These rates have remained relatively steady over the past decade.
 
 ::: {.content-visible when-format="html"}
 ```{r include=FALSE}
@@ -194,6 +282,7 @@ for (i in 1:len) {
 
 ::: {.content-hidden when-format="html"}
 #### Albemarle County Public Schools
+
 ```{r}
 #| label: fig-alb-sped-img
 #| fig-cap: "Percent of students identified to receive special education services by race and ethnicity for the 2014-15 through 2024-25 school years at ACPS."
@@ -202,6 +291,7 @@ knitr::include_graphics("supplement_figures/fig-1-percent-of-students-iden.png")
 ```
 
 #### Charlottesville City Schools
+
 ```{r}
 #| label: fig-cville-sped-img
 #| fig-cap: "Percent of students identified to receive special education services by race and ethnicity for the 2014-15 through 2024-25 school years at CCS."
@@ -210,6 +300,7 @@ knitr::include_graphics("supplement_figures/fig-2-percent-of-students-iden.png")
 ```
 
 #### Virginia Public Schools
+
 ```{r}
 #| label: fig-va-sped-img
 #| fig-cap: "Percent of students identified to receive special education services by race and ethnicity for the 2014-15 through 2024-25 school years at Virginia public schools."
@@ -219,6 +310,18 @@ knitr::include_graphics("supplement_figures/fig-3-percent-of-students-iden.png")
 :::
 
 ### High School Graduation Rate
+
+On-time graduation is an important indicator of whether localities are preparing students for college or career readiness, as a high school diploma is a standard requirement for many jobs and for accessing higher education. Disparities in high school graduation rates can coincide with other [outcomes](https://odphp.health.gov/healthypeople/priority-areas/social-determinants-health/literature-summaries/high-school-graduation), from better employment and income prospects to better health and life expectancy. Nationally, racial disparities in graduation rates are even more pronounced by gender: across all race and ethnicities, boys are less likely to graduate than girls, with [a wider gender gap for Black and Hispanic youth](https://www.brookings.edu/articles/racial-disparities-in-the-high-school-graduation-gender-gap/).
+
+The figures below show the percentage of public school students that graduated within four years of entering high school by race and ethnicity, and separately for economically disadvantaged students. Graduates are defined as students who earn one of the following Board of Education approved diplomas: Advanced Studies Diploma, Standard Diploma, Modified Standard Diploma, Special Diploma, General Achievement Diploma.
+
+#### Notable Trends
+
+- In both ACPS and CCS, the gap in on-time graduation rates between Hispanic students and other groups is significant, similar to statewide trends. This gap is especially wide in CSS, with a graduation rate for Hispanic students of 66% in 2025, the lowest rate within the past decade.
+
+- The graduation rate for students identified as economically disadvantaged at ACPS has remained below the overall student graduation rate over this period: 88% of economically disadvantaged students graduated on time compared to 94% of all students in 2025.
+
+- At CCS, the graduation rate for students identified as economically disadvantaged has remained similar to overall CCS graduation rates for the last few years. The graduation rate for economically disadvantaged students and students overall was around 86% at CCS in 2025, lower than the graduation rate for both groups statewide, around 90% in 2025.
 
 ::: {.content-visible when-format="html"}
 ```{r include=FALSE}
@@ -342,6 +445,7 @@ for (i in 1:len) {
 
 ::: {.content-hidden when-format="html"}
 #### Albemarle County Public Schools
+
 ```{r}
 #| label: fig-alb-grad-rates-img
 #| fig-cap: "Percent of student cohort graduating in four years by race and ethnicity, and economically disadvantaged students for 2014-2025 at ACPS."
@@ -351,6 +455,7 @@ knitr::include_graphics("supplement_figures/fig-5-percent-of-student-cohor.png")
 ```
 
 #### Charlottesville City Schools
+
 ```{r}
 #| label: fig-cville-grad-rates-img
 #| fig-cap: "Percent of student cohort graduating in four years by race and ethnicity, and economically disadvantaged students for 2014-2025 at CCS."
@@ -360,6 +465,7 @@ knitr::include_graphics("supplement_figures/fig-7-percent-of-student-cohor.png")
 ```
 
 #### Virginia Public Schools
+
 ```{r}
 #| label: fig-va-grad-rates-img
 #| fig-cap: "Percent of student cohort graduating in four years by race and ethnicity, and economically disadvantaged students for 2014-2025 at Virginia public schools."
@@ -370,6 +476,20 @@ knitr::include_graphics("supplement_figures/fig-9-percent-of-student-cohor.png")
 :::
 
 ### Post-Secondary Enrollment
+
+Post-secondary enrollment captures the percent of graduating high school seniors who enroll in an institute of higher education within 16 months of graduating. College graduates enjoy more job security, higher wage, and better health, among other positive outcomes. But rates of college going (and degree attainment) vary substantially by race and ethnicity and [by socioeconomic status](https://www.brookings.edu/articles/college-enrollment-gaps-how-academic-preparation-influences-opportunity/). While college enrollment has been declining in the U.S. since 2010, nationally the rates for Black and Hispanic students have fallen faster than the rate for White students. These racial disparities in post-secondary enrollment serve to perpetuate racial disparities in income and wealth and to restrict the economic mobility of young people.
+
+The figures below show enrollment in a 2-year or 4-year college or university by race and ethnicity, and separately for economically disadvantaged students.
+
+#### Notable Trends
+
+- For ACPS graduates, there has been a decline in college enrollment for Black and Hispanic students over the past decade. In the most recent data available, 59% of Black graduates and 48% of Hispanic graduates enrolled in post-secondary education, compared to 89% of Asian and 77% of White graduates.
+
+- In ACPS, graduating students identified as economically disadvantaged are around 25% less likely to enroll in college compared to the overall rate for graduating students. While there have been declines among both populations, the decline in college enrollment for economically disadvantaged students has been steeper.
+
+- For CCS, college enrollment has declined for Black students in recent years, with a decade low of 43% of Black students in 2023. This represents a significant racial gap between Black students and other groups.
+
+- In CCS, around half (53%) of economically disadvantaged graduating students enrolled in post-secondary education, less than the overall rate for graduating students. 
 
 ::: {.content-visible when-format="html"}
 ```{r, results='asis'}
@@ -475,6 +595,7 @@ for (i in 1:len) {
 
 ::: {.content-hidden when-format="html"}
 #### Albemarle County Public Schools
+
 ```{r}
 #| label: fig-alb-postsecondary-img
 #| fig-cap: "Percent of graduating students enrolled in a post-secondary institution by race and ethnicity, and economically disadvantaged students for 2014-2023 at ACPS."
@@ -484,6 +605,7 @@ knitr::include_graphics("supplement_figures/fig-11-percent-of-graduating-st.png"
 ```
 
 #### Charlottesville City Schools
+
 ```{r}
 #| label: fig-cville-postsecondary-img
 #| fig-cap: "Percent of graduating students enrolled in a post-secondary institution by race and ethnicity, and economically disadvantaged students for 2014-2023 at CCS."
@@ -493,6 +615,7 @@ knitr::include_graphics("supplement_figures/fig-13-percent-of-graduating-st.png"
 ```
 
 #### Virginia Public Schools
+
 ```{r}
 #| label: fig-va-postsecondary-img
 #| fig-cap: "Percent of graduating students enrolled in a post-secondary institution by race and ethnicity, and economically disadvantaged students for 2014-2023 at Virginia public schools."
@@ -505,6 +628,19 @@ knitr::include_graphics("supplement_figures/fig-15-percent-of-graduating-st.png"
 ## Economic and Family Stability
 
 ### Youth Labor Force Participation and Unemployment
+
+Labor force participation among young people and youth unemployment can shed light on both the health of the economy and the well-being of young people. Youth employment has positive implications for future life outcomes, however, youth employment rates are [very low relative to historical standards](https://www.urban.org/research/publication/youth-workforce-detailed-picture). High unemployment rates for youth may suggest an unavailability of jobs for youth or a mismatch between the skills that young people possess and the skills employers are seeking. 
+
+The youth labor force participation rate – the number of 16-19 year olds who are employed or are seeking employment as a percentage of the number of residents aged 16-19 – and the youth unemployment rate – the number of 16-19 year olds who have reported that they do not have a job but are ready to work and have been seeking employment within the last 4 weeks – are shown for each census tract in Charlottesville and Albemarle. Exploring this data geographically can highlight where local youth are more likely to be in the labor force and unemployed, compared to local and statewide trends. As young people may be more restricted in their ability to travel larger distances for work, jobs nearby can be a priority. 
+
+#### Notable Trends
+
+- The [Stepping Stones 2026 report](https://communitypartnerships.github.io/data-resources/reports/stepping-stones-2026.html#youth-labor-force-participation-and-unemployment) showed that both Albemarle and Charlottesville youth are less likely to be in the labor force compared to state-wide trends. However, there is variation within both the county and city in youth employment. While 40% of Virginia youth are part of the labor force, some tracts in Albemarle and Charlottesville are near or well above the state average. In the county, areas around Barracks-Hessian Hills and Albemarle High School have estimates of youth labor force participation over 86%, with other tracts in the county above 50%. In the city, half the census tracts have estimates of the percent of youth in the labor force higher than the state average, with Belmont at the highest at 83%.
+
+- Youth unemployment rates also vary within the county and city. While labor force participation has remained steady statewide, youth unemployment has decreased statewide over the past decade, at 13% in 2024. Some areas, including Barracks-Hessian Hills in Albemarle county, have seen growth in both youth labor force participation and youth unemployment at higher rates than state trends. 
+
+- The majority of census tracts in both the city and county have relatively low estimates of youth unemployment rates, showing that most youth that want to work are employed. There are a few areas, however, where nearly one quarter of youth in the labor force are unemployed. 
+
 ```{r}
 library(ggspatial)
 library(ggthemes)
@@ -523,6 +659,7 @@ df <- read_csv("../data/youth_employment_status_by_tract.csv") %>%
 ```
 
 #### Albemarle County Census Tracts
+
 ```{r}
 # Set data
 df_alb <- df %>% 
@@ -541,7 +678,7 @@ source_text <- "Data Source: U.S. Census Bureau, American Community Survey 5-yea
 
 ```
 
-:::{.content-visible when-format="html" .column-body layout-ncol=2}
+::: {.content-visible .column-body when-format="html" layout-ncol="2"}
 ```{r}
 youth_employ_map <- df_alb %>% 
   mutate(GEOID = as.character(GEOID)) %>% 
@@ -766,8 +903,9 @@ alb_unemploy_gap <-  ggplot(alb_unemploy, aes(x = 0, y = percent, label = names)
 ```
 :::
 
-::: {.content-visible when-format="html"}
+:::: {.content-visible when-format="html"}
 #### Albemarle Census Tracts: Youth in the Labor Force and Unemployment 2020-2024
+
 ```{r include=FALSE}
 # Init Step to make sure that the dependencies are loaded
 highchart()
@@ -817,11 +955,10 @@ for (i in 1:len) {
 
 ```
 :::
-
-:::
-
+::::
 
 #### Charlottesville Census Tracts
+
 ```{r}
 # Set data
 df_cville <- df %>% 
@@ -840,7 +977,7 @@ source_text <- "Data Source: U.S. Census Bureau, American Community Survey 5-yea
 
 ```
 
-:::{.content-visible when-format="html" .column-body layout-ncol=2}
+::: {.content-visible .column-body when-format="html" layout-ncol="2"}
 ```{r}
 youth_employ_map <- df_cville %>% 
   mutate(GEOID = as.character(GEOID)) %>% 
@@ -869,6 +1006,7 @@ leaflet() %>%
             }
             )
 ```
+
 ```{r}
 map_unemploy <- youth_employ_map %>% filter(variable == "Youth (16-19) in the Labor Force Experiencing Unemployment")
 leaflet() %>% 
@@ -1062,8 +1200,9 @@ cville_unemploy_gap <-  ggplot(cville_unemploy, aes(x = 0, y = percent, label = 
 ```
 :::
 
-::: {.content-visible when-format="html"}
+:::: {.content-visible when-format="html"}
 #### Charlottesville Census Tracts: Youth in the Labor Force and Unemployment 2020-2024
+
 ```{r include=FALSE}
 # Init Step to make sure that the dependencies are loaded
 highchart()
@@ -1113,10 +1252,21 @@ for (i in 1:len) {
 
 ```
 :::
-
-:::
+::::
 
 ### Children Living below Poverty Threshold
+
+Childhood poverty has wide-ranging and long-term repercussions, from inadequate nutrition and limited access to health care services, to unstable housing and greater exposure to environmental toxins.[ ](https://npc.umich.edu/publications/policy_briefs/brief16/PolicyBrief16.pdf)Racial disparities in poverty and child poverty are long standing in the US, with Black, Native, and Hispanic populations among the groups most impacted by poverty. Research has shown how these disparities are [created and reinforced](https://www.sciencedirect.com/science/article/pii/S1876285921002783) through [state and federal policies](https://www.americanprogress.org/article/systematic-inequality-economic-opportunity/).
+
+The figures below show the percentage of children by race and ethnicity living in families with incomes below the federal poverty level. In 2024, the federal poverty level for a family of four was \$31,200. Falling below the poverty threshold indicates severe economic insecurity.
+
+#### Notable Trends
+
+- Black and Hispanic children are more likely to be living in poverty than any other racial group in Albemarle County, following state-wide trends. In the city of Charlottesville, Black children have consistently had higher rates of living in poverty that others, though there has been considerable growth in the rate of child poverty among Asian families in recent years.
+
+- The gap in outcomes between Black and White children is significant. In 2024, 21% of Black children in Albemarle experienced poverty compared to 6% of White children. In Charlottesville, this gap was even larger, with nearly half (47%) of Black children living in poverty compared to 6% of White children. 
+
+- The percent of children in poverty has been relatively steady in Albemarle across all subgroups, the poverty rate for Black children in Charlottesville has been steadily increasing over the past decade.
 
 ::: {.content-visible when-format="html"}
 ```{r, results='asis'}
@@ -1191,6 +1341,7 @@ for (i in 1:len) {
 
 ::: {.content-hidden when-format="html"}
 #### Albemarle County
+
 ```{r}
 #| label: fig-alb-child-pov-img
 #| fig-cap: "Percent of children living below the poverty threshold by race and ethnicity, 2014-2024, for Albemarle County."
@@ -1199,6 +1350,7 @@ knitr::include_graphics("supplement_figures/fig-16-percent-of-children-livi.png"
 ```
 
 #### Charlottesville City
+
 ```{r}
 #| label: fig-cville-child-pov-img
 #| fig-cap: "Percent of children living below the poverty threshold by race and ethnicity, 2014-2024, for Charlottesville City."
@@ -1207,6 +1359,7 @@ knitr::include_graphics("supplement_figures/fig-17-percent-of-children-livi.png"
 ```
 
 #### Virginia
+
 ```{r}
 #| label: fig-va-child-pov-img
 #| fig-cap: "Percent of children living below the poverty threshold by race and ethnicity, 2014-2024, for Virginia."
@@ -1216,6 +1369,20 @@ knitr::include_graphics("supplement_figures/fig-18-percent-of-children-livi.png"
 :::
 
 ### Students Identified as Economically Disadvantaged
+
+Students in economically disadvantaged households face additional barriers to learning, from the impact of inadequate nutrition on concentration to the effect on development from growing up with long-term exposure to stress. Like poverty, the experience of economic disadvantage among students is shaped by race, with the same [policies](https://www.americanprogress.org/article/systematic-inequality-economic-opportunity/) and [structures](https://www.sciencedirect.com/science/article/pii/S1876285921002783) that generate racially disparate rates of poverty producing disparate rates of economic disadvantage. The challenges to education faced by economically disadvantaged students is one of the ways racial advantage and disadvantage impacts intergenerational poverty and economic mobility.
+
+Students are identified as economically disadvantaged if they meet one or more of the following conditions: eligible for free or reduced meals (family income is within 130% or 185% of federal poverty threshold), are eligible for TANF, Medicaid and/or Head Start, or identified as from a migrant family, experiencing homelessness, or in foster care. The measure below is the percent of students by race and ethnicity who meet any of the above conditions.
+
+#### Notable Trends
+
+- In ACPS, Black and Hispanic students are more likely to be identified as economically disadvantaged compared to their White classmates. This gap is also reflected state-wide. 
+
+- Mirroring the results for child poverty above, Black and Asian students in CCS are more likely to be identified as economically disadvantaged.
+
+- In ACPS, the percent of Hispanic identified as economically disadvantaged has decreased since the 2020-21 school year, from a high around 70% to 46% in 2024. This is still nearly half of all Hispanic students enrolled in ACPS.
+
+- In CCS, the percent of Black students identified as economically disadvantaged has remained consistently high over the past decade. In 2024, nearly 3 of every 4 Black students enrolled in CCS were economically disadvantaged (72%), compared to around 1 in 8 White students (13%).
 
 ::: {.content-visible when-format="html"}
 ```{r, results='asis'}
@@ -1301,31 +1468,42 @@ for (i in 1:len) {
 
 ::: {.content-hidden when-format="html"}
 #### Albemarle County Public Schools
+
 ```{r}
 #| label: fig-alb-econ-disadv-img
-#| fig-cap: "Percent of students identified as economically disadvantaged by race and ethnicity for the 20014-15 through 2025-26 school years in ACPS."
+#| fig-cap: "Percent of students identified as economically disadvantaged by race and ethnicity for the 2014-15 through 2025-26 school years in ACPS."
 
 knitr::include_graphics("supplement_figures/fig-19-percent-of-students-iden.png")
 ```
 
 #### Charlottesville City Schools
+
 ```{r}
 #| label: fig-cville-econ-disadv-img
-#| fig-cap: "Percent of students identified as economically disadvantaged by race and ethnicity for the 20014-15 through 2025-26 school years in CCS."
+#| fig-cap: "Percent of students identified as economically disadvantaged by race and ethnicity for the 2014-15 through 2025-26 school years in CCS."
 
 knitr::include_graphics("supplement_figures/fig-20-percent-of-students-iden.png")
 ```
 
 #### Virginia Public Schools
+
 ```{r}
 #| label: fig-va-econ-disadv-img
-#| fig-cap: "Percent of students identified as economically disadvantaged by race and ethnicity for the 20014-15 through 2025-26 school years in Virginia public schools."
+#| fig-cap: "Percent of students identified as economically disadvantaged by race and ethnicity for the 2014-15 through 2025-26 school years in Virginia public schools."
 
 knitr::include_graphics("supplement_figures/fig-21-percent-of-students-iden.png")
 ```
 :::
 
 ### Assessments and Investigations by Child Protective Services
+
+Reports of potential child neglect or abuse are one indicator of child wellbeing. Upon receiving a referral, CPS determines whether a case should be accepted for followup through a family assessment for lower-risk cases, focused on identifying needed supports and services, or an investigation for more severe allegations. Childhood maltreatment, in addition to having an immediate and negative impact on children, has been linked to later [physical, psychological, and behavioral consequences](https://www.childwelfare.gov/topics/safety-and-risk/definitions-child-abuse-and-neglect/). Accepted cases, though, are not equivalent to the presence of abuse or neglect. In Charlottesville, Albemarle, and statewide in 2024, less than a quarter of accepted referrals lead to an investigation and less than one-third of investigations lead to a finding of abuse or neglect.
+
+The following figures show the rate per 1,000 children of referrals to Child Protective Services accepted for assessment or investigation by race and ethnicity. 
+
+#### Notable Trends
+
+- In Albemarle and Charlottesville, the rate of accepted referrals to CPS is higher for Black and Hispanic children compared to other groups. In Albemarle, the rate per 1,000 Black children has increased in recent years. In Charlottesville, the rate for Black children has decreased from a high of 207 per 1,000 children in 2017, but saw an uptick in 2024.
 
 ::: {.content-visible when-format="html"}
 ```{r, results='asis'}
@@ -1391,6 +1569,7 @@ for (i in 1:len) {
 
 ::: {.content-hidden when-format="html"}
 #### Albemarle County
+
 ```{r}
 #| label: fig-alb-cps-img
 #| fig-cap: "Referrals to child protective services accepted for assessment or investigation by race and ethnicity, rate per 1,000 children, for fiscal years 2016-2024 for Albemarle County."
@@ -1399,6 +1578,7 @@ knitr::include_graphics("supplement_figures/fig-22-referrals-to-child-prote.png"
 ```
 
 #### Charlottesville City
+
 ```{r}
 #| label: fig-cville-cps-img
 #| fig-cap: "Referrals to child protective services accepted for assessment or investigation by race and ethnicity, rate per 1,000 children, for fiscal years 2016-2024 for Charlottesville City."
@@ -1407,6 +1587,7 @@ knitr::include_graphics("supplement_figures/fig-23-referrals-to-child-prote.png"
 ```
 
 #### Virginia
+
 ```{r}
 #| label: fig-va-cps-img
 #| fig-cap: "Referrals to child protective services accepted for assessment or investigation by race and ethnicity, rate per 1,000 children, for fiscal years 2016-2024 for Virginia."
@@ -1416,6 +1597,16 @@ knitr::include_graphics("supplement_figures/fig-24-referrals-to-child-prote.png"
 :::
 
 ### Children in Foster Care
+
+Children in foster care are among our most vulnerable youth. The rate of family separation is both an indicator of child welfare and of the unmet need or underinvestment in policies and resources to support families in the community. Neglect, often a proxy for the effects of poverty, is [one of the most common reasons for a child’s removal from the home nationally](https://nationalcasagal.org/the-common-thread-in-child-removal-neglect-not-abuse/), including “failure to provide adequate nutrition, supervision, health care, clothing, or housing.” Research has long shown that minoritized populations, especially Black children, are overrepresented in foster care, and legal and social researchers have [repeatedly](https://www.hachettebookgroup.com/titles/dorothy-roberts/shattered-bonds/9780465070596/)[ ](https://cssp.org/wp-content/uploads/2018/11/CSSP-Entangled-Roots.pdf)[documented](https://cssp.org/entangled-roots-the-role-of-race-in-policies-that-separate-families/) the ways child welfare systems are [entangled](https://www.childrensrights.org/wp-content/uploads/2023/04/CR-Racism-at-the-Front-End-of-Child-Welfare-2023-Fact-Sheet.pdf) with [race](https://www.hachettebookgroup.com/titles/dorothy-roberts/torn-apart/9781541675445/).
+
+The following figures show the rate per 1,000 children in foster care by race and ethnicity. 
+
+#### Notable Trends
+
+- In Albemarle, the gap between the rate of Black and Hispanic children and other groups in foster car is significant. There has been some decrease in the rate of Black children in care, while other groups remained relatively steady over the period shown.
+
+- In Charlottesville, there is a significant gap between the rate of Black children in foster care compared to other groups. Although the rate of Black children in care has dropped from a period high around 40 per 1,000 children, the rate has risen again in the most recent year of data.
 
 ::: {.content-visible when-format="html"}
 ```{r, results='asis'}
@@ -1481,6 +1672,7 @@ for (i in 1:len) {
 
 ::: {.content-hidden when-format="html"}
 #### Albemarle County
+
 ```{r}
 #| label: fig-alb-foster-care-img
 #| fig-cap: "Children in foster care by race and ethnicity, rate per 1,000 children in Albemarle County for 2016-2024, measured in October of each year."
@@ -1489,6 +1681,7 @@ knitr::include_graphics("supplement_figures/fig-25-rate-of-children-in-fost.png"
 ```
 
 #### Charlottesville City
+
 ```{r}
 #| label: fig-cville-foster-care-img
 #| fig-cap: "Children in foster care by race and ethnicity, rate per 1,000 children in Charlottesville City for 2016-2024, measured in October of each year."
@@ -1497,6 +1690,7 @@ knitr::include_graphics("supplement_figures/fig-26-rate-of-children-in-fost.png"
 ```
 
 #### Virginia
+
 ```{r}
 #| label: fig-va-foster-care-img
 #| fig-cap: "Children in foster care by race and ethnicity, rate per 1,000 children in Virginia for 2016-2024, measured in October of each year."
@@ -1508,6 +1702,16 @@ knitr::include_graphics("supplement_figures/fig-27-rate-of-children-in-fost.png"
 ## Health
 
 ### Low Birth-Weight Infants
+
+The rate of low birth-weight infants, defined as those born weighing less than 2,500 grams (about 5.5 lbs), is an indicator of both maternal health and infant health. Due to inequitable access to maternal care and education, low birth-weight infants are more likely among families of color relative to White families. [Recent research](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC6596993/) found that low birth-weight infants are more common in non-Hispanic Black families, non-Hispanic Asian families, and foreign-born Hispanic families. The racial inequities in this outcome are associated with cascading health inequalities, as being a low birth-weight infant predicts many other poor health outcomes.
+
+The figures below show data from the Virginia Department of Health (VDH), which records the percentage of low birth-weight babies by maternal race and ethnicity. 
+
+#### Notable Trends
+
+- Babies born under 5.5 lbs are more common in Black families compared to White families in Albemarle, Charlottesville, and state-wide.
+
+- The gap has been significant in both Albemarle and Charlottesville, with a high around 20% in both localities for Black infants, compared to around 6% of White babies.
 
 ::: {.content-visible when-format="html"}
 ```{r, results='asis'}
@@ -1594,6 +1798,7 @@ for (i in 1:len) {
 
 ::: {.content-hidden when-format="html"}
 #### Albemarle County
+
 ```{r}
 #| label: fig-alb-low-birthweight-img
 #| fig-cap: "Percent of babies born weighing under 2,500 grams (5.5 lbs) by race and ethnicity, 2014-2024, for Albemarle County."
@@ -1602,6 +1807,7 @@ knitr::include_graphics("supplement_figures/fig-28-percent-low-birth-weight.png"
 ```
 
 #### Charlottesville City
+
 ```{r}
 #| label: fig-cville-low-birthweight-img
 #| fig-cap: "Percent of babies born weighing under 2,500 grams (5.5 lbs) by race and ethnicity, 2014-2024, for Charlottesville City."
@@ -1610,6 +1816,7 @@ knitr::include_graphics("supplement_figures/fig-29-percent-low-birth-weight.png"
 ```
 
 #### Virginia
+
 ```{r}
 #| label: fig-va-low-birthweight-img
 #| fig-cap: "Percent of babies born weighing under 2,500 grams (5.5 lbs) by race and ethnicity, 2014-2024, for Virginia."
@@ -1619,6 +1826,16 @@ knitr::include_graphics("supplement_figures/fig-30-percent-low-birth-weight.png"
 :::
 
 ### Infant Mortality
+
+Much like low birth-weight,[ ](https://virginiaequitycenter.github.io/cville-equity-atlas/reports/stepping-stones/#infant-deaths)infant mortality is an indicator of infant health and family access to health care. Infant mortality refers to the rate of babies who die before their first birthday per 1,000 live births, and it is a tragedy that [disproportionately impacts Black families](https://minorityhealth.hhs.gov/omh/browse.aspx?lvl=4&lvlid=23) in part because these families are less likely to receive prenatal and postnatal care. The most common causes of infant mortality include birth defects, preterm births and low birth-weight, maternal complications during pregnancy, Sudden Infant Death Syndrome, and injuries.
+
+The figures below show data from the Virginia Department of Health’s (VDH), which records infant mortality rate by maternal race and ethnicity. The rate is calculated as a 3-year rolling average due to the low number of infant deaths recorded locally each year. 
+
+#### Notable Trends
+
+- In recent years, the infant mortality rate has been higher for Black and Hispanic babies compared to White babies. 
+
+- While infant mortality rates are generally lower in both Albemarle County and Charlottesville relative to the state, the racial gap has widened in both localities, with the rate decreasing slightly for White babies and increasing some for Black babies.
 
 ::: {.content-visible when-format="html"}
 ```{r, results='asis'}
@@ -1709,6 +1926,7 @@ for (i in 1:len) {
 
 ::: {.content-hidden when-format="html"}
 #### Albemarle County
+
 ```{r}
 #| label: fig-alb-infant-mortality-img
 #| fig-cap: "Rate per 1,000 births of infants who died before their 1st birthday by race and ethnicity, 2016-2023, for Albemarle."
@@ -1717,6 +1935,7 @@ knitr::include_graphics("supplement_figures/fig-31-infant-mortality-rate-in.png"
 ```
 
 #### Charlottesville City
+
 ```{r}
 #| label: fig-cville-infant-mortality-img
 #| fig-cap: "Rate per 1,000 births of infants who died before their 1st birthday by race and ethnicity, 2016-2023, for Charlottesville City."
@@ -1725,6 +1944,7 @@ knitr::include_graphics("supplement_figures/fig-32-infant-mortality-rate-in.png"
 ```
 
 #### Virginia
+
 ```{r}
 #| label: fig-va-infant-mortality-img
 #| fig-cap: "Rate per 1,000 births of infants who died before their 1st birthday by race and ethnicity, 2016-2023, for Virginia."
@@ -1732,3 +1952,58 @@ knitr::include_graphics("supplement_figures/fig-32-infant-mortality-rate-in.png"
 knitr::include_graphics("supplement_figures/fig-33-infant-mortality-rate-in.png")
 ```
 :::
+
+## Contributors
+
+The Stepping Stones 2026 Report and Supplement is a collaboration of many contributors, including:
+
+- Elizabeth Mitchell, Senior Research Specialist, Center for Community Partnerships, University of Virginia
+- Michele Claibourn, Director of Community-Centered Analysis, Center for Community Partnerships, University of Virginia and Assistant Professor, Batten School of Leadership and Public Policy, University of Virginia
+- Misty Graves, Director, City of Charlottesville Department of Human Services
+- Kaki Dimock, Chief Human Services Officer, Albemarle County
+- Mary Stebbins, Director, Albemarle County Department of Social Services
+
+### About the Center for Community Partnerships
+
+Established in 2019, the mission of the UVA Center for Community Partnerships is to build mutually beneficial partnerships in university communities by advancing a transformative approach to the fundamental research mission, which will, in turn, reform institutional values, pedagogy, and operations. We envision universities that serve local communities by bringing rich research resources to bear and equipping students to lead in building a more just society.
+
+Community-Centered Analysis centers on community-driven partnerships to provide advocates, as well as civic and private sector leaders, with data and metrics, contextualized analysis, interactive maps and data visualizations, and narrative storytelling as a resource in pursuit of a more just region.
+
+### About the Charlottesville Department of Human Services (DHS)
+
+The City of Charlottesville's [Department of Human Services (DHS)](https://charlottesville.org/224/Human-Services) was created in 2010 to serve as a human services policy advisor to the City Manager in order to implement the social policy initiatives of the Charlottesville City Council. The vision of the Charlottesville City DHS is to serve as the community’s premier provider in meeting the therapeutic needs of youth and families, supporting the community’s efforts to improve equity, and address poverty and its impacts.
+
+Charlottesville DHS provides a variety of services and programs that improve and support the resilience, health, and well-being of youth, families, residents and community organizations. They support initiatives that make a positive impact on youth development, juvenile justice involvement, foster care, financial stability, housing stability, re-entry and community well-being.
+
+### About Albemarle County Human Services Programs
+
+[Albemarle County Human Services](https://www.albemarle.org/government/human-services) Programs include the Department of Social Services, the Office of Housing, which includes an affordable policy division and a housing voucher division, the Human Services Response Team (HART), and programs aimed at improving community access and engagement in county services. These services are unified by an interest in improving Albemarle County’s well-being and resilience.
+
+### Project Repository
+
+The work supporting this Stepping Stones 2026 Report and Supplement, including our data collection documentation and the corresponding data, is publicly available on GitHub at https://github.com/virginiaequitycenter/stepping-stones-2026.
+
+### Citation
+
+UVA Center for Community Partnerships. Stepping Stones Supplement Report: Disaggregated Measures of Well-Being of Children and Families in in Charlottesville and Albemarle. Published July 2026.
+
+This work is licensed under a [Creative Commons Attribution 4.0 International License](https://creativecommons.org/licenses/by/4.0/).
+
+## Appendix
+
+### Data Sources by Figure
+
+```{r}
+#| html-table-processing: none
+
+df_sources <- read_csv("../data/appendix_supplement_data_sources.csv")
+
+df_sources %>%
+  gt() %>%
+  cols_width(`Figure` ~ "50%",
+             `Source` ~ "50%") %>%
+  tab_style(
+    style = cell_text(v_align = "top"),
+    locations = cells_body()
+    )
+```

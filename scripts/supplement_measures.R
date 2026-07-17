@@ -545,7 +545,7 @@ write_csv(fc_rates, "data/foster_care_race_ethn.csv")
 # Child Abuse/Neglect Investigations/Assessments by Race/Ethnicity ----
 # Source: Data request made to research@dss.virginia.gov
 #  - Individual Accepted Referrals reports for SFY 2016 through SFY 2025
-#  - Data retreived from Virginia OASIS (On-line Automated Services Information System). 
+#  - Data retrieved from Virginia OASIS (On-line Automated Services Information System). 
 #    - This is the Commonwealth's state automated child welfare information system (SACWIS) 
 #       for recording foster care and child protective services cases
 
