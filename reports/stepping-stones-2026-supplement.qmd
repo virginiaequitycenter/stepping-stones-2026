@@ -1,6 +1,6 @@
 ---
 title: "Stepping Stones 2026 Supplement Report"
-subtitle: "Disaggregated Measures of Well-Being of Children and Families in in Charlottesville and Albemarle"
+subtitle: "Disaggregated Measures of Wellbeing of Children and Families in in Charlottesville and Albemarle"
 date: "July 2026"
 date-format: "MMMM YYYY"
 # author: "Community-Centered Analysis at the UVA Center for Community Partnerships"
@@ -9,23 +9,23 @@ date-format: "MMMM YYYY"
 #   type: report
 #   url: communitypartnerships.virginia.edu
 format:
-  html:
-    toc: true
-    theme: cosmo
-    embed-resources: true
-  # docx:
+  # html:
   #   toc: true
-  #   toc-title: "Table of Contents"
-  #   # lof: true
-  #   # number-sections: true
-  #   number-depth: 3
-  #   # fig-align: left
-  #   # fig-width: 3
-  #   # fig-height: 2
-  #   # # fig-format: png
-  #   # fig-dpi: 200
+  #   theme: cosmo
   #   embed-resources: true
-  #   reference-doc: styles.docx
+  docx:
+    toc: true
+    toc-title: "Table of Contents"
+    # lof: true
+    # number-sections: true
+    number-depth: 3
+    # fig-align: left
+    # fig-width: 3
+    # fig-height: 2
+    # # fig-format: png
+    # fig-dpi: 200
+    embed-resources: true
+    reference-doc: styles.docx
 execute:
   cache: false
   echo: false
@@ -102,19 +102,15 @@ tracts_geo <- tracts_geo %>% st_transform(tracts_geo, crs = 4326)
 
 ```
 
-::: {.content-hidden when-format="html"}
-## Executive Summary {.unlisted .unnumbered}
-:::
-
 ## Introduction
 
 The Stepping Stones 2026 Report provides trend data for a selection of outcomes on the well-being of children and families in the City of Charlottesville and Albemarle County. *This report is a supplement to the Stepping Stones 2026 Report to present disaggregated data for a subset of measures related to Education, Economic and Family Stability, and Health.*
 
 Disaggregated data is data that is broken down and analyzed by race, ethnicity, or other defined subgroups. Racially and other disaggregated data is valuable for equity assessments and promoting equitable policy making. Equity assessments provide understanding on whether current policies and institutions are impacting or serving subgroups differently; equitable policy making ensures that new policies will produce more equal outcomes across different populations.
 
-The disaggregated data in this report is intended to center equity. Aggregated data – summary statistics for the population as a whole – can mask vastly different experiences and outcomes among distinct populations. As shown below, many of the measures of youth and community wellbeing vary by race, ethnicity, socioeconomic status, or geography. Some categories of people are disproportionately harmed or benefited. Working towards health and well-being for the youth in our region must mean *all* youth.
+Summary statistics for the population as a whole can mask vastly different experiences and outcomes among distinct populations. As shown in this supplement, many of the measures of youth and community well-being vary by race, ethnicity, socioeconomic status, or geography. Some groups of people are disproportionately harmed or benefited. Working towards health and well-being for the youth in our region must mean *all* youth.
 
-Our approach to this supplemental report follows the principles from the primary report: we seek to make the work open, reproducible, and contextualized. We use publicly available data and data requested from state-level agencies, our work is documented so that it can be reproduced by others, and we provide context alongside the data, including an overview of how each measure matters for youth wellbeing.
+Our approach to this supplemental report follows the principles from the primary report: we seek to make the work open, reproducible, and contextualized. We use publicly available data and data requested from state-level agencies, our work is documented so that it can be reproduced by others, and we provide context alongside the data, including an overview of how each measure matters for youth well-being.
 
 ::: {.content-visible when-format="html"}
 ### Summary & Report PDF
@@ -126,13 +122,13 @@ This interactive online version of the Stepping Stones Report is also available 
 
 ## Considerations
 
-Understanding the full context of these data is especially important when considering racial disparities. Youth of color are disproportionately impacted by many of the included outcomes relative to white youth due to the long history of racial inequality in policies, investments and opportunities. We hope that highlighting the disparate outcomes of youth in our region raises questions about what leaders, educators, and stakeholders can do to ensure all youth, regardless of their racial or ethnic identity, have equal opportunity to thrive in our community.
+Understanding the full context of these data is especially important when considering racial and ethnic disparities. Youth of color are disproportionately impacted by many of the included outcomes relative to white youth due to the long history of racial inequality in policies, investments and opportunities. We hope that highlighting the disparate outcomes of youth in our region raises questions about what leaders, educators, and stakeholders can do to ensure all youth, regardless of their racial or ethnic identity, have equal opportunity to thrive in our community.
 
 The table below provides the racial and ethnic composition of Charlottesville and Albemarle youth (residents under 18 years old). It is important to note the proportion of a subgroup in the overall population when considering the outcomes in this report. If 40% of youth in a certain racial group experience a particular outcome, knowing whether that racial group constitutes 2% or 80% of the overall population matters for understanding the number of youth impacted.
 
 ```{r, results='asis'}
 #| label: tbl-population
-#| tbl-cap: "Youth population in Albemarle / Charlottesville / VA, disaggregated by racial and ethnic subgroups: White (67% / 55% / 52%), White, Non-Hispanic (65% / 52% / 50%), Black (9% / 18% / 19%), Multiracial(13% / 18% / 16%), Hispanic (12% / 12% / 16%), Asian (5% / 5% / 6%), Other Racial Identities (5% / 4% / 6%), American Indian or Alaskan Native (0.5% / 0% / 0.4%), and Native Hawaiian or Other Pacific Islander (0% / 0% / 0.1%)."
+#| tbl-cap: "Youth population estimates in Albemarle / Charlottesville / VA, disaggregated by racial and ethnic subgroups: White (67% / 55% / 52%), White, Non-Hispanic (65% / 52% / 50%), Black (9% / 18% / 19%), Multiracial (13% / 18% / 16%), Hispanic (12% / 12% / 16%), Asian (5% / 5% / 6%), Other Racial Identities (5% / 4% / 6%), American Indian or Alaskan Native (0.5% / 0% / 0.4%), and Native Hawaiian or Other Pacific Islander (0% / 0% / 0.1%)."
 #| tbl-cap-location: bottom
 #| html-table-processing: none
 
@@ -164,7 +160,7 @@ pop_percents %>%
     locations = list(cells_column_labels(), cells_body())
   ) %>%
   tab_header(
-    title = md("**Youth Population by Race and Ethnicity in Albemarle County, City of Charlottesville and Virginia in 2024**")
+    title = md("**Youth Population Estimates by Race and Ethnicity in Albemarle County, City of Charlottesville and Virginia in 2024**")
   ) %>%
   tab_source_note(
     source_note = md("Data Source: U.S. Census Bureau, American Community Survey 5-year estimates")
@@ -311,7 +307,7 @@ knitr::include_graphics("supplement_figures/fig-3-percent-of-students-iden.png")
 
 ### High School Graduation Rate
 
-On-time graduation is an important indicator of whether localities are preparing students for college or career readiness, as a high school diploma is a standard requirement for many jobs and for accessing higher education. Disparities in high school graduation rates can coincide with other [outcomes](https://odphp.health.gov/healthypeople/priority-areas/social-determinants-health/literature-summaries/high-school-graduation), from better employment and income prospects to better health and life expectancy. Nationally, racial disparities in graduation rates are even more pronounced by gender: across all race and ethnicities, boys are less likely to graduate than girls, with [a wider gender gap for Black and Hispanic youth](https://www.brookings.edu/articles/racial-disparities-in-the-high-school-graduation-gender-gap/).
+On-time graduation is an important indicator of whether localities are preparing students for college or career readiness, as a high school diploma is a standard requirement for many jobs and for accessing higher education. Disparities in high school graduation rates can coincide with other [outcomes](https://odphp.health.gov/healthypeople/priority-areas/social-determinants-health/literature-summaries/high-school-graduation), from better employment and income prospects to better health and life expectancy. Nationally, racial disparities in graduation rates are even more pronounced by gender: across all race and ethnicity, boys are less likely to graduate than girls, with [a wider gender gap for Black and Hispanic youth](https://www.brookings.edu/articles/racial-disparities-in-the-high-school-graduation-gender-gap/).
 
 The figures below show the percentage of public school students that graduated within four years of entering high school by race and ethnicity, and separately for economically disadvantaged students. Graduates are defined as students who earn one of the following Board of Education approved diplomas: Advanced Studies Diploma, Standard Diploma, Modified Standard Diploma, Special Diploma, General Achievement Diploma.
 
@@ -489,7 +485,7 @@ The figures below show enrollment in a 2-year or 4-year college or university by
 
 - For CCS, college enrollment has declined for Black students in recent years, with a decade low of 43% of Black students in 2023. This represents a significant racial gap between Black students and other groups.
 
-- In CCS, around half (53%) of economically disadvantaged graduating students enrolled in post-secondary education, less than the overall rate for graduating students. 
+- In CCS, around half (53%) of economically disadvantaged graduating students enrolled in post-secondary education, less than the overall rate for graduating students.
 
 ::: {.content-visible when-format="html"}
 ```{r, results='asis'}
@@ -629,17 +625,17 @@ knitr::include_graphics("supplement_figures/fig-15-percent-of-graduating-st.png"
 
 ### Youth Labor Force Participation and Unemployment
 
-Labor force participation among young people and youth unemployment can shed light on both the health of the economy and the well-being of young people. Youth employment has positive implications for future life outcomes, however, youth employment rates are [very low relative to historical standards](https://www.urban.org/research/publication/youth-workforce-detailed-picture). High unemployment rates for youth may suggest an unavailability of jobs for youth or a mismatch between the skills that young people possess and the skills employers are seeking. 
+Labor force participation among young people and youth unemployment can shed light on both the health of the economy and the well-being of young people. Youth employment has positive implications for future life outcomes; however, youth employment rates are [very low relative to historical standards](https://www.urban.org/research/publication/youth-workforce-detailed-picture). High unemployment rates for youth may suggest an unavailability of jobs for youth or a mismatch between the skills that young people possess and the skills employers are seeking.
 
-The youth labor force participation rate – the number of 16-19 year olds who are employed or are seeking employment as a percentage of the number of residents aged 16-19 – and the youth unemployment rate – the number of 16-19 year olds who have reported that they do not have a job but are ready to work and have been seeking employment within the last 4 weeks – are shown for each census tract in Charlottesville and Albemarle. Exploring this data geographically can highlight where local youth are more likely to be in the labor force and unemployed, compared to local and statewide trends. As young people may be more restricted in their ability to travel larger distances for work, jobs nearby can be a priority. 
+The youth labor force participation rate – the number of 16-19 year olds who are employed or are seeking employment as a percentage of the number of residents aged 16-19 – and the youth unemployment rate – the number of 16-19 year olds who have reported that they do not have a job but are ready to work and have been seeking employment within the last 4 weeks – are shown for each census tract in Charlottesville and Albemarle. Exploring this data geographically can highlight where local youth are more likely to be in the labor force and unemployed, compared to local and statewide trends. As young people may be more restricted in their ability to travel larger distances for work, jobs nearby can be a priority.
 
 #### Notable Trends
 
 - The [Stepping Stones 2026 report](https://communitypartnerships.github.io/data-resources/reports/stepping-stones-2026.html#youth-labor-force-participation-and-unemployment) showed that both Albemarle and Charlottesville youth are less likely to be in the labor force compared to state-wide trends. However, there is variation within both the county and city in youth employment. While 40% of Virginia youth are part of the labor force, some tracts in Albemarle and Charlottesville are near or well above the state average. In the county, areas around Barracks-Hessian Hills and Albemarle High School have estimates of youth labor force participation over 86%, with other tracts in the county above 50%. In the city, half the census tracts have estimates of the percent of youth in the labor force higher than the state average, with Belmont at the highest at 83%.
 
-- Youth unemployment rates also vary within the county and city. While labor force participation has remained steady statewide, youth unemployment has decreased statewide over the past decade, at 13% in 2024. Some areas, including Barracks-Hessian Hills in Albemarle county, have seen growth in both youth labor force participation and youth unemployment at higher rates than state trends. 
+- Youth unemployment rates also vary within the county and city. While labor force participation has remained steady statewide, youth unemployment has decreased statewide over the past decade, at 13% in 2024. Some areas, including Barracks-Hessian Hills in Albemarle county, have seen growth in both youth labor force participation and youth unemployment at higher rates than state trends.
 
-- The majority of census tracts in both the city and county have relatively low estimates of youth unemployment rates, showing that most youth that want to work are employed. There are a few areas, however, where nearly one quarter of youth in the labor force are unemployed. 
+- The majority of census tracts in both the city and county have relatively low estimates of youth unemployment rates, showing that most youth that want to work are employed. There are a few areas, however, where nearly one quarter of youth in the labor force are unemployed.
 
 ```{r}
 library(ggspatial)
@@ -1256,7 +1252,7 @@ for (i in 1:len) {
 
 ### Children Living below Poverty Threshold
 
-Childhood poverty has wide-ranging and long-term repercussions, from inadequate nutrition and limited access to health care services, to unstable housing and greater exposure to environmental toxins.[ ](https://npc.umich.edu/publications/policy_briefs/brief16/PolicyBrief16.pdf)Racial disparities in poverty and child poverty are long standing in the US, with Black, Native, and Hispanic populations among the groups most impacted by poverty. Research has shown how these disparities are [created and reinforced](https://www.sciencedirect.com/science/article/pii/S1876285921002783) through [state and federal policies](https://www.americanprogress.org/article/systematic-inequality-economic-opportunity/).
+Childhood poverty has wide-ranging and long-term repercussions, from inadequate nutrition and limited access to health care services, to unstable housing and greater exposure to environmental toxins. Racial disparities in poverty and child poverty are long standing in the US, with Black, Native, and Hispanic populations among the groups most impacted by poverty. Research has shown how these disparities are [created and reinforced](https://www.sciencedirect.com/science/article/pii/S1876285921002783) through [state and federal policies](https://www.americanprogress.org/article/systematic-inequality-economic-opportunity/).
 
 The figures below show the percentage of children by race and ethnicity living in families with incomes below the federal poverty level. In 2024, the federal poverty level for a family of four was \$31,200. Falling below the poverty threshold indicates severe economic insecurity.
 
@@ -1264,7 +1260,7 @@ The figures below show the percentage of children by race and ethnicity living i
 
 - Black and Hispanic children are more likely to be living in poverty than any other racial group in Albemarle County, following state-wide trends. In the city of Charlottesville, Black children have consistently had higher rates of living in poverty that others, though there has been considerable growth in the rate of child poverty among Asian families in recent years.
 
-- The gap in outcomes between Black and White children is significant. In 2024, 21% of Black children in Albemarle experienced poverty compared to 6% of White children. In Charlottesville, this gap was even larger, with nearly half (47%) of Black children living in poverty compared to 6% of White children. 
+- The gap in outcomes between Black and White children is significant. In 2024, 21% of Black children in Albemarle experienced poverty compared to 6% of White children. In Charlottesville, this gap was even larger, with nearly half (47%) of Black children living in poverty compared to 6% of White children.
 
 - The percent of children in poverty has been relatively steady in Albemarle across all subgroups, the poverty rate for Black children in Charlottesville has been steadily increasing over the past decade.
 
@@ -1376,7 +1372,7 @@ Students are identified as economically disadvantaged if they meet one or more o
 
 #### Notable Trends
 
-- In ACPS, Black and Hispanic students are more likely to be identified as economically disadvantaged compared to their White classmates. This gap is also reflected state-wide. 
+- In ACPS, Black and Hispanic students are more likely to be identified as economically disadvantaged compared to their White classmates. This gap is also reflected state-wide.
 
 - Mirroring the results for child poverty above, Black and Asian students in CCS are more likely to be identified as economically disadvantaged.
 
@@ -1497,9 +1493,9 @@ knitr::include_graphics("supplement_figures/fig-21-percent-of-students-iden.png"
 
 ### Assessments and Investigations by Child Protective Services
 
-Reports of potential child neglect or abuse are one indicator of child wellbeing. Upon receiving a referral, CPS determines whether a case should be accepted for followup through a family assessment for lower-risk cases, focused on identifying needed supports and services, or an investigation for more severe allegations. Childhood maltreatment, in addition to having an immediate and negative impact on children, has been linked to later [physical, psychological, and behavioral consequences](https://www.childwelfare.gov/topics/safety-and-risk/definitions-child-abuse-and-neglect/). Accepted cases, though, are not equivalent to the presence of abuse or neglect. In Charlottesville, Albemarle, and statewide in 2024, less than a quarter of accepted referrals lead to an investigation and less than one-third of investigations lead to a finding of abuse or neglect.
+Reports of potential child neglect or abuse are one indicator of child well-being. Upon receiving a referral, CPS determines whether a case should be accepted for followup through a family assessment for lower-risk cases, focused on identifying needed supports and services, or an investigation for more severe allegations. Childhood maltreatment, in addition to having an immediate and negative impact on children, has been linked to later [physical, psychological, and behavioral consequences](https://www.childwelfare.gov/topics/safety-and-risk/definitions-child-abuse-and-neglect/). Accepted cases, though, are not equivalent to the presence of abuse or neglect. In Charlottesville, Albemarle, and statewide in 2024, less than a quarter of accepted referrals lead to an investigation and less than one-third of investigations lead to a finding of abuse or neglect.
 
-The following figures show the rate per 1,000 children of referrals to Child Protective Services accepted for assessment or investigation by race and ethnicity. 
+The following figures show the rate per 1,000 children of referrals to Child Protective Services accepted for assessment or investigation by race and ethnicity.
 
 #### Notable Trends
 
@@ -1598,9 +1594,9 @@ knitr::include_graphics("supplement_figures/fig-24-referrals-to-child-prote.png"
 
 ### Children in Foster Care
 
-Children in foster care are among our most vulnerable youth. The rate of family separation is both an indicator of child welfare and of the unmet need or underinvestment in policies and resources to support families in the community. Neglect, often a proxy for the effects of poverty, is [one of the most common reasons for a child’s removal from the home nationally](https://nationalcasagal.org/the-common-thread-in-child-removal-neglect-not-abuse/), including “failure to provide adequate nutrition, supervision, health care, clothing, or housing.” Research has long shown that minoritized populations, especially Black children, are overrepresented in foster care, and legal and social researchers have [repeatedly](https://www.hachettebookgroup.com/titles/dorothy-roberts/shattered-bonds/9780465070596/)[ ](https://cssp.org/wp-content/uploads/2018/11/CSSP-Entangled-Roots.pdf)[documented](https://cssp.org/entangled-roots-the-role-of-race-in-policies-that-separate-families/) the ways child welfare systems are [entangled](https://www.childrensrights.org/wp-content/uploads/2023/04/CR-Racism-at-the-Front-End-of-Child-Welfare-2023-Fact-Sheet.pdf) with [race](https://www.hachettebookgroup.com/titles/dorothy-roberts/torn-apart/9781541675445/).
+Children in foster care are among our most vulnerable youth. The rate of family separation is both an indicator of child welfare and of the unmet need or underinvestment in policies and resources to support families in the community. Neglect, often a proxy for the effects of poverty, is [one of the most common reasons for a child’s removal from the home nationally](https://nationalcasagal.org/the-common-thread-in-child-removal-neglect-not-abuse/), including “failure to provide adequate nutrition, supervision, health care, clothing, or housing.” Research has long shown that minoritized populations, especially Black children, are overrepresented in foster care, and legal and social researchers have [repeatedly](https://www.hachettebookgroup.com/titles/dorothy-roberts/shattered-bonds/9780465070596/) [documented](https://cssp.org/entangled-roots-the-role-of-race-in-policies-that-separate-families/) the ways child welfare systems are [entangled](https://www.childrensrights.org/wp-content/uploads/2023/04/CR-Racism-at-the-Front-End-of-Child-Welfare-2023-Fact-Sheet.pdf) with [race](https://www.hachettebookgroup.com/titles/dorothy-roberts/torn-apart/9781541675445/).
 
-The following figures show the rate per 1,000 children in foster care by race and ethnicity. 
+The following figures show the rate per 1,000 children in foster care by race and ethnicity.
 
 #### Notable Trends
 
@@ -1705,7 +1701,7 @@ knitr::include_graphics("supplement_figures/fig-27-rate-of-children-in-fost.png"
 
 The rate of low birth-weight infants, defined as those born weighing less than 2,500 grams (about 5.5 lbs), is an indicator of both maternal health and infant health. Due to inequitable access to maternal care and education, low birth-weight infants are more likely among families of color relative to White families. [Recent research](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC6596993/) found that low birth-weight infants are more common in non-Hispanic Black families, non-Hispanic Asian families, and foreign-born Hispanic families. The racial inequities in this outcome are associated with cascading health inequalities, as being a low birth-weight infant predicts many other poor health outcomes.
 
-The figures below show data from the Virginia Department of Health (VDH), which records the percentage of low birth-weight babies by maternal race and ethnicity. 
+The figures below show data from the Virginia Department of Health (VDH), which records the percentage of low birth-weight babies by maternal race and ethnicity.
 
 #### Notable Trends
 
@@ -1827,13 +1823,13 @@ knitr::include_graphics("supplement_figures/fig-30-percent-low-birth-weight.png"
 
 ### Infant Mortality
 
-Much like low birth-weight,[ ](https://virginiaequitycenter.github.io/cville-equity-atlas/reports/stepping-stones/#infant-deaths)infant mortality is an indicator of infant health and family access to health care. Infant mortality refers to the rate of babies who die before their first birthday per 1,000 live births, and it is a tragedy that [disproportionately impacts Black families](https://minorityhealth.hhs.gov/omh/browse.aspx?lvl=4&lvlid=23) in part because these families are less likely to receive prenatal and postnatal care. The most common causes of infant mortality include birth defects, preterm births and low birth-weight, maternal complications during pregnancy, Sudden Infant Death Syndrome, and injuries.
+Much like low birth-weight, infant mortality is an indicator of infant health and family access to health care. Infant mortality refers to the rate of babies who die before their first birthday per 1,000 live births, and it is a tragedy that [disproportionately impacts Black families](https://minorityhealth.hhs.gov/omh/browse.aspx?lvl=4&lvlid=23) in part because these families are less likely to receive prenatal and postnatal care. The most common causes of infant mortality include birth defects, preterm births and low birth-weight, maternal complications during pregnancy, Sudden Infant Death Syndrome, and injuries.
 
-The figures below show data from the Virginia Department of Health’s (VDH), which records infant mortality rate by maternal race and ethnicity. The rate is calculated as a 3-year rolling average due to the low number of infant deaths recorded locally each year. 
+The figures below show data from the Virginia Department of Health’s (VDH), which records infant mortality rate by maternal race and ethnicity. The rate is calculated as a 3-year rolling average due to the low number of infant deaths recorded locally each year.
 
 #### Notable Trends
 
-- In recent years, the infant mortality rate has been higher for Black and Hispanic babies compared to White babies. 
+- In recent years, the infant mortality rate has been higher for Black and Hispanic babies compared to White babies.
 
 - While infant mortality rates are generally lower in both Albemarle County and Charlottesville relative to the state, the racial gap has widened in both localities, with the rate decreasing slightly for White babies and increasing some for Black babies.
 
@@ -1985,7 +1981,7 @@ The work supporting this Stepping Stones 2026 Report and Supplement, including o
 
 ### Citation
 
-UVA Center for Community Partnerships. Stepping Stones Supplement Report: Disaggregated Measures of Well-Being of Children and Families in in Charlottesville and Albemarle. Published July 2026.
+UVA Center for Community Partnerships. Stepping Stones Supplement Report: Disaggregated Measures of Wellbeing of Children and Families in in Charlottesville and Albemarle. Published July 2026.
 
 This work is licensed under a [Creative Commons Attribution 4.0 International License](https://creativecommons.org/licenses/by/4.0/).
 
